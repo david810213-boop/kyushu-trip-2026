@@ -933,25 +933,11 @@
         </div>
         <div>
           <label class="block text-xs font-bold text-ink mb-1">Visit Japan Web QR Code 照片：</label>
-<div class="space-y-2">
-  <input type="file" id="editQrFile" accept="image/*" class="w-full p-2 border border-handBorder rounded-lg text-xs bg-white" onchange="handleModalFileSelect(event)">
-  <input type="hidden" id="editQrUrl" value="">
-  <p class="text-[10px] text-capybara">※ 請直接上傳手機裡的 QR Code 截圖，圖片會自動轉存。</p>
-</div>
-
-<script>
-// 讓上傳的圖片轉為 Base64 暫存
-function handleModalFileSelect(event) {
-  const file = event.target.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      document.getElementById('editQrUrl').value = e.target.result;
-    };
-    reader.readAsDataURL(file);
-  }
-}
-</script>
+          <div class="space-y-2">
+            <input type="file" id="editQrFile" accept="image/*" class="w-full p-2 border border-handBorder rounded-lg text-xs bg-white" onchange="handleModalFileSelect(event)">
+            <input type="hidden" id="editQrUrl" value="">
+            <p class="text-[10px] text-capybara">※ 請直接上傳手機裡的 QR Code 截圖，圖片會自動轉存。</p>
+          </div>
         </div>
 
         <button type="submit" class="w-full hand-pill py-2 bg-akaushi text-white font-bold mt-2">
@@ -1212,121 +1198,113 @@ function handleModalFileSelect(event) {
       updateChecklist();
     }
 
-    // Render Members Vault
+    // 支援圖片上傳與預覽的證件庫渲染
     window.renderMemberVault = function() {
       const container = document.getElementById('memberVaultContainer');
       if (!container) return;
 
       const data = window.memberVaultData;
       const qrDisplay = data.qrImg 
-        ? `<img src="${data.qrImg}" class="w-28 h-28 mx-auto object-cover rounded-xl border-2 border-handBorder" alt="VJW QR Code">`
-        : `<div class="w-28 h-28 mx-auto bg-gray-100 border-2 border-handBorder rounded-xl flex items-center justify-center p-2">
-            <div class="w-full h-full bg-ink flex flex-wrap p-1 rounded">
-              <div class="w-1/2 h-1/2 border-2 border-white bg-white"></div>
-              <div class="w-1/2 h-1/2 bg-ink"></div>
-              <div class="w-1/2 h-1/2 bg-ink"></div>
-              <div class="w-1/2 h-1/2 border-2 border-white bg-white"></div>
-            </div>
+        ? `<img src="${data.qrImg}" class="w-36 h-36 mx-auto object-contain rounded-xl border-2 border-handBorder shadow-sm" alt="VJW QR Code">`
+        : `<div class="w-28 h-28 mx-auto bg-gray-100 border-2 border-handBorder rounded-xl flex items-center justify-center p-2"> 
+             <div class="w-full h-full bg-ink flex flex-wrap p-1 rounded"> 
+               <div class="w-1/2 h-1/2 border-2 border-white bg-white"></div> 
+               <div class="w-1/2 h-1/2 bg-ink"></div> 
+               <div class="w-1/2 h-1/2 bg-ink"></div> 
+               <div class="w-1/2 h-1/2 border-2 border-white bg-white"></div> 
+             </div> 
            </div>`;
 
-      container.innerHTML = `
-        <div class="p-2.5 bg-white rounded-xl border border-handBorder">
-          <p class="text-[10px] text-capybara font-bold">成員代表：${data.name}</p>
-          <div class="flex justify-between items-center mt-1">
-            <span class="font-mono font-bold text-ink text-sm">護照號碼：${data.passport}</span>
-            <span class="text-[10px] text-capybara">效期 ${data.expiry}</span>
-          </div>
-        </div>
+      container.innerHTML = ` 
+        <div class="p-2.5 bg-white rounded-xl border border-handBorder"> 
+          <p class="text-[10px] text-capybara font-bold">成員代表：${data.name}</p> 
+          <div class="flex justify-between items-center mt-1"> 
+            <span class="font-mono font-bold text-ink text-sm">護照號碼：${data.passport}</span> 
+            <span class="text-[10px] text-capybara">效期 ${data.expiry}</span> 
+          </div> 
+        </div> 
+        
+        <div class="p-3 bg-white rounded-xl border border-handBorder text-center space-y-2"> 
+          <p class="text-xs font-bold text-ink">退稅 & 入境 Visit Japan Web QR Code 截圖</p> 
+          
+          ${qrDisplay} 
 
-        <div class="p-3 bg-white rounded-xl border border-handBorder text-center">
-          <p class="text-xs font-bold text-ink mb-2">退稅 & 入境 Visit Japan Web QR Code</p>
-          ${qrDisplay}
-          <button onclick="showToast('Visit Japan Web QR Code 已放大！')" class="mt-2 hand-pill px-4 py-1 bg-matcha text-white text-xs font-bold">
-            放大顯示 QR Code
-          </button>
-        </div>
+          <!-- 本地檔案上傳按鈕 -->
+          <div class="pt-1">
+            <input type="file" id="localQrUpload" accept="image/*" style="display: none;" onchange="handleLocalQrUpload(event)">
+            <label for="localQrUpload" class="inline-block hand-pill px-4 py-1.5 bg-matcha text-white text-xs font-bold cursor-pointer shadow-sm">
+              📤 選擇手機內的 QR Code 照片
+            </label>
+          </div>
+          <p class="text-[10px] text-capybara">※ 照片僅會暫存在您的裝置畫面上，離線也能隨時查看。</p>
+        </div> 
       `;
     };
 
+    // 處理主頁面本地圖片上傳轉 Base64
+    window.handleLocalQrUpload = function(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          window.memberVaultData.qrImg = e.target.result;
+          renderMemberVault();
+          showToast('QR Code 照片已成功載入！');
+        };
+        reader.readAsDataURL(file);
+      }
+    };
+
+    // 處理 Modal 內的圖片檔案上傳
+    window.handleModalFileSelect = function(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById('editQrUrl').value = e.target.result;
+          showToast('照片讀取完成！請點擊儲存修改。');
+        };
+        reader.readAsDataURL(file);
+      }
+    };
+
+    // 打開編輯視窗並自動寫入對應的欄位資料
     window.openEditMemberVaultModal = function() {
       const data = window.memberVaultData;
-      document.getElementById('vaultNameInput').value = data.name;
-      document.getElementById('vaultPassportInput').value = data.passport;
-      document.getElementById('vaultExpiryInput').value = data.expiry;
-      document.getElementById('vaultQrImgInput').value = data.qrImg || '';
+      document.getElementById('vaultNameInput').value = data.name || '';
+      document.getElementById('vaultPassportInput').value = data.passport || '';
+      document.getElementById('vaultExpiryInput').value = data.expiry || '';
+      document.getElementById('editQrUrl').value = data.qrImg || '';
+      const fileInput = document.getElementById('editQrFile');
+      if (fileInput) fileInput.value = '';
       openModal('editVaultModal');
     };
 
+    // 儲存編輯視窗的資料
     window.saveMemberVaultData = function(e) {
-      e.preventDefault();
+      if (e && e.preventDefault) e.preventDefault();
+      
+      const name = document.getElementById('vaultNameInput').value.trim();
+      const passport = document.getElementById('vaultPassportInput').value.trim();
+      const expiry = document.getElementById('vaultExpiryInput').value.trim();
+      const qrImg = document.getElementById('editQrUrl').value.trim();
+
+      if (!name || !passport) {
+        showToast('請填寫姓名與護照號碼！');
+        return;
+      }
+
       window.memberVaultData = {
-        name: document.getElementById('vaultNameInput').value.trim(),
-        passport: document.getElementById('vaultPassportInput').value.trim(),
-        expiry: document.getElementById('vaultExpiryInput').value.trim(),
-        qrImg: document.getElementById('vaultQrImgInput').value.trim()
+        name: name,
+        passport: passport,
+        expiry: expiry,
+        qrImg: qrImg || window.memberVaultData.qrImg
       };
 
       renderMemberVault();
       closeModal('editVaultModal');
       showToast('成員個人資料已更新！');
     };
-
-// 支援圖片上傳與預覽的證件庫渲染
-window.renderMemberVault = function() {
-  const container = document.getElementById('memberVaultContainer');
-  if (!container) return;
-  const data = window.memberVaultData;
-  
-  const qrDisplay = data.qrImg ? 
-    `<img src="${data.qrImg}" class="w-32 h-32 mx-auto object-cover rounded-xl border-2 border-handBorder" alt="VJW QR Code">` : 
-    `<div class="w-28 h-28 mx-auto bg-gray-100 border-2 border-handBorder rounded-xl flex items-center justify-center p-2"> 
-       <div class="w-full h-full bg-ink flex flex-wrap p-1 rounded"> 
-         <div class="w-1/2 h-1/2 border-2 border-white bg-white"></div> 
-         <div class="w-1/2 h-1/2 bg-ink"></div> 
-         <div class="w-1/2 h-1/2 bg-ink"></div> 
-         <div class="w-1/2 h-1/2 border-2 border-white bg-white"></div> 
-       </div> 
-     </div>`;
-
-  container.innerHTML = ` 
-    <div class="p-2.5 bg-white rounded-xl border border-handBorder"> 
-      <p class="text-[10px] text-capybara font-bold">成員代表：${data.name}</p> 
-      <div class="flex justify-between items-center mt-1"> 
-        <span class="font-mono font-bold text-ink text-sm">護照號碼：${data.passport}</span> 
-        <span class="text-[10px] text-capybara">效期 ${data.expiry}</span> 
-      </div> 
-    </div> 
-    
-    <div class="p-3 bg-white rounded-xl border border-handBorder text-center space-y-2"> 
-      <p class="text-xs font-bold text-ink">退稅 & 入境 Visit Japan Web QR Code 截圖</p> 
-      
-      ${qrDisplay} 
-
-      <!-- 本地檔案上傳按鈕 -->
-      <div class="pt-1">
-        <input type="file" id="localQrUpload" accept="image/*" style="display: none;" onchange="handleLocalQrUpload(event)">
-        <label for="localQrUpload" class="inline-block hand-pill px-4 py-1.5 bg-matcha text-white text-xs font-bold cursor-pointer shadow-sm">
-          📤 選擇手機內的 QR Code 照片
-        </label>
-      </div>
-      <p class="text-[10px] text-capybara">※ 照片僅會暫存在您的裝置畫面上，離線也能隨時查看。</p>
-    </div> 
-  `;
-};
-
-// 處理本地圖片上傳轉為 Base64 預覽的函式
-window.handleLocalQrUpload = function(event) {
-  const file = event.target.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      window.memberVaultData.qrImg = e.target.result;
-      renderMemberVault();
-      showToast('QR Code 照片已成功載入！');
-    };
-    reader.readAsDataURL(file);
-  }
-};
 
     window.saveExchangeRate = function() {
       const val = parseFloat(document.getElementById('rateInput').value);
@@ -1354,6 +1332,38 @@ window.handleLocalQrUpload = function(event) {
           showToast('該名字已在成員列表中');
         }
       }
+    };
+
+    function renderMembersUI() {
+      const badgesContainer = document.getElementById('memberBadgesList');
+      const selectWho = document.getElementById('expWhoSelect');
+      const splittersContainer = document.getElementById('splitterCheckboxes');
+      const countText = document.getElementById('memberCountText');
+
+      if (countText) countText.innerText = window.members.length;
+
+      if (badgesContainer) {
+        badgesContainer.innerHTML = window.members.map(m => 
+          `<span class="px-2 py-0.5 bg-matcha-bg text-matcha-dark font-bold text-[10px] rounded-full border border-matcha/30">${m}</span>`
+        ).join('');
+      }
+
+      if (selectWho) {
+        selectWho.innerHTML = window.members.map(m => `<option value="${m}">${m}</option>`).join('');
+      }
+
+      if (splittersContainer) {
+        splittersContainer.innerHTML = window.members.map(m => `
+          <label class="flex items-center gap-1 text-[11px] font-bold text-ink cursor-pointer">
+            <input type="checkbox" value="${m}" class="splitter-cb accent-matcha rounded" checked>
+            <span>${m}</span>
+          </label>
+        `).join('');
+      }
+    }
+
+    window.selectAllSplitters = function(checked) {
+      document.querySelectorAll('.splitter-cb').forEach(cb => cb.checked = checked);
     };
 
     function switchDay(dayNum) {
@@ -1712,5 +1722,7 @@ window.handleLocalQrUpload = function(event) {
     window.closeModal = closeModal;
     window.showToast = showToast;
   </script>
+</body>
+</html>
 </body>
 </html>
