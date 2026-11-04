@@ -1,1500 +1,1520 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>九州 8 天 7 夜 自由行 | 多人共用手繪和風旅頁 & 熊本機場退稅攻略</title>
-  
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  <!-- Google Fonts: Zen Maru Gothic -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet">
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+ <title>九州 8 天 7 夜 自由行 | 多人共用手繪和風旅頁 & 熊本機場退稅攻略</title>
+ 
+ <!-- Tailwind CSS -->
+ <script src="https://cdn.tailwindcss.com"></script>
+ 
+ <!-- Font Awesome Icons -->
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ 
+ <!-- Google Fonts: Zen Maru Gothic -->
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet">
 
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            paper: '#FAF6F0',
-            paperCard: '#FFFDF9',
-            handBorder: '#4A3E3D',
-            matcha: {
-              DEFAULT: '#6B7C59',
-              light: '#8FA07D',
-              bg: '#EFF3EA'
-            },
-            akaushi: {
-              DEFAULT: '#D97757',
-              dark: '#B85536',
-              light: '#F4A288'
-            },
-            capybara: '#8C6D58',
-            gold: '#D4A373',
-            ink: '#4A3E3D'
-          },
-          fontFamily: {
-            maru: ['"Zen Maru Gothic"', 'sans-serif']
-          }
-        }
-      }
-    }
-  </script>
+ <script>
+ tailwind.config = {
+   theme: {
+     extend: {
+       colors: {
+         paper: '#FAF6F0',
+         paperCard: '#FFFDF9',
+         handBorder: '#4A3E3D',
+         matcha: {
+           DEFAULT: '#6B7C59',
+           light: '#8FA07D',
+           bg: '#EFF3EA',
+           dark: '#4D5B3E'
+         },
+         akaushi: {
+           DEFAULT: '#D97757',
+           dark: '#B85536',
+           light: '#F4A288'
+         },
+         capybara: '#8C6D58',
+         gold: '#D4A373',
+         ink: '#4A3E3D'
+       },
+       fontFamily: {
+         maru: ['"Zen Maru Gothic"', 'sans-serif']
+       }
+     }
+   }
+ }
+ </script>
 
-  <style>
-    body {
-      background-color: #FAF6F0;
-      color: #4A3E3D;
-      font-family: "Zen Maru Gothic", sans-serif;
-      background-image: radial-gradient(#D6CABE 1.2px, transparent 1.2px);
-      background-size: 18px 18px;
-    }
+ <style>
+ body {
+   background-color: #FAF6F0;
+   color: #4A3E3D;
+   font-family: "Zen Maru Gothic", sans-serif;
+   background-image: radial-gradient(#D6CABE 1.2px, transparent 1.2px);
+   background-size: 18px 18px;
+ }
 
-    .hand-card {
-      background: #FFFDF9;
-      border: 2.5px solid #4A3E3D;
-      border-radius: 20px;
-      box-shadow: 3px 3.5px 0px #4A3E3D;
-      position: relative;
-    }
+ .hand-card {
+   background: #FFFDF9;
+   border: 2.5px solid #4A3E3D;
+   border-radius: 20px;
+   box-shadow: 3px 3.5px 0px #4A3E3D;
+   position: relative;
+ }
 
-    .hand-pill {
-      border: 2px solid #4A3E3D;
-      border-radius: 9999px;
-      box-shadow: 2px 2px 0px #4A3E3D;
-      transition: all 0.15s ease;
-    }
-    .hand-pill:active {
-      transform: translate(1px, 1px);
-      box-shadow: 1px 1px 0px #4A3E3D;
-    }
+ .hand-pill {
+   border: 2px solid #4A3E3D;
+   border-radius: 9999px;
+   box-shadow: 2px 2px 0px #4A3E3D;
+   transition: all 0.15s ease;
+ }
+ .hand-pill:active {
+   transform: translate(1px, 1px);
+   box-shadow: 1px 1px 0px #4A3E3D;
+ }
 
-    ::-webkit-scrollbar {
-      height: 6px;
-      width: 6px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #FAF6F0;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #6B7C59;
-      border-radius: 10px;
-    }
+ ::-webkit-scrollbar {
+   height: 6px;
+   width: 6px;
+ }
+ ::-webkit-scrollbar-track {
+   background: #FAF6F0;
+ }
+ ::-webkit-scrollbar-thumb {
+   background: #6B7C59;
+   border-radius: 10px;
+ }
 
-    .tab-content {
-      display: none;
-      opacity: 0;
-      transition: opacity 0.2s ease-in-out;
-    }
-    .tab-content.active {
-      display: block;
-      opacity: 1;
-    }
+ .no-scrollbar::-webkit-scrollbar {
+   display: none;
+ }
+ .no-scrollbar {
+   -ms-overflow-style: none;
+   scrollbar-width: none;
+ }
 
-    .toast-popup {
-      position: fixed;
-      bottom: 80px;
-      left: 50%;
-      transform: translateX(-50%) translateY(20px);
-      background: #4A3E3D;
-      color: #FFFDF9;
-      padding: 8px 18px;
-      border-radius: 9999px;
-      font-size: 12px;
-      font-weight: bold;
-      opacity: 0;
-      transition: all 0.3s ease;
-      z-index: 100;
-      pointer-events: none;
-      box-shadow: 2px 3px 0px rgba(0,0,0,0.2);
-    }
-    .toast-popup.show {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
-  </style>
+ .tab-content {
+   display: none;
+   opacity: 0;
+   transition: opacity 0.2s ease-in-out;
+ }
+ .tab-content.active {
+   display: block;
+   opacity: 1;
+ }
+
+ .toast-popup {
+   position: fixed;
+   bottom: 80px;
+   left: 50%;
+   transform: translateX(-50%) translateY(20px);
+   background: #4A3E3D;
+   color: #FFFDF9;
+   padding: 8px 18px;
+   border-radius: 9999px;
+   font-size: 12px;
+   font-weight: bold;
+   opacity: 0;
+   transition: all 0.3s ease;
+   z-index: 100;
+   pointer-events: none;
+   box-shadow: 2px 3px 0px rgba(0,0,0,0.2);
+ }
+ .toast-popup.show {
+   opacity: 1;
+   transform: translateX(-50%) translateY(0);
+ }
+ </style>
 </head>
 <body class="pb-24 pt-3 px-3 sm:px-4 max-w-md mx-auto min-h-screen relative">
 
-  <!-- TOAST MESSAGE -->
-  <div id="toast" class="toast-popup">已複製至剪貼簿！</div>
-
-  <!-- SVG ASSET SYSTEM -->
-  <svg class="hidden">
-    <defs>
-      <g id="sketch-castle">
-        <path d="M4 36 L36 36 L33 26 L7 26 Z" fill="#EAE5D9" stroke="#4A3E3D" stroke-width="2" stroke-linejoin="round"/>
-        <path d="M8 26 L32 26 L29 17 L11 17 Z" fill="#6B7C59" stroke="#4A3E3D" stroke-width="2" stroke-linejoin="round"/>
-        <path d="M13 17 L27 17 L24 9 L16 9 Z" fill="#D97757" stroke="#4A3E3D" stroke-width="2" stroke-linejoin="round"/>
-        <path d="M17 9 L23 9 L20 4 Z" fill="#D4A373" stroke="#4A3E3D" stroke-width="2"/>
-        <rect x="18" y="28" width="4" height="8" fill="#4A3E3D"/>
-      </g>
-      <g id="sketch-torii">
-        <path d="M3 8 Q20 4 37 8 L37 12 Q20 8 3 12 Z" fill="#D97757" stroke="#4A3E3D" stroke-width="2"/>
-        <rect x="6" y="12" width="28" height="3" fill="#D97757" stroke="#4A3E3D" stroke-width="1.5"/>
-        <rect x="9" y="15" width="4" height="21" fill="#D97757" stroke="#4A3E3D" stroke-width="2"/>
-        <rect x="27" y="15" width="4" height="21" fill="#D97757" stroke="#4A3E3D" stroke-width="2"/>
-        <rect x="18" y="12" width="4" height="7" fill="#4A3E3D"/>
-      </g>
-      <g id="sketch-onsen">
-        <path d="M4 28 C6 22, 34 22, 36 28 C34 36, 6 36, 4 28 Z" fill="#8FA07D" stroke="#4A3E3D" stroke-width="2"/>
-        <path d="M12 20 C14 14, 12 10, 14 6" stroke="#D97757" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-        <path d="M20 20 C22 14, 20 10, 22 6" stroke="#D97757" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-        <path d="M28 20 C30 14, 28 10, 30 6" stroke="#D97757" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-      </g>
-      <g id="sketch-volcano">
-        <path d="M3 34 L13 14 L27 14 L37 34 Z" fill="#6B7C59" stroke="#4A3E3D" stroke-width="2"/>
-        <path d="M13 14 L27 14 L24 18 L16 18 Z" fill="#8C6D58" stroke="#4A3E3D" stroke-width="1.5"/>
-        <path d="M16 11 C15 6, 13 4, 11 2 M20 11 C20 5, 20 3, 20 1 M24 11 C25 6, 27 4, 29 2" stroke="#D97757" stroke-width="2" fill="none" stroke-linecap="round"/>
-      </g>
-      <g id="sketch-ramen">
-        <path d="M5 16 C6 34, 34 34, 35 16 Z" fill="#FFFDF9" stroke="#4A3E3D" stroke-width="2"/>
-        <ellipse cx="20" cy="16" rx="15" ry="4" fill="#D97757" stroke="#4A3E3D" stroke-width="1.8"/>
-        <circle cx="15" cy="16" r="3" fill="#D4A373"/>
-        <path d="M8 8 L24 2 M12 8 L28 2" stroke="#4A3E3D" stroke-width="2" stroke-linecap="round"/>
-      </g>
-      <g id="sketch-car">
-        <rect x="3" y="10" width="34" height="18" rx="6" fill="#6B7C59" stroke="#4A3E3D" stroke-width="2.2"/>
-        <rect x="7" y="13" width="8" height="6" rx="2" fill="#FFFDF9" stroke="#4A3E3D" stroke-width="1.5"/>
-        <rect x="18" y="13" width="8" height="6" rx="2" fill="#FFFDF9" stroke="#4A3E3D" stroke-width="1.5"/>
-        <rect x="29" y="13" width="5" height="6" rx="1" fill="#FFFDF9" stroke="#4A3E3D" stroke-width="1.5"/>
-        <circle cx="10" cy="28" r="4.5" fill="#FFFDF9" stroke="#4A3E3D" stroke-width="2"/>
-        <circle cx="10" cy="28" r="1.5" fill="#4A3E3D"/>
-        <circle cx="30" cy="28" r="4.5" fill="#FFFDF9" stroke="#4A3E3D" stroke-width="2"/>
-        <circle cx="30" cy="28" r="1.5" fill="#4A3E3D"/>
-      </g>
-      <g id="sketch-plane">
-        <path d="M4 22 L16 17 L28 27 L32 25 L24 15 L34 11 L32 7 L20 13 L10 9 L8 11 L14 15 Z" fill="#D97757" stroke="#4A3E3D" stroke-width="2" stroke-linejoin="round"/>
-      </g>
-      <g id="sketch-bag">
-        <rect x="8" y="13" width="24" height="19" rx="3" fill="#D4A373" stroke="#4A3E3D" stroke-width="2"/>
-        <path d="M14 13 C14 7, 26 7, 26 13" stroke="#4A3E3D" stroke-width="2" fill="none"/>
-      </g>
-      <g id="sketch-kumamon">
-        <circle cx="20" cy="20" r="17" fill="#4A3E3D" stroke="#4A3E3D" stroke-width="2"/>
-        <circle cx="8" cy="8" r="6" fill="#4A3E3D" stroke="#4A3E3D" stroke-width="2"/>
-        <circle cx="32" cy="8" r="6" fill="#4A3E3D" stroke="#4A3E3D" stroke-width="2"/>
-        <circle cx="8" cy="8" r="2.5" fill="#FFFDF9"/>
-        <circle cx="32" cy="8" r="2.5" fill="#FFFDF9"/>
-        <circle cx="13" cy="17" r="3.5" fill="#FFFDF9"/>
-        <circle cx="27" cy="17" r="3.5" fill="#FFFDF9"/>
-        <circle cx="13" cy="17" r="1.5" fill="#4A3E3D"/>
-        <circle cx="27" cy="17" r="1.5" fill="#4A3E3D"/>
-        <ellipse cx="20" cy="23" rx="6" ry="4" fill="#FFFDF9"/>
-        <ellipse cx="20" cy="22" rx="2" ry="1.5" fill="#4A3E3D"/>
-        <circle cx="9" cy="24" r="3.5" fill="#D97757"/>
-        <circle cx="31" cy="24" r="3.5" fill="#D97757"/>
-      </g>
-    </defs>
-  </svg>
-
-  <!-- APP BRANDING HEADER -->
-  <header class="mb-3 text-center">
-    <div class="relative inline-block w-full">
-      <div class="hand-card p-3 bg-[#FFFDF9] flex items-center justify-between">
-        <div class="flex items-center gap-2.5">
-          <div class="w-10 h-10 p-0.5 border-2 border-handBorder rounded-2xl bg-matcha/20 flex items-center justify-center">
-            <svg class="w-8 h-8"><use href="#sketch-kumamon"/></svg>
-          </div>
-          <div class="text-left">
-            <h1 class="text-lg font-black text-ink tracking-tight flex items-center gap-1.5">
-              福岡・熊本 8天7夜
-              <span class="text-[10px] bg-akaushi text-white font-bold px-2 py-0.5 rounded-full border border-handBorder shadow-sm">自由行</span>
-            </h1>
-            <div class="flex items-center gap-1.5 text-[11px] font-bold text-capybara">
-              <span id="roomStatusText" class="text-matcha-dark font-extrabold"><i class="fa-solid fa-users"></i> 房號: KYUSHU2026</span>
-              <button onclick="copyRoomCode()" class="text-[10px] text-akaushi underline">複製</button>
-            </div>
-          </div>
-        </div>
-
-        <button onclick="openModal('roomSyncModal')" class="hand-pill px-2.5 py-1.5 bg-paper font-bold text-xs text-ink flex items-center gap-1">
-          <i class="fa-solid fa-rotate text-matcha"></i>
-          <span>切換共用</span>
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <!-- MAIN NAVIGATION TABS CONTENT -->
-  <main>
-    <!-- ==================== TAB 1: ITINERARY ==================== -->
-    <section id="tab-itinerary" class="tab-content active space-y-3">
-      <div class="hand-card p-3 bg-paperCard">
-        <div class="flex justify-between items-center mb-1.5 px-1">
-          <span id="spotDayHeader" class="text-xs font-black text-akaushi">Day 1 • 12/07 (一)</span>
-          <span id="spotProgressStep" class="text-xs font-bold text-capybara">進度 1 / 4 站</span>
-        </div>
-        <div class="relative w-full h-3 bg-paper rounded-full border-2 border-handBorder overflow-hidden mb-3">
-          <div id="topProgressBar" class="h-full bg-matcha transition-all duration-300" style="width: 25%;"></div>
-        </div>
-        <div class="flex items-center justify-between gap-2">
-          <button id="prevSpotBtn" onclick="stepSpot(-1)" class="hand-pill px-3 py-1.5 bg-white text-ink font-bold text-xs flex items-center gap-1 opacity-50 cursor-not-allowed">
-            <i class="fa-solid fa-chevron-left text-[10px]"></i> 上一站
-          </button>
-          <div class="text-center flex-1 px-1">
-            <p id="currentSpotTitle" class="text-xs font-black text-ink truncate">熊本機場 (KMJ) 接機</p>
-          </div>
-          <button id="nextSpotBtn" onclick="stepSpot(1)" class="hand-pill px-3 py-1.5 bg-akaushi text-white font-bold text-xs flex items-center gap-1">
-            下一站 <i class="fa-solid fa-chevron-right text-[10px]"></i>
-          </button>
-        </div>
-      </div>
-
-      <div class="flex overflow-x-auto gap-2 py-1 no-scrollbar">
-        <button onclick="switchDay(1)" class="day-capsule hand-pill px-3 py-1.5 text-xs font-bold whitespace-nowrap bg-akaushi text-white" data-day="1">D1 (12/07)</button>
-        <button onclick="switchDay(2)" class="day-capsule hand-pill px-3 py-1.5 text-xs font-bold whitespace-nowrap bg-white text-ink" data-day="2">D2 (12/08)</button>
-        <button onclick="switchDay(3)" class="day-capsule hand-pill px-3 py-1.5 text-xs font-bold whitespace-nowrap bg-white text-ink" data-day="3">D3 (12/09)</button>
-        <button onclick="switchDay(4)" class="day-capsule hand-pill px-3 py-1.5 text-xs font-bold whitespace-nowrap bg-white text-ink" data-day="4">D4 (12/10)</button>
-        <button onclick="switchDay(5)" class="day-capsule hand-pill px-3 py-1.5 text-xs font-bold whitespace-nowrap bg-white text-ink" data-day="5">D5 (12/11)</button>
-        <button onclick="switchDay(6)" class="day-capsule hand-pill px-3 py-1.5 text-xs font-bold whitespace-nowrap bg-white text-ink" data-day="6">D6 (12/12)</button>
-        <button onclick="switchDay(7)" class="day-capsule hand-pill px-3 py-1.5 text-xs font-bold whitespace-nowrap bg-white text-ink" data-day="7">D7 (12/13)</button>
-        <button onclick="switchDay(8)" class="day-capsule hand-pill px-3 py-1.5 text-xs font-bold whitespace-nowrap bg-white text-ink" data-day="8">D8 (12/14)</button>
-      </div>
-
-      <div id="spotDetailCard" class="hand-card p-4 bg-paperCard space-y-3"></div>
-
-      <div class="hand-card p-3.5 bg-paperCard">
-        <h3 class="text-xs font-black text-ink mb-2.5 flex items-center justify-between border-b-2 border-dashed border-capybara/20 pb-1.5">
-          <span id="dayListTitle"><i class="fa-solid fa-map-location-dot text-matcha"></i> 當日完整景點清單</span>
-          <span id="dayTypeBadge" class="text-[10px] bg-matcha/20 text-matcha-dark font-bold px-2 py-0.5 rounded-full">包車 9小時</span>
-        </h3>
-        <div id="daySpotList" class="space-y-2"></div>
-      </div>
-    </section>
-
-    <!-- ==================== TAB 2: FLIGHT & KUMAMOTO AIRPORT TAX REFUND GUIDE ==================== -->
-    <section id="tab-flight" class="tab-content space-y-3">
-      <div class="hand-card p-4 bg-paperCard">
-        <div class="flex justify-between items-center mb-3">
-          <h2 class="text-sm font-black text-ink flex items-center gap-1.5">
-            <svg class="w-5 h-5"><use href="#sketch-plane"/></svg> 星宇航空 (STARLUX)
-          </h2>
-          <span class="hand-pill px-2.5 py-1 bg-akaushi text-white text-[11px] font-extrabold font-mono select-all">
-            PNR: DUFKTB
-          </span>
-        </div>
-        <div class="grid grid-cols-2 gap-2 text-xs">
-          <div class="p-2.5 rounded-xl border-2 border-handBorder bg-white">
-            <div class="flex justify-between items-center text-[10px] text-capybara font-bold mb-1">
-              <span>去程 JX846</span>
-              <span>12/07 (一)</span>
-            </div>
-            <p class="text-base font-black text-ink text-center">07:30 ➔ 10:35</p>
-            <p class="text-[11px] text-matcha-dark font-bold text-center mt-0.5">TPE 桃園 ➔ KMJ 熊本</p>
-          </div>
-          <div class="p-2.5 rounded-xl border-2 border-handBorder bg-white">
-            <div class="flex justify-between items-center text-[10px] text-capybara font-bold mb-1">
-              <span>回程 JX847</span>
-              <span>12/14 (一)</span>
-            </div>
-            <p class="text-base font-black text-ink text-center">11:45 ➔ 13:25</p>
-            <p class="text-[11px] text-akaushi font-bold text-center mt-0.5">KMJ 熊本 ➔ TPE 桃園</p>
-          </div>
-        </div>
-        <div class="mt-3 p-2 bg-matcha-bg rounded-xl border-2 border-matcha/40 text-[11px] text-matcha-dark font-bold flex items-center gap-2">
-          <i class="fa-solid fa-circle-info"></i> 包車司機海獅將於熊本機場接機大廳候機。
-        </div>
-      </div>
-
-      <div class="hand-card p-4 bg-akaushi/10 border-akaushi text-center space-y-1">
-        <div class="text-3xl mb-1">🗾 ✈️ 🛍️</div>
-        <span class="hand-pill px-2.5 py-0.5 bg-akaushi text-white text-[10px] font-bold">KUMAMOTO AIRPORT GUIDE</span>
-        <h2 class="text-base font-black text-ink">熊本機場退稅攻略</h2>
-        <p class="text-xs font-bold text-akaushi font-mono">2026年11月1日新制</p>
-        <p class="text-xs font-black text-ink pt-1">先付款・機場海關確認・事後退款</p>
-        <p class="text-[11px] text-capybara font-bold">熊本機場出境專用指南</p>
-      </div>
-
-      <div class="hand-card p-4 bg-paperCard space-y-2.5">
-        <h3 class="text-xs font-black text-ink border-b-2 border-dashed border-capybara/20 pb-1.5 flex items-center gap-1.5">
-          <i class="fa-solid fa-thumbtack text-akaushi"></i> 熊本機場適用方式
-        </h3>
-        <div class="p-2.5 rounded-xl border-2 border-handBorder bg-white flex items-start gap-2.5">
-          <div class="w-8 h-8 rounded-xl bg-akaushi/15 text-akaushi font-bold flex items-center justify-center flex-shrink-0 text-base">🏢</div>
-          <div>
-            <b class="text-xs font-black text-ink">1F 一樓大廳退稅專用機台</b>
-            <p class="text-[11px] text-capybara font-bold">使用實體 Tax Refund Kiosk 辦理海關確認。</p>
-          </div>
-        </div>
-        <div class="p-2.5 rounded-xl border-2 border-handBorder bg-white flex items-start gap-2.5">
-          <div class="w-8 h-8 rounded-xl bg-matcha/20 text-matcha-dark font-bold flex items-center justify-center flex-shrink-0 text-base">📱</div>
-          <div>
-            <b class="text-xs font-black text-ink">Visit Japan Web 線上退稅</b>
-            <p class="text-[11px] text-capybara font-bold">熊本機場目前不在七大線上確認機場名單內，請使用實體機台。</p>
-          </div>
-        </div>
-        <div class="p-2.5 rounded-xl border-2 border-handBorder bg-white flex items-start gap-2.5">
-          <div class="w-8 h-8 rounded-xl bg-gold/20 text-ink font-bold flex items-center justify-center flex-shrink-0 text-base">💴</div>
-          <div>
-            <b class="text-xs font-black text-ink">機場現金退款</b>
-            <p class="text-[11px] text-capybara font-bold">熊本機場沒有現金退款機台或櫃台，依購物時登記的方式退款。</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="hand-card p-4 bg-paperCard space-y-2.5">
-        <h3 class="text-xs font-black text-ink border-b-2 border-dashed border-capybara/20 pb-1.5 flex items-center gap-1.5">
-          <span class="w-5 h-5 rounded-full bg-akaushi text-white text-[10px] font-bold flex items-center justify-center">01</span>
-          日本退稅新制重點
-        </h3>
-        <div class="grid grid-cols-2 gap-2 text-xs">
-          <div class="p-2.5 bg-matcha-bg border-2 border-matcha/40 rounded-xl space-y-1">
-            <b class="text-matcha-dark font-black">✓ 退稅資格</b>
-            <p class="text-[11px] text-ink font-bold">符合資格的外國短期訪日旅客</p>
-            <p class="text-[11px] text-capybara font-bold">同店同日未稅滿 ¥5,000</p>
-          </div>
-          <div class="p-2.5 bg-akaushi/10 border-2 border-akaushi/40 rounded-xl space-y-1">
-            <b class="text-akaushi font-black">⚠ 注意限制</b>
-            <p class="text-[11px] text-ink font-bold">商品必須全部帶出日本</p>
-            <p class="text-[11px] text-capybara font-bold">購買日起90天內完成確認</p>
-          </div>
-        </div>
-        <p class="text-xs text-ink font-bold pt-1">一般消費稅 10%，部分食品飲料適用 8%。</p>
-        <p class="text-xs text-capybara font-bold">消耗品不再需要特殊密封包裝，但不能在日本境內消耗。</p>
-        <div class="p-2.5 bg-akaushi/15 border-2 border-akaushi rounded-xl text-xs space-y-1">
-          <b class="text-akaushi font-black">新制最大改變：</b>
-          <p class="text-ink font-bold leading-relaxed">購物時先付含稅價格，離境完成海關確認後，才由店家或退款業者退還消費稅相當金額。</p>
-        </div>
-      </div>
-
-      <div class="hand-card p-4 bg-paperCard space-y-3">
-        <h3 class="text-xs font-black text-ink border-b-2 border-dashed border-capybara/20 pb-1.5 flex items-center gap-1.5">
-          <span class="w-5 h-5 rounded-full bg-akaushi text-white text-[10px] font-bold flex items-center justify-center">02</span>
-          熊本機場退稅四步驟
-        </h3>
-        <div class="space-y-2 text-xs">
-          <div class="p-2.5 rounded-xl bg-white border-2 border-handBorder flex items-start gap-2.5">
-            <span class="w-6 h-6 rounded-full bg-akaushi text-white text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">1</span>
-            <div>
-              <b class="text-ink font-black">抵達熊本機場</b>
-              <p class="text-[11px] text-capybara font-bold">前往國際線航廈一樓，先不要托運含有免稅商品的行李。</p>
-            </div>
-          </div>
-          <div class="p-2.5 rounded-xl bg-white border-2 border-handBorder flex items-start gap-2.5">
-            <span class="w-6 h-6 rounded-full bg-akaushi text-white text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">2</span>
-            <div>
-              <b class="text-ink font-black">找到退稅 Kiosk</b>
-              <p class="text-[11px] text-capybara font-bold">前往 1F Tax Refund Kiosk，準備護照，依照機台指示操作。</p>
-              <a href="https://www.customs.go.jp/kaigairyoko/taxrefund/map_CHECK.htm" target="_blank" class="inline-block mt-1.5 hand-pill px-2.5 py-1 bg-paper font-bold text-[10px] text-akaushi">
-                查看日本海關機台地圖 ↗
-              </a>
-            </div>
-          </div>
-          <div class="p-2.5 rounded-xl bg-white border-2 border-handBorder flex items-start gap-2.5">
-            <span class="w-6 h-6 rounded-full bg-akaushi text-white text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">3</span>
-            <div class="w-full">
-              <b class="text-ink font-black">等待海關確認結果</b>
-              <div class="grid grid-cols-2 gap-2 mt-1 text-[11px]">
-                <div class="p-2 bg-matcha-bg border border-matcha/40 rounded-xl space-y-0.5">
-                  <strong class="text-matcha-dark font-black">GREEN ✓</strong>
-                  <p class="text-capybara font-bold">確認完成，可前往航空公司櫃台。</p>
-                </div>
-                <div class="p-2 bg-akaushi/10 border border-akaushi/40 rounded-xl space-y-0.5">
-                  <strong class="text-akaushi font-black">RED !</strong>
-                  <p class="text-capybara font-bold">需要帶商品到海關檢查區查驗。</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="p-2.5 rounded-xl bg-white border-2 border-handBorder flex items-start gap-2.5">
-            <span class="w-6 h-6 rounded-full bg-akaushi text-white text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">4</span>
-            <div>
-              <b class="text-ink font-black">托運行李、準備登機</b>
-              <p class="text-[11px] text-capybara font-bold">海關確認完成後，才進行行李托運及後續出境手續。</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="hand-card p-4 bg-paperCard space-y-2">
-        <h3 class="text-xs font-black text-ink border-b-2 border-dashed border-capybara/20 pb-1.5 flex items-center gap-1.5">
-          <span class="w-5 h-5 rounded-full bg-akaushi text-white text-[10px] font-bold flex items-center justify-center">05</span>
-          出境退稅檢查清單
-        </h3>
-        <p class="text-[11px] text-capybara font-bold">完成一項勾選一項，避免機場漏辦。</p>
-        <div class="relative w-full h-2.5 bg-paper rounded-full border-2 border-handBorder overflow-hidden my-2">
-          <div id="kmj-progress" class="h-full bg-matcha transition-all duration-300" style="width: 0%;"></div>
-        </div>
-        <p id="kmj-count" class="text-xs font-black text-matcha-dark text-right">完成 0 / 7 項</p>
-        <div id="kmj-checks" class="space-y-1.5 text-xs font-bold text-ink pt-1">
-          <label class="flex items-center gap-2 p-2 bg-white rounded-xl border border-handBorder cursor-pointer">
-            <input type="checkbox" class="w-4 h-4 accent-matcha rounded">
-            <span>購物時已出示護照及完成退稅登記</span>
-          </label>
-          <label class="flex items-center gap-2 p-2 bg-white rounded-xl border border-handBorder cursor-pointer">
-            <input type="checkbox" class="w-4 h-4 accent-matcha rounded">
-            <span>已確認退款平台與退款方式</span>
-          </label>
-          <label class="flex items-center gap-2 p-2 bg-white rounded-xl border border-handBorder cursor-pointer">
-            <input type="checkbox" class="w-4 h-4 accent-matcha rounded">
-            <span>保留購物紀錄及相關商品</span>
-          </label>
-          <label class="flex items-center gap-2 p-2 bg-white rounded-xl border border-handBorder cursor-pointer">
-            <input type="checkbox" class="w-4 h-4 accent-matcha rounded">
-            <span>免稅商品尚未放進托運行李</span>
-          </label>
-          <label class="flex items-center gap-2 p-2 bg-white rounded-xl border border-handBorder cursor-pointer">
-            <input type="checkbox" class="w-4 h-4 accent-matcha rounded">
-            <span>已準備護照</span>
-          </label>
-          <label class="flex items-center gap-2 p-2 bg-white rounded-xl border border-handBorder cursor-pointer">
-            <input type="checkbox" class="w-4 h-4 accent-matcha rounded">
-            <span>已完成 1F 海關退稅機台確認</span>
-          </label>
-          <label class="flex items-center gap-2 p-2 bg-white rounded-xl border border-handBorder cursor-pointer">
-            <input type="checkbox" class="w-4 h-4 accent-matcha rounded">
-            <span>GREEN 確認完成或 RED 已完成人工查驗</span>
-          </label>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== TAB 3: GOURMET & SOUVENIRS ==================== -->
-    <section id="tab-food" class="tab-content space-y-3">
-      <div class="hand-card p-3 bg-paperCard space-y-2.5">
-        <div class="flex justify-between items-center">
-          <h2 class="text-sm font-black text-ink flex items-center gap-1.5">
-            <svg class="w-5 h-5"><use href="#sketch-ramen"/></svg> 美食・伴手禮寶典
-          </h2>
-          <button onclick="openModal('addFoodModal')" class="hand-pill px-3 py-1.5 bg-akaushi text-white text-xs font-bold flex items-center gap-1 shadow-sm">
-            <i class="fa-solid fa-plus text-[10px]"></i> 新增口袋美食
-          </button>
-        </div>
-
-        <div class="flex overflow-x-auto gap-1.5 py-1 no-scrollbar border-t border-dashed border-capybara/20 pt-2">
-          <button onclick="filterFood('gourmet')" class="food-tab hand-pill px-2.5 py-1 text-[11px] font-bold bg-akaushi text-white flex-shrink-0" data-ftab="gourmet">美食推薦</button>
-          <button onclick="filterFood('souvenir')" class="food-tab hand-pill px-2.5 py-1 text-[11px] font-bold bg-white text-ink flex-shrink-0" data-ftab="souvenir">伴手禮推薦</button>
-        </div>
-
-        <div class="flex items-center gap-2 pt-1 border-t border-dashed border-capybara/20">
-          <label style="font-size: 12px;" class="font-bold text-capybara">細分類別:</label>
-          <select id="food-category" class="flex-1 p-1.5 rounded-lg border-2 border-handBorder bg-paper font-bold text-xs text-ink">
-            <option value="">🌟 全部顯示</option>
-            <option value="RAMEN">🍜 拉麵類</option>
-            <option value="YAKITORI">🍢 燒鳥/串燒</option>
-            <option value="MOTSU">🍲 牛腸鍋</option>
-            <option value="UNAGI">🍱 鰻魚飯</option>
-            <option value="CHICKEN">🍗 水瀧雞肉鍋</option>
-            <option value="WAGYU">🥩 和牛/赤牛丼</option>
-            <option value="GIFT">🎁 特色伴手禮</option>
-          </select>
-        </div>
-      </div>
-      <div id="foodListContainer" class="space-y-3"></div>
-    </section>
-
-    <!-- ==================== TAB 4: REALTIME EXPENSE & CALCULATOR ==================== -->
-    <section id="tab-expense" class="tab-content space-y-3">
-      <div class="hand-card p-4 bg-paperCard space-y-3">
-        <div class="flex justify-between items-start">
-          <div>
-            <h2 class="text-sm font-black text-ink">多人即時記帳・分帳</h2>
-            <p class="text-[11px] text-capybara font-bold">即時同步總花費與動態精準算盤</p>
-          </div>
-          <span id="syncedCountTag" class="text-xs bg-matcha/20 text-matcha-dark font-extrabold px-2 py-0.5 rounded-full border border-handBorder">雲端同步中</span>
-        </div>
-
-        <div class="grid grid-cols-2 gap-2 text-xs">
-          <div class="p-2.5 bg-white rounded-xl border-2 border-handBorder">
-            <div class="flex justify-between items-center mb-1">
-              <span class="text-[10px] text-capybara font-bold"><i class="fa-solid fa-coins text-gold"></i> JPY/TWD 匯率</span>
-              <button onclick="openModal('editRateModal')" class="text-[10px] text-akaushi font-bold underline">修改</button>
-            </div>
-            <p id="displayRateText" class="text-sm font-black text-ink">1 JPY = 0.208 TWD</p>
-          </div>
-
-          <div class="p-2.5 bg-white rounded-xl border-2 border-handBorder">
-            <div class="flex justify-between items-center mb-1">
-              <span class="text-[10px] text-capybara font-bold"><i class="fa-solid fa-users text-matcha"></i> 團隊成員</span>
-              <button onclick="openModal('addMemberModal')" class="text-[10px] text-akaushi font-bold underline">+ 新增成員</button>
-            </div>
-            <div id="memberBadgesList" class="flex flex-wrap gap-1 max-h-12 overflow-y-auto pt-0.5 no-scrollbar"></div>
-          </div>
-        </div>
-
-        <div class="p-3 bg-white rounded-xl border-2 border-handBorder">
-          <p class="text-[10px] text-capybara font-bold">團隊總花費 (JPY)</p>
-          <p id="totalExpenseJPY" class="text-xl font-black text-ink">¥ 0</p>
-          <p id="totalExpenseTWD" class="text-xs font-bold text-akaushi">≈ NT$ 0 (匯率 0.208)</p>
-        </div>
-
-        <form onsubmit="addNewExpense(event)" class="space-y-2.5 text-xs pt-1 border-t-2 border-dashed border-capybara/20">
-          <div class="grid grid-cols-2 gap-2">
-            <input type="text" id="expItem" required placeholder="消費項目 (如: 德永屋牛腸鍋)" class="p-2 rounded-xl border-2 border-handBorder bg-paper font-bold">
-            <input type="number" step="any" id="expAmt" required placeholder="金額 (日圓 JPY)" class="p-2 rounded-xl border-2 border-handBorder bg-paper font-bold">
-          </div>
-
-          <div class="space-y-1">
-            <label class="font-bold text-ink text-[11px] flex items-center gap-1">
-              <i class="fa-solid fa-hand-holding-dollar text-akaushi"></i> 付款人：
-            </label>
-            <select id="expWhoSelect" required class="w-full p-2 rounded-xl border-2 border-handBorder bg-paper font-bold text-ink"></select>
-          </div>
-
-          <div class="space-y-1 bg-white p-2.5 rounded-xl border-2 border-handBorder">
-            <div class="flex justify-between items-center mb-1">
-              <span class="font-bold text-ink text-[11px]"><i class="fa-solid fa-square-check text-matcha"></i> 分攤成員：</span>
-              <div class="flex gap-1">
-                <button type="button" onclick="selectAllSplitters(true)" class="text-[10px] text-matcha-dark font-bold px-2 py-0.5 bg-matcha/10 rounded-full border border-matcha/30">全選</button>
-                <button type="button" onclick="selectAllSplitters(false)" class="text-[10px] text-capybara font-bold px-2 py-0.5 bg-gray-100 rounded-full border border-gray-300">全不選</button>
-              </div>
-            </div>
-            <div id="splitterCheckboxes" class="grid grid-cols-3 gap-1.5 pt-1"></div>
-          </div>
-
-          <button type="submit" class="w-full hand-pill py-2.5 bg-akaushi text-white font-bold text-xs flex items-center justify-center gap-1">
-            <i class="fa-solid fa-plus"></i> 新增共用記帳
-          </button>
-        </form>
-      </div>
-
-      <div class="hand-card p-3.5 bg-paperCard">
-        <h3 class="text-xs font-black text-ink mb-2 flex justify-between items-center">
-          <span><i class="fa-solid fa-list-check text-matcha"></i> 共用支出明細</span>
-        </h3>
-        <div id="expenseListItems" class="space-y-2 text-xs"></div>
-      </div>
-
-      <div class="hand-card p-3.5 bg-paperCard">
-        <h3 class="text-xs font-black text-ink mb-2 border-b-2 border-dashed border-capybara/20 pb-1.5">
-          <span><i class="fa-solid fa-calculator text-akaushi"></i> 精準分帳結算</span>
-        </h3>
-        <div id="settlementResult" class="space-y-1.5 text-xs"></div>
-      </div>
-    </section>
-
-    <!-- ==================== TAB 5: VAULT & MEMBER MANAGEMENT ==================== -->
-    <section id="tab-vault" class="tab-content space-y-3">
-      <div class="hand-card p-4 bg-paperCard space-y-3">
-        <div class="flex items-center justify-between border-b-2 border-dashed border-capybara/20 pb-2">
-          <div class="flex items-center gap-2.5">
-            <div class="w-10 h-10 rounded-full border-2 border-handBorder bg-matcha-bg flex items-center justify-center font-bold text-matcha-dark">
-              團隊
-            </div>
-            <div>
-              <h3 class="text-sm font-black text-ink">共用證件庫 (Passport Vault)</h3>
-              <p class="text-[10px] text-capybara">成員護照與 Visit Japan Web QR Code</p>
-            </div>
-          </div>
-
-          <button onclick="openModal('addMemberModal')" class="hand-pill px-2.5 py-1 bg-matcha text-white text-[11px] font-bold flex items-center gap-1 shadow-sm">
-            <i class="fa-solid fa-user-plus"></i> 新增成員
-          </button>
-        </div>
-
-        <div class="flex items-center justify-between bg-white p-2 rounded-xl border border-handBorder text-xs">
-          <label class="font-bold text-ink">選擇查閱/編輯成員：</label>
-          <select id="vaultMemberSelect" onchange="switchVaultMember(this.value)" class="p-1.5 rounded-lg border border-handBorder bg-paper font-bold text-ink"></select>
-        </div>
-
-        <div id="memberVaultContainer" class="space-y-2 text-xs"></div>
-      </div>
-
-      <div class="hand-card p-4 bg-paperCard space-y-3">
-        <div class="flex items-center gap-2">
-          <i class="fa-solid fa-shield-cat text-akaushi text-lg"></i>
-          <div>
-            <h3 class="text-sm font-black text-ink">緊急救援與中文醫療地圖</h3>
-            <p class="text-[10px] text-capybara">即時提供在地協助</p>
-          </div>
-        </div>
-        <div class="grid grid-cols-2 gap-2 text-xs">
-          <a href="tel:119" class="p-2.5 bg-white rounded-xl border border-handBorder flex items-center gap-2 hover:bg-akaushi/10">
-            <div class="w-7 h-7 rounded-full bg-akaushi/20 flex items-center justify-center text-akaushi"><i class="fa-solid fa-phone"></i></div>
-            <div>
-              <p class="font-bold text-ink">緊急撥號</p>
-              <p class="text-[10px] text-capybara">119 / 110</p>
-            </div>
-          </a>
-          <a href="tel:0927342810" class="p-2.5 bg-white rounded-xl border border-handBorder flex items-center gap-2 hover:bg-matcha/10">
-            <div class="w-7 h-7 rounded-full bg-matcha/20 flex items-center justify-center text-matcha-dark"><i class="fa-solid fa-building-columns"></i></div>
-            <div>
-              <p class="font-bold text-ink">駐福岡辦事處</p>
-              <p class="text-[10px] text-capybara">092-734-2810</p>
-            </div>
-          </a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- BOTTOM NAVIGATION BAR -->
-  <nav class="fixed bottom-0 left-0 right-0 bg-[#FFFDF9] border-t-2 border-handBorder shadow-lg z-40 max-w-md mx-auto">
-    <div class="flex justify-around items-center py-2 px-1">
-      <button onclick="switchTab('itinerary')" class="nav-btn flex flex-col items-center gap-0.5 text-akaushi font-bold" data-tab="itinerary">
-        <i class="fa-solid fa-compass text-base"></i>
-        <span class="text-[10px]">旅程</span>
-      </button>
-      <button onclick="switchTab('flight')" class="nav-btn flex flex-col items-center gap-0.5 text-capybara hover:text-akaushi font-bold" data-tab="flight">
-        <i class="fa-solid fa-plane text-base"></i>
-        <span class="text-[10px]">航班退稅</span>
-      </button>
-      <button onclick="switchTab('expense')" class="nav-btn flex flex-col items-center gap-0.5 text-capybara hover:text-akaushi font-bold" data-tab="expense">
-        <i class="fa-solid fa-wallet text-base"></i>
-        <span class="text-[10px]">記帳</span>
-      </button>
-      <button onclick="switchTab('food')" class="nav-btn flex flex-col items-center gap-0.5 text-capybara hover:text-akaushi font-bold" data-tab="food">
-        <i class="fa-solid fa-utensils text-base"></i>
-        <span class="text-[10px]">美食</span>
-      </button>
-      <button onclick="switchTab('vault')" class="nav-btn flex flex-col items-center gap-0.5 text-capybara hover:text-akaushi font-bold" data-tab="vault">
-        <i class="fa-solid fa-user text-base"></i>
-        <span class="text-[10px]">成員</span>
-      </button>
-    </div>
-  </nav>
-
-  <!-- ROOM SYNC MODAL -->
-  <div id="roomSyncModal" class="fixed inset-0 bg-ink/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="hand-card bg-paperCard p-4 max-w-xs w-full space-y-3">
-      <div class="flex justify-between items-center border-b border-handBorder pb-2">
-        <h3 class="font-black text-ink text-sm"><i class="fa-solid fa-users text-matcha"></i> 多人共用房間設定</h3>
-        <button onclick="closeModal('roomSyncModal')" class="text-capybara text-base font-bold"><i class="fa-solid fa-xmark"></i></button>
-      </div>
-      <div class="space-y-2 text-xs">
-        <p class="text-capybara font-bold">請輸入同伴的房間代碼，即可即時同步：</p>
-        <input type="text" id="roomCodeInput" placeholder="例如: KYUSHU2026" class="w-full p-2 rounded-xl border-2 border-handBorder bg-paper font-bold uppercase text-center">
-        <button onclick="joinRoom()" class="w-full hand-pill py-2 bg-akaushi text-white font-bold">加入此行程房間</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- EDIT EXCHANGE RATE MODAL -->
-  <div id="editRateModal" class="fixed inset-0 bg-ink/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="hand-card bg-paperCard p-4 max-w-xs w-full space-y-3">
-      <div class="flex justify-between items-center border-b border-handBorder pb-2">
-        <h3 class="font-black text-ink text-sm"><i class="fa-solid fa-coins text-gold"></i> 修改即時匯率</h3>
-        <button onclick="closeModal('editRateModal')" class="text-capybara text-base font-bold"><i class="fa-solid fa-xmark"></i></button>
-      </div>
-      <div class="space-y-2 text-xs">
-        <p class="text-capybara font-bold">請輸入 1 JPY 可兌換之 TWD (例: 0.208)：</p>
-        <input type="number" step="0.0001" id="rateInput" placeholder="0.208" class="w-full p-2 rounded-xl border-2 border-handBorder bg-paper font-bold text-center text-sm">
-        <button onclick="saveExchangeRate()" class="w-full hand-pill py-2 bg-akaushi text-white font-bold">儲存匯率</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ADD MEMBER MODAL -->
-  <div id="addMemberModal" class="fixed inset-0 bg-ink/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="hand-card bg-paperCard p-4 max-w-xs w-full space-y-3">
-      <div class="flex justify-between items-center border-b border-handBorder pb-2">
-        <h3 class="font-black text-ink text-sm"><i class="fa-solid fa-user-plus text-matcha"></i> 新增旅伴成員</h3>
-        <button onclick="closeModal('addMemberModal')" class="text-capybara text-base font-bold"><i class="fa-solid fa-xmark"></i></button>
-      </div>
-      <div class="space-y-2 text-xs">
-        <p class="text-capybara font-bold">請輸入新旅伴姓名 / 暱稱：</p>
-        <input type="text" id="memberNameInput" placeholder="例如: 小明" class="w-full p-2 rounded-xl border-2 border-handBorder bg-paper font-bold text-center">
-        <button onclick="saveNewMember()" class="w-full hand-pill py-2 bg-matcha text-white font-bold">確定新增成員</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- EDIT MEMBER VAULT MODAL -->
-  <div id="editVaultModal" class="fixed inset-0 bg-ink/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="hand-card bg-paperCard p-4 max-w-xs w-full space-y-3 max-h-[90vh] overflow-y-auto">
-      <div class="flex justify-between items-center border-b border-handBorder pb-2">
-        <h3 class="font-black text-ink text-sm"><i class="fa-solid fa-id-card text-akaushi"></i> 編輯成員證件資料</h3>
-        <button onclick="closeModal('editVaultModal')" class="text-capybara text-base font-bold"><i class="fa-solid fa-xmark"></i></button>
-      </div>
-
-      <form onsubmit="saveMemberVaultData(event)" class="space-y-2.5 text-xs">
-        <div>
-          <label class="font-bold text-ink">成員代表姓名：</label>
-          <input type="text" id="vaultNameInput" required placeholder="例如: 王又豎" class="w-full p-2 mt-0.5 rounded-xl border-2 border-handBorder bg-paper font-bold text-ink">
-        </div>
-        <div>
-          <label class="font-bold text-ink">護照號碼：</label>
-          <input type="text" id="vaultPassportInput" required placeholder="例如: 350198234" class="w-full p-2 mt-0.5 rounded-xl border-2 border-handBorder bg-paper font-mono font-bold text-ink">
-        </div>
-        <div>
-          <label class="font-bold text-ink">護照效期：</label>
-          <input type="text" id="vaultExpiryInput" required placeholder="例如: 2031/06/12" class="w-full p-2 mt-0.5 rounded-xl border-2 border-handBorder bg-paper font-mono font-bold text-ink">
-        </div>
-        <div>
-          <label class="block text-xs font-bold text-ink mb-1">Visit Japan Web QR Code 照片：</label>
-          <div class="space-y-2">
-            <input type="file" id="editQrFile" accept="image/*" class="w-full p-2 border border-handBorder rounded-lg text-xs bg-white" onchange="handleModalFileSelect(event)">
-            <input type="hidden" id="editQrUrl" value="">
-            <p class="text-[10px] text-capybara">※ 請直接上傳手機裡的 QR Code 截圖，圖片會自動轉存並與該成員關聯。</p>
-          </div>
-        </div>
-
-        <button type="submit" class="w-full hand-pill py-2 bg-akaushi text-white font-bold mt-2">
-          儲存修改
-        </button>
-      </form>
-    </div>
-  </div>
-
-  <!-- ADD FOOD MODAL -->
-  <div id="addFoodModal" class="fixed inset-0 bg-ink/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="hand-card bg-paperCard p-4 max-w-xs w-full space-y-3">
-      <div class="flex justify-between items-center border-b border-handBorder pb-2">
-        <h3 class="font-black text-ink text-sm"><i class="fa-solid fa-utensils text-akaushi"></i> 新增口袋美食</h3>
-        <button onclick="closeModal('addFoodModal')" class="text-capybara text-base font-bold"><i class="fa-solid fa-xmark"></i></button>
-      </div>
-      <form onsubmit="addNewCustomFood(event)" class="space-y-2 text-xs">
-        <input type="text" id="customFoodName" required placeholder="店名 (如: 一蘭拉麵)" class="w-full p-2 rounded-xl border-2 border-handBorder bg-paper font-bold">
-        <select id="customFoodTag" class="w-full p-2 rounded-xl border-2 border-handBorder bg-paper font-bold">
-          <option value="RAMEN">🍜 拉麵類</option>
-          <option value="YAKITORI">🍢 燒鳥/串燒</option>
-          <option value="MOTSU">🍲 牛腸鍋</option>
-          <option value="UNAGI">🍱 鰻魚飯</option>
-          <option value="CHICKEN">🍗 水瀧雞肉鍋</option>
-          <option value="WAGYU">🥩 和牛/赤牛丼</option>
-          <option value="GIFT">🎁 特色伴手禮</option>
-        </select>
-        <input type="text" id="customFoodDesc" required placeholder="特色簡介" class="w-full p-2 rounded-xl border-2 border-handBorder bg-paper font-bold">
-        <input type="text" id="customFoodLoc" required placeholder="地點 (如: 博多車站)" class="w-full p-2 rounded-xl border-2 border-handBorder bg-paper font-bold">
-        <button type="submit" class="w-full hand-pill py-2 bg-akaushi text-white font-bold">新增至口袋名單</button>
-      </form>
-    </div>
-  </div>
-
-  <!-- FIREBASE & CORE LOGIC -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-    import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-    import { getFirestore, doc, collection, onSnapshot, setDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
-    const appId = typeof __app_id !== 'undefined' ? __app_id : 'kyushu-2026-trip';
-    let db, auth, user;
-    let currentRoomId = 'KYUSHU2026';
-    let unsubscribeExpenses = null;
-    let unsubscribeFavorites = null;
-    let unsubscribeCustomFood = null;
-
-    try {
-      const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
-        apiKey: "demo",
-        projectId: "demo-kyushu",
-        appId: "1:demo:web:kyushu"
-      };
-      const app = initializeApp(firebaseConfig);
-      db = getFirestore(app);
-      auth = getAuth(app);
-      if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-        await signInWithCustomToken(auth, __initial_auth_token);
-      } else {
-        await signInAnonymously(auth);
-      }
-      user = auth.currentUser;
-      setupRealtimeListeners();
-    } catch (err) {
-      console.log("Firebase initialized in Local Fallback mode.");
-    }
-
-    function setupRealtimeListeners() {
-      if (!db || !user) return;
-      if (unsubscribeExpenses) unsubscribeExpenses();
-      if (unsubscribeFavorites) unsubscribeFavorites();
-      if (unsubscribeCustomFood) unsubscribeCustomFood();
-
-      const expensesRef = collection(db, 'artifacts', appId, 'public', 'data', `expenses_${currentRoomId}`);
-      const favoritesRef = collection(db, 'artifacts', appId, 'public', 'data', `favorites_${currentRoomId}`);
-      const customFoodRef = collection(db, 'artifacts', appId, 'public', 'data', `custom_food_${currentRoomId}`);
-
-      unsubscribeExpenses = onSnapshot(expensesRef, (snapshot) => {
-        const items = [];
-        snapshot.forEach(doc => items.push({ id: doc.id, ...doc.data() }));
-        window.expensesList = items;
-        window.renderExpenses();
-      });
-
-      unsubscribeFavorites = onSnapshot(favoritesRef, (snapshot) => {
-        const favs = {};
-        snapshot.forEach(doc => favs[doc.id] = doc.data().fav);
-        window.favoriteItems = favs;
-        window.renderFoodList();
-      });
-
-      unsubscribeCustomFood = onSnapshot(customFoodRef, (snapshot) => {
-        const custom = [];
-        snapshot.forEach(doc => custom.push({ id: doc.id, ...doc.data() }));
-        window.customFoodList = custom;
-        window.renderFoodList();
-      });
-    }
-
-    window.syncExpenseToFirestore = async function(item) {
-      if (!db || !user) return;
-      const docId = `exp_${Date.now()}`;
-      await setDoc(doc(db, 'artifacts', appId, 'public', 'data', `expenses_${currentRoomId}`, docId), item);
-    };
-
-    window.deleteExpenseFromFirestore = async function(docId) {
-      if (!db || !user) return;
-      await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', `expenses_${currentRoomId}`, docId));
-    };
-
-    window.toggleFavoriteFirestore = async function(foodId) {
-      if (!db || !user) return;
-      const current = window.favoriteItems[foodId] || false;
-      await setDoc(doc(db, 'artifacts', appId, 'public', 'data', `favorites_${currentRoomId}`, `food_${foodId}`), { fav: !current });
-    };
-
-    window.syncFoodToFirestore = async function(item) {
-      if (!db || !user) return;
-      const docId = `food_custom_${Date.now()}`;
-      await setDoc(doc(db, 'artifacts', appId, 'public', 'data', `custom_food_${currentRoomId}`, docId), item);
-    };
-
-    window.joinRoom = function() {
-      const code = document.getElementById('roomCodeInput').value.trim().toUpperCase();
-      if (code) {
-        currentRoomId = code;
-        document.getElementById('roomStatusText').innerHTML = `<i class="fa-solid fa-users"></i> 房號: ${currentRoomId}`;
-        setupRealtimeListeners();
-        closeModal('roomSyncModal');
-        showToast(`已成功切換至【${currentRoomId}】共用房間！`);
-      }
-    };
-  </script>
-
-  <!-- APP CORE LOGIC -->
-  <script>
-    const daysData = {
-      1: {
-        dayLabel: "Day 1 • 12/07 (一)", type: "包車 9小時",
-        spots: [
-          { name: "熊本機場 (KMJ) 接機", time: "10:35", tag: "接機", desc: "星宇 JX846 抵達，包車司機海獅接機前往福岡。", addr: "熊本県上益城郡益城町小谷1802-2", svg: "#sketch-plane" },
-          { name: "福岡 Mina 天神 / LaLaport", time: "12:45", tag: "購物散策", desc: "午餐採買與 1:1 實物大 RX-93ff ν 鋼彈立像巡禮。", addr: "福岡市博多區那珂 6-23-1", svg: "#sketch-bag" },
-          { name: "福岡塔 / 百道濱海景", time: "16:00", tag: "地標觀景", desc: "欣賞百道濱海景與福岡夜景名勝。", addr: "福岡市早良區百道浜 2-3-26", svg: "#sketch-torii" },
-          { name: "福岡福濱民宿 Check-in", time: "17:45", tag: "民宿入住", desc: "包車抵達民宿，卸下行李稍作休憩。", addr: "1-chōme-4-16 Fukuhama, Chuo Ward, Fukuoka", svg: "#sketch-kumamon" }
-        ]
-      },
-      2: {
-        dayLabel: "Day 2 • 12/08 (二)", type: "包車 10小時",
-        spots: [
-          { name: "福岡民宿出發", time: "08:30", tag: "專車出發", desc: "司機海獅民宿接送啟程。", addr: "1-chōme-4-16 Fukuhama, Chuo Ward, Fukuoka", svg: "#sketch-car" },
-          { name: "寶滿宮竈門神社", time: "09:10", tag: "結緣神社", desc: "漫步鬼滅之刃聖地與結緣神社名勝。", addr: "福岡県太宰府市内山883", svg: "#sketch-torii" },
-          { name: "太宰府天滿宮 & 表參道", time: "10:30", tag: "參道午餐", desc: "參拜學問之神、品嚐現烤梅枝餅。", addr: "福岡県太宰府市宰府4-7-1", svg: "#sketch-torii" },
-          { name: "博多運河城 (Canal City)", time: "14:00", tag: "運河購物", desc: "九州複合式水舞購物商場商圈。", addr: "福岡市博多區住吉 1-2", svg: "#sketch-bag" }
-        ]
-      },
-      3: {
-        dayLabel: "Day 3 • 12/09 (三)", type: "自由行 (大眾運輸)",
-        spots: [
-          { name: "天神地下街 / PARCO", time: "09:30", tag: "天神購物", desc: "九州最繁華地下街道與日系品牌散策。", addr: "福岡市中央區天神 2 地下", svg: "#sketch-bag" },
-          { name: "博多一雙 / 麵屋兼虎", time: "12:00", tag: "極上拉麵", desc: "享用濃厚魚介沾麵或泡系豚骨拉麵。", addr: "福岡市中央區天神 1-11-11", svg: "#sketch-ramen" },
-          { name: "博多內臟鍋 (德永屋/前田屋)", time: "18:00", tag: "牛腸鍋", desc: "昭和老舖清爽味噌牛腸鍋慶祝福岡最後一夜。", addr: "福岡市博多區博多站前", svg: "#sketch-ramen" }
-        ]
-      },
-      4: {
-        dayLabel: "Day 4 • 12/10 (四)", type: "包車 10小時 (載行李)",
-        spots: [
-          { name: "福岡退房出發", time: "08:30", tag: "行李上車", desc: "行李全部裝載，出發前往大分湯布院。", addr: "福岡民宿 Check-out", svg: "#sketch-car" },
-          { name: "由布院 & 金鱗湖散策", time: "10:15", tag: "溫泉街", desc: "湯之坪街道、金鱗湖湖景與限量 B-Speak 蛋糕捲。", addr: "大分県由布市湯布院町川上", svg: "#sketch-onsen" },
-          { name: "阿蘇龜之井飯店 Check-in", time: "16:00", tag: "溫泉飯店", desc: "辦理入住，享用溫泉大浴場。", addr: "1230 Kurokawa, Aso, Kumamoto 869-2225", svg: "#sketch-onsen" }
-        ]
-      },
-      5: {
-        dayLabel: "Day 5 • 12/11 (五)", type: "包車 9小時",
-        spots: [
-          { name: "阿蘇中岳火口 & 草千里", time: "10:00", tag: "火山景致", desc: "觀賞火山噴煙口與草千里廣袤大草原。", addr: "熊本県阿蘇市黒川", svg: "#sketch-volcano" },
-          { name: "午餐：阿蘇赤牛丼 (いまきん)", time: "13:30", tag: "名物午餐", desc: "品嚐阿蘇極品火烤赤牛丼與和牛料理。", addr: "熊本県阿蘇市内牧366-2", svg: "#sketch-ramen" },
-          { name: "熊本 OMO5 星野飯店 Check-in", time: "15:30", tag: "飯店入住", desc: "入住熊本市中心 HAB@ 3F 星野飯店。", addr: "熊本市中央区手取本町 5-1 HAB@ 3F", svg: "#sketch-kumamon" }
-        ]
-      },
-      6: {
-        dayLabel: "Day 6 • 12/12 (六)", type: "自由行 (熊本市電)",
-        spots: [
-          { name: "熊本城 & 櫻之馬場彩苑", time: "09:30", tag: "名城巡禮", desc: "日本三大名城天守閣與古風城彩苑區。", addr: "熊本市中央區本丸 1-1", svg: "#sketch-castle" },
-          { name: "勝烈亭黑豬肉排", time: "12:00", tag: "米其林美食", desc: "極厚酥脆黑豬肉排或焦蒜麻油豚骨拉麵。", addr: "熊本市中央區新市街 8-18", svg: "#sketch-ramen" }
-        ]
-      },
-      7: {
-        dayLabel: "Day 7 • 12/13 (日)", type: "自由行 (大眾運輸)",
-        spots: [
-          { name: "熊本車站 AMU Plaza 採買", time: "10:00", tag: "車站採買", desc: "集結九州名品伴手禮與雜貨。", addr: "熊本市西區春日 3-15-26", svg: "#sketch-bag" },
-          { name: "水前寺成趣園", time: "14:00", tag: "日式庭園", desc: "桃山樣式回遊庭園與抹茶池畔清飲。", addr: "熊本市中央區水前寺公園 8-1", svg: "#sketch-torii" }
-        ]
-      },
-      8: {
-        dayLabel: "Day 8 • 12/14 (一)", type: "單趟包車送機",
-        spots: [
-          { name: "OMO5 星野飯店退房", time: "09:30", tag: "專車送機", desc: "海獅專車飯店外接應直達機場。", addr: "熊本 OMO5 星野飯店", svg: "#sketch-car" },
-          { name: "抵達熊本機場 (KMJ)", time: "10:15", tag: "機場報到", desc: "辦理 JX847 班機報到與搭機返台。", addr: "熊本機場 Terminal", svg: "#sketch-plane" }
-        ]
-      }
-    };
-
-    const foodList = [
-      { id: 1, type: "gourmet", name: "麵屋兼虎", tag: "RAMEN", desc: "濃郁魚介豚骨沾麵，湯頭極度香濃。", location: "天神/博多", score: "4.7", svg: "#sketch-ramen" },
-      { id: 2, type: "gourmet", name: "博多一雙", tag: "RAMEN", desc: "泡系豚骨拉麵，細密泡沫湯頭。", location: "博多車站", score: "4.6", svg: "#sketch-ramen" },
-      { id: 3, type: "gourmet", name: "黑亭拉麵", tag: "RAMEN", desc: "焦蒜麻油豚骨拉麵，雙黃蛋黃特色。", location: "熊本城/二本木", score: "4.5", svg: "#sketch-ramen" },
-      { id: 4, type: "gourmet", name: "博多 Kawaya (皮S)", tag: "YAKITORI", desc: "名物卷曲酥脆雞皮串燒，外酥內嫩。", location: "博多/天神", score: "4.6", svg: "#sketch-ramen" },
-      { id: 5, type: "gourmet", name: "天神 鳥次", tag: "YAKITORI", desc: "質感紀州備長炭燒鳥名店。", location: "天神", score: "4.7", svg: "#sketch-ramen" },
-      { id: 6, type: "gourmet", name: "德永屋", tag: "MOTSU", desc: "昭和老鋪清爽味噌牛腸鍋。", location: "博多/天神", score: "4.5", svg: "#sketch-ramen" },
-      { id: 7, type: "gourmet", name: "博多內臟鍋 前田屋", tag: "MOTSU", desc: "極上和牛牛腸鍋，湯頭鮮甜。", location: "博多", score: "4.8", svg: "#sketch-ramen" },
-      { id: 8, type: "gourmet", name: "吉塚鰻魚屋", tag: "UNAGI", desc: "百年蒲燒鰻魚飯蒸籠炊名店。", location: "博多中洲", score: "4.8", svg: "#sketch-ramen" },
-      { id: 9, type: "gourmet", name: "博多華味鳥", tag: "CHICKEN", desc: "濃郁雞白湯水瀧雞肉鍋。", location: "博多", score: "4.6", svg: "#sketch-ramen" },
-      { id: 10, type: "gourmet", name: "大東園和牛燒肉", tag: "WAGYU", desc: "博多頂級黑毛和牛燒肉。", location: "博多祇園", score: "4.7", svg: "#sketch-ramen" },
-      { id: 11, type: "gourmet", name: "勝烈亭黑豬肉排", tag: "WAGYU", desc: "米其林推薦極厚黑豬肉排與和牛牛排。", location: "熊本新市街", score: "4.7", svg: "#sketch-ramen" },
-      { id: 12, type: "gourmet", name: "阿蘇赤牛丼 (いまきん食堂)", tag: "WAGYU", desc: "百年老鋪火烤赤牛丼配半熟蛋。", location: "阿蘇草千里", score: "4.8", svg: "#sketch-ramen" },
-      { id: 13, type: "gourmet", name: "烤肉多牛", tag: "WAGYU", desc: "超高 CP 值燒肉，上等牛肋條絕品。", location: "博多", score: "4.6", svg: "#sketch-ramen" },
-      { id: 14, type: "souvenir", name: "福砂屋長崎蛋糕", tag: "GIFT", desc: "底層砂糖顆粒經典長崎蛋糕。", location: "博多阪急/機場", score: "4.9", svg: "#sketch-bag" },
-      { id: 15, type: "souvenir", name: "熊本譽之陣太鼓 (香梅)", tag: "GIFT", desc: "阿蘇伏流水小豆羊羹裹麻糬。", location: "熊本", score: "4.6", svg: "#sketch-bag" },
-      { id: 16, type: "souvenir", name: "太宰府梅枝餅", tag: "GIFT", desc: "現烤皮酥餡甜抹茶相配。", location: "太宰府參道", score: "4.7", svg: "#sketch-bag" },
-      { id: 17, type: "souvenir", name: "B-Speak 蛋糕卷", tag: "GIFT", desc: "每日限量鮮奶純生蛋糕卷。", location: "由布院金鱗湖", score: "4.8", svg: "#sketch-bag" },
-      { id: 18, type: "souvenir", name: "福太郎 Menbei", tag: "GIFT", desc: "經典明太子海鮮微辣煎餅。", location: "博多", score: "4.6", svg: "#sketch-bag" }
-    ];
-
-    let currentDayIndex = 1;
-    let currentSpotIndex = 0;
-    let currentFoodTab = 'gourmet'; 
-    let currentFoodCategory = ''; 
-    let selectedVaultMember = "王又豎";
-
-    window.members = ["王又豎", "花生", "妍频", "妹妹", "大衛", "潸潸"];
-    window.exchangeRate = 0.208;
-    window.expensesList = [
-      { id: '1', item: "包車4天訂金", amount: 66800, who: "王又豎", splitters: ["王又豎", "花生", "妍频", "妹妹", "大衛", "潸潸"] }
-    ];
-    window.favoriteItems = {};
-    window.customFoodList = [];
-
-    window.membersVaultData = {
-      "王又豎": { name: "王又豎", passport: "350198234", expiry: "2031/06/12", qrImg: "" },
-      "花生": { name: "花生", passport: "未填寫", expiry: "未填寫", qrImg: "" },
-      "妍频": { name: "妍频", passport: "未填寫", expiry: "未填寫", qrImg: "" },
-      "妹妹": { name: "妹妹", passport: "未填寫", expiry: "未填寫", qrImg: "" },
-      "大衛": { name: "大衛", passport: "未填寫", expiry: "未填寫", qrImg: "" },
-      "潸潸": { name: "潸潸", passport: "未填寫", expiry: "未填寫", qrImg: "" }
-    };
-
-    window.onload = function() {
-      switchDay(1);
-      renderMembersUI();
-      renderMemberVault();
-      renderFoodList();
-      renderExpenses();
-      setupKmjChecklistEvents();
-
-      const categorySelect = document.getElementById('food-category');
-      if (categorySelect) {
-        categorySelect.addEventListener('change', (e) => {
-          currentFoodCategory = e.target.value;
-          window.renderFoodList();
-        });
-      }
-    };
-
-    function setupKmjChecklistEvents() {
-      const container = document.getElementById('kmj-checks');
-      if (!container) return;
-      const checks = container.querySelectorAll('input[type="checkbox"]');
-      const bar = document.getElementById('kmj-progress');
-      const count = document.getElementById('kmj-count');
-
-      function updateChecklist() {
-        const total = checks.length;
-        const done = Array.from(checks).filter(x => x.checked).length;
-        if (bar) bar.style.width = (done / total * 100) + '%';
-        if (count) count.textContent = `完成 ${done} / ${total} 項`;
-      }
-      checks.forEach(x => x.addEventListener('change', updateChecklist));
-      updateChecklist();
-    }
-
-    function renderMembersUI() {
-      const select = document.getElementById('vaultMemberSelect');
-      const expWho = document.getElementById('expWhoSelect');
-      const splitters = document.getElementById('splitterCheckboxes');
-      const badges = document.getElementById('memberBadgesList');
-
-      if (select) {
-        select.innerHTML = window.members.map(m => `<option value="${m}" ${m === selectedVaultMember ? 'selected' : ''}>${m}</option>`).join('');
-      }
-      if (expWho) {
-        expWho.innerHTML = window.members.map(m => `<option value="${m}">${m}</option>`).join('');
-      }
-      if (splitters) {
-        splitters.innerHTML = window.members.map(m => `
-          <label class="flex items-center gap-1 text-[11px] font-bold text-ink cursor-pointer">
-            <input type="checkbox" value="${m}" checked class="splitter-cb w-3.5 h-3.5 accent-matcha rounded">
-            <span>${m}</span>
-          </label>
-        `).join('');
-      }
-      if (badges) {
-        badges.innerHTML = window.members.map(m => `<span class="px-2 py-0.5 bg-paper rounded-full text-[10px] font-bold text-ink border border-handBorder">${m}</span>`).join('');
-      }
-    }
-
-    window.switchVaultMember = function(name) {
-      selectedVaultMember = name;
-      renderMemberVault();
-    };
-
-    window.renderMemberVault = function() {
-      const container = document.getElementById('memberVaultContainer');
-      if (!container) return;
-
-      const data = window.membersVaultData[selectedVaultMember] || { name: selectedVaultMember, passport: "未填寫", expiry: "未填寫", qrImg: "" };
-      
-      const qrDisplay = data.qrImg ? 
-        `<img src="${data.qrImg}" class="w-32 h-32 mx-auto object-cover rounded-xl border-2 border-handBorder" alt="VJW QR Code">` : 
-        `<div class="w-28 h-28 mx-auto bg-gray-100 border-2 border-handBorder rounded-xl flex items-center justify-center p-2"> 
-           <div class="w-full h-full bg-ink flex flex-wrap p-1 rounded"> 
-             <div class="w-1/2 h-1/2 border-2 border-white bg-white"></div> 
-             <div class="w-1/2 h-1/2 bg-ink"></div> 
-             <div class="w-1/2 h-1/2 bg-ink"></div> 
-             <div class="w-1/2 h-1/2 border-2 border-white bg-white"></div> 
-           </div> 
-         </div>`;
-
-      container.innerHTML = ` 
-        <div class="p-2.5 bg-white rounded-xl border border-handBorder"> 
-          <p class="text-[10px] text-capybara font-bold">成員代表：${data.name}</p> 
-          <div class="flex justify-between items-center mt-1"> 
-            <span class="font-mono font-bold text-ink text-sm">護照號碼：${data.passport}</span> 
-            <span class="text-[10px] text-capybara">效期 ${data.expiry}</span> 
-          </div> 
-        </div> 
-        
-        <div class="p-3 bg-white rounded-xl border border-handBorder text-center space-y-2"> 
-          <p class="text-xs font-bold text-ink">退稅 & 入境 Visit Japan Web QR Code 截圖</p> 
-          ${qrDisplay} 
-          <div class="pt-1 flex gap-2 justify-center">
-            <button onclick="openEditMemberVaultModal()" class="hand-pill px-4 py-1.5 bg-akaushi text-white text-xs font-bold shadow-sm">
-              ✏️ 編輯 ${data.name} 的資料 / 上傳 QR Code
-            </button>
-          </div>
-          <p class="text-[10px] text-capybara">※ 照片僅會暫存在您的裝置畫面上，離線也能隨時查看。</p>
-        </div> 
-      `;
-    };
-
-    window.openEditMemberVaultModal = function() {
-      const data = window.membersVaultData[selectedVaultMember] || { name: selectedVaultMember, passport: '', expiry: '', qrImg: '' };
-      document.getElementById('vaultNameInput').value = data.name;
-      document.getElementById('vaultPassportInput').value = data.passport === '未填寫' ? '' : data.passport;
-      document.getElementById('vaultExpiryInput').value = data.expiry === '未填寫' ? '' : data.expiry;
-      document.getElementById('editQrUrl').value = data.qrImg || '';
-      openModal('editVaultModal');
-    };
-
-    window.handleModalFileSelect = function(event) {
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          document.getElementById('editQrUrl').value = e.target.result;
-          showToast('照片已順利載入，請點擊下方「儲存修改」按鈕！');
-        };
-        reader.readAsDataURL(file);
-      }
-    };
-
-    window.saveMemberVaultData = function(e) {
-      if (e && e.preventDefault) e.preventDefault();
-      
-      const oldName = selectedVaultMember;
-      const newName = document.getElementById('vaultNameInput').value.trim();
-      const passport = document.getElementById('vaultPassportInput').value.trim();
-      const expiry = document.getElementById('vaultExpiryInput').value.trim();
-      const qrImg = document.getElementById('editQrUrl').value;
-
-      if (!newName) {
-        showToast('請填寫成員姓名！');
-        return;
-      }
-
-      if (oldName !== newName) {
-        delete window.membersVaultData[oldName];
-        const idx = window.members.indexOf(oldName);
-        if (idx !== -1) window.members[idx] = newName;
-        else window.members.push(newName);
-      }
-
-      window.membersVaultData[newName] = {
-        name: newName,
-        passport: passport || '未填寫',
-        expiry: expiry || '未填寫',
-        qrImg: qrImg || (window.membersVaultData[oldName] ? window.membersVaultData[oldName].qrImg : '')
-      };
-
-      selectedVaultMember = newName;
-      renderMembersUI();
-      renderMemberVault();
-      closeModal('editVaultModal');
-      showToast(`已成功儲存【${newName}】的資料與 QR Code！`);
-    };
-
-    window.saveNewMember = function() {
-      const name = document.getElementById('memberNameInput').value.trim();
-      if (name) {
-        if (!window.members.includes(name)) {
-          window.members.push(name);
-          window.membersVaultData[name] = { name: name, passport: "未填寫", expiry: "未填寫", qrImg: "" };
-          selectedVaultMember = name;
-          renderMembersUI();
-          renderMemberVault();
-          document.getElementById('memberNameInput').value = '';
-          closeModal('addMemberModal');
-          showToast(`已成功新增旅伴：${name}`);
-        } else {
-          showToast('該成員已在清單中');
-        }
-      }
-    };
-
-    // Itinerary Logic
-    function switchDay(dayNum) {
-      currentDayIndex = dayNum;
-      currentSpotIndex = 0;
-      document.querySelectorAll('.day-capsule').forEach(btn => {
-        if (parseInt(btn.dataset.day) === dayNum) {
-          btn.className = "day-capsule hand-pill px-3 py-1.5 text-xs font-bold whitespace-nowrap bg-akaushi text-white";
-        } else {
-          btn.className = "day-capsule hand-pill px-3 py-1.5 text-xs font-bold whitespace-nowrap bg-white text-ink";
-        }
-      });
-      renderCurrentSpot();
-      renderDaySpotList();
-    }
-
-    function stepSpot(delta) {
-      const daySpots = daysData[currentDayIndex].spots;
-      const newIdx = currentSpotIndex + delta;
-      if (newIdx >= 0 && newIdx < daySpots.length) {
-        currentSpotIndex = newIdx;
-        renderCurrentSpot();
-      }
-    }
-
-    function renderCurrentSpot() {
-      const dayData = daysData[currentDayIndex];
-      const spot = dayData.spots[currentSpotIndex];
-      const total = dayData.spots.length;
-
-      document.getElementById('spotDayHeader').innerText = dayData.dayLabel;
-      document.getElementById('spotProgressStep').innerText = `進度 ${currentSpotIndex + 1} / ${total} 站`;
-      document.getElementById('currentSpotTitle').innerText = spot.name;
-
-      const percent = ((currentSpotIndex + 1) / total) * 100;
-      document.getElementById('topProgressBar').style.width = `${percent}%`;
-
-      const prevBtn = document.getElementById('prevSpotBtn');
-      const nextBtn = document.getElementById('nextSpotBtn');
-      prevBtn.className = currentSpotIndex === 0 ? "hand-pill px-3 py-1.5 bg-white text-ink font-bold text-xs flex items-center gap-1 opacity-50 cursor-not-allowed" : "hand-pill px-3 py-1.5 bg-white text-ink font-bold text-xs flex items-center gap-1";
-      nextBtn.className = currentSpotIndex === total - 1 ? "hand-pill px-3 py-1.5 bg-white text-ink font-bold text-xs flex items-center gap-1 opacity-50 cursor-not-allowed" : "hand-pill px-3 py-1.5 bg-akaushi text-white font-bold text-xs flex items-center gap-1";
-
-      const detailContainer = document.getElementById('spotDetailCard');
-      detailContainer.innerHTML = `
-        <div class="flex justify-between items-start">
-          <span class="hand-pill px-2.5 py-0.5 bg-akaushi/15 text-akaushi border-akaushi text-[11px] font-bold">${spot.tag}</span>
-          <span class="hand-pill px-2.5 py-0.5 bg-white text-ink text-[11px] font-mono font-bold">${spot.time}</span>
-        </div>
-        <div class="flex items-center gap-2.5 my-1">
-          <div class="w-8 h-8 flex-shrink-0"><svg class="w-8 h-8"><use href="${spot.svg}"/></svg></div>
-          <h2 class="text-base font-black text-ink">${spot.name}</h2>
-        </div>
-        <p class="text-xs text-capybara leading-relaxed font-bold border-t border-b border-dashed border-capybara/20 py-2">${spot.desc}</p>
-        <div class="space-y-2 pt-1">
-          <p class="text-[11px] text-capybara font-bold flex items-center gap-1"><i class="fa-solid fa-location-dot text-akaushi"></i> ${spot.addr}</p>
-          <div class="flex gap-2">
-            <button onclick="openGoogleMap('${spot.name}')" class="hand-pill flex-1 py-1.5 bg-matcha text-white font-bold text-xs flex items-center justify-center gap-1"><i class="fa-solid fa-map-location-dot"></i> Google 地圖</button>
-            <button onclick="copyText('${spot.addr}')" class="hand-pill flex-1 py-1.5 bg-white text-ink font-bold text-xs flex items-center justify-center gap-1"><i class="fa-solid fa-copy"></i> 複製地址</button>
-          </div>
-        </div>
-      `;
-    }
-
-    function renderDaySpotList() {
-      const dayData = daysData[currentDayIndex];
-      document.getElementById('dayTypeBadge').innerText = dayData.type;
-      let html = '';
-      dayData.spots.forEach((s, idx) => {
-        const isCurrent = idx === currentSpotIndex;
-        html += `
-          <div onclick="selectSpot(${idx})" class="p-2 rounded-xl border-2 border-handBorder cursor-pointer transition flex items-center justify-between ${isCurrent ? 'bg-akaushi/10 border-akaushi' : 'bg-white'}">
-            <div class="flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full ${isCurrent ? 'bg-akaushi' : 'bg-matcha'}"></span>
-              <span class="text-xs font-bold text-ink">${s.name}</span>
-            </div>
-            <span class="text-[10px] text-capybara font-mono font-bold">${s.time}</span>
-          </div>
-        `;
-      });
-      document.getElementById('daySpotList').innerHTML = html;
-    }
-
-    function selectSpot(idx) {
-      currentSpotIndex = idx;
-      renderCurrentSpot();
-      renderDaySpotList();
-    }
-
-    // Food & Gourmet Logic
-    function filterFood(type) {
-      currentFoodTab = type;
-      document.querySelectorAll('.food-tab').forEach(btn => {
-        if (btn.dataset.ftab === type) {
-          btn.className = "food-tab hand-pill px-2.5 py-1 text-[11px] font-bold bg-akaushi text-white";
-        } else {
-          btn.className = "food-tab hand-pill px-2.5 py-1 text-[11px] font-bold bg-white text-ink";
-        }
-      });
-      window.renderFoodList();
-    }
-
-    window.renderFoodList = function() {
-      const container = document.getElementById('foodListContainer');
-      if (!container) return;
-
-      const combined = [...foodList, ...(window.customFoodList || [])];
-      const filtered = combined.filter(item => {
-        const matchTab = (currentFoodTab === '' || item.type === currentFoodTab);
-        const matchCat = (currentFoodCategory === '' || item.tag === currentFoodCategory);
-        return matchTab && matchCat;
-      });
-
-      let html = '';
-      if (filtered.length === 0) {
-        html = `<div class="hand-card p-4 text-center text-xs text-capybara font-bold">沒有找到符合條件的美食項目</div>`;
-      } else {
-        filtered.forEach(item => {
-          const isFav = window.favoriteItems[item.id] || false;
-          html += `
-            <div class="hand-card p-3 bg-paperCard flex justify-between items-center">
-              <div class="space-y-1 flex-1 pr-2">
-                <div class="flex items-center gap-2 flex-wrap">
-                  <div class="w-6 h-6 flex-shrink-0"><svg class="w-6 h-6"><use href="${item.svg || '#sketch-ramen'}"/></svg></div>
-                  <h3 class="text-xs font-black text-ink">${item.name}</h3>
-                  <span class="hand-pill px-1.5 py-0.5 text-[9px] font-bold bg-matcha/20 text-matcha-dark">${item.tag}</span>
-                </div>
-                <p class="text-[11px] text-capybara font-bold">${item.desc}</p>
-                <p class="text-[10px] text-matcha-dark font-bold"><i class="fa-solid fa-star text-akaushi"></i> ${item.score || '4.5'} • 📍 ${item.location}</p>
-              </div>
-              <div class="flex flex-col items-end gap-1 flex-shrink-0">
-                <button onclick="toggleFavoriteFirestore(${item.id})" class="hand-pill px-2 py-1 text-xs font-bold ${isFav ? 'bg-akaushi text-white' : 'bg-white text-capybara'}"><i class="fa-solid fa-heart"></i></button>
-                <button onclick="openGoogleMap('${item.name}')" class="hand-pill px-2.5 py-0.5 bg-white text-ink text-[10px] font-bold">地圖</button>
-              </div>
-            </div>
-          `;
-        });
-      }
-      container.innerHTML = html;
-    };
-
-    window.addNewCustomFood = function(e) {
-      e.preventDefault();
-      const newItem = {
-        id: Date.now(),
-        type: 'gourmet',
-        name: document.getElementById('customFoodName').value.trim(),
-        tag: document.getElementById('customFoodTag').value,
-        desc: document.getElementById('customFoodDesc').value.trim(),
-        location: document.getElementById('customFoodLoc').value.trim(),
-        score: "4.7",
-        svg: "#sketch-ramen"
-      };
-      if (window.syncFoodToFirestore) {
-        window.syncFoodToFirestore(newItem);
-      } else {
-        window.customFoodList.push(newItem);
-        renderFoodList();
-      }
-      closeModal('addFoodModal');
-      showToast('已新增口袋美食！');
-    };
-
-    // Expense Logic
-    window.addNewExpense = function(e) {
-      e.preventDefault();
-      const item = document.getElementById('expItem').value.trim();
-      const amount = parseFloat(document.getElementById('expAmt').value);
-      const who = document.getElementById('expWhoSelect').value;
-      const checkedSplitters = Array.from(document.querySelectorAll('.splitter-cb:checked')).map(cb => cb.value);
-
-      if (checkedSplitters.length === 0) {
-        showToast('請至少勾選一位分攤成員！');
-        return;
-      }
-
-      const newExp = { item, amount, who, splitters: checkedSplitters, createdAt: Date.now() };
-      if (window.syncExpenseToFirestore) {
-        window.syncExpenseToFirestore(newExp);
-      } else {
-        window.expensesList.push({ id: Date.now().toString(), ...newExp });
-        renderExpenses();
-      }
-
-      document.getElementById('expItem').value = '';
-      document.getElementById('expAmt').value = '';
-      showToast('已新增共用記帳！');
-    };
-
-    window.renderExpenses = function() {
-      let total = 0;
-      let html = '';
-      const balances = {};
-      window.members.forEach(m => balances[m] = 0);
-
-      window.expensesList.forEach(e => {
-        total += e.amount;
-        const twdAmt = Math.round(e.amount * window.exchangeRate);
-        const activeSplitters = (e.splitters && e.splitters.length > 0) ? e.splitters : window.members;
-        const perPersonShare = e.amount / activeSplitters.length;
-
-        if (balances[e.who] !== undefined) balances[e.who] += e.amount;
-        activeSplitters.forEach(s => {
-          if (balances[s] !== undefined) balances[s] -= perPersonShare;
-        });
-
-        const splittersText = activeSplitters.length === window.members.length ? '全員均分' : activeSplitters.join('、');
-
-        html += `
-          <div class="p-2.5 rounded-xl border border-handBorder bg-white space-y-1">
-            <div class="flex justify-between items-center">
-              <span class="font-black text-ink">${e.item}</span>
-              <div class="flex items-center gap-1.5">
-                <span class="font-bold text-akaushi font-mono">¥ ${e.amount.toLocaleString()}</span>
-                <span class="text-[10px] text-capybara font-bold">(NT$ ${twdAmt.toLocaleString()})</span>
-                <button onclick="deleteExpenseFromFirestore('${e.id}')" class="text-capybara hover:text-akaushi pl-1"><i class="fa-solid fa-trash-can text-xs"></i></button>
-              </div>
-            </div>
-            <div class="flex justify-between items-center text-[10px] text-capybara font-bold">
-              <span><i class="fa-solid fa-user-tag text-matcha"></i> 付款: ${e.who}</span>
-              <span><i class="fa-solid fa-users text-akaushi"></i> 分攤 (${activeSplitters.length}人): ${splittersText}</span>
-            </div>
-          </div>
-        `;
-      });
-
-      document.getElementById('expenseListItems').innerHTML = html || `<p class="text-capybara text-center py-2">尚無記帳資料</p>`;
-      document.getElementById('totalExpenseJPY').innerText = `¥ ${total.toLocaleString()}`;
-      const totalTWD = Math.round(total * window.exchangeRate);
-      document.getElementById('totalExpenseTWD').innerText = `≈ NT$ ${totalTWD.toLocaleString()} (匯率 ${window.exchangeRate})`;
-      document.getElementById('displayRateText').innerText = `1 JPY = ${window.exchangeRate} TWD`;
-
-      renderSettlement(balances);
-    };
-
-    function renderSettlement(balances) {
-      let debtors = [];
-      let creditors = [];
-      Object.keys(balances).forEach(m => {
-        const bal = balances[m];
-        if (bal < -1) debtors.push({ name: m, amount: -bal });
-        else if (bal > 1) creditors.push({ name: m, amount: bal });
-      });
-
-      let settlementHTML = '';
-      let transactions = [];
-      let dIdx = 0, cIdx = 0;
-      while (dIdx < debtors.length && cIdx < creditors.length) {
-        let d = debtors[dIdx];
-        let c = creditors[cIdx];
-        let transfer = Math.min(d.amount, c.amount);
-        if (transfer > 1) {
-          transactions.push({ from: d.name, to: c.name, jpy: Math.round(transfer), twd: Math.round(transfer * window.exchangeRate) });
-        }
-        d.amount -= transfer;
-        c.amount -= transfer;
-        if (d.amount < 1) dIdx++;
-        if (c.amount < 1) cIdx++;
-      }
-
-      if (transactions.length === 0) {
-        settlementHTML = `<div class="p-2.5 rounded-xl bg-matcha-bg border border-matcha/30 text-matcha-dark font-bold text-center text-xs">🎉 目前所有人帳目平支，互相欠款為 0 元！</div>`;
-      } else {
-        transactions.forEach(t => {
-          settlementHTML += `
-            <div class="p-2 rounded-xl bg-akaushi/10 border border-akaushi/30 flex justify-between items-center text-ink font-bold text-xs">
-              <span><i class="fa-solid fa-arrow-right-from-bracket text-akaushi"></i> <strong>${t.from}</strong> 應給 <strong>${t.to}</strong></span>
-              <span class="text-akaushi font-mono">¥ ${t.jpy.toLocaleString()} <span class="text-[10px] text-capybara font-normal">(NT$ ${t.twd.toLocaleString()})</span></span>
-            </div>
-          `;
-        });
-      }
-
-      let netSummaryHTML = '<div class="mt-2 text-[10px] grid grid-cols-2 gap-1 text-capybara font-bold">';
-      window.members.forEach(m => {
-        const b = Math.round(balances[m] || 0);
-        const color = b > 0 ? 'text-matcha-dark' : (b < 0 ? 'text-akaushi' : 'text-capybara');
-        const sign = b > 0 ? '+' : '';
-        netSummaryHTML += `<div class="bg-white p-1.5 rounded-lg border border-handBorder/40"><span>${m}:</span> <span class="${color} font-mono">${sign}¥${b.toLocaleString()}</span></div>`;
-      });
-      netSummaryHTML += '</div>';
-
-      document.getElementById('settlementResult').innerHTML = settlementHTML + netSummaryHTML;
-    }
-
-    window.selectAllSplitters = function(select) {
-      document.querySelectorAll('.splitter-cb').forEach(cb => cb.checked = select);
-    };
-
-    window.saveExchangeRate = function() {
-      const val = parseFloat(document.getElementById('rateInput').value);
-      if (!isNaN(val) && val > 0) {
-        window.exchangeRate = val;
-        closeModal('editRateModal');
-        renderExpenses();
-        showToast(`匯率已更新為 1 JPY = ${val} TWD`);
-      } else {
-        showToast('請輸入有效的匯率數字');
-      }
-    };
-
-    // Navigation & Common UI
-    function switchTab(tabId) {
-      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-      document.getElementById(`tab-${tabId}`).classList.add('active');
-      document.querySelectorAll('.nav-btn').forEach(btn => {
-        if (btn.dataset.tab === tabId) {
-          btn.classList.add('text-akaushi');
-          btn.classList.remove('text-capybara');
-        } else {
-          btn.classList.remove('text-akaushi');
-          btn.classList.add('text-capybara');
-        }
-      });
-    }
-
-    function openGoogleMap(query) {
-      window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`, '_blank');
-    }
-
-    function copyText(text) {
-      const el = document.createElement('textarea');
-      el.value = text;
-      document.body.appendChild(el);
-      el.select();
-      document.execCommand('copy');
-      document.body.removeChild(el);
-      showToast('已複製地址！');
-    }
-
-    function copyRoomCode() {
-      copyText('KYUSHU2026');
-      showToast('已複製房間代碼 KYUSHU2026');
-    }
-
-    function showToast(msg) {
-      const toast = document.getElementById('toast');
-      toast.innerText = msg;
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 2000);
-    }
-
-    function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
-    function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
-
-    window.switchDay = switchDay;
-    window.stepSpot = stepSpot;
-    window.switchTab = switchTab;
-    window.openModal = openModal;
-    window.closeModal = closeModal;
-    window.showToast = showToast;
-  </script>
+ <!-- TOAST MESSAGE -->
+ <div id="toast" class="toast-popup">已複製至剪貼簿！</div>
+
+ <!-- JAPANESE HAND-DRAWN LINE-ART SKETCH SVG ASSET SYSTEM -->
+ <svg class="hidden">
+   <defs>
+     <g id="sketch-castle">
+       <path d="M4 36 L36 36 L33 26 L7 26 Z" fill="#EAE5D9" stroke="#4A3E3D" stroke-width="2" stroke-linejoin="round"/>
+       <path d="M8 26 L32 26 L29 17 L11 17 Z" fill="#6B7C59" stroke="#4A3E3D" stroke-width="2" stroke-linejoin="round"/>
+       <path d="M13 17 L27 17 L24 9 L16 9 Z" fill="#D97757" stroke="#4A3E3D" stroke-width="2" stroke-linejoin="round"/>
+       <path d="M17 9 L23 9 L20 4 Z" fill="#D4A373" stroke="#4A3E3D" stroke-width="2"/>
+       <rect x="18" y="28" width="4" height="8" fill="#4A3E3D"/>
+     </g>
+     <g id="sketch-torii">
+       <path d="M3 8 Q20 4 37 8 L37 12 Q20 8 3 12 Z" fill="#D97757" stroke="#4A3E3D" stroke-width="2"/>
+       <rect x="6" y="12" width="28" height="3" fill="#D97757" stroke="#4A3E3D" stroke-width="1.5"/>
+       <rect x="9" y="15" width="4" height="21" fill="#D97757" stroke="#4A3E3D" stroke-width="2"/>
+       <rect x="27" y="15" width="4" height="21" fill="#D97757" stroke="#4A3E3D" stroke-width="2"/>
+       <rect x="18" y="12" width="4" height="7" fill="#4A3E3D"/>
+     </g>
+     <g id="sketch-onsen">
+       <path d="M4 28 C6 22, 34 22, 36 28 C34 36, 6 36, 4 28 Z" fill="#8FA07D" stroke="#4A3E3D" stroke-width="2"/>
+       <path d="M12 20 C14 14, 12 10, 14 6" stroke="#D97757" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+       <path d="M20 20 C22 14, 20 10, 22 6" stroke="#D97757" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+       <path d="M28 20 C30 14, 28 10, 30 6" stroke="#D97757" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+     </g>
+     <g id="sketch-volcano">
+       <path d="M3 34 L13 14 L27 14 L37 34 Z" fill="#6B7C59" stroke="#4A3E3D" stroke-width="2"/>
+       <path d="M13 14 L27 14 L24 18 L16 18 Z" fill="#8C6D58" stroke="#4A3E3D" stroke-width="1.5"/>
+       <path d="M16 11 C15 6, 13 4, 11 2 M20 11 C20 5, 20 3, 20 1 M24 11 C25 6, 27 4, 29 2" stroke="#D97757" stroke-width="2" fill="none" stroke-linecap="round"/>
+     </g>
+     <g id="sketch-ramen">
+       <path d="M5 16 C6 34, 34 34, 35 16 Z" fill="#FFFDF9" stroke="#4A3E3D" stroke-width="2"/>
+       <ellipse cx="20" cy="16" rx="15" ry="4" fill="#D97757" stroke="#4A3E3D" stroke-width="1.8"/>
+       <circle cx="15" cy="16" r="3" fill="#D4A373"/>
+       <path d="M8 8 L24 2 M12 8 L28 2" stroke="#4A3E3D" stroke-width="2" stroke-linecap="round"/>
+     </g>
+     <g id="sketch-car">
+       <rect x="3" y="10" width="34" height="18" rx="6" fill="#6B7C59" stroke="#4A3E3D" stroke-width="2.2"/>
+       <rect x="7" y="13" width="8" height="6" rx="2" fill="#FFFDF9" stroke="#4A3E3D" stroke-width="1.5"/>
+       <rect x="18" y="13" width="8" height="6" rx="2" fill="#FFFDF9" stroke="#4A3E3D" stroke-width="1.5"/>
+       <rect x="29" y="13" width="5" height="6" rx="1" fill="#FFFDF9" stroke="#4A3E3D" stroke-width="1.5"/>
+       <circle cx="10" cy="28" r="4.5" fill="#FFFDF9" stroke="#4A3E3D" stroke-width="2"/>
+       <circle cx="10" cy="28" r="1.5" fill="#4A3E3D"/>
+       <circle cx="30" cy="28" r="4.5" fill="#FFFDF9" stroke="#4A3E3D" stroke-width="2"/>
+       <circle cx="30" cy="28" r="1.5" fill="#4A3E3D"/>
+     </g>
+     <g id="sketch-plane">
+       <path d="M4 22 L16 17 L28 27 L32 25 L24 15 L34 11 L32 7 L20 13 L10 9 L8 11 L14 15 Z" fill="#D97757" stroke="#4A3E3D" stroke-width="2" stroke-linejoin="round"/>
+     </g>
+     <g id="sketch-bag">
+       <rect x="8" y="13" width="24" height="19" rx="3" fill="#D4A373" stroke="#4A3E3D" stroke-width="2"/>
+       <path d="M14 13 C14 7, 26 7, 26 13" stroke="#4A3E3D" stroke-width="2" fill="none"/>
+     </g>
+     <g id="sketch-kumamon">
+       <circle cx="20" cy="20" r="17" fill="#4A3E3D" stroke="#4A3E3D" stroke-width="2"/>
+       <circle cx="8" cy="8" r="6" fill="#4A3E3D" stroke="#4A3E3D" stroke-width="2"/>
+       <circle cx="32" cy="8" r="6" fill="#4A3E3D" stroke="#4A3E3D" stroke-width="2"/>
+       <circle cx="8" cy="8" r="2.5" fill="#FFFDF9"/>
+       <circle cx="32" cy="8" r="2.5" fill="#FFFDF9"/>
+       <circle cx="13" cy="17" r="3.5" fill="#FFFDF9"/>
+       <circle cx="27" cy="17" r="3.5" fill="#FFFDF9"/>
+       <circle cx="13" cy="17" r="1.5" fill="#4A3E3D"/>
+       <circle cx="27" cy="17" r="1.5" fill="#4A3E3D"/>
+       <ellipse cx="20" cy="23" rx="6" ry="4" fill="#FFFDF9"/>
+       <ellipse cx="20" cy="22" rx="2" ry="1.5" fill="#4A3E3D"/>
+       <circle cx="9" cy="24" r="3.5" fill="#D97757"/>
+       <circle cx="31" cy="24" r="3.5" fill="#D97757"/>
+     </g>
+   </defs>
+ </svg>
+
+ <!-- APP BRANDING HEADER -->
+ <header class="mb-3 text-center">
+   <div class="relative inline-block w-full">
+     <div class="hand-card p-3 bg-[#FFFDF9] flex items-center justify-between">
+       <div class="flex items-center gap-2.5">
+         <div class="w-10 h-10 p-0.5 border-2 border-handBorder rounded-2xl bg-matcha/20 flex items-center justify-center">
+           <svg class="w-8 h-8"><use href="#sketch-kumamon"/></svg>
+         </div>
+         <div class="text-left">
+           <h1 class="text-lg font-black text-ink tracking-tight flex items-center gap-1.5">
+             福岡・熊本 8天7夜
+             <span class="text-[10px] bg-akaushi text-white font-bold px-2 py-0.5 rounded-full border border-handBorder shadow-sm">自由行</span>
+           </h1>
+           <div class="flex items-center gap-1.5 text-[11px] font-bold text-capybara">
+             <span id="roomStatusText" class="text-matcha-dark font-extrabold"><i class="fa-solid fa-users"></i> 房號: KYUSHU2026</span>
+             <button onclick="copyRoomCode()" class="text-[10px] text-akaushi underline">複製</button>
+           </div>
+         </div>
+       </div>
+
+       <button onclick="openModal('roomSyncModal')" class="hand-pill px-2.5 py-1.5 bg-paper font-bold text-xs text-ink flex items-center gap-1">
+         <i class="fa-solid fa-rotate text-matcha"></i>
+         <span>切換共用</span>
+       </button>
+     </div>
+   </div>
+ </header>
+
+ <!-- MAIN NAVIGATION TABS CONTENT -->
+ <main>
+   <!-- TAB 1: ITINERARY -->
+   <section id="tab-itinerary" class="tab-content active space-y-3">
+     <div class="hand-card p-3 bg-paperCard">
+       <div class="flex justify-between items-center mb-1.5 px-1">
+         <span id="spotDayHeader" class="text-xs font-black text-akaushi">Day 1 • 12/07 (一)</span>
+         <span id="spotProgressStep" class="text-xs font-bold text-capybara">進度 1 / 4 站</span>
+       </div>
+       <div class="relative w-full h-3 bg-paper rounded-full border-2 border-handBorder overflow-hidden mb-3">
+         <div id="topProgressBar" class="h-full bg-matcha transition-all duration-300" style="width: 25%;"></div>
+       </div>
+       <div class="flex items-center justify-between gap-2">
+         <button id="prevSpotBtn" onclick="stepSpot(-1)" class="hand-pill px-3 py-1.5 bg-white text-ink font-bold text-xs flex items-center gap-1 opacity-50 cursor-not-allowed">
+           <i class="fa-solid fa-chevron-left text-[10px]"></i> 上一站
+         </button>
+         <div class="text-center flex-1 px-1">
+           <p id="currentSpotTitle" class="text-xs font-black text-ink truncate">熊本機場 (KMJ) 接機</p>
+         </div>
+         <button id="nextSpotBtn" onclick="stepSpot(1)" class="hand-pill px-3 py-1.5 bg-akaushi text-white font-bold text-xs flex items-center gap-1">
+           下一站 <i class="fa-solid fa-chevron-right text-[10px]"></i>
+         </button>
+       </div>
+     </div>
+
+     <div class="flex overflow-x-auto gap-2 py-1 no-scrollbar">
+       <button onclick="switchDay(1)" class="day-capsule hand-pill px-3 py-1.5 text-xs font-bold whitespace-nowrap bg-akaushi text-white" data-day="1">D1 (12/07)</button>
+       <button onclick="switchDay(2)" class="day-capsule hand-pill px-3 py-1.5 text-xs font-bold whitespace-nowrap bg-white text-ink" data-day="2">D2 (12/08)</button>
+       <button onclick="switchDay(3)" class="day-capsule hand-pill px-3 py-1.5 text-xs font-bold whitespace-nowrap bg-white text-ink" data-day="3">D3 (12/09)</button>
+       <button onclick="switchDay(4)" class="day-capsule hand-pill px-3 py-1.5 text-xs font-bold whitespace-nowrap bg-white text-ink" data-day="4">D4 (12/10)</button>
+       <button onclick="switchDay(5)" class="day-capsule hand-pill px-3 py-1.5 text-xs font-bold whitespace-nowrap bg-white text-ink" data-day="5">D5 (12/11)</button>
+       <button onclick="switchDay(6)" class="day-capsule hand-pill px-3 py-1.5 text-xs font-bold whitespace-nowrap bg-white text-ink" data-day="6">D6 (12/12)</button>
+       <button onclick="switchDay(7)" class="day-capsule hand-pill px-3 py-1.5 text-xs font-bold whitespace-nowrap bg-white text-ink" data-day="7">D7 (12/13)</button>
+       <button onclick="switchDay(8)" class="day-capsule hand-pill px-3 py-1.5 text-xs font-bold whitespace-nowrap bg-white text-ink" data-day="8">D8 (12/14)</button>
+     </div>
+
+     <div id="spotDetailCard" class="hand-card p-4 bg-paperCard space-y-3"></div>
+
+     <div class="hand-card p-3.5 bg-paperCard">
+       <h3 class="text-xs font-black text-ink mb-2.5 flex items-center justify-between border-b-2 border-dashed border-capybara/20 pb-1.5">
+         <span id="dayListTitle"><i class="fa-solid fa-map-location-dot text-matcha"></i> 當日完整景點清單</span>
+         <span id="dayTypeBadge" class="text-[10px] bg-matcha/20 text-matcha-dark font-bold px-2 py-0.5 rounded-full">包車 9小時</span>
+       </h3>
+       <div id="daySpotList" class="space-y-2"></div>
+     </div>
+   </section>
+
+   <!-- TAB 2: FLIGHT & KUMAMOTO AIRPORT GUIDE -->
+   <section id="tab-flight" class="tab-content space-y-3">
+     <div class="hand-card p-4 bg-paperCard">
+       <div class="flex justify-between items-center mb-3">
+         <h2 class="text-sm font-black text-ink flex items-center gap-1.5">
+           <svg class="w-5 h-5"><use href="#sketch-plane"/></svg> 星宇航空 (STARLUX)
+         </h2>
+         <span class="hand-pill px-2.5 py-1 bg-akaushi text-white text-[11px] font-extrabold font-mono select-all">
+           PNR: DUFKTB
+         </span>
+       </div>
+       <div class="grid grid-cols-2 gap-2 text-xs">
+         <div class="p-2.5 rounded-xl border-2 border-handBorder bg-white">
+           <div class="flex justify-between items-center text-[10px] text-capybara font-bold mb-1">
+             <span>去程 JX846</span>
+             <span>12/07 (一)</span>
+           </div>
+           <p class="text-base font-black text-ink text-center">07:30 ➔ 10:35</p>
+           <p class="text-[11px] text-matcha-dark font-bold text-center mt-0.5">TPE 桃園 ➔ KMJ 熊本</p>
+         </div>
+         <div class="p-2.5 rounded-xl border-2 border-handBorder bg-white">
+           <div class="flex justify-between items-center text-[10px] text-capybara font-bold mb-1">
+             <span>回程 JX847</span>
+             <span>12/14 (一)</span>
+           </div>
+           <p class="text-base font-black text-ink text-center">11:45 ➔ 13:25</p>
+           <p class="text-[11px] text-akaushi font-bold text-center mt-0.5">KMJ 熊本 ➔ TPE 桃園</p>
+         </div>
+       </div>
+       <div class="mt-3 p-2 bg-matcha-bg rounded-xl border-2 border-matcha/40 text-[11px] text-matcha-dark font-bold flex items-center gap-2">
+         <i class="fa-solid fa-circle-info"></i> 包車司機海獅將於熊本機場接機大廳候機。
+       </div>
+     </div>
+
+     <!-- KUMAMOTO TAX REFUND MODULE -->
+     <div class="hand-card p-4 bg-akaushi/10 border-akaushi text-center space-y-1">
+       <div class="text-3xl mb-1">🗾 ✈️ 🛍️</div>
+       <span class="hand-pill px-2.5 py-0.5 bg-akaushi text-white text-[10px] font-bold">KUMAMOTO AIRPORT GUIDE</span>
+       <h2 class="text-base font-black text-ink">熊本機場退稅攻略</h2>
+       <p class="text-xs font-bold text-akaushi font-mono">2026年11月1日新制</p>
+       <p class="text-xs font-black text-ink pt-1">先付款・機場海關確認・事後退款</p>
+       <p class="text-[11px] text-capybara font-bold">熊本機場出境專用指南</p>
+     </div>
+
+     <div class="hand-card p-4 bg-paperCard space-y-2.5">
+       <h3 class="text-xs font-black text-ink border-b-2 border-dashed border-capybara/20 pb-1.5 flex items-center gap-1.5">
+         <i class="fa-solid fa-thumbtack text-akaushi"></i> 熊本機場適用方式
+       </h3>
+       <div class="p-2.5 rounded-xl border-2 border-handBorder bg-white flex items-start gap-2.5">
+         <div class="w-8 h-8 rounded-xl bg-akaushi/15 text-akaushi font-bold flex items-center justify-center flex-shrink-0 text-base">🏢</div>
+         <div>
+           <b class="text-xs font-black text-ink">1F 一樓大廳退稅專用機台</b>
+           <p class="text-[11px] text-capybara font-bold">使用實體 Tax Refund Kiosk 辦理海關確認。</p>
+         </div>
+       </div>
+       <div class="p-2.5 rounded-xl border-2 border-handBorder bg-white flex items-start gap-2.5">
+         <div class="w-8 h-8 rounded-xl bg-matcha/20 text-matcha-dark font-bold flex items-center justify-center flex-shrink-0 text-base">📱</div>
+         <div>
+           <b class="text-xs font-black text-ink">Visit Japan Web 線上退稅</b>
+           <p class="text-[11px] text-capybara font-bold">熊本機場目前不在七大線上確認機場名單內，請使用實體機台。</p>
+         </div>
+       </div>
+       <div class="p-2.5 rounded-xl border-2 border-handBorder bg-white flex items-start gap-2.5">
+         <div class="w-8 h-8 rounded-xl bg-gold/20 text-ink font-bold flex items-center justify-center flex-shrink-0 text-base">💴</div>
+         <div>
+           <b class="text-xs font-black text-ink">機場現金退款</b>
+           <p class="text-[11px] text-capybara font-bold">熊本機場沒有現金退款機台或櫃台，依購物時登記的方式退款。</p>
+         </div>
+       </div>
+     </div>
+
+     <div class="hand-card p-4 bg-paperCard space-y-2.5">
+       <h3 class="text-xs font-black text-ink border-b-2 border-dashed border-capybara/20 pb-1.5 flex items-center gap-1.5">
+         <span class="w-5 h-5 rounded-full bg-akaushi text-white text-[10px] font-bold flex items-center justify-center">01</span>
+         日本退稅新制重點
+       </h3>
+       <div class="grid grid-cols-2 gap-2 text-xs">
+         <div class="p-2.5 bg-matcha-bg border-2 border-matcha/40 rounded-xl space-y-1">
+           <b class="text-matcha-dark font-black">✓ 退稅資格</b>
+           <p class="text-[11px] text-ink font-bold">符合資格的外國短期訪日旅客</p>
+           <p class="text-[11px] text-capybara font-bold">同店同日未稅滿 ¥5,000</p>
+         </div>
+         <div class="p-2.5 bg-akaushi/10 border-2 border-akaushi/40 rounded-xl space-y-1">
+           <b class="text-akaushi font-black">⚠ 注意限制</b>
+           <p class="text-[11px] text-ink font-bold">商品必須全部帶出日本</p>
+           <p class="text-[11px] text-capybara font-bold">購買日起90天內完成確認</p>
+         </div>
+       </div>
+       <p class="text-xs text-ink font-bold pt-1">一般消費稅 10%，部分食品飲料適用 8%。</p>
+       <p class="text-xs text-capybara font-bold">消耗品不再需要特殊密封包裝，但不能在日本境內消耗。</p>
+       <div class="p-2.5 bg-akaushi/15 border-2 border-akaushi rounded-xl text-xs space-y-1">
+         <b class="text-akaushi font-black">新制最大改變：</b>
+         <p class="text-ink font-bold leading-relaxed">購物時先付含稅價格，離境完成海關確認後，才由店家或退款業者退還消費稅相當金額。</p>
+       </div>
+     </div>
+
+     <div class="hand-card p-4 bg-paperCard space-y-3">
+       <h3 class="text-xs font-black text-ink border-b-2 border-dashed border-capybara/20 pb-1.5 flex items-center gap-1.5">
+         <span class="w-5 h-5 rounded-full bg-akaushi text-white text-[10px] font-bold flex items-center justify-center">02</span>
+         熊本機場退稅四步驟
+       </h3>
+       <div class="space-y-2 text-xs">
+         <div class="p-2.5 rounded-xl bg-white border-2 border-handBorder flex items-start gap-2.5">
+           <span class="w-6 h-6 rounded-full bg-akaushi text-white text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">1</span>
+           <div>
+             <b class="text-ink font-black">抵達熊本機場</b>
+             <p class="text-[11px] text-capybara font-bold">前往國際線航廈一樓，先不要托運含有免稅商品的行李。</p>
+           </div>
+         </div>
+         <div class="p-2.5 rounded-xl bg-white border-2 border-handBorder flex items-start gap-2.5">
+           <span class="w-6 h-6 rounded-full bg-akaushi text-white text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">2</span>
+           <div>
+             <b class="text-ink font-black">找到退稅 Kiosk</b>
+             <p class="text-[11px] text-capybara font-bold">前往 1F Tax Refund Kiosk，準備護照，依照機台指示操作。</p>
+             <a href="https://www.customs.go.jp/kaigairyoko/taxrefund/map_CHECK.htm" target="_blank" class="inline-block mt-1.5 hand-pill px-2.5 py-1 bg-paper font-bold text-[10px] text-akaushi">
+               查看日本海關機台地圖 ↗
+             </a>
+           </div>
+         </div>
+         <div class="p-2.5 rounded-xl bg-white border-2 border-handBorder flex items-start gap-2.5">
+           <span class="w-6 h-6 rounded-full bg-akaushi text-white text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">3</span>
+           <div class="w-full">
+             <b class="text-ink font-black">等待海關確認結果</b>
+             <div class="grid grid-cols-2 gap-2 mt-1 text-[11px]">
+               <div class="p-2 bg-matcha-bg border border-matcha/40 rounded-xl space-y-0.5">
+                 <strong class="text-matcha-dark font-black">GREEN ✓</strong>
+                 <p class="text-capybara font-bold">確認完成，可前往航空公司櫃台。</p>
+               </div>
+               <div class="p-2 bg-akaushi/10 border border-akaushi/40 rounded-xl space-y-0.5">
+                 <strong class="text-akaushi font-black">RED !</strong>
+                 <p class="text-capybara font-bold">需要帶商品到海關檢查區查驗。</p>
+               </div>
+             </div>
+           </div>
+         </div>
+         <div class="p-2.5 rounded-xl bg-white border-2 border-handBorder flex items-start gap-2.5">
+           <span class="w-6 h-6 rounded-full bg-akaushi text-white text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">4</span>
+           <div>
+             <b class="text-ink font-black">托運行李、準備登機</b>
+             <p class="text-[11px] text-capybara font-bold">海關確認完成後，才進行行李托運及後續出境手續。</p>
+           </div>
+         </div>
+       </div>
+     </div>
+
+     <div class="hand-card p-4 bg-paperCard space-y-2">
+       <h3 class="text-xs font-black text-ink border-b-2 border-dashed border-capybara/20 pb-1.5 flex items-center gap-1.5">
+         <span class="w-5 h-5 rounded-full bg-akaushi text-white text-[10px] font-bold flex items-center justify-center">05</span>
+         出境退稅檢查清單
+       </h3>
+       <p class="text-[11px] text-capybara font-bold">完成一項勾選一項，避免機場漏辦。</p>
+       <div class="relative w-full h-2.5 bg-paper rounded-full border-2 border-handBorder overflow-hidden my-2">
+         <div id="kmj-progress" class="h-full bg-matcha transition-all duration-300" style="width: 0%;"></div>
+       </div>
+       <p id="kmj-count" class="text-xs font-black text-matcha-dark text-right">完成 0 / 7 項</p>
+       <div id="kmj-checks" class="space-y-1.5 text-xs font-bold text-ink pt-1">
+         <label class="flex items-center gap-2 p-2 bg-white rounded-xl border border-handBorder cursor-pointer">
+           <input type="checkbox" class="w-4 h-4 accent-matcha rounded">
+           <span>購物時已出示護照及完成退稅登記</span>
+         </label>
+         <label class="flex items-center gap-2 p-2 bg-white rounded-xl border border-handBorder cursor-pointer">
+           <input type="checkbox" class="w-4 h-4 accent-matcha rounded">
+           <span>已確認退款平台與退款方式</span>
+         </label>
+         <label class="flex items-center gap-2 p-2 bg-white rounded-xl border border-handBorder cursor-pointer">
+           <input type="checkbox" class="w-4 h-4 accent-matcha rounded">
+           <span>保留購物紀錄及相關商品</span>
+         </label>
+         <label class="flex items-center gap-2 p-2 bg-white rounded-xl border border-handBorder cursor-pointer">
+           <input type="checkbox" class="w-4 h-4 accent-matcha rounded">
+           <span>免稅商品尚未放進托運行李</span>
+         </label>
+         <label class="flex items-center gap-2 p-2 bg-white rounded-xl border border-handBorder cursor-pointer">
+           <input type="checkbox" class="w-4 h-4 accent-matcha rounded">
+           <span>已準備護照</span>
+         </label>
+         <label class="flex items-center gap-2 p-2 bg-white rounded-xl border border-handBorder cursor-pointer">
+           <input type="checkbox" class="w-4 h-4 accent-matcha rounded">
+           <span>已完成 1F 海關退稅機台確認</span>
+         </label>
+         <label class="flex items-center gap-2 p-2 bg-white rounded-xl border border-handBorder cursor-pointer">
+           <input type="checkbox" class="w-4 h-4 accent-matcha rounded">
+           <span>GREEN 確認完成或 RED 已完成人工查驗</span>
+         </label>
+       </div>
+     </div>
+   </section>
+
+   <!-- TAB 3: GOURMET -->
+   <section id="tab-food" class="tab-content space-y-3">
+     <div class="hand-card p-3 bg-paperCard space-y-2.5">
+       <div class="flex justify-between items-center">
+         <h2 class="text-sm font-black text-ink flex items-center gap-1.5">
+           <svg class="w-5 h-5"><use href="#sketch-ramen"/></svg> 美食・伴手禮寶典
+         </h2>
+         <button onclick="openModal('addFoodModal')" class="hand-pill px-3 py-1.5 bg-akaushi text-white text-xs font-bold flex items-center gap-1 shadow-sm">
+           <i class="fa-solid fa-plus text-[10px]"></i> 新增口袋美食
+         </button>
+       </div>
+
+       <div class="flex overflow-x-auto gap-1.5 py-1 no-scrollbar border-t border-dashed border-capybara/20 pt-2">
+         <button onclick="filterFood('gourmet')" class="food-tab hand-pill px-2.5 py-1 text-[11px] font-bold bg-akaushi text-white flex-shrink-0" data-ftab="gourmet">美食推薦</button>
+         <button onclick="filterFood('souvenir')" class="food-tab hand-pill px-2.5 py-1 text-[11px] font-bold bg-white text-ink flex-shrink-0" data-ftab="souvenir">伴手禮推薦</button>
+       </div>
+
+       <div class="flex items-center gap-2 pt-1 border-t border-dashed border-capybara/20">
+         <label style="font-size: 12px;" class="font-bold text-capybara">細分類別:</label>
+         <select id="food-category" class="flex-1 p-1.5 rounded-lg border-2 border-handBorder bg-paper font-bold text-xs text-ink">
+           <option value="">🌟 全部顯示</option>
+           <option value="RAMEN">🍜 拉麵類</option>
+           <option value="YAKITORI">🍢 燒鳥/串燒</option>
+           <option value="MOTSU">🍲 牛腸鍋</option>
+           <option value="UNAGI">🍱 鰻魚飯</option>
+           <option value="CHICKEN">🍗 水瀧雞肉鍋</option>
+           <option value="WAGYU">🥩 和牛/赤牛丼</option>
+           <option value="GIFT">🎁 特色伴手禮</option>
+         </select>
+       </div>
+     </div>
+     <div id="foodListContainer" class="space-y-3"></div>
+   </section>
+
+   <!-- TAB 4: EXPENSE -->
+   <section id="tab-expense" class="tab-content space-y-3">
+     <div class="hand-card p-4 bg-paperCard space-y-3">
+       <div class="flex justify-between items-start">
+         <div>
+           <h2 class="text-sm font-black text-ink">多人即時記帳・分帳</h2>
+           <p class="text-[11px] text-capybara font-bold">即時同步總花費與動態精準算盤</p>
+         </div>
+         <span id="syncedCountTag" class="text-xs bg-matcha/20 text-matcha-dark font-extrabold px-2 py-0.5 rounded-full border border-handBorder">雲端同步中</span>
+       </div>
+
+       <div class="grid grid-cols-2 gap-2 text-xs">
+         <div class="p-2.5 bg-white rounded-xl border-2 border-handBorder">
+           <div class="flex justify-between items-center mb-1">
+             <span class="text-[10px] text-capybara font-bold"><i class="fa-solid fa-coins text-gold"></i> JPY/TWD 匯率</span>
+             <button onclick="openModal('editRateModal')" class="text-[10px] text-akaushi font-bold underline">修改</button>
+           </div>
+           <p id="displayRateText" class="text-sm font-black text-ink">1 JPY = 0.208 TWD</p>
+         </div>
+
+         <div class="p-2.5 bg-white rounded-xl border-2 border-handBorder">
+           <div class="flex justify-between items-center mb-1">
+             <span class="text-[10px] text-capybara font-bold"><i class="fa-solid fa-users text-matcha"></i> 團隊成員</span>
+             <button onclick="openModal('addMemberModal')" class="text-[10px] text-akaushi font-bold underline">+ 新增成員</button>
+           </div>
+           <div id="memberBadgesList" class="flex flex-wrap gap-1 max-h-12 overflow-y-auto pt-0.5 no-scrollbar"></div>
+         </div>
+       </div>
+
+       <div class="p-3 bg-white rounded-xl border-2 border-handBorder">
+         <p class="text-[10px] text-capybara font-bold">團隊總花費 (JPY)</p>
+         <p id="totalExpenseJPY" class="text-xl font-black text-ink">¥ 0</p>
+         <p id="totalExpenseTWD" class="text-xs font-bold text-akaushi">≈ NT$ 0 (匯率 0.208)</p>
+       </div>
+
+       <form onsubmit="addNewExpense(event)" class="space-y-2.5 text-xs pt-1 border-t-2 border-dashed border-capybara/20">
+         <div class="grid grid-cols-2 gap-2">
+           <input type="text" id="expItem" required placeholder="消費項目 (如: 德永屋牛腸鍋)" class="p-2 rounded-xl border-2 border-handBorder bg-paper font-bold">
+           <input type="number" step="any" id="expAmt" required placeholder="金額 (日圓 JPY)" class="p-2 rounded-xl border-2 border-handBorder bg-paper font-bold">
+         </div>
+
+         <div class="space-y-1">
+           <label class="font-bold text-ink text-[11px] flex items-center gap-1">
+             <i class="fa-solid fa-hand-holding-dollar text-akaushi"></i> 付款人：
+           </label>
+           <select id="expWhoSelect" required class="w-full p-2 rounded-xl border-2 border-handBorder bg-paper font-bold text-ink"></select>
+         </div>
+
+         <div class="space-y-1 bg-white p-2.5 rounded-xl border-2 border-handBorder">
+           <div class="flex justify-between items-center mb-1">
+             <span class="font-bold text-ink text-[11px]"><i class="fa-solid fa-square-check text-matcha"></i> 分攤成員：</span>
+             <div class="flex gap-1">
+               <button type="button" onclick="selectAllSplitters(true)" class="text-[10px] text-matcha-dark font-bold px-2 py-0.5 bg-matcha/10 rounded-full border border-matcha/30">全選</button>
+               <button type="button" onclick="selectAllSplitters(false)" class="text-[10px] text-capybara font-bold px-2 py-0.5 bg-gray-100 rounded-full border border-gray-300">全不選</button>
+             </div>
+           </div>
+           <div id="splitterCheckboxes" class="grid grid-cols-3 gap-1.5 pt-1"></div>
+         </div>
+
+         <button type="submit" class="w-full hand-pill py-2.5 bg-akaushi text-white font-bold text-xs flex items-center justify-center gap-1">
+           <i class="fa-solid fa-plus"></i> 新增共用記帳
+         </button>
+       </form>
+     </div>
+
+     <div class="hand-card p-3.5 bg-paperCard">
+       <h3 class="text-xs font-black text-ink mb-2 flex justify-between items-center">
+         <span><i class="fa-solid fa-list-check text-matcha"></i> 共用支出明細</span>
+       </h3>
+       <div id="expenseListItems" class="space-y-2 text-xs"></div>
+     </div>
+
+     <div class="hand-card p-3.5 bg-paperCard">
+       <h3 class="text-xs font-black text-ink mb-2 border-b-2 border-dashed border-capybara/20 pb-1.5">
+         <span><i class="fa-solid fa-calculator text-akaushi"></i> 精準分帳結算</span>
+       </h3>
+       <div id="settlementResult" class="space-y-1.5 text-xs"></div>
+     </div>
+   </section>
+
+   <!-- TAB 5: VAULT & MEMBER MANAGEMENT -->
+   <section id="tab-vault" class="tab-content space-y-3">
+     <div class="hand-card p-4 bg-paperCard space-y-3">
+       <div class="flex items-center justify-between border-b-2 border-dashed border-capybara/20 pb-2">
+         <div class="flex items-center gap-2.5">
+           <div class="w-10 h-10 rounded-full border-2 border-handBorder bg-matcha-bg flex items-center justify-center font-bold text-matcha-dark">
+             團隊
+           </div>
+           <div>
+             <h3 class="text-sm font-black text-ink">共用證件庫 (Passport Vault)</h3>
+             <p class="text-[10px] text-capybara">成員護照與 Visit Japan Web QR Code</p>
+           </div>
+         </div>
+
+         <button onclick="openModal('addMemberModal')" class="hand-pill px-2.5 py-1 bg-matcha text-white text-[11px] font-bold flex items-center gap-1 shadow-sm">
+           <i class="fa-solid fa-user-plus"></i> 新增成員
+         </button>
+       </div>
+
+       <div class="flex items-center justify-between bg-white p-2 rounded-xl border border-handBorder text-xs">
+         <label class="font-bold text-ink">選擇查閱/編輯成員：</label>
+         <select id="vaultMemberSelect" onchange="switchVaultMember(this.value)" class="p-1.5 rounded-lg border border-handBorder bg-paper font-bold text-ink">
+         </select>
+       </div>
+
+       <div id="memberVaultContainer" class="space-y-2 text-xs"></div>
+     </div>
+
+     <div class="hand-card p-4 bg-paperCard space-y-3">
+       <div class="flex items-center gap-2">
+         <i class="fa-solid fa-shield-cat text-akaushi text-lg"></i>
+         <div>
+           <h3 class="text-sm font-black text-ink">緊急救援與中文醫療地圖</h3>
+           <p class="text-[10px] text-capybara">即時提供在地協助</p>
+         </div>
+       </div>
+       <div class="grid grid-cols-2 gap-2 text-xs">
+         <a href="tel:119" class="p-2.5 bg-white rounded-xl border border-handBorder flex items-center gap-2 hover:bg-akaushi/10">
+           <div class="w-7 h-7 rounded-full bg-akaushi/20 flex items-center justify-center text-akaushi"><i class="fa-solid fa-phone"></i></div>
+           <div>
+             <p class="font-bold text-ink">緊急撥號</p>
+             <p class="text-[10px] text-capybara">119 / 110</p>
+           </div>
+         </a>
+         <a href="tel:0927342810" class="p-2.5 bg-white rounded-xl border border-handBorder flex items-center gap-2 hover:bg-matcha/10">
+           <div class="w-7 h-7 rounded-full bg-matcha/20 flex items-center justify-center text-matcha-dark"><i class="fa-solid fa-building-columns"></i></div>
+           <div>
+             <p class="font-bold text-ink">駐福岡辦事處</p>
+             <p class="text-[10px] text-capybara">092-734-2810</p>
+           </div>
+         </a>
+       </div>
+     </div>
+   </section>
+ </main>
+
+ <!-- BOTTOM NAVIGATION BAR -->
+ <nav class="fixed bottom-0 left-0 right-0 bg-[#FFFDF9] border-t-2 border-handBorder shadow-lg z-40 max-w-md mx-auto">
+   <div class="flex justify-around items-center py-2 px-1">
+     <button onclick="switchTab('itinerary')" class="nav-btn flex flex-col items-center gap-0.5 text-akaushi font-bold" data-tab="itinerary">
+       <i class="fa-solid fa-compass text-base"></i>
+       <span class="text-[10px]">旅程</span>
+     </button>
+     <button onclick="switchTab('flight')" class="nav-btn flex flex-col items-center gap-0.5 text-capybara hover:text-akaushi font-bold" data-tab="flight">
+       <i class="fa-solid fa-plane text-base"></i>
+       <span class="text-[10px]">航班退稅</span>
+     </button>
+     <button onclick="switchTab('expense')" class="nav-btn flex flex-col items-center gap-0.5 text-capybara hover:text-akaushi font-bold" data-tab="expense">
+       <i class="fa-solid fa-wallet text-base"></i>
+       <span class="text-[10px]">記帳</span>
+     </button>
+     <button onclick="switchTab('food')" class="nav-btn flex flex-col items-center gap-0.5 text-capybara hover:text-akaushi font-bold" data-tab="food">
+       <i class="fa-solid fa-utensils text-base"></i>
+       <span class="text-[10px]">美食</span>
+     </button>
+     <button onclick="switchTab('vault')" class="nav-btn flex flex-col items-center gap-0.5 text-capybara hover:text-akaushi font-bold" data-tab="vault">
+       <i class="fa-solid fa-user text-base"></i>
+       <span class="text-[10px]">成員</span>
+     </button>
+   </div>
+ </nav>
+
+ <!-- ROOM SYNC MODAL -->
+ <div id="roomSyncModal" class="fixed inset-0 bg-ink/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+   <div class="hand-card bg-paperCard p-4 max-w-xs w-full space-y-3">
+     <div class="flex justify-between items-center border-b border-handBorder pb-2">
+       <h3 class="font-black text-ink text-sm"><i class="fa-solid fa-users text-matcha"></i> 多人共用房間設定</h3>
+       <button onclick="closeModal('roomSyncModal')" class="text-capybara text-base font-bold"><i class="fa-solid fa-xmark"></i></button>
+     </div>
+     <div class="space-y-2 text-xs">
+       <p class="text-capybara font-bold">請輸入同伴的房間代碼，即可即時同步：</p>
+       <input type="text" id="roomCodeInput" placeholder="例如: KYUSHU2026" class="w-full p-2 rounded-xl border-2 border-handBorder bg-paper font-bold uppercase text-center">
+       <button onclick="joinRoom()" class="w-full hand-pill py-2 bg-akaushi text-white font-bold">加入此行程房間</button>
+     </div>
+   </div>
+ </div>
+
+ <!-- EDIT EXCHANGE RATE MODAL -->
+ <div id="editRateModal" class="fixed inset-0 bg-ink/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+   <div class="hand-card bg-paperCard p-4 max-w-xs w-full space-y-3">
+     <div class="flex justify-between items-center border-b border-handBorder pb-2">
+       <h3 class="font-black text-ink text-sm"><i class="fa-solid fa-coins text-gold"></i> 修改即時匯率</h3>
+       <button onclick="closeModal('editRateModal')" class="text-capybara text-base font-bold"><i class="fa-solid fa-xmark"></i></button>
+     </div>
+     <div class="space-y-2 text-xs">
+       <p class="text-capybara font-bold">請輸入 1 JPY 可兌換之 TWD (例: 0.208)：</p>
+       <input type="number" step="0.0001" id="rateInput" placeholder="0.208" class="w-full p-2 rounded-xl border-2 border-handBorder bg-paper font-bold text-center text-sm">
+       <button onclick="saveExchangeRate()" class="w-full hand-pill py-2 bg-akaushi text-white font-bold">儲存匯率</button>
+     </div>
+   </div>
+ </div>
+
+ <!-- ADD MEMBER MODAL -->
+ <div id="addMemberModal" class="fixed inset-0 bg-ink/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+   <div class="hand-card bg-paperCard p-4 max-w-xs w-full space-y-3">
+     <div class="flex justify-between items-center border-b border-handBorder pb-2">
+       <h3 class="font-black text-ink text-sm"><i class="fa-solid fa-user-plus text-matcha"></i> 新增旅伴成員</h3>
+       <button onclick="closeModal('addMemberModal')" class="text-capybara text-base font-bold"><i class="fa-solid fa-xmark"></i></button>
+     </div>
+     <div class="space-y-2 text-xs">
+       <p class="text-capybara font-bold">請輸入新旅伴姓名 / 暱稱：</p>
+       <input type="text" id="memberNameInput" placeholder="例如: 小明" class="w-full p-2 rounded-xl border-2 border-handBorder bg-paper font-bold text-center">
+       <button onclick="saveNewMember()" class="w-full hand-pill py-2 bg-matcha text-white font-bold">
+         確定新增成員
+       </button>
+     </div>
+   </div>
+ </div>
+
+ <!-- EDIT MEMBER VAULT MODAL -->
+ <div id="editVaultModal" class="fixed inset-0 bg-ink/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+   <div class="hand-card bg-paperCard p-4 max-w-xs w-full space-y-3 max-h-[90vh] overflow-y-auto">
+     <div class="flex justify-between items-center border-b border-handBorder pb-2">
+       <h3 class="font-black text-ink text-sm"><i class="fa-solid fa-id-card text-akaushi"></i> 編輯成員證件資料</h3>
+       <button onclick="closeModal('editVaultModal')" class="text-capybara text-base font-bold"><i class="fa-solid fa-xmark"></i></button>
+     </div>
+
+     <form onsubmit="saveMemberVaultData(event)" class="space-y-2.5 text-xs">
+       <div>
+         <label class="font-bold text-ink">成員代表姓名：</label>
+         <input type="text" id="vaultNameInput" required placeholder="例如: 王又豎" class="w-full p-2 mt-0.5 rounded-xl border-2 border-handBorder bg-paper font-bold text-ink">
+       </div>
+       <div>
+         <label class="font-bold text-ink">護照號碼：</label>
+         <input type="text" id="vaultPassportInput" required placeholder="例如: 350198234" class="w-full p-2 mt-0.5 rounded-xl border-2 border-handBorder bg-paper font-mono font-bold text-ink">
+       </div>
+       <div>
+         <label class="font-bold text-ink">護照效期：</label>
+         <input type="text" id="vaultExpiryInput" required placeholder="例如: 2031/06/12" class="w-full p-2 mt-0.5 rounded-xl border-2 border-handBorder bg-paper font-mono font-bold text-ink">
+       </div>
+       <div>
+         <label class="block text-xs font-bold text-ink mb-1">Visit Japan Web QR Code 照片：</label>
+         <div class="space-y-2">
+           <input type="file" id="editQrFile" accept="image/*" class="w-full p-2 border border-handBorder rounded-lg text-xs bg-white" onchange="handleModalFileSelect(event)">
+           <input type="hidden" id="editQrUrl" value="">
+           <p class="text-[10px] text-capybara">※ 請直接上傳手機裡的 QR Code 截圖，圖片會自動轉存並與該成員關聯。</p>
+         </div>
+       </div>
+
+       <button type="submit" class="w-full hand-pill py-2 bg-akaushi text-white font-bold mt-2">
+         儲存修改
+       </button>
+     </form>
+   </div>
+ </div>
+
+ <!-- ADD FOOD MODAL -->
+ <div id="addFoodModal" class="fixed inset-0 bg-ink/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+   <div class="hand-card bg-paperCard p-4 max-w-xs w-full space-y-3">
+     <div class="flex justify-between items-center border-b border-handBorder pb-2">
+       <h3 class="font-black text-ink text-sm"><i class="fa-solid fa-utensils text-akaushi"></i> 新增口袋美食</h3>
+       <button onclick="closeModal('addFoodModal')" class="text-capybara text-base font-bold"><i class="fa-solid fa-xmark"></i></button>
+     </div>
+     <form onsubmit="addNewCustomFood(event)" class="space-y-2 text-xs">
+       <input type="text" id="customFoodName" required placeholder="店名 (如: 一蘭拉麵)" class="w-full p-2 rounded-xl border-2 border-handBorder bg-paper font-bold">
+       <select id="customFoodTag" class="w-full p-2 rounded-xl border-2 border-handBorder bg-paper font-bold">
+         <option value="RAMEN">🍜 拉麵類</option>
+         <option value="YAKITORI">🍢 燒鳥/串燒</option>
+         <option value="MOTSU">🍲 牛腸鍋</option>
+         <option value="UNAGI">🍱 鰻魚飯</option>
+         <option value="CHICKEN">🍗 水瀧雞肉鍋</option>
+         <option value="WAGYU">🥩 和牛/赤牛丼</option>
+         <option value="GIFT">🎁 特色伴手禮</option>
+       </select>
+       <input type="text" id="customFoodDesc" required placeholder="特色簡介" class="w-full p-2 rounded-xl border-2 border-handBorder bg-paper font-bold">
+       <input type="text" id="customFoodLoc" required placeholder="地點 (如: 博多車站)" class="w-full p-2 rounded-xl border-2 border-handBorder bg-paper font-bold">
+       <button type="submit" class="w-full hand-pill py-2 bg-akaushi text-white font-bold">新增至口袋名單</button>
+     </form>
+   </div>
+ </div>
+
+ <!-- FIREBASE MODULE INTEGRATION -->
+ <script type="module">
+   import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+   import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+   import { getFirestore, doc, collection, onSnapshot, setDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+   const appId = typeof __app_id !== 'undefined' ? __app_id : 'kyushu-2026-trip';
+   let db, auth, user;
+   let currentRoomId = 'KYUSHU2026';
+   let unsubscribeExpenses = null;
+   let unsubscribeFavorites = null;
+   let unsubscribeCustomFood = null;
+
+   try {
+     const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
+       apiKey: "demo",
+       projectId: "demo-kyushu",
+       appId: "1:demo:web:kyushu"
+     };
+     const app = initializeApp(firebaseConfig);
+     db = getFirestore(app);
+     auth = getAuth(app);
+     if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+       await signInWithCustomToken(auth, __initial_auth_token);
+     } else {
+       await signInAnonymously(auth);
+     }
+     user = auth.currentUser;
+     setupRealtimeListeners();
+   } catch (err) {
+     console.log("Firebase initialized in Local Fallback mode.");
+   }
+
+   function setupRealtimeListeners() {
+     if (!db || !user) return;
+     if (unsubscribeExpenses) unsubscribeExpenses();
+     if (unsubscribeFavorites) unsubscribeFavorites();
+     if (unsubscribeCustomFood) unsubscribeCustomFood();
+
+     const expensesRef = collection(db, 'artifacts', appId, 'public', 'data', `expenses_${currentRoomId}`);
+     const favoritesRef = collection(db, 'artifacts', appId, 'public', 'data', `favorites_${currentRoomId}`);
+     const customFoodRef = collection(db, 'artifacts', appId, 'public', 'data', `custom_food_${currentRoomId}`);
+
+     unsubscribeExpenses = onSnapshot(expensesRef, (snapshot) => {
+       const items = [];
+       snapshot.forEach(doc => items.push({ id: doc.id, ...doc.data() }));
+       window.expensesList = items;
+       window.renderExpenses();
+     });
+
+     unsubscribeFavorites = onSnapshot(favoritesRef, (snapshot) => {
+       const favs = {};
+       snapshot.forEach(doc => favs[doc.id] = doc.data().fav);
+       window.favoriteItems = favs;
+       window.renderFoodList();
+     });
+
+     unsubscribeCustomFood = onSnapshot(customFoodRef, (snapshot) => {
+       const custom = [];
+       snapshot.forEach(doc => custom.push({ id: doc.id, ...doc.data() }));
+       window.customFoodList = custom;
+       window.renderFoodList();
+     });
+   }
+
+   window.syncExpenseToFirestore = async function(item) {
+     if (!db || !user) return;
+     const docId = `exp_${Date.now()}`;
+     await setDoc(doc(db, 'artifacts', appId, 'public', 'data', `expenses_${currentRoomId}`, docId), item);
+   };
+
+   window.deleteExpenseFromFirestore = async function(docId) {
+     if (!db || !user) return;
+     await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', `expenses_${currentRoomId}`, docId));
+   };
+
+   window.toggleFavoriteFirestore = async function(foodId) {
+     if (!db || !user) return;
+     const current = window.favoriteItems[foodId] || false;
+     await setDoc(doc(db, 'artifacts', appId, 'public', 'data', `favorites_${currentRoomId}`, `food_${foodId}`), { fav: !current });
+   };
+
+   window.syncFoodToFirestore = async function(item) {
+     if (!db || !user) return;
+     const docId = `food_custom_${Date.now()}`;
+     await setDoc(doc(db, 'artifacts', appId, 'public', 'data', `custom_food_${currentRoomId}`, docId), item);
+   };
+
+   window.joinRoom = function() {
+     const code = document.getElementById('roomCodeInput').value.trim().toUpperCase();
+     if (code) {
+       currentRoomId = code;
+       document.getElementById('roomStatusText').innerHTML = `<i class="fa-solid fa-users"></i> 房號: ${currentRoomId}`;
+       setupRealtimeListeners();
+       closeModal('roomSyncModal');
+       showToast(`已成功切換至【${currentRoomId}】共用房間！`);
+     }
+   };
+ </script>
+
+ <!-- APP CORE LOGIC & UI DATA -->
+ <script>
+   const daysData = {
+     1: {
+       dayLabel: "Day 1 • 12/07 (一)", type: "包車 9小時",
+       spots: [
+         { name: "熊本機場 (KMJ) 接機", time: "10:35", tag: "接機", desc: "星宇 JX846 抵達，包車司機海獅接機前往福岡。", addr: "熊本県上益城郡益城町小谷1802-2", svg: "#sketch-plane" },
+         { name: "福岡 Mina 天神 / LaLaport", time: "12:45", tag: "購物散策", desc: "午餐採買與 1:1 實物大 RX-93ff ν 鋼彈立像巡禮。", addr: "福岡市博多區那珂 6-23-1", svg: "#sketch-bag" },
+         { name: "福岡塔 / 百道濱海景", time: "16:00", tag: "地標觀景", desc: "欣賞百道濱海景與福岡夜景名勝。", addr: "福岡市早良區百道浜 2-3-26", svg: "#sketch-torii" },
+         { name: "福岡福濱民宿 Check-in", time: "17:45", tag: "民宿入住", desc: "包車抵達民宿，卸下行李稍作休憩。", addr: "1-chōme-4-16 Fukuhama, Chuo Ward, Fukuoka", svg: "#sketch-kumamon" }
+       ]
+     },
+     2: {
+       dayLabel: "Day 2 • 12/08 (二)", type: "包車 10小時",
+       spots: [
+         { name: "福岡民宿出發", time: "08:30", tag: "專車出發", desc: "司機海獅民宿接送啟程。", addr: "1-chōme-4-16 Fukuhama, Chuo Ward, Fukuoka", svg: "#sketch-car" },
+         { name: "寶滿宮竈門神社", time: "09:10", tag: "結緣神社", desc: "漫步鬼滅之刃聖地與結緣神社名勝。", addr: "福岡県太宰府市内山883", svg: "#sketch-torii" },
+         { name: "太宰府天滿宮 & 表參道", time: "10:30", tag: "參道午餐", desc: "參拜學問之神、品嚐現烤梅枝餅。", addr: "福岡県太宰府市宰府4-7-1", svg: "#sketch-torii" },
+         { name: "博多運河城 (Canal City)", time: "14:00", tag: "運河購物", desc: "九州複合式水舞購物商場商圈。", addr: "福岡市博多區住吉 1-2", svg: "#sketch-bag" }
+       ]
+     },
+     3: {
+       dayLabel: "Day 3 • 12/09 (三)", type: "自由行 (大眾運輸)",
+       spots: [
+         { name: "天神地下街 / PARCO", time: "09:30", tag: "天神購物", desc: "九州最繁華地下街道與日系品牌散策。", addr: "福岡市中央區天神 2 地下", svg: "#sketch-bag" },
+         { name: "博多一雙 / 麵屋兼虎", time: "12:00", tag: "極上拉麵", desc: "享用濃厚魚介沾麵或泡系豚骨拉麵。", addr: "福岡市中央區天神 1-11-11", svg: "#sketch-ramen" },
+         { name: "博多內臟鍋 (德永屋/前田屋)", time: "18:00", tag: "牛腸鍋", desc: "昭和老鋪清爽味噌牛腸鍋慶祝福岡最後一夜。", addr: "福岡市博多區博多站前", svg: "#sketch-ramen" }
+       ]
+     },
+     4: {
+       dayLabel: "Day 4 • 12/10 (四)", type: "包車 10小時 (載行李)",
+       spots: [
+         { name: "福岡退房出發", time: "08:30", tag: "行李上車", desc: "行李全部裝載，出發前往大分湯布院。", addr: "福岡民宿 Check-out", svg: "#sketch-car" },
+         { name: "由布院 & 金鱗湖散策", time: "10:15", tag: "溫泉街", desc: "湯之坪街道、金鱗湖湖景與限量 B-Speak 蛋糕捲。", addr: "大分県由布市湯布院町川上", svg: "#sketch-onsen" },
+         { name: "阿蘇龜之井飯店 Check-in", time: "16:00", tag: "溫泉飯店", desc: "辦理入住，享用溫泉大浴場。", addr: "1230 Kurokawa, Aso, Kumamoto 869-2225", svg: "#sketch-onsen" }
+       ]
+     },
+     5: {
+       dayLabel: "Day 5 • 12/11 (五)", type: "包車 9小時",
+       spots: [
+         { name: "阿蘇中岳火口 & 草千里", time: "10:00", tag: "火山景致", desc: "觀賞火山噴煙口與草千里廣袤大草原。", addr: "熊本県阿蘇市黒川", svg: "#sketch-volcano" },
+         { name: "午餐：阿蘇赤牛丼 (いまきん)", time: "13:30", tag: "名物午餐", desc: "品嚐阿蘇極品火烤赤牛丼與和牛料理。", addr: "熊本県阿蘇市内牧366-2", svg: "#sketch-ramen" },
+         { name: "熊本 OMO5 星野飯店 Check-in", time: "15:30", tag: "飯店入住", desc: "入住熊本市中心 HAB@ 3F 星野飯店。", addr: "熊本市中央区手取本町 5-1 HAB@ 3F", svg: "#sketch-kumamon" }
+       ]
+     },
+     6: {
+       dayLabel: "Day 6 • 12/12 (六)", type: "自由行 (熊本市電)",
+       spots: [
+         { name: "熊本城 & 櫻之馬場彩苑", time: "09:30", tag: "名城巡禮", desc: "日本三大名城天守閣與古風城彩苑區。", addr: "熊本市中央區本丸 1-1", svg: "#sketch-castle" },
+         { name: "勝烈亭黑豬肉排", time: "12:00", tag: "米其林美食", desc: "極厚酥脆黑豬肉排或焦蒜麻油豚骨拉麵。", addr: "熊本市中央區新市街 8-18", svg: "#sketch-ramen" }
+       ]
+     },
+     7: {
+       dayLabel: "Day 7 • 12/13 (日)", type: "自由行 (大眾運輸)",
+       spots: [
+         { name: "熊本車站 AMU Plaza 採買", time: "10:00", tag: "車站採買", desc: "集結九州名品伴手禮與雜貨。", addr: "熊本市西區春日 3-15-26", svg: "#sketch-bag" },
+         { name: "水前寺成趣園", time: "14:00", tag: "日式庭園", desc: "桃山樣式回遊庭園與抹茶池畔清飲。", addr: "熊本市中央區水前寺公園 8-1", svg: "#sketch-torii" }
+       ]
+     },
+     8: {
+       dayLabel: "Day 8 • 12/14 (一)", type: "單趟包車送機",
+       spots: [
+         { name: "OMO5 星野飯店退房", time: "09:30", tag: "專車送機", desc: "海獅專車飯店外接應直達機場。", addr: "熊本 OMO5 星野飯店", svg: "#sketch-car" },
+         { name: "抵達熊本機場 (KMJ)", time: "10:15", tag: "機場報到", desc: "辦理 JX847 班機報到與搭機返台。", addr: "熊本機場 Terminal", svg: "#sketch-plane" }
+       ]
+     }
+   };
+
+   const foodList = [
+     { id: 1, type: "gourmet", name: "麵屋兼虎", tag: "RAMEN", desc: "濃郁魚介豚骨沾麵，湯頭極度香濃。", location: "天神/博多", score: "4.7", svg: "#sketch-ramen" },
+     { id: 2, type: "gourmet", name: "博多一雙", tag: "RAMEN", desc: "泡系豚骨拉麵，細密泡沫湯頭。", location: "博多車站", score: "4.6", svg: "#sketch-ramen" },
+     { id: 3, type: "gourmet", name: "黑亭拉麵", tag: "RAMEN", desc: "焦蒜麻油豚骨拉麵，雙黃蛋黃特色。", location: "熊本城/二本木", score: "4.5", svg: "#sketch-ramen" },
+     { id: 4, type: "gourmet", name: "博多 Kawaya (皮S)", tag: "YAKITORI", desc: "名物卷曲酥脆雞皮串燒，外酥內嫩。", location: "博多/天神", score: "4.6", svg: "#sketch-ramen" },
+     { id: 5, type: "gourmet", name: "天神 鳥次", tag: "YAKITORI", desc: "質感紀州備長炭燒鳥名店。", location: "天神", score: "4.7", svg: "#sketch-ramen" },
+     { id: 6, type: "gourmet", name: "德永屋", tag: "MOTSU", desc: "昭和老鋪清爽味噌牛腸鍋。", location: "博多/天神", score: "4.5", svg: "#sketch-ramen" },
+     { id: 7, type: "gourmet", name: "博多內臟鍋 前田屋", tag: "MOTSU", desc: "極上和牛牛腸鍋，湯頭鮮甜。", location: "博多", score: "4.8", svg: "#sketch-ramen" },
+     { id: 8, type: "gourmet", name: "吉塚鰻魚屋", tag: "UNAGI", desc: "百年蒲燒鰻魚飯蒸籠炊名店。", location: "博多中洲", score: "4.8", svg: "#sketch-ramen" },
+     { id: 9, type: "gourmet", name: "博多華味鳥", tag: "CHICKEN", desc: "濃郁雞白湯水瀧雞肉鍋。", location: "博多", score: "4.6", svg: "#sketch-ramen" },
+     { id: 10, type: "gourmet", name: "大東園和牛燒肉", tag: "WAGYU", desc: "博多頂級黑毛和牛燒肉。", location: "博多祇園", score: "4.7", svg: "#sketch-ramen" },
+     { id: 11, type: "gourmet", name: "勝烈亭黑豬肉排", tag: "WAGYU", desc: "米其林推薦極厚黑豬肉排與和牛牛排。", location: "熊本新市街", score: "4.7", svg: "#sketch-ramen" },
+     { id: 12, type: "gourmet", name: "阿蘇赤牛丼 (いまきん食堂)", tag: "WAGYU", desc: "百年老鋪火烤赤牛丼配半熟蛋。", location: "阿蘇草千里", score: "4.8", svg: "#sketch-ramen" },
+     { id: 13, type: "gourmet", name: "烤肉多牛", tag: "WAGYU", desc: "超高 CP 值燒肉，上等牛肋條絕品。", location: "博多", score: "4.6", svg: "#sketch-ramen" },
+     { id: 14, type: "souvenir", name: "福砂屋長崎蛋糕", tag: "GIFT", desc: "底層砂糖顆粒經典長崎蛋糕。", location: "博多阪急/機場", score: "4.9", svg: "#sketch-bag" },
+     { id: 15, type: "souvenir", name: "熊本譽之陣太鼓 (香梅)", tag: "GIFT", desc: "阿蘇伏流水小豆羊羹裹麻糬。", location: "熊本", score: "4.6", svg: "#sketch-bag" },
+     { id: 16, type: "souvenir", name: "太宰府梅枝餅", tag: "GIFT", desc: "現烤皮酥餡甜抹茶相配。", location: "太宰府參道", score: "4.7", svg: "#sketch-bag" },
+     { id: 17, type: "souvenir", name: "B-Speak 蛋糕卷", tag: "GIFT", desc: "每日限量鮮奶純生蛋糕卷。", location: "由布院金鱗湖", score: "4.8", svg: "#sketch-bag" },
+     { id: 18, type: "souvenir", name: "福太郎 Menbei", tag: "GIFT", desc: "經典明太子海鮮微辣煎餅。", location: "博多", score: "4.6", svg: "#sketch-bag" }
+   ];
+
+   let currentDayIndex = 1;
+   let currentSpotIndex = 0;
+   let currentFoodTab = 'gourmet'; 
+   let currentFoodCategory = ''; 
+   let selectedVaultMember = "王又豎";
+
+   window.members = ["王又豎", "花生", "妍频", "妹妹", "大衛", "潸潸"];
+   window.exchangeRate = 0.208;
+   window.expensesList = [
+     { id: '1', item: "包車4天訂金", amount: 66800, who: "王又豎", splitters: ["王又豎", "花生", "妍频", "妹妹", "大衛", "潸潸"] }
+   ];
+   window.favoriteItems = {};
+   window.customFoodList = [];
+
+   // 多成員證件庫資料結構
+   window.membersVaultData = {
+     "王又豎": { name: "王又豎", passport: "350198234", expiry: "2031/06/12", qrImg: "" },
+     "花生": { name: "花生", passport: "未填寫", expiry: "未填寫", qrImg: "" },
+     "妍频": { name: "妍频", passport: "未填寫", expiry: "未填寫", qrImg: "" },
+     "妹妹": { name: "妹妹", passport: "未填寫", expiry: "未填寫", qrImg: "" },
+     "大衛": { name: "大衛", passport: "未填寫", expiry: "未填寫", qrImg: "" },
+     "潸潸": { name: "潸潸", passport: "未填寫", expiry: "未填寫", qrImg: "" }
+   };
+
+   window.onload = function() {
+     switchDay(1);
+     renderMembersUI();
+     renderMemberVault();
+     renderFoodList();
+     renderExpenses();
+     setupKmjChecklistEvents();
+
+     const categorySelect = document.getElementById('food-category');
+     if (categorySelect) {
+       categorySelect.addEventListener('change', (e) => {
+         currentFoodCategory = e.target.value;
+         window.renderFoodList();
+       });
+     }
+   };
+
+   function setupKmjChecklistEvents() {
+     const container = document.getElementById('kmj-checks');
+     if (!container) return;
+     const checks = container.querySelectorAll('input[type="checkbox"]');
+     const bar = document.getElementById('kmj-progress');
+     const count = document.getElementById('kmj-count');
+
+     function updateChecklist() {
+       const total = checks.length;
+       const done = Array.from(checks).filter(x => x.checked).length;
+       if (bar) bar.style.width = (done / total * 100) + '%';
+       if (count) count.textContent = `完成 ${done} / ${total} 項`;
+     }
+     checks.forEach(x => x.addEventListener('change', updateChecklist));
+     updateChecklist();
+   }
+
+   function renderMembersUI() {
+     const select = document.getElementById('vaultMemberSelect');
+     const expWho = document.getElementById('expWhoSelect');
+     const splitters = document.getElementById('splitterCheckboxes');
+     const badges = document.getElementById('memberBadgesList');
+
+     if (select) {
+       select.innerHTML = window.members.map(m => `<option value="${m}" ${m === selectedVaultMember ? 'selected' : ''}>${m}</option>`).join('');
+     }
+     if (expWho) {
+       expWho.innerHTML = window.members.map(m => `<option value="${m}">${m}</option>`).join('');
+     }
+     if (splitters) {
+       splitters.innerHTML = window.members.map(m => `
+         <label class="flex items-center gap-1 text-[11px] font-bold text-ink cursor-pointer">
+           <input type="checkbox" value="${m}" checked class="splitter-cb w-3.5 h-3.5 accent-matcha rounded">
+           <span>${m}</span>
+         </label>
+       `).join('');
+     }
+     if (badges) {
+       badges.innerHTML = window.members.map(m => `<span class="px-2 py-0.5 bg-paper rounded-full text-[10px] font-bold text-ink border border-handBorder">${m}</span>`).join('');
+     }
+   }
+
+   window.switchVaultMember = function(name) {
+     selectedVaultMember = name;
+     renderMemberVault();
+   };
+
+   window.renderMemberVault = function() {
+     const container = document.getElementById('memberVaultContainer');
+     if (!container) return;
+
+     const data = window.membersVaultData[selectedVaultMember] || { name: selectedVaultMember, passport: "未填寫", expiry: "未填寫", qrImg: "" };
+     
+     const qrDisplay = data.qrImg ? 
+       `<img src="${data.qrImg}" class="w-32 h-32 mx-auto object-cover rounded-xl border-2 border-handBorder" alt="VJW QR Code">` : 
+       `<div class="w-28 h-28 mx-auto bg-gray-100 border-2 border-handBorder rounded-xl flex items-center justify-center p-2"> 
+         <div class="w-full h-full bg-ink flex flex-wrap p-1 rounded"> 
+           <div class="w-1/2 h-1/2 border-2 border-white bg-white"></div> 
+           <div class="w-1/2 h-1/2 bg-ink"></div> 
+           <div class="w-1/2 h-1/2 bg-ink"></div> 
+           <div class="w-1/2 h-1/2 border-2 border-white bg-white"></div> 
+         </div> 
+       </div>`;
+
+     container.innerHTML = ` 
+       <div class="p-2.5 bg-white rounded-xl border border-handBorder"> 
+         <p class="text-[10px] text-capybara font-bold">成員代表：${data.name}</p> 
+         <div class="flex justify-between items-center mt-1"> 
+           <span class="font-mono font-bold text-ink text-sm">護照號碼：${data.passport}</span> 
+           <span class="text-[10px] text-capybara">效期 ${data.expiry}</span> 
+         </div> 
+       </div> 
+
+       <div class="p-3 bg-white rounded-xl border border-handBorder text-center space-y-2"> 
+         <p class="text-xs font-bold text-ink">退稅 & 入境 Visit Japan Web QR Code 截圖</p> 
+         ${qrDisplay} 
+         <div class="pt-1 flex gap-2 justify-center">
+           <button onclick="openEditMemberVaultModal()" class="hand-pill px-4 py-1.5 bg-akaushi text-white text-xs font-bold shadow-sm">
+             ✏️ 編輯 ${data.name} 的資料 / 上傳 QR Code
+           </button>
+         </div>
+         <p class="text-[10px] text-capybara">※ 照片僅會暫存在您的裝置畫面上，離線也能隨時查看。</p>
+       </div> 
+     `;
+   };
+
+   window.openEditMemberVaultModal = function() {
+     const data = window.membersVaultData[selectedVaultMember] || { name: selectedVaultMember, passport: '', expiry: '', qrImg: '' };
+     document.getElementById('vaultNameInput').value = data.name;
+     document.getElementById('vaultPassportInput').value = data.passport === '未填寫' ? '' : data.passport;
+     document.getElementById('vaultExpiryInput').value = data.expiry === '未填寫' ? '' : data.expiry;
+     document.getElementById('editQrUrl').value = data.qrImg || '';
+     openModal('editVaultModal');
+   };
+
+   window.handleModalFileSelect = function(event) {
+     const file = event.target.files[0];
+     if (file) {
+       const reader = new FileReader();
+       reader.onload = function(e) {
+         document.getElementById('editQrUrl').value = e.target.result;
+         showToast('照片已順利載入，請點擊下方「儲存修改」按鈕！');
+       };
+       reader.readAsDataURL(file);
+     }
+   };
+
+   window.saveMemberVaultData = function(e) {
+     if (e && e.preventDefault) e.preventDefault();
+     
+     const oldName = selectedVaultMember;
+     const newName = document.getElementById('vaultNameInput').value.trim();
+     const passport = document.getElementById('vaultPassportInput').value.trim();
+     const expiry = document.getElementById('vaultExpiryInput').value.trim();
+     const qrImg = document.getElementById('editQrUrl').value;
+
+     if (!newName) {
+       showToast('請填寫成員姓名！');
+       return;
+     }
+
+     if (oldName !== newName) {
+       delete window.membersVaultData[oldName];
+       const idx = window.members.indexOf(oldName);
+       if (idx !== -1) window.members[idx] = newName;
+       else window.members.push(newName);
+     }
+
+     window.membersVaultData[newName] = {
+       name: newName,
+       passport: passport || '未填寫',
+       expiry: expiry || '未填寫',
+       qrImg: qrImg || (window.membersVaultData[oldName] ? window.membersVaultData[oldName].qrImg : '')
+     };
+
+     selectedVaultMember = newName;
+     renderMembersUI();
+     renderMemberVault();
+     closeModal('editVaultModal');
+     showToast(`已成功儲存【${newName}】的資料與 QR Code！`);
+   };
+
+   window.saveNewMember = function() {
+     const name = document.getElementById('memberNameInput').value.trim();
+     if (name) {
+       if (!window.members.includes(name)) {
+         window.members.push(name);
+         window.membersVaultData[name] = { name: name, passport: "未填寫", expiry: "未填寫", qrImg: "" };
+         selectedVaultMember = name;
+         renderMembersUI();
+         renderMemberVault();
+         document.getElementById('memberNameInput').value = '';
+         closeModal('addMemberModal');
+         showToast(`已成功新增旅伴：${name}`);
+       } else {
+         showToast('該成員已在清單中');
+       }
+     }
+   };
+
+   // Itinerary Logic
+   function switchDay(dayNum) {
+     currentDayIndex = dayNum;
+     currentSpotIndex = 0;
+     document.querySelectorAll('.day-capsule').forEach(btn => {
+       if (parseInt(btn.dataset.day) === dayNum) {
+         btn.className = "day-capsule hand-pill px-3 py-1.5 text-xs font-bold whitespace-nowrap bg-akaushi text-white";
+       } else {
+         btn.className = "day-capsule hand-pill px-3 py-1.5 text-xs font-bold whitespace-nowrap bg-white text-ink";
+       }
+     });
+     renderCurrentSpot();
+     renderDaySpotList();
+   }
+
+   function stepSpot(delta) {
+     const daySpots = daysData[currentDayIndex].spots;
+     const newIdx = currentSpotIndex + delta;
+     if (newIdx >= 0 && newIdx < daySpots.length) {
+       currentSpotIndex = newIdx;
+       renderCurrentSpot();
+       renderDaySpotList();
+     }
+   }
+
+   function renderCurrentSpot() {
+     const dayData = daysData[currentDayIndex];
+     const spot = dayData.spots[currentSpotIndex];
+     const total = dayData.spots.length;
+
+     document.getElementById('spotDayHeader').innerText = dayData.dayLabel;
+     document.getElementById('spotProgressStep').innerText = `進度 ${currentSpotIndex + 1} / ${total} 站`;
+     document.getElementById('currentSpotTitle').innerText = spot.name;
+
+     const percent = ((currentSpotIndex + 1) / total) * 100;
+     document.getElementById('topProgressBar').style.width = `${percent}%`;
+
+     const prevBtn = document.getElementById('prevSpotBtn');
+     const nextBtn = document.getElementById('nextSpotBtn');
+     prevBtn.className = currentSpotIndex === 0 ? "hand-pill px-3 py-1.5 bg-white text-ink font-bold text-xs flex items-center gap-1 opacity-50 cursor-not-allowed" : "hand-pill px-3 py-1.5 bg-white text-ink font-bold text-xs flex items-center gap-1";
+     nextBtn.className = currentSpotIndex === total - 1 ? "hand-pill px-3 py-1.5 bg-white text-ink font-bold text-xs flex items-center gap-1 opacity-50 cursor-not-allowed" : "hand-pill px-3 py-1.5 bg-akaushi text-white font-bold text-xs flex items-center gap-1";
+
+     const detailContainer = document.getElementById('spotDetailCard');
+     detailContainer.innerHTML = `
+       <div class="flex justify-between items-start">
+         <span class="hand-pill px-2.5 py-0.5 bg-akaushi/15 text-akaushi border-akaushi text-[11px] font-bold">${spot.tag}</span>
+         <span class="hand-pill px-2.5 py-0.5 bg-white text-ink text-[11px] font-mono font-bold">${spot.time}</span>
+       </div>
+       <div class="flex items-center gap-2.5 my-1">
+         <div class="w-8 h-8 flex-shrink-0"><svg class="w-8 h-8"><use href="${spot.svg}"/></svg></div>
+         <h2 class="text-base font-black text-ink">${spot.name}</h2>
+       </div>
+       <p class="text-xs text-capybara leading-relaxed font-bold border-t border-b border-dashed border-capybara/20 py-2">${spot.desc}</p>
+       <div class="space-y-2 pt-1">
+         <p class="text-[11px] text-capybara font-bold flex items-center gap-1"><i class="fa-solid fa-location-dot text-akaushi"></i> ${spot.addr}</p>
+         <div class="flex gap-2">
+           <button onclick="openGoogleMap('${spot.name}')" class="hand-pill flex-1 py-1.5 bg-matcha text-white font-bold text-xs flex items-center justify-center gap-1"><i class="fa-solid fa-map-location-dot"></i> Google 地圖</button>
+           <button onclick="copyText('${spot.addr}')" class="hand-pill flex-1 py-1.5 bg-white text-ink font-bold text-xs flex items-center justify-center gap-1"><i class="fa-solid fa-copy"></i> 複製地址</button>
+         </div>
+       </div>
+     `;
+   }
+
+   function renderDaySpotList() {
+     const dayData = daysData[currentDayIndex];
+     document.getElementById('dayTypeBadge').innerText = dayData.type;
+     let html = '';
+     dayData.spots.forEach((s, idx) => {
+       const isCurrent = idx === currentSpotIndex;
+       html += `
+         <div onclick="selectSpot(${idx})" class="p-2 rounded-xl border-2 border-handBorder cursor-pointer transition flex items-center justify-between ${isCurrent ? 'bg-akaushi/10 border-akaushi' : 'bg-white'}">
+           <div class="flex items-center gap-2">
+             <span class="w-2 h-2 rounded-full ${isCurrent ? 'bg-akaushi' : 'bg-matcha'}"></span>
+             <span class="text-xs font-bold text-ink">${s.name}</span>
+           </div>
+           <span class="text-[10px] text-capybara font-mono font-bold">${s.time}</span>
+         </div>
+       `;
+     });
+     document.getElementById('daySpotList').innerHTML = html;
+   }
+
+   function selectSpot(idx) {
+     currentSpotIndex = idx;
+     renderCurrentSpot();
+     renderDaySpotList();
+   }
+
+   // Food & Gourmet Logic
+   function filterFood(type) {
+     currentFoodTab = type;
+     document.querySelectorAll('.food-tab').forEach(btn => {
+       if (btn.dataset.ftab === type) {
+         btn.className = "food-tab hand-pill px-2.5 py-1 text-[11px] font-bold bg-akaushi text-white";
+       } else {
+         btn.className = "food-tab hand-pill px-2.5 py-1 text-[11px] font-bold bg-white text-ink";
+       }
+     });
+     window.renderFoodList();
+   }
+
+   window.renderFoodList = function() {
+     const container = document.getElementById('foodListContainer');
+     if (!container) return;
+
+     const combined = [...foodList, ...(window.customFoodList || [])];
+     const filtered = combined.filter(item => {
+       const matchTab = (currentFoodTab === '' || item.type === currentFoodTab);
+       const matchCat = (currentFoodCategory === '' || item.tag === currentFoodCategory);
+       return matchTab && matchCat;
+     });
+
+     let html = '';
+     if (filtered.length === 0) {
+       html = `<div class="hand-card p-4 text-center text-xs text-capybara font-bold">沒有找到符合條件的美食項目</div>`;
+     } else {
+       filtered.forEach(item => {
+         const isFav = window.favoriteItems[item.id] || false;
+         html += `
+           <div class="hand-card p-3 bg-paperCard flex justify-between items-center">
+             <div class="space-y-1 flex-1 pr-2">
+               <div class="flex items-center gap-2 flex-wrap">
+                 <div class="w-6 h-6 flex-shrink-0"><svg class="w-6 h-6"><use href="${item.svg || '#sketch-ramen'}"/></svg></div>
+                 <h3 class="text-xs font-black text-ink">${item.name}</h3>
+                 <span class="hand-pill px-1.5 py-0.5 text-[9px] font-bold bg-matcha/20 text-matcha-dark">${item.tag}</span>
+               </div>
+               <p class="text-[11px] text-capybara font-bold">${item.desc}</p>
+               <p class="text-[10px] text-matcha-dark font-bold"><i class="fa-solid fa-star text-akaushi"></i> ${item.score || '4.5'} • 📍 ${item.location}</p>
+             </div>
+             <div class="flex flex-col items-end gap-1 flex-shrink-0">
+               <button onclick="toggleFavoriteFirestore(${item.id})" class="hand-pill px-2 py-1 text-xs font-bold ${isFav ? 'bg-akaushi text-white' : 'bg-white text-capybara'}"><i class="fa-solid fa-heart"></i></button>
+               <button onclick="openGoogleMap('${item.name}')" class="hand-pill px-2.5 py-0.5 bg-white text-ink text-[10px] font-bold">地圖</button>
+             </div>
+           </div>
+         `;
+       });
+     }
+     container.innerHTML = html;
+   };
+
+   window.addNewCustomFood = function(e) {
+     e.preventDefault();
+     const newItem = {
+       id: Date.now(),
+       type: 'gourmet',
+       name: document.getElementById('customFoodName').value.trim(),
+       tag: document.getElementById('customFoodTag').value,
+       desc: document.getElementById('customFoodDesc').value.trim(),
+       location: document.getElementById('customFoodLoc').value.trim(),
+       score: "4.7",
+       svg: "#sketch-ramen"
+     };
+     if (window.syncFoodToFirestore) {
+       window.syncFoodToFirestore(newItem);
+     } else {
+       window.customFoodList.push(newItem);
+       renderFoodList();
+     }
+     closeModal('addFoodModal');
+     showToast('已新增口袋美食！');
+   };
+
+   // Expense Logic
+   window.addNewExpense = function(e) {
+     e.preventDefault();
+     const item = document.getElementById('expItem').value.trim();
+     const amount = parseFloat(document.getElementById('expAmt').value);
+     const who = document.getElementById('expWhoSelect').value;
+     const checkedSplitters = Array.from(document.querySelectorAll('.splitter-cb:checked')).map(cb => cb.value);
+
+     if (checkedSplitters.length === 0) {
+       showToast('請至少勾選一位分攤成員！');
+       return;
+     }
+
+     const newExp = { item, amount, who, splitters: checkedSplitters, createdAt: Date.now() };
+     if (window.syncExpenseToFirestore) {
+       window.syncExpenseToFirestore(newExp);
+     } else {
+       window.expensesList.push({ id: Date.now().toString(), ...newExp });
+       renderExpenses();
+     }
+
+     document.getElementById('expItem').value = '';
+     document.getElementById('expAmt').value = '';
+     showToast('已新增共用記帳！');
+   };
+
+   window.renderExpenses = function() {
+     let total = 0;
+     let html = '';
+     const balances = {};
+     window.members.forEach(m => balances[m] = 0);
+
+     window.expensesList.forEach(e => {
+       total += e.amount;
+       const twdAmt = Math.round(e.amount * window.exchangeRate);
+       const activeSplitters = (e.splitters && e.splitters.length > 0) ? e.splitters : window.members;
+       const perPersonShare = e.amount / activeSplitters.length;
+
+       if (balances[e.who] !== undefined) balances[e.who] += e.amount;
+       activeSplitters.forEach(s => {
+         if (balances[s] !== undefined) balances[s] -= perPersonShare;
+       });
+
+       const splittersText = activeSplitters.length === window.members.length ? '全員均分' : activeSplitters.join('、');
+
+       html += `
+         <div class="p-2.5 rounded-xl border border-handBorder bg-white space-y-1">
+           <div class="flex justify-between items-center">
+             <span class="font-black text-ink">${e.item}</span>
+             <div class="flex items-center gap-1.5">
+               <span class="font-bold text-akaushi font-mono">¥ ${e.amount.toLocaleString()}</span>
+               <span class="text-[10px] text-capybara font-bold">(NT$ ${twdAmt.toLocaleString()})</span>
+               <button onclick="deleteExpenseFromFirestore('${e.id}')" class="text-capybara hover:text-akaushi pl-1"><i class="fa-solid fa-trash-can text-xs"></i></button>
+             </div>
+           </div>
+           <div class="flex justify-between items-center text-[10px] text-capybara font-bold">
+             <span><i class="fa-solid fa-user-tag text-matcha"></i> 付款: ${e.who}</span>
+             <span><i class="fa-solid fa-users text-akaushi"></i> 分攤 (${activeSplitters.length}人): ${splittersText}</span>
+           </div>
+         </div>
+       `;
+     });
+
+     document.getElementById('expenseListItems').innerHTML = html || `<p class="text-capybara text-center py-2">尚無記帳資料</p>`;
+     document.getElementById('totalExpenseJPY').innerText = `¥ ${total.toLocaleString()}`;
+     const totalTWD = Math.round(total * window.exchangeRate);
+     document.getElementById('totalExpenseTWD').innerText = `≈ NT$ ${totalTWD.toLocaleString()} (匯率 ${window.exchangeRate})`;
+     document.getElementById('displayRateText').innerText = `1 JPY = ${window.exchangeRate} TWD`;
+
+     renderSettlement(balances);
+   };
+
+   function renderSettlement(balances) {
+     let debtors = [];
+     let creditors = [];
+     Object.keys(balances).forEach(m => {
+       const bal = balances[m];
+       if (bal < -1) debtors.push({ name: m, amount: -bal });
+       else if (bal > 1) creditors.push({ name: m, amount: bal });
+     });
+
+     let settlementHTML = '';
+     let transactions = [];
+     let dIdx = 0, cIdx = 0;
+     while (dIdx < debtors.length && cIdx < creditors.length) {
+       let d = debtors[dIdx];
+       let c = creditors[cIdx];
+       let transfer = Math.min(d.amount, c.amount);
+       if (transfer > 1) {
+         transactions.push({ from: d.name, to: c.name, jpy: Math.round(transfer), twd: Math.round(transfer * window.exchangeRate) });
+       }
+       d.amount -= transfer;
+       c.amount -= transfer;
+       if (d.amount < 1) dIdx++;
+       if (c.amount < 1) cIdx++;
+     }
+
+     if (transactions.length === 0) {
+       settlementHTML = `<div class="p-2.5 rounded-xl bg-matcha-bg border border-matcha/30 text-matcha-dark font-bold text-center text-xs">🎉 目前所有人帳目平支，互相欠款為 0 元！</div>`;
+     } else {
+       transactions.forEach(t => {
+         settlementHTML += `
+           <div class="p-2 rounded-xl bg-akaushi/10 border border-akaushi/30 flex justify-between items-center text-ink font-bold text-xs">
+             <span><i class="fa-solid fa-arrow-right-from-bracket text-akaushi"></i> <strong>${t.from}</strong> 應給 <strong>${t.to}</strong></span>
+             <span class="text-akaushi font-mono">¥ ${t.jpy.toLocaleString()} <span class="text-[10px] text-capybara font-normal">(NT$ ${t.twd.toLocaleString()})</span></span>
+           </div>
+         `;
+       });
+     }
+
+     let netSummaryHTML = '<div class="mt-2 text-[10px] grid grid-cols-2 gap-1 text-capybara font-bold">';
+     window.members.forEach(m => {
+       const b = Math.round(balances[m] || 0);
+       const color = b > 0 ? 'text-matcha-dark' : (b < 0 ? 'text-akaushi' : 'text-capybara');
+       const sign = b > 0 ? '+' : '';
+       netSummaryHTML += `<div class="bg-white p-1.5 rounded-lg border border-handBorder/40"><span>${m}:</span> <span class="${color} font-mono">${sign}¥${b.toLocaleString()}</span></div>`;
+     });
+     netSummaryHTML += '</div>';
+
+     document.getElementById('settlementResult').innerHTML = settlementHTML + netSummaryHTML;
+   }
+
+   window.selectAllSplitters = function(select) {
+     document.querySelectorAll('.splitter-cb').forEach(cb => cb.checked = select);
+   };
+
+   window.saveExchangeRate = function() {
+     const val = parseFloat(document.getElementById('rateInput').value);
+     if (!isNaN(val) && val > 0) {
+       window.exchangeRate = val;
+       closeModal('editRateModal');
+       renderExpenses();
+       showToast(`匯率已更新為 1 JPY = ${val} TWD`);
+     } else {
+       showToast('請輸入有效的匯率數字');
+     }
+   };
+
+   // Navigation & Common UI
+   function switchTab(tabId) {
+     document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+     document.getElementById(`tab-${tabId}`).classList.add('active');
+     document.querySelectorAll('.nav-btn').forEach(btn => {
+       if (btn.dataset.tab === tabId) {
+         btn.classList.add('text-akaushi');
+         btn.classList.remove('text-capybara');
+       } else {
+         btn.classList.remove('text-akaushi');
+         btn.classList.add('text-capybara');
+       }
+     });
+   }
+
+   function openGoogleMap(query) {
+     window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`, '_blank');
+   }
+
+   function copyText(text) {
+     const el = document.createElement('textarea');
+     el.value = text;
+     document.body.appendChild(el);
+     el.select();
+     document.execCommand('copy');
+     document.body.removeChild(el);
+     showToast('已複製地址！');
+   }
+
+   function copyRoomCode() {
+     copyText('KYUSHU2026');
+     showToast('已複製房間代碼 KYUSHU2026');
+   }
+
+   function showToast(msg) {
+     const toast = document.getElementById('toast');
+     toast.innerText = msg;
+     toast.classList.add('show');
+     setTimeout(() => toast.classList.remove('show'), 2000);
+   }
+
+   function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
+   function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+
+   window.switchDay = switchDay;
+   window.stepSpot = stepSpot;
+   window.selectSpot = selectSpot;
+   window.filterFood = filterFood;
+   window.switchTab = switchTab;
+   window.openModal = openModal;
+   window.closeModal = closeModal;
+   window.showToast = showToast;
+   window.openGoogleMap = openGoogleMap;
+   window.copyText = copyText;
+   window.copyRoomCode = copyRoomCode;
+ </script>
 </body>
 </html>
