@@ -1254,37 +1254,62 @@
       showToast('成員個人資料已更新！');
     };
 
-    // Render Members in Select Dropdowns & Checkboxes
-    window.renderMembersUI = function() {
-      const badgesContainer = document.getElementById('memberBadgesList');
-      if (badgesContainer) {
-        badgesContainer.innerHTML = window.members.map(m => `
-          <span class="px-2 py-0.5 rounded-full bg-paper border border-handBorder text-[10px] font-bold text-ink whitespace-nowrap">
-            ${m}
-          </span>
-        `).join('');
-      }
-      document.getElementById('memberCountText').innerText = window.members.length;
+// 支援圖片上傳與預覽的證件庫渲染
+window.renderMemberVault = function() {
+  const container = document.getElementById('memberVaultContainer');
+  if (!container) return;
+  const data = window.memberVaultData;
+  
+  const qrDisplay = data.qrImg ? 
+    `<img src="${data.qrImg}" class="w-32 h-32 mx-auto object-cover rounded-xl border-2 border-handBorder" alt="VJW QR Code">` : 
+    `<div class="w-28 h-28 mx-auto bg-gray-100 border-2 border-handBorder rounded-xl flex items-center justify-center p-2"> 
+       <div class="w-full h-full bg-ink flex flex-wrap p-1 rounded"> 
+         <div class="w-1/2 h-1/2 border-2 border-white bg-white"></div> 
+         <div class="w-1/2 h-1/2 bg-ink"></div> 
+         <div class="w-1/2 h-1/2 bg-ink"></div> 
+         <div class="w-1/2 h-1/2 border-2 border-white bg-white"></div> 
+       </div> 
+     </div>`;
 
-      const whoSelect = document.getElementById('expWhoSelect');
-      if (whoSelect) {
-        whoSelect.innerHTML = window.members.map(m => `<option value="${m}">${m}</option>`).join('');
-      }
+  container.innerHTML = ` 
+    <div class="p-2.5 bg-white rounded-xl border border-handBorder"> 
+      <p class="text-[10px] text-capybara font-bold">成員代表：${data.name}</p> 
+      <div class="flex justify-between items-center mt-1"> 
+        <span class="font-mono font-bold text-ink text-sm">護照號碼：${data.passport}</span> 
+        <span class="text-[10px] text-capybara">效期 ${data.expiry}</span> 
+      </div> 
+    </div> 
+    
+    <div class="p-3 bg-white rounded-xl border border-handBorder text-center space-y-2"> 
+      <p class="text-xs font-bold text-ink">退稅 & 入境 Visit Japan Web QR Code 截圖</p> 
+      
+      ${qrDisplay} 
 
-      const checkboxesContainer = document.getElementById('splitterCheckboxes');
-      if (checkboxesContainer) {
-        checkboxesContainer.innerHTML = window.members.map((m, idx) => `
-          <label class="flex items-center gap-1.5 text-[11px] font-bold text-ink cursor-pointer select-none bg-paper p-1.5 rounded-lg border border-handBorder/30">
-            <input type="checkbox" value="${m}" checked class="splitter-cb accent-akaushi w-3.5 h-3.5 rounded">
-            <span class="truncate">${m}</span>
-          </label>
-        `).join('');
-      }
+      <!-- 本地檔案上傳按鈕 -->
+      <div class="pt-1">
+        <input type="file" id="localQrUpload" accept="image/*" style="display: none;" onchange="handleLocalQrUpload(event)">
+        <label for="localQrUpload" class="inline-block hand-pill px-4 py-1.5 bg-matcha text-white text-xs font-bold cursor-pointer shadow-sm">
+          📤 選擇手機內的 QR Code 照片
+        </label>
+      </div>
+      <p class="text-[10px] text-capybara">※ 照片僅會暫存在您的裝置畫面上，離線也能隨時查看。</p>
+    </div> 
+  `;
+};
+
+// 處理本地圖片上傳轉為 Base64 預覽的函式
+window.handleLocalQrUpload = function(event) {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      window.memberVaultData.qrImg = e.target.result;
+      renderMemberVault();
+      showToast('QR Code 照片已成功載入！');
     };
-
-    window.selectAllSplitters = function(flag) {
-      document.querySelectorAll('.splitter-cb').forEach(cb => cb.checked = flag);
-    };
+    reader.readAsDataURL(file);
+  }
+};
 
     window.saveExchangeRate = function() {
       const val = parseFloat(document.getElementById('rateInput').value);
