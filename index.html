@@ -3,7 +3,7 @@
 <head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
- <title>九州 8 天 7 夜 自由行 | 多人共用手繪和風旅頁 & 熊本機場退稅攻略</title>
+ <title>九州 8 天 7 夜 自由行 | 熊本機場退稅攻略</title>
  
  <!-- Tailwind CSS -->
  <script src="https://cdn.tailwindcss.com"></script>
@@ -770,7 +770,7 @@
    </div>
  </div>
 
- <!-- FIREBASE MODULE INTEGRATION -->
+ <!-- FIREBASE MODULE INTEGRATION & HYBRID LOCAL SNAPSHOT -->
  <script type="module">
    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
    import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
@@ -778,10 +778,40 @@
 
    const appId = typeof __app_id !== 'undefined' ? __app_id : 'kyushu-2026-trip';
    let db, auth, user;
-   let currentRoomId = 'KYUSHU2026';
+   let currentRoomId = localStorage.getItem('kyushu_room') || 'KYUSHU2026';
    let unsubscribeExpenses = null;
    let unsubscribeFavorites = null;
    let unsubscribeCustomFood = null;
+   let unsubscribeVault = null;
+
+   // 優先從 LocalStorage 載入本地快照，防止 PWA 加入主畫面重開被清空
+   window.loadLocalSnapshot = function() {
+     const savedMembers = localStorage.getItem(`kyushu_members_${currentRoomId}`);
+     const savedVault = localStorage.getItem(`kyushu_vault_${currentRoomId}`);
+     const savedExpenses = localStorage.getItem(`kyushu_expenses_${currentRoomId}`);
+     const savedFavs = localStorage.getItem(`kyushu_favs_${currentRoomId}`);
+     
+     if (savedMembers) window.members = JSON.parse(savedMembers);
+     if (savedVault) window.membersVaultData = JSON.parse(savedVault);
+     if (savedExpenses) window.expensesList = JSON.parse(savedExpenses);
+     if (savedFavs) window.favoriteItems = JSON.parse(savedFavs);
+
+     const statusEl = document.getElementById('roomStatusText');
+     if (statusEl) statusEl.innerHTML = `<i class="fa-solid fa-users"></i> 房號: ${currentRoomId}`;
+     
+     if (typeof window.renderMembersUI === 'function') window.renderMembersUI();
+     if (typeof window.renderMemberVault === 'function') window.renderMemberVault();
+     if (typeof window.renderExpenses === 'function') window.renderExpenses();
+     if (typeof window.renderFoodList === 'function') window.renderFoodList();
+   };
+
+   window.saveLocalSnapshot = function() {
+     localStorage.setItem('kyushu_room', currentRoomId);
+     localStorage.setItem(`kyushu_members_${currentRoomId}`, JSON.stringify(window.members));
+     localStorage.setItem(`kyushu_vault_${currentRoomId}`, JSON.stringify(window.membersVaultData));
+     localStorage.setItem(`kyushu_expenses_${currentRoomId}`, JSON.stringify(window.expensesList));
+     localStorage.setItem(`kyushu_favs_${currentRoomId}`, JSON.stringify(window.favoriteItems || {}));
+   };
 
    try {
      const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
@@ -800,7 +830,7 @@
      user = auth.currentUser;
      setupRealtimeListeners();
    } catch (err) {
-     console.log("Firebase initialized in Local Fallback mode.");
+     console.log("Firebase initialized in Local Fallback mode.", err);
    }
 
    function setupRealtimeListeners() {
@@ -808,15 +838,18 @@
      if (unsubscribeExpenses) unsubscribeExpenses();
      if (unsubscribeFavorites) unsubscribeFavorites();
      if (unsubscribeCustomFood) unsubscribeCustomFood();
+     if (unsubscribeVault) unsubscribeVault();
 
      const expensesRef = collection(db, 'artifacts', appId, 'public', 'data', `expenses_${currentRoomId}`);
      const favoritesRef = collection(db, 'artifacts', appId, 'public', 'data', `favorites_${currentRoomId}`);
      const customFoodRef = collection(db, 'artifacts', appId, 'public', 'data', `custom_food_${currentRoomId}`);
+     const vaultRef = collection(db, 'artifacts', appId, 'public', 'data', `vault_${currentRoomId}`);
 
      unsubscribeExpenses = onSnapshot(expensesRef, (snapshot) => {
        const items = [];
        snapshot.forEach(doc => items.push({ id: doc.id, ...doc.data() }));
        window.expensesList = items;
+       window.saveLocalSnapshot();
        window.renderExpenses();
      });
 
@@ -824,6 +857,7 @@
        const favs = {};
        snapshot.forEach(doc => favs[doc.id] = doc.data().fav);
        window.favoriteItems = favs;
+       window.saveLocalSnapshot();
        window.renderFoodList();
      });
 
@@ -833,22 +867,44 @@
        window.customFoodList = custom;
        window.renderFoodList();
      });
+
+     unsubscribeVault = onSnapshot(vaultRef, (snapshot) => {
+       snapshot.forEach(doc => {
+         const data = doc.data();
+         if (data && data.name) {
+           window.membersVaultData[data.name] = data;
+           if (!window.members.includes(data.name)) {
+             window.members.push(data.name);
+           }
+         }
+       });
+       window.saveLocalSnapshot();
+       window.renderMembersUI();
+       window.renderMemberVault();
+     });
    }
 
    window.syncExpenseToFirestore = async function(item) {
+     window.saveLocalSnapshot();
      if (!db || !user) return;
      const docId = `exp_${Date.now()}`;
      await setDoc(doc(db, 'artifacts', appId, 'public', 'data', `expenses_${currentRoomId}`, docId), item);
    };
 
    window.deleteExpenseFromFirestore = async function(docId) {
+     window.expensesList = window.expensesList.filter(e => e.id !== docId);
+     window.saveLocalSnapshot();
+     window.renderExpenses();
      if (!db || !user) return;
      await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', `expenses_${currentRoomId}`, docId));
    };
 
    window.toggleFavoriteFirestore = async function(foodId) {
-     if (!db || !user) return;
      const current = window.favoriteItems[foodId] || false;
+     window.favoriteItems[foodId] = !current;
+     window.saveLocalSnapshot();
+     window.renderFoodList();
+     if (!db || !user) return;
      await setDoc(doc(db, 'artifacts', appId, 'public', 'data', `favorites_${currentRoomId}`, `food_${foodId}`), { fav: !current });
    };
 
@@ -858,16 +914,28 @@
      await setDoc(doc(db, 'artifacts', appId, 'public', 'data', `custom_food_${currentRoomId}`, docId), item);
    };
 
+   window.syncVaultToFirestore = async function(memberData) {
+     window.membersVaultData[memberData.name] = memberData;
+     window.saveLocalSnapshot();
+     if (!db || !user) return;
+     await setDoc(doc(db, 'artifacts', appId, 'public', 'data', `vault_${currentRoomId}`, `member_${memberData.name}`), memberData);
+   };
+
    window.joinRoom = function() {
      const code = document.getElementById('roomCodeInput').value.trim().toUpperCase();
      if (code) {
        currentRoomId = code;
-       document.getElementById('roomStatusText').innerHTML = `<i class="fa-solid fa-users"></i> 房號: ${currentRoomId}`;
+       window.loadLocalSnapshot();
        setupRealtimeListeners();
        closeModal('roomSyncModal');
        showToast(`已成功切換至【${currentRoomId}】共用房間！`);
      }
    };
+
+   window.addEventListener('online', () => {
+     showToast('網路已恢復連線，自動即時同步中');
+     setupRealtimeListeners();
+   });
  </script>
 
  <!-- APP CORE LOGIC & UI DATA -->
@@ -973,7 +1041,6 @@
    window.favoriteItems = {};
    window.customFoodList = [];
 
-   // 多成員證件庫資料結構
    window.membersVaultData = {
      "王又豎": { name: "王又豎", passport: "350198234", expiry: "2031/06/12", qrImg: "" },
      "花生": { name: "花生", passport: "未填寫", expiry: "未填寫", qrImg: "" },
@@ -984,11 +1051,8 @@
    };
 
    window.onload = function() {
+     if (typeof window.loadLocalSnapshot === 'function') window.loadLocalSnapshot();
      switchDay(1);
-     renderMembersUI();
-     renderMemberVault();
-     renderFoodList();
-     renderExpenses();
      setupKmjChecklistEvents();
 
      const categorySelect = document.getElementById('food-category');
@@ -1128,18 +1192,25 @@
        else window.members.push(newName);
      }
 
-     window.membersVaultData[newName] = {
+     const updatedData = {
        name: newName,
        passport: passport || '未填寫',
        expiry: expiry || '未填寫',
        qrImg: qrImg || (window.membersVaultData[oldName] ? window.membersVaultData[oldName].qrImg : '')
      };
 
+     if (window.syncVaultToFirestore) {
+       window.syncVaultToFirestore(updatedData);
+     } else {
+       window.membersVaultData[newName] = updatedData;
+       if (typeof window.saveLocalSnapshot === 'function') window.saveLocalSnapshot();
+     }
+
      selectedVaultMember = newName;
      renderMembersUI();
      renderMemberVault();
      closeModal('editVaultModal');
-     showToast(`已成功儲存【${newName}】的資料與 QR Code！`);
+     showToast(`已成功儲存【${newName}】的資料！`);
    };
 
    window.saveNewMember = function() {
@@ -1147,7 +1218,13 @@
      if (name) {
        if (!window.members.includes(name)) {
          window.members.push(name);
-         window.membersVaultData[name] = { name: name, passport: "未填寫", expiry: "未填寫", qrImg: "" };
+         const newData = { name: name, passport: "未填寫", expiry: "未填寫", qrImg: "" };
+         if (window.syncVaultToFirestore) {
+           window.syncVaultToFirestore(newData);
+         } else {
+           window.membersVaultData[name] = newData;
+           if (typeof window.saveLocalSnapshot === 'function') window.saveLocalSnapshot();
+         }
          selectedVaultMember = name;
          renderMembersUI();
          renderMemberVault();
@@ -1160,7 +1237,7 @@
      }
    };
 
-   // Itinerary Logic
+   // 行程模組
    function switchDay(dayNum) {
      currentDayIndex = dayNum;
      currentSpotIndex = 0;
@@ -1248,7 +1325,7 @@
      renderDaySpotList();
    }
 
-   // Food & Gourmet Logic
+   // 美食寶典模組
    function filterFood(type) {
      currentFoodTab = type;
      document.querySelectorAll('.food-tab').forEach(btn => {
@@ -1322,7 +1399,7 @@
      showToast('已新增口袋美食！');
    };
 
-   // Expense Logic
+   // 記帳模組
    window.addNewExpense = function(e) {
      e.preventDefault();
      const item = document.getElementById('expItem').value.trim();
@@ -1340,6 +1417,7 @@
        window.syncExpenseToFirestore(newExp);
      } else {
        window.expensesList.push({ id: Date.now().toString(), ...newExp });
+       if (typeof window.saveLocalSnapshot === 'function') window.saveLocalSnapshot();
        renderExpenses();
      }
 
@@ -1385,11 +1463,18 @@
        `;
      });
 
-     document.getElementById('expenseListItems').innerHTML = html || `<p class="text-capybara text-center py-2">尚無記帳資料</p>`;
-     document.getElementById('totalExpenseJPY').innerText = `¥ ${total.toLocaleString()}`;
+     const listEl = document.getElementById('expenseListItems');
+     if (listEl) listEl.innerHTML = html || `<p class="text-capybara text-center py-2">尚無記帳資料</p>`;
+     
+     const totalJpyEl = document.getElementById('totalExpenseJPY');
+     if (totalJpyEl) totalJpyEl.innerText = `¥ ${total.toLocaleString()}`;
+     
      const totalTWD = Math.round(total * window.exchangeRate);
-     document.getElementById('totalExpenseTWD').innerText = `≈ NT$ ${totalTWD.toLocaleString()} (匯率 ${window.exchangeRate})`;
-     document.getElementById('displayRateText').innerText = `1 JPY = ${window.exchangeRate} TWD`;
+     const totalTwdEl = document.getElementById('totalExpenseTWD');
+     if (totalTwdEl) totalTwdEl.innerText = `≈ NT$ ${totalTWD.toLocaleString()} (匯率 ${window.exchangeRate})`;
+     
+     const displayRateEl = document.getElementById('displayRateText');
+     if (displayRateEl) displayRateEl.innerText = `1 JPY = ${window.exchangeRate} TWD`;
 
      renderSettlement(balances);
    };
@@ -1441,7 +1526,8 @@
      });
      netSummaryHTML += '</div>';
 
-     document.getElementById('settlementResult').innerHTML = settlementHTML + netSummaryHTML;
+     const settlementResultEl = document.getElementById('settlementResult');
+     if (settlementResultEl) settlementResultEl.innerHTML = settlementHTML + netSummaryHTML;
    }
 
    window.selectAllSplitters = function(select) {
@@ -1460,7 +1546,7 @@
      }
    };
 
-   // Navigation & Common UI
+   // 導覽與共用 UI 邏輯
    function switchTab(tabId) {
      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
      document.getElementById(`tab-${tabId}`).classList.add('active');
@@ -1515,6 +1601,8 @@
    window.openGoogleMap = openGoogleMap;
    window.copyText = copyText;
    window.copyRoomCode = copyRoomCode;
+   window.renderMembersUI = renderMembersUI;
+   window.renderMemberVault = renderMemberVault;
  </script>
 </body>
 </html>
