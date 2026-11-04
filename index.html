@@ -932,9 +932,26 @@
           <input type="text" id="vaultExpiryInput" required placeholder="例如: 2031/06/12" class="w-full p-2 mt-0.5 rounded-xl border-2 border-handBorder bg-paper font-mono font-bold text-ink">
         </div>
         <div>
-          <label class="font-bold text-ink">Visit Japan Web 圖片網址 (選填)：</label>
-          <input type="url" id="vaultQrImgInput" placeholder="https://..." class="w-full p-2 mt-0.5 rounded-xl border-2 border-handBorder bg-paper font-bold text-ink">
-          <p class="text-[9px] text-capybara mt-0.5">※ 若有網路圖片連結可貼上，留空則顯示預設 QR 圖示。</p>
+          <label class="block text-xs font-bold text-ink mb-1">Visit Japan Web QR Code 照片：</label>
+<div class="space-y-2">
+  <input type="file" id="editQrFile" accept="image/*" class="w-full p-2 border border-handBorder rounded-lg text-xs bg-white" onchange="handleModalFileSelect(event)">
+  <input type="hidden" id="editQrUrl" value="">
+  <p class="text-[10px] text-capybara">※ 請直接上傳手機裡的 QR Code 截圖，圖片會自動轉存。</p>
+</div>
+
+<script>
+// 讓上傳的圖片轉為 Base64 暫存
+function handleModalFileSelect(event) {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      document.getElementById('editQrUrl').value = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+}
+</script>
         </div>
 
         <button type="submit" class="w-full hand-pill py-2 bg-akaushi text-white font-bold mt-2">
