@@ -216,13 +216,13 @@
              <span class="text-[10px] bg-akaushi text-white font-bold px-2 py-0.5 rounded-full border border-handBorder shadow-sm">自由行</span>
            </h1>
            <div class="flex items-center gap-1.5 text-[11px] font-bold text-capybara">
-             <span id="roomStatusText" class="text-matcha-dark font-extrabold"><i class="fa-solid fa-users"></i> 房號: KYUSHU2026</span>
-             <button onclick="copyRoomCode()" class="text-[10px] text-akaushi underline">複製</button>
+             <span id="roomStatusText" class="text-matcha-dark font-extrabold"><i class="fa-solid fa-users"></i> 尚未加入房間</span>
+             <button onclick="shareRoomLink()" class="text-[10px] text-akaushi underline">分享連結</button>
            </div>
          </div>
        </div>
 
-       <button onclick="openModal('roomSyncModal')" class="hand-pill px-2.5 py-1.5 bg-paper font-bold text-xs text-ink flex items-center gap-1">
+       <button onclick="openRoomModal()" class="hand-pill px-2.5 py-1.5 bg-paper font-bold text-xs text-ink flex items-center gap-1">
          <i class="fa-solid fa-rotate text-matcha"></i>
          <span>切換共用</span>
        </button>
@@ -514,7 +514,7 @@
          <div class="p-2.5 bg-white rounded-xl border-2 border-handBorder">
            <div class="flex justify-between items-center mb-1">
              <span class="text-[10px] text-capybara font-bold"><i class="fa-solid fa-coins text-gold"></i> JPY/TWD 匯率</span>
-             <button onclick="openModal('editRateModal')" class="text-[10px] text-akaushi font-bold underline">修改</button>
+             <button onclick="openRateModal()" class="text-[10px] text-akaushi font-bold underline">修改</button>
            </div>
            <p id="displayRateText" class="text-sm font-black text-ink">1 JPY = 0.208 TWD</p>
          </div>
@@ -623,7 +623,7 @@
              <p class="text-[10px] text-capybara">119 / 110</p>
            </div>
          </a>
-         <a href="tel:0927342810" class="p-2.5 bg-white rounded-xl border border-handBorder flex items-center gap-2 hover:bg-matcha/10">
+         <a href="tel:+81927342810" class="p-2.5 bg-white rounded-xl border border-handBorder flex items-center gap-2 hover:bg-matcha/10">
            <div class="w-7 h-7 rounded-full bg-matcha/20 flex items-center justify-center text-matcha-dark"><i class="fa-solid fa-building-columns"></i></div>
            <div>
              <p class="font-bold text-ink">駐福岡辦事處</p>
@@ -669,9 +669,13 @@
        <button onclick="closeModal('roomSyncModal')" class="text-capybara text-base font-bold"><i class="fa-solid fa-xmark"></i></button>
      </div>
      <div class="space-y-2 text-xs">
-       <p class="text-capybara font-bold">請輸入同伴的房間代碼，即可即時同步：</p>
-       <input type="text" id="roomCodeInput" placeholder="例如: KYUSHU2026" class="w-full p-2 rounded-xl border-2 border-handBorder bg-paper font-bold uppercase text-center">
+       <p id="currentRoomHint" class="hidden p-2 bg-matcha-bg rounded-xl border border-matcha/40 text-matcha-dark font-bold text-center"></p>
+       <p class="text-capybara font-bold">輸入同伴給你的房號，或直接打開同伴分享的連結：</p>
+       <input type="text" id="roomCodeInput" placeholder="例如: K7QM2XPA" autocomplete="off" class="w-full p-2 rounded-xl border-2 border-handBorder bg-paper font-bold uppercase text-center">
        <button onclick="joinRoom()" class="w-full hand-pill py-2 bg-akaushi text-white font-bold">加入此行程房間</button>
+       <div class="flex items-center gap-2 text-[10px] text-capybara font-bold"><span class="flex-1 border-t border-dashed border-capybara/30"></span>或<span class="flex-1 border-t border-dashed border-capybara/30"></span></div>
+       <button onclick="createRoom()" class="w-full hand-pill py-2 bg-matcha text-white font-bold">建立新的行程房間</button>
+       <p class="text-[10px] text-capybara">※ 一團只要一個人建立，其他人用「分享連結」加入。房號就是鑰匙，請只分享給旅伴。</p>
      </div>
    </div>
  </div>
@@ -723,24 +727,26 @@
        </div>
        <div>
          <label class="font-bold text-ink">護照號碼：</label>
-         <input type="text" id="vaultPassportInput" required placeholder="例如: 350198234" class="w-full p-2 mt-0.5 rounded-xl border-2 border-handBorder bg-paper font-mono font-bold text-ink">
+         <input type="text" id="vaultPassportInput" placeholder="例如: 3XXXXXXXX" class="w-full p-2 mt-0.5 rounded-xl border-2 border-handBorder bg-paper font-mono font-bold text-ink">
        </div>
        <div>
          <label class="font-bold text-ink">護照效期：</label>
-         <input type="text" id="vaultExpiryInput" required placeholder="例如: 2031/06/12" class="w-full p-2 mt-0.5 rounded-xl border-2 border-handBorder bg-paper font-mono font-bold text-ink">
+         <input type="text" id="vaultExpiryInput" placeholder="例如: 2031/06/12" class="w-full p-2 mt-0.5 rounded-xl border-2 border-handBorder bg-paper font-mono font-bold text-ink">
        </div>
        <div>
          <label class="block text-xs font-bold text-ink mb-1">Visit Japan Web QR Code 照片：</label>
          <div class="space-y-2">
            <input type="file" id="editQrFile" accept="image/*" class="w-full p-2 border border-handBorder rounded-lg text-xs bg-white" onchange="handleModalFileSelect(event)">
-           <input type="hidden" id="editQrUrl" value="">
-           <p class="text-[10px] text-capybara">※ 請直接上傳手機裡的 QR Code 截圖，圖片會自動轉存並與該成員關聯。</p>
+           <img id="editQrPreview" class="hidden w-32 h-32 mx-auto object-contain rounded-xl border-2 border-handBorder bg-white" alt="QR 預覽">
+           <p class="text-[10px] text-capybara">※ 上傳 Visit Japan Web 的 QR 截圖，會轉成無損 PNG 同步給全團，離線也看得到。</p>
          </div>
        </div>
-
-       <button type="submit" class="w-full hand-pill py-2 bg-akaushi text-white font-bold mt-2">
-         儲存修改
-       </button>
+       <div class="flex gap-2">
+         <button type="button" onclick="deleteCurrentMember()" class="hand-pill px-3 py-2 bg-white text-akaushi font-bold"><i class="fa-solid fa-user-minus"></i></button>
+         <button type="submit" class="flex-1 hand-pill py-2 bg-akaushi text-white font-bold">
+           儲存修改
+         </button>
+       </div>
      </form>
    </div>
  </div>
@@ -770,176 +776,44 @@
    </div>
  </div>
 
- <!-- FIREBASE MODULE INTEGRATION & HYBRID LOCAL SNAPSHOT -->
+ <!-- QR FULLSCREEN MODAL -->
+ <div id="qrFullModal" class="fixed inset-0 bg-white z-[60] hidden flex flex-col items-center justify-center p-4" onclick="closeModal('qrFullModal')">
+   <p id="qrFullName" class="text-sm font-black text-ink mb-2"></p>
+   <img id="qrFullImg" class="w-full max-w-md object-contain" alt="Visit Japan Web QR Code">
+   <p class="text-[11px] text-capybara font-bold mt-3">掃描前請把螢幕亮度調到最高・點任意處關閉</p>
+ </div>
+
+ <!-- APP LOGIC + FIRESTORE REALTIME SYNC -->
  <script type="module">
-   import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-   import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-   import { getFirestore, doc, collection, onSnapshot, setDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+   import { initializeApp } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
+   import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-auth.js";
+   import {
+     initializeFirestore, getFirestore, persistentLocalCache, persistentMultipleTabManager,
+     collection, doc, onSnapshot, getDoc, setDoc, updateDoc, deleteDoc, writeBatch, query, orderBy
+   } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-firestore.js";
 
-   const appId = typeof __app_id !== 'undefined' ? __app_id : 'kyushu-2026-trip';
-   let db, auth, user;
-   let currentRoomId = localStorage.getItem('kyushu_room') || 'KYUSHU2026';
-   let unsubscribeExpenses = null;
-   let unsubscribeFavorites = null;
-   let unsubscribeCustomFood = null;
-   let unsubscribeVault = null;
-
-   // 優先從 LocalStorage 載入本地快照，防止 PWA 加入主畫面重開被清空
-   window.loadLocalSnapshot = function() {
-     const savedMembers = localStorage.getItem(`kyushu_members_${currentRoomId}`);
-     const savedVault = localStorage.getItem(`kyushu_vault_${currentRoomId}`);
-     const savedExpenses = localStorage.getItem(`kyushu_expenses_${currentRoomId}`);
-     const savedFavs = localStorage.getItem(`kyushu_favs_${currentRoomId}`);
-     
-     if (savedMembers) window.members = JSON.parse(savedMembers);
-     if (savedVault) window.membersVaultData = JSON.parse(savedVault);
-     if (savedExpenses) window.expensesList = JSON.parse(savedExpenses);
-     if (savedFavs) window.favoriteItems = JSON.parse(savedFavs);
-
-     const statusEl = document.getElementById('roomStatusText');
-     if (statusEl) statusEl.innerHTML = `<i class="fa-solid fa-users"></i> 房號: ${currentRoomId}`;
-     
-     if (typeof window.renderMembersUI === 'function') window.renderMembersUI();
-     if (typeof window.renderMemberVault === 'function') window.renderMemberVault();
-     if (typeof window.renderExpenses === 'function') window.renderExpenses();
-     if (typeof window.renderFoodList === 'function') window.renderFoodList();
+   // ===== Firebase 設定（前端公開設定，資料由 firestore.rules 保護） =====
+   const firebaseConfig = {
+     apiKey: "AIzaSyCVWhB9he5BP2cl244_0CG9MMVQAnqcb5I",
+     authDomain: "kyushu-trip-2026-32690.firebaseapp.com",
+     projectId: "kyushu-trip-2026-32690",
+     storageBucket: "kyushu-trip-2026-32690.firebasestorage.app",
+     messagingSenderId: "411818501543",
+     appId: "1:411818501543:web:eb6afbe0a0d9a94eb1c282"
    };
 
-   window.saveLocalSnapshot = function() {
-     localStorage.setItem('kyushu_room', currentRoomId);
-     localStorage.setItem(`kyushu_members_${currentRoomId}`, JSON.stringify(window.members));
-     localStorage.setItem(`kyushu_vault_${currentRoomId}`, JSON.stringify(window.membersVaultData));
-     localStorage.setItem(`kyushu_expenses_${currentRoomId}`, JSON.stringify(window.expensesList));
-     localStorage.setItem(`kyushu_favs_${currentRoomId}`, JSON.stringify(window.favoriteItems || {}));
-   };
-
+   const app = initializeApp(firebaseConfig);
+   const auth = getAuth(app);
+   let db;
    try {
-     const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
-       apiKey: "demo",
-       projectId: "demo-kyushu",
-       appId: "1:demo:web:kyushu"
-     };
-     const app = initializeApp(firebaseConfig);
+     // 離線快取：重開 App 立即顯示、離線寫入自動排隊，連線後上傳
+     db = initializeFirestore(app, { localCache: persistentLocalCache({ tabManager: persistentMultipleTabManager() }) });
+   } catch (e) {
+     console.warn('離線快取無法啟用，改用記憶體模式', e);
      db = getFirestore(app);
-     auth = getAuth(app);
-     if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-       await signInWithCustomToken(auth, __initial_auth_token);
-     } else {
-       await signInAnonymously(auth);
-     }
-     user = auth.currentUser;
-     setupRealtimeListeners();
-   } catch (err) {
-     console.log("Firebase initialized in Local Fallback mode.", err);
    }
 
-   function setupRealtimeListeners() {
-     if (!db || !user) return;
-     if (unsubscribeExpenses) unsubscribeExpenses();
-     if (unsubscribeFavorites) unsubscribeFavorites();
-     if (unsubscribeCustomFood) unsubscribeCustomFood();
-     if (unsubscribeVault) unsubscribeVault();
-
-     const expensesRef = collection(db, 'artifacts', appId, 'public', 'data', `expenses_${currentRoomId}`);
-     const favoritesRef = collection(db, 'artifacts', appId, 'public', 'data', `favorites_${currentRoomId}`);
-     const customFoodRef = collection(db, 'artifacts', appId, 'public', 'data', `custom_food_${currentRoomId}`);
-     const vaultRef = collection(db, 'artifacts', appId, 'public', 'data', `vault_${currentRoomId}`);
-
-     unsubscribeExpenses = onSnapshot(expensesRef, (snapshot) => {
-       const items = [];
-       snapshot.forEach(doc => items.push({ id: doc.id, ...doc.data() }));
-       window.expensesList = items;
-       window.saveLocalSnapshot();
-       window.renderExpenses();
-     });
-
-     unsubscribeFavorites = onSnapshot(favoritesRef, (snapshot) => {
-       const favs = {};
-       snapshot.forEach(doc => favs[doc.id] = doc.data().fav);
-       window.favoriteItems = favs;
-       window.saveLocalSnapshot();
-       window.renderFoodList();
-     });
-
-     unsubscribeCustomFood = onSnapshot(customFoodRef, (snapshot) => {
-       const custom = [];
-       snapshot.forEach(doc => custom.push({ id: doc.id, ...doc.data() }));
-       window.customFoodList = custom;
-       window.renderFoodList();
-     });
-
-     unsubscribeVault = onSnapshot(vaultRef, (snapshot) => {
-       snapshot.forEach(doc => {
-         const data = doc.data();
-         if (data && data.name) {
-           window.membersVaultData[data.name] = data;
-           if (!window.members.includes(data.name)) {
-             window.members.push(data.name);
-           }
-         }
-       });
-       window.saveLocalSnapshot();
-       window.renderMembersUI();
-       window.renderMemberVault();
-     });
-   }
-
-   window.syncExpenseToFirestore = async function(item) {
-     window.saveLocalSnapshot();
-     if (!db || !user) return;
-     const docId = `exp_${Date.now()}`;
-     await setDoc(doc(db, 'artifacts', appId, 'public', 'data', `expenses_${currentRoomId}`, docId), item);
-   };
-
-   window.deleteExpenseFromFirestore = async function(docId) {
-     window.expensesList = window.expensesList.filter(e => e.id !== docId);
-     window.saveLocalSnapshot();
-     window.renderExpenses();
-     if (!db || !user) return;
-     await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', `expenses_${currentRoomId}`, docId));
-   };
-
-   window.toggleFavoriteFirestore = async function(foodId) {
-     const current = window.favoriteItems[foodId] || false;
-     window.favoriteItems[foodId] = !current;
-     window.saveLocalSnapshot();
-     window.renderFoodList();
-     if (!db || !user) return;
-     await setDoc(doc(db, 'artifacts', appId, 'public', 'data', `favorites_${currentRoomId}`, `food_${foodId}`), { fav: !current });
-   };
-
-   window.syncFoodToFirestore = async function(item) {
-     if (!db || !user) return;
-     const docId = `food_custom_${Date.now()}`;
-     await setDoc(doc(db, 'artifacts', appId, 'public', 'data', `custom_food_${currentRoomId}`, docId), item);
-   };
-
-   window.syncVaultToFirestore = async function(memberData) {
-     window.membersVaultData[memberData.name] = memberData;
-     window.saveLocalSnapshot();
-     if (!db || !user) return;
-     await setDoc(doc(db, 'artifacts', appId, 'public', 'data', `vault_${currentRoomId}`, `member_${memberData.name}`), memberData);
-   };
-
-   window.joinRoom = function() {
-     const code = document.getElementById('roomCodeInput').value.trim().toUpperCase();
-     if (code) {
-       currentRoomId = code;
-       window.loadLocalSnapshot();
-       setupRealtimeListeners();
-       closeModal('roomSyncModal');
-       showToast(`已成功切換至【${currentRoomId}】共用房間！`);
-     }
-   };
-
-   window.addEventListener('online', () => {
-     showToast('網路已恢復連線，自動即時同步中');
-     setupRealtimeListeners();
-   });
- </script>
-
- <!-- APP CORE LOGIC & UI DATA -->
- <script>
+   // ===== 靜態資料 =====
    const daysData = {
      1: {
        dayLabel: "Day 1 • 12/07 (一)", type: "包車 9小時",
@@ -1027,296 +901,389 @@
      { id: 18, type: "souvenir", name: "福太郎 Menbei", tag: "GIFT", desc: "經典明太子海鮮微辣煎餅。", location: "博多", score: "4.6", svg: "#sketch-bag" }
    ];
 
-   let currentDayIndex = 1;
-   let currentSpotIndex = 0;
-   let currentFoodTab = 'gourmet'; 
-   let currentFoodCategory = ''; 
-   let selectedVaultMember = "王又豎";
+   const DEFAULT_MEMBERS = ["王又豎", "花生", "妍频", "妹妹", "大衛", "潸潸"];
+   const DEFAULT_RATE = 0.208;
+   const ROOM_KEY = 'kyushu_room_v2';
+   const CHECKLIST_KEY = 'kyushu_kmj_checks';
+   const MAX_QR_CHARS = 900000; // Firestore 單一文件上限 1 MiB，預留空間
 
-   window.members = ["王又豎", "花生", "妍频", "妹妹", "大衛", "潸潸"];
-   window.exchangeRate = 0.208;
-   window.expensesList = [
-     { id: '1', item: "包車4天訂金", amount: 66800, who: "王又豎", splitters: ["王又豎", "花生", "妍频", "妹妹", "大衛", "潸潸"] }
-   ];
-   window.favoriteItems = {};
-   window.customFoodList = [];
+   // ===== 狀態（全部由 onSnapshot 寫入，畫面只讀 state） =====
+   const state = { roomId: null, members: [], qr: {}, expenses: [], foods: [], favs: {}, rate: DEFAULT_RATE };
+   let uid = null;
+   let unsubs = [];
+   let selectedMemberId = null;
+   let pendingQr = null;
+   let currentDayIndex = 1, currentSpotIndex = 0;
+   let currentFoodTab = 'gourmet', currentFoodCategory = '';
 
-   window.membersVaultData = {
-     "王又豎": { name: "王又豎", passport: "350198234", expiry: "2031/06/12", qrImg: "" },
-     "花生": { name: "花生", passport: "未填寫", expiry: "未填寫", qrImg: "" },
-     "妍频": { name: "妍频", passport: "未填寫", expiry: "未填寫", qrImg: "" },
-     "妹妹": { name: "妹妹", passport: "未填寫", expiry: "未填寫", qrImg: "" },
-     "大衛": { name: "大衛", passport: "未填寫", expiry: "未填寫", qrImg: "" },
-     "潸潸": { name: "潸潸", passport: "未填寫", expiry: "未填寫", qrImg: "" }
+   // ===== 工具 =====
+   const $ = (id) => document.getElementById(id);
+   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+   const storage = {
+     get(k) { try { return localStorage.getItem(k); } catch { return null; } },
+     set(k, v) { try { localStorage.setItem(k, v); } catch {} }
    };
+   function newId() {
+     if (crypto.randomUUID) return crypto.randomUUID().replace(/-/g, '');
+     return Date.now().toString(36) + Math.random().toString(36).slice(2, 12);
+   }
+   function genRoomCode() {
+     const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+     const buf = new Uint32Array(8);
+     crypto.getRandomValues(buf);
+     return Array.from(buf, n => chars[n % chars.length]).join('');
+   }
+   const normalizeCode = (s) => String(s || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+   const memberName = (id) => state.members.find(m => m.id === id)?.name ?? '(已移除成員)';
+   const col = (name) => collection(db, 'rooms', state.roomId, name);
+   const roomRef = () => doc(db, 'rooms', state.roomId);
 
-   window.onload = function() {
-     if (typeof window.loadLocalSnapshot === 'function') window.loadLocalSnapshot();
-     switchDay(1);
-     setupKmjChecklistEvents();
+   function onErr(e) {
+     console.error(e);
+     const map = {
+       'permission-denied': '沒有此房間的權限，請重新加入房間',
+       'resource-exhausted': '今日免費額度已用完',
+       'invalid-argument': '資料格式或大小有誤'
+     };
+     showToast(`同步失敗：${map[e?.code] || e?.code || e?.message || e}`);
+   }
 
-     const categorySelect = document.getElementById('food-category');
-     if (categorySelect) {
-       categorySelect.addEventListener('change', (e) => {
-         currentFoodCategory = e.target.value;
-         window.renderFoodList();
+   function requireRoom() {
+     if (state.roomId && uid) return true;
+     showToast('請先建立或加入行程房間');
+     openRoomModal();
+     return false;
+   }
+
+   function setSyncStatus() {
+     const el = $('syncedCountTag');
+     const room = $('roomStatusText');
+     if (room) room.innerHTML = `<i class="fa-solid fa-users"></i> ${state.roomId ? '房號: ' + esc(state.roomId) : '尚未加入房間'}`;
+     if (!el) return;
+     if (!state.roomId) el.textContent = '尚未加入房間';
+     else if (!navigator.onLine) el.textContent = '離線中・連線後自動上傳';
+     else el.textContent = '雲端同步中';
+   }
+
+   // ===== 房間：加入 / 建立 / 訂閱 =====
+   async function ensureAccess(code) {
+     const accessRef = doc(db, 'rooms', code, 'access', uid);
+     const snap = await getDoc(accessRef);
+     if (!snap.exists()) await setDoc(accessRef, { joinedAt: Date.now() });
+   }
+
+   async function enterRoom(code, { checkExists = true } = {}) {
+     code = normalizeCode(code);
+     if (!code || !uid) return false;
+     try {
+       await ensureAccess(code);
+       if (checkExists) {
+         const r = await getDoc(doc(db, 'rooms', code));
+         if (!r.exists() && !r.metadata.fromCache) { showToast(`找不到房號 ${code}`); return false; }
+       }
+     } catch (e) {
+       // 離線且曾經加入過：直接用本機快取
+       if (!(e?.code === 'unavailable' && storage.get(ROOM_KEY) === code)) { onErr(e); return false; }
+     }
+
+     unsubs.splice(0).forEach(u => u());
+     Object.assign(state, { roomId: code, members: [], qr: {}, expenses: [], foods: [], favs: {}, rate: DEFAULT_RATE });
+     selectedMemberId = null;
+     storage.set(ROOM_KEY, code);
+     const url = new URL(location.href);
+     url.searchParams.set('room', code);
+     history.replaceState(null, '', url);
+     subscribe();
+     renderAll();
+     return true;
+   }
+
+   function subscribe() {
+     unsubs.push(onSnapshot(roomRef(), s => {
+       state.rate = s.data()?.exchangeRate || DEFAULT_RATE;
+       renderExpenses();
+     }, onErr));
+
+     unsubs.push(onSnapshot(query(col('members'), orderBy('order')), s => {
+       state.members = s.docs.map(d => ({ id: d.id, ...d.data() }));
+       if (!state.members.some(m => m.id === selectedMemberId)) selectedMemberId = state.members[0]?.id ?? null;
+       renderMembersUI();
+       renderMemberVault();
+       renderExpenses();
+     }, onErr));
+
+     unsubs.push(onSnapshot(col('qr'), s => {
+       state.qr = Object.fromEntries(s.docs.map(d => [d.id, d.data().img]));
+       renderMemberVault();
+     }, onErr));
+
+     unsubs.push(onSnapshot(query(col('expenses'), orderBy('createdAtMs')), s => {
+       state.expenses = s.docs.map(d => ({ id: d.id, ...d.data() }));
+       renderExpenses();
+     }, onErr));
+
+     unsubs.push(onSnapshot(query(col('foods'), orderBy('createdAtMs')), s => {
+       state.foods = s.docs.map(d => ({ id: d.id, ...d.data() }));
+       renderFoodList();
+     }, onErr));
+
+     unsubs.push(onSnapshot(col('favorites'), s => {
+       state.favs = Object.fromEntries(s.docs.map(d => [d.id, !!d.data().fav]));
+       renderFoodList();
+     }, onErr));
+
+     setSyncStatus();
+   }
+
+   async function createRoom() {
+     if (!uid) return showToast('登入中，請稍候再試');
+     if (!navigator.onLine) return showToast('建立房間需要網路連線');
+     const code = genRoomCode();
+     try {
+       await ensureAccess(code);
+       const batch = writeBatch(db);
+       batch.set(doc(db, 'rooms', code), { exchangeRate: DEFAULT_RATE, createdAt: Date.now(), createdBy: uid });
+       const ids = DEFAULT_MEMBERS.map((name, i) => {
+         const id = newId();
+         batch.set(doc(db, 'rooms', code, 'members', id), { name, passport: '', expiry: '', order: i });
+         return id;
        });
+       batch.set(doc(db, 'rooms', code, 'expenses', newId()), {
+         item: '包車4天訂金', amount: 66800, payerId: ids[0], splitterIds: ids, createdAtMs: Date.now(), createdBy: uid
+       });
+       await batch.commit();
+     } catch (e) { onErr(e); return; }
+     if (await enterRoom(code, { checkExists: false })) {
+       closeModal('roomSyncModal');
+       showToast(`已建立房間 ${code}，按「分享連結」傳給旅伴`);
      }
-   };
-
-   function setupKmjChecklistEvents() {
-     const container = document.getElementById('kmj-checks');
-     if (!container) return;
-     const checks = container.querySelectorAll('input[type="checkbox"]');
-     const bar = document.getElementById('kmj-progress');
-     const count = document.getElementById('kmj-count');
-
-     function updateChecklist() {
-       const total = checks.length;
-       const done = Array.from(checks).filter(x => x.checked).length;
-       if (bar) bar.style.width = (done / total * 100) + '%';
-       if (count) count.textContent = `完成 ${done} / ${total} 項`;
-     }
-     checks.forEach(x => x.addEventListener('change', updateChecklist));
-     updateChecklist();
    }
 
+   async function joinRoom() {
+     const code = normalizeCode($('roomCodeInput').value);
+     if (!code) return showToast('請輸入房號');
+     if (!uid) return showToast('登入中，請稍候再試');
+     if (await enterRoom(code)) {
+       $('roomCodeInput').value = '';
+       closeModal('roomSyncModal');
+       showToast(`已加入【${code}】共用房間！`);
+     }
+   }
+
+   function openRoomModal() {
+     const hint = $('currentRoomHint');
+     if (state.roomId) { hint.textContent = `目前房號：${state.roomId}`; hint.classList.remove('hidden'); }
+     else hint.classList.add('hidden');
+     openModal('roomSyncModal');
+   }
+
+   async function shareRoomLink() {
+     if (!requireRoom()) return;
+     const url = `${location.origin}${location.pathname}?room=${state.roomId}`;
+     if (navigator.share) {
+       try { await navigator.share({ title: '九州 8 天 7 夜共用行程', url }); return; }
+       catch (e) { if (e?.name === 'AbortError') return; }
+     }
+     copyText(url, '已複製房間連結，貼給旅伴即可加入');
+   }
+
+   // ===== 成員 / 證件庫 =====
    function renderMembersUI() {
-     const select = document.getElementById('vaultMemberSelect');
-     const expWho = document.getElementById('expWhoSelect');
-     const splitters = document.getElementById('splitterCheckboxes');
-     const badges = document.getElementById('memberBadgesList');
+     const select = $('vaultMemberSelect');
+     const expWho = $('expWhoSelect');
+     const splitters = $('splitterCheckboxes');
+     const badges = $('memberBadgesList');
+     const prevWho = expWho?.value;
+     const unchecked = new Set(Array.from(document.querySelectorAll('.splitter-cb:not(:checked)'), cb => cb.value));
 
-     if (select) {
-       select.innerHTML = window.members.map(m => `<option value="${m}" ${m === selectedVaultMember ? 'selected' : ''}>${m}</option>`).join('');
-     }
-     if (expWho) {
-       expWho.innerHTML = window.members.map(m => `<option value="${m}">${m}</option>`).join('');
-     }
+     const opts = (sel) => state.members.map(m => `<option value="${esc(m.id)}" ${m.id === sel ? 'selected' : ''}>${esc(m.name)}</option>`).join('');
+     if (select) select.innerHTML = opts(selectedMemberId);
+     if (expWho) expWho.innerHTML = opts(prevWho);
      if (splitters) {
-       splitters.innerHTML = window.members.map(m => `
+       splitters.innerHTML = state.members.map(m => `
          <label class="flex items-center gap-1 text-[11px] font-bold text-ink cursor-pointer">
-           <input type="checkbox" value="${m}" checked class="splitter-cb w-3.5 h-3.5 accent-matcha rounded">
-           <span>${m}</span>
-         </label>
-       `).join('');
+           <input type="checkbox" value="${esc(m.id)}" ${unchecked.has(m.id) ? '' : 'checked'} class="splitter-cb w-3.5 h-3.5 accent-matcha rounded">
+           <span>${esc(m.name)}</span>
+         </label>`).join('');
      }
-     if (badges) {
-       badges.innerHTML = window.members.map(m => `<span class="px-2 py-0.5 bg-paper rounded-full text-[10px] font-bold text-ink border border-handBorder">${m}</span>`).join('');
-     }
+     if (badges) badges.innerHTML = state.members.map(m => `<span class="px-2 py-0.5 bg-paper rounded-full text-[10px] font-bold text-ink border border-handBorder">${esc(m.name)}</span>`).join('');
    }
 
-   window.switchVaultMember = function(name) {
-     selectedVaultMember = name;
+   function switchVaultMember(id) {
+     selectedMemberId = id;
      renderMemberVault();
-   };
+   }
 
-   window.renderMemberVault = function() {
-     const container = document.getElementById('memberVaultContainer');
+   function renderMemberVault() {
+     const container = $('memberVaultContainer');
      if (!container) return;
-
-     const data = window.membersVaultData[selectedVaultMember] || { name: selectedVaultMember, passport: "未填寫", expiry: "未填寫", qrImg: "" };
-     
-     const qrDisplay = data.qrImg ? 
-       `<img src="${data.qrImg}" class="w-32 h-32 mx-auto object-cover rounded-xl border-2 border-handBorder" alt="VJW QR Code">` : 
-       `<div class="w-28 h-28 mx-auto bg-gray-100 border-2 border-handBorder rounded-xl flex items-center justify-center p-2"> 
-         <div class="w-full h-full bg-ink flex flex-wrap p-1 rounded"> 
-           <div class="w-1/2 h-1/2 border-2 border-white bg-white"></div> 
-           <div class="w-1/2 h-1/2 bg-ink"></div> 
-           <div class="w-1/2 h-1/2 bg-ink"></div> 
-           <div class="w-1/2 h-1/2 border-2 border-white bg-white"></div> 
-         </div> 
-       </div>`;
-
-     container.innerHTML = ` 
-       <div class="p-2.5 bg-white rounded-xl border border-handBorder"> 
-         <p class="text-[10px] text-capybara font-bold">成員代表：${data.name}</p> 
-         <div class="flex justify-between items-center mt-1"> 
-           <span class="font-mono font-bold text-ink text-sm">護照號碼：${data.passport}</span> 
-           <span class="text-[10px] text-capybara">效期 ${data.expiry}</span> 
-         </div> 
-       </div> 
-
-       <div class="p-3 bg-white rounded-xl border border-handBorder text-center space-y-2"> 
-         <p class="text-xs font-bold text-ink">退稅 & 入境 Visit Japan Web QR Code 截圖</p> 
-         ${qrDisplay} 
-         <div class="pt-1 flex gap-2 justify-center">
-           <button onclick="openEditMemberVaultModal()" class="hand-pill px-4 py-1.5 bg-akaushi text-white text-xs font-bold shadow-sm">
-             ✏️ 編輯 ${data.name} 的資料 / 上傳 QR Code
-           </button>
-         </div>
-         <p class="text-[10px] text-capybara">※ 照片僅會暫存在您的裝置畫面上，離線也能隨時查看。</p>
-       </div> 
-     `;
-   };
-
-   window.openEditMemberVaultModal = function() {
-     const data = window.membersVaultData[selectedVaultMember] || { name: selectedVaultMember, passport: '', expiry: '', qrImg: '' };
-     document.getElementById('vaultNameInput').value = data.name;
-     document.getElementById('vaultPassportInput').value = data.passport === '未填寫' ? '' : data.passport;
-     document.getElementById('vaultExpiryInput').value = data.expiry === '未填寫' ? '' : data.expiry;
-     document.getElementById('editQrUrl').value = data.qrImg || '';
-     openModal('editVaultModal');
-   };
-
-   window.handleModalFileSelect = function(event) {
-     const file = event.target.files[0];
-     if (file) {
-       const reader = new FileReader();
-       reader.onload = function(e) {
-         document.getElementById('editQrUrl').value = e.target.result;
-         showToast('照片已順利載入，請點擊下方「儲存修改」按鈕！');
-       };
-       reader.readAsDataURL(file);
-     }
-   };
-
-   window.saveMemberVaultData = function(e) {
-     if (e && e.preventDefault) e.preventDefault();
-     
-     const oldName = selectedVaultMember;
-     const newName = document.getElementById('vaultNameInput').value.trim();
-     const passport = document.getElementById('vaultPassportInput').value.trim();
-     const expiry = document.getElementById('vaultExpiryInput').value.trim();
-     const qrImg = document.getElementById('editQrUrl').value;
-
-     if (!newName) {
-       showToast('請填寫成員姓名！');
+     const m = state.members.find(x => x.id === selectedMemberId);
+     if (!m) {
+       container.innerHTML = `<p class="text-capybara text-center py-2 font-bold">${state.roomId ? '尚無成員' : '請先建立或加入行程房間'}</p>`;
        return;
      }
+     const qr = state.qr[m.id];
+     const qrDisplay = qr
+       ? `<img src="${esc(qr)}" data-action="qr-full" data-id="${esc(m.id)}" class="w-40 h-40 mx-auto object-contain rounded-xl border-2 border-handBorder bg-white cursor-zoom-in" alt="VJW QR Code">
+          <p class="text-[10px] text-akaushi font-bold">點圖片可全螢幕顯示給機台掃描</p>`
+       : `<div class="w-28 h-28 mx-auto bg-gray-100 border-2 border-dashed border-handBorder rounded-xl flex items-center justify-center text-[10px] text-capybara font-bold">尚未上傳</div>`;
 
-     if (oldName !== newName) {
-       delete window.membersVaultData[oldName];
-       const idx = window.members.indexOf(oldName);
-       if (idx !== -1) window.members[idx] = newName;
-       else window.members.push(newName);
-     }
+     container.innerHTML = `
+       <div class="p-2.5 bg-white rounded-xl border border-handBorder">
+         <p class="text-[10px] text-capybara font-bold">成員代表：${esc(m.name)}</p>
+         <div class="flex justify-between items-center mt-1">
+           <span class="font-mono font-bold text-ink text-sm">護照號碼：${esc(m.passport || '未填寫')}</span>
+           <span class="text-[10px] text-capybara">效期 ${esc(m.expiry || '未填寫')}</span>
+         </div>
+       </div>
+       <div class="p-3 bg-white rounded-xl border border-handBorder text-center space-y-2">
+         <p class="text-xs font-bold text-ink">退稅 & 入境 Visit Japan Web QR Code 截圖</p>
+         ${qrDisplay}
+         <div class="pt-1 flex gap-2 justify-center">
+           <button onclick="openEditMemberVaultModal()" class="hand-pill px-4 py-1.5 bg-akaushi text-white text-xs font-bold shadow-sm">
+             ✏️ 編輯 ${esc(m.name)} 的資料 / 上傳 QR Code
+           </button>
+         </div>
+         <p class="text-[10px] text-capybara">※ 資料會同步給同房間旅伴，並快取在裝置上，機場沒網路也能顯示。</p>
+       </div>`;
+   }
 
-     const updatedData = {
-       name: newName,
-       passport: passport || '未填寫',
-       expiry: expiry || '未填寫',
-       qrImg: qrImg || (window.membersVaultData[oldName] ? window.membersVaultData[oldName].qrImg : '')
-     };
+   function openEditMemberVaultModal() {
+     const m = state.members.find(x => x.id === selectedMemberId);
+     if (!m) return;
+     pendingQr = null;
+     $('vaultNameInput').value = m.name;
+     $('vaultPassportInput').value = m.passport || '';
+     $('vaultExpiryInput').value = m.expiry || '';
+     $('editQrFile').value = '';
+     const pv = $('editQrPreview');
+     if (state.qr[m.id]) { pv.src = state.qr[m.id]; pv.classList.remove('hidden'); } else pv.classList.add('hidden');
+     openModal('editVaultModal');
+   }
 
-     if (window.syncVaultToFirestore) {
-       window.syncVaultToFirestore(updatedData);
-     } else {
-       window.membersVaultData[newName] = updatedData;
-       if (typeof window.saveLocalSnapshot === 'function') window.saveLocalSnapshot();
-     }
+   function loadImage(file) {
+     return new Promise((resolve, reject) => {
+       const url = URL.createObjectURL(file);
+       const img = new Image();
+       img.onload = () => { URL.revokeObjectURL(url); resolve(img); };
+       img.onerror = (e) => { URL.revokeObjectURL(url); reject(e); };
+       img.src = url;
+     });
+   }
 
-     selectedVaultMember = newName;
-     renderMembersUI();
-     renderMemberVault();
-     closeModal('editVaultModal');
-     showToast(`已成功儲存【${newName}】的資料！`);
-   };
-
-   window.saveNewMember = function() {
-     const name = document.getElementById('memberNameInput').value.trim();
-     if (name) {
-       if (!window.members.includes(name)) {
-         window.members.push(name);
-         const newData = { name: name, passport: "未填寫", expiry: "未填寫", qrImg: "" };
-         if (window.syncVaultToFirestore) {
-           window.syncVaultToFirestore(newData);
-         } else {
-           window.membersVaultData[name] = newData;
-           if (typeof window.saveLocalSnapshot === 'function') window.saveLocalSnapshot();
+   // 轉成 PNG（無損，QR 邊緣不會糊）；太大才轉黑白、再逐步縮小
+   async function processQrImage(file) {
+     const img = await loadImage(file);
+     const canvas = document.createElement('canvas');
+     const ctx = canvas.getContext('2d', { willReadFrequently: true });
+     let maxSide = 1400;
+     let bw = false;
+     for (let i = 0; i < 8; i++) {
+       const scale = Math.min(1, maxSide / Math.max(img.naturalWidth, img.naturalHeight));
+       canvas.width = Math.round(img.naturalWidth * scale);
+       canvas.height = Math.round(img.naturalHeight * scale);
+       ctx.fillStyle = '#fff';
+       ctx.fillRect(0, 0, canvas.width, canvas.height);
+       ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+       if (bw) {
+         const data = ctx.getImageData(0, 0, canvas.width, canvas.height);
+         const p = data.data;
+         for (let j = 0; j < p.length; j += 4) {
+           const v = (p[j] * 0.299 + p[j + 1] * 0.587 + p[j + 2] * 0.114) < 150 ? 0 : 255;
+           p[j] = p[j + 1] = p[j + 2] = v;
          }
-         selectedVaultMember = name;
-         renderMembersUI();
-         renderMemberVault();
-         document.getElementById('memberNameInput').value = '';
-         closeModal('addMemberModal');
-         showToast(`已成功新增旅伴：${name}`);
-       } else {
-         showToast('該成員已在清單中');
+         ctx.putImageData(data, 0, 0);
        }
+       const url = canvas.toDataURL('image/png');
+       if (url.length <= MAX_QR_CHARS) return url;
+       if (!bw) bw = true; else maxSide = Math.round(maxSide * 0.8);
      }
-   };
+     throw new Error('圖片太大，請先裁切成只有 QR Code 的區域再上傳');
+   }
 
-   // 行程模組
+   async function handleModalFileSelect(event) {
+     const file = event.target.files[0];
+     if (!file) return;
+     try {
+       showToast('圖片處理中…');
+       pendingQr = await processQrImage(file);
+       const pv = $('editQrPreview');
+       pv.src = pendingQr;
+       pv.classList.remove('hidden');
+       showToast('照片已載入，請按「儲存修改」');
+     } catch (e) {
+       pendingQr = null;
+       showToast(e?.message || '圖片讀取失敗');
+     }
+   }
+
+   function saveMemberVaultData(e) {
+     e?.preventDefault?.();
+     if (!requireRoom()) return;
+     const id = selectedMemberId;
+     const name = $('vaultNameInput').value.trim();
+     if (!name) return showToast('請填寫成員姓名！');
+     if (state.members.some(m => m.id !== id && m.name === name)) return showToast('已有同名成員');
+
+     updateDoc(doc(col('members'), id), {
+       name,
+       passport: $('vaultPassportInput').value.trim(),
+       expiry: $('vaultExpiryInput').value.trim()
+     }).catch(onErr);
+     if (pendingQr) setDoc(doc(col('qr'), id), { img: pendingQr, updatedAt: Date.now() }).catch(onErr);
+     pendingQr = null;
+     closeModal('editVaultModal');
+     showToast(`已儲存【${name}】的資料！`);
+   }
+
+   function saveNewMember() {
+     if (!requireRoom()) return;
+     const name = $('memberNameInput').value.trim();
+     if (!name) return;
+     if (state.members.some(m => m.name === name)) return showToast('該成員已在清單中');
+     const id = newId();
+     setDoc(doc(col('members'), id), { name, passport: '', expiry: '', order: Date.now() }).catch(onErr);
+     selectedMemberId = id;
+     $('memberNameInput').value = '';
+     closeModal('addMemberModal');
+     showToast(`已新增旅伴：${name}`);
+   }
+
+   function deleteCurrentMember() {
+     const m = state.members.find(x => x.id === selectedMemberId);
+     if (!m || !requireRoom()) return;
+     const used = state.expenses.some(e => e.payerId === m.id || (e.splitterIds || []).includes(m.id));
+     if (used) return showToast(`${m.name} 還有記帳紀錄，請先刪除相關帳目`);
+     if (!confirm(`確定移除成員「${m.name}」？`)) return;
+     deleteDoc(doc(col('members'), m.id)).catch(onErr);
+     deleteDoc(doc(col('qr'), m.id)).catch(onErr);
+     closeModal('editVaultModal');
+     showToast(`已移除 ${m.name}`);
+   }
+
+   function openQrFull(id) {
+     const img = state.qr[id];
+     if (!img) return;
+     $('qrFullImg').src = img;
+     $('qrFullName').textContent = memberName(id);
+     openModal('qrFullModal');
+   }
+
+   // ===== 行程 =====
    function switchDay(dayNum) {
      currentDayIndex = dayNum;
      currentSpotIndex = 0;
      document.querySelectorAll('.day-capsule').forEach(btn => {
-       if (parseInt(btn.dataset.day) === dayNum) {
-         btn.className = "day-capsule hand-pill px-3 py-1.5 text-xs font-bold whitespace-nowrap bg-akaushi text-white";
-       } else {
-         btn.className = "day-capsule hand-pill px-3 py-1.5 text-xs font-bold whitespace-nowrap bg-white text-ink";
-       }
+       const on = parseInt(btn.dataset.day) === dayNum;
+       btn.className = `day-capsule hand-pill px-3 py-1.5 text-xs font-bold whitespace-nowrap ${on ? 'bg-akaushi text-white' : 'bg-white text-ink'}`;
      });
      renderCurrentSpot();
      renderDaySpotList();
    }
 
    function stepSpot(delta) {
-     const daySpots = daysData[currentDayIndex].spots;
-     const newIdx = currentSpotIndex + delta;
-     if (newIdx >= 0 && newIdx < daySpots.length) {
-       currentSpotIndex = newIdx;
-       renderCurrentSpot();
-       renderDaySpotList();
-     }
-   }
-
-   function renderCurrentSpot() {
-     const dayData = daysData[currentDayIndex];
-     const spot = dayData.spots[currentSpotIndex];
-     const total = dayData.spots.length;
-
-     document.getElementById('spotDayHeader').innerText = dayData.dayLabel;
-     document.getElementById('spotProgressStep').innerText = `進度 ${currentSpotIndex + 1} / ${total} 站`;
-     document.getElementById('currentSpotTitle').innerText = spot.name;
-
-     const percent = ((currentSpotIndex + 1) / total) * 100;
-     document.getElementById('topProgressBar').style.width = `${percent}%`;
-
-     const prevBtn = document.getElementById('prevSpotBtn');
-     const nextBtn = document.getElementById('nextSpotBtn');
-     prevBtn.className = currentSpotIndex === 0 ? "hand-pill px-3 py-1.5 bg-white text-ink font-bold text-xs flex items-center gap-1 opacity-50 cursor-not-allowed" : "hand-pill px-3 py-1.5 bg-white text-ink font-bold text-xs flex items-center gap-1";
-     nextBtn.className = currentSpotIndex === total - 1 ? "hand-pill px-3 py-1.5 bg-white text-ink font-bold text-xs flex items-center gap-1 opacity-50 cursor-not-allowed" : "hand-pill px-3 py-1.5 bg-akaushi text-white font-bold text-xs flex items-center gap-1";
-
-     const detailContainer = document.getElementById('spotDetailCard');
-     detailContainer.innerHTML = `
-       <div class="flex justify-between items-start">
-         <span class="hand-pill px-2.5 py-0.5 bg-akaushi/15 text-akaushi border-akaushi text-[11px] font-bold">${spot.tag}</span>
-         <span class="hand-pill px-2.5 py-0.5 bg-white text-ink text-[11px] font-mono font-bold">${spot.time}</span>
-       </div>
-       <div class="flex items-center gap-2.5 my-1">
-         <div class="w-8 h-8 flex-shrink-0"><svg class="w-8 h-8"><use href="${spot.svg}"/></svg></div>
-         <h2 class="text-base font-black text-ink">${spot.name}</h2>
-       </div>
-       <p class="text-xs text-capybara leading-relaxed font-bold border-t border-b border-dashed border-capybara/20 py-2">${spot.desc}</p>
-       <div class="space-y-2 pt-1">
-         <p class="text-[11px] text-capybara font-bold flex items-center gap-1"><i class="fa-solid fa-location-dot text-akaushi"></i> ${spot.addr}</p>
-         <div class="flex gap-2">
-           <button onclick="openGoogleMap('${spot.name}')" class="hand-pill flex-1 py-1.5 bg-matcha text-white font-bold text-xs flex items-center justify-center gap-1"><i class="fa-solid fa-map-location-dot"></i> Google 地圖</button>
-           <button onclick="copyText('${spot.addr}')" class="hand-pill flex-1 py-1.5 bg-white text-ink font-bold text-xs flex items-center justify-center gap-1"><i class="fa-solid fa-copy"></i> 複製地址</button>
-         </div>
-       </div>
-     `;
-   }
-
-   function renderDaySpotList() {
-     const dayData = daysData[currentDayIndex];
-     document.getElementById('dayTypeBadge').innerText = dayData.type;
-     let html = '';
-     dayData.spots.forEach((s, idx) => {
-       const isCurrent = idx === currentSpotIndex;
-       html += `
-         <div onclick="selectSpot(${idx})" class="p-2 rounded-xl border-2 border-handBorder cursor-pointer transition flex items-center justify-between ${isCurrent ? 'bg-akaushi/10 border-akaushi' : 'bg-white'}">
-           <div class="flex items-center gap-2">
-             <span class="w-2 h-2 rounded-full ${isCurrent ? 'bg-akaushi' : 'bg-matcha'}"></span>
-             <span class="text-xs font-bold text-ink">${s.name}</span>
-           </div>
-           <span class="text-[10px] text-capybara font-mono font-bold">${s.time}</span>
-         </div>
-       `;
-     });
-     document.getElementById('daySpotList').innerHTML = html;
+     const n = currentSpotIndex + delta;
+     if (n >= 0 && n < daysData[currentDayIndex].spots.length) selectSpot(n);
    }
 
    function selectSpot(idx) {
@@ -1325,284 +1292,351 @@
      renderDaySpotList();
    }
 
-   // 美食寶典模組
+   function renderCurrentSpot() {
+     const dayData = daysData[currentDayIndex];
+     const spot = dayData.spots[currentSpotIndex];
+     const total = dayData.spots.length;
+     $('spotDayHeader').innerText = dayData.dayLabel;
+     $('spotProgressStep').innerText = `進度 ${currentSpotIndex + 1} / ${total} 站`;
+     $('currentSpotTitle').innerText = spot.name;
+     $('topProgressBar').style.width = `${((currentSpotIndex + 1) / total) * 100}%`;
+
+     const base = 'hand-pill px-3 py-1.5 font-bold text-xs flex items-center gap-1';
+     $('prevSpotBtn').className = `${base} bg-white text-ink ${currentSpotIndex === 0 ? 'opacity-50 cursor-not-allowed' : ''}`;
+     $('nextSpotBtn').className = currentSpotIndex === total - 1 ? `${base} bg-white text-ink opacity-50 cursor-not-allowed` : `${base} bg-akaushi text-white`;
+
+     $('spotDetailCard').innerHTML = `
+       <div class="flex justify-between items-start">
+         <span class="hand-pill px-2.5 py-0.5 bg-akaushi/15 text-akaushi border-akaushi text-[11px] font-bold">${esc(spot.tag)}</span>
+         <span class="hand-pill px-2.5 py-0.5 bg-white text-ink text-[11px] font-mono font-bold">${esc(spot.time)}</span>
+       </div>
+       <div class="flex items-center gap-2.5 my-1">
+         <div class="w-8 h-8 flex-shrink-0"><svg class="w-8 h-8"><use href="${esc(spot.svg)}"/></svg></div>
+         <h2 class="text-base font-black text-ink">${esc(spot.name)}</h2>
+       </div>
+       <p class="text-xs text-capybara leading-relaxed font-bold border-t border-b border-dashed border-capybara/20 py-2">${esc(spot.desc)}</p>
+       <div class="space-y-2 pt-1">
+         <p class="text-[11px] text-capybara font-bold flex items-center gap-1"><i class="fa-solid fa-location-dot text-akaushi"></i> ${esc(spot.addr)}</p>
+         <div class="flex gap-2">
+           <button data-action="map" data-q="${esc(spot.name)}" class="hand-pill flex-1 py-1.5 bg-matcha text-white font-bold text-xs flex items-center justify-center gap-1"><i class="fa-solid fa-map-location-dot"></i> Google 地圖</button>
+           <button data-action="copy-addr" data-text="${esc(spot.addr)}" class="hand-pill flex-1 py-1.5 bg-white text-ink font-bold text-xs flex items-center justify-center gap-1"><i class="fa-solid fa-copy"></i> 複製地址</button>
+         </div>
+       </div>`;
+   }
+
+   function renderDaySpotList() {
+     const dayData = daysData[currentDayIndex];
+     $('dayTypeBadge').innerText = dayData.type;
+     $('daySpotList').innerHTML = dayData.spots.map((s, idx) => {
+       const cur = idx === currentSpotIndex;
+       return `
+         <div data-action="spot" data-idx="${idx}" class="p-2 rounded-xl border-2 border-handBorder cursor-pointer transition flex items-center justify-between ${cur ? 'bg-akaushi/10 border-akaushi' : 'bg-white'}">
+           <div class="flex items-center gap-2">
+             <span class="w-2 h-2 rounded-full ${cur ? 'bg-akaushi' : 'bg-matcha'}"></span>
+             <span class="text-xs font-bold text-ink">${esc(s.name)}</span>
+           </div>
+           <span class="text-[10px] text-capybara font-mono font-bold">${esc(s.time)}</span>
+         </div>`;
+     }).join('');
+   }
+
+   // ===== 美食 =====
    function filterFood(type) {
      currentFoodTab = type;
      document.querySelectorAll('.food-tab').forEach(btn => {
-       if (btn.dataset.ftab === type) {
-         btn.className = "food-tab hand-pill px-2.5 py-1 text-[11px] font-bold bg-akaushi text-white";
-       } else {
-         btn.className = "food-tab hand-pill px-2.5 py-1 text-[11px] font-bold bg-white text-ink";
-       }
+       const on = btn.dataset.ftab === type;
+       btn.className = `food-tab hand-pill px-2.5 py-1 text-[11px] font-bold flex-shrink-0 ${on ? 'bg-akaushi text-white' : 'bg-white text-ink'}`;
      });
-     window.renderFoodList();
+     renderFoodList();
    }
 
-   window.renderFoodList = function() {
-     const container = document.getElementById('foodListContainer');
+   function renderFoodList() {
+     const container = $('foodListContainer');
      if (!container) return;
+     const combined = [...foodList, ...state.foods];
+     const filtered = combined.filter(item =>
+       (currentFoodTab === '' || item.type === currentFoodTab) &&
+       (currentFoodCategory === '' || item.tag === currentFoodCategory));
 
-     const combined = [...foodList, ...(window.customFoodList || [])];
-     const filtered = combined.filter(item => {
-       const matchTab = (currentFoodTab === '' || item.type === currentFoodTab);
-       const matchCat = (currentFoodCategory === '' || item.tag === currentFoodCategory);
-       return matchTab && matchCat;
-     });
-
-     let html = '';
-     if (filtered.length === 0) {
-       html = `<div class="hand-card p-4 text-center text-xs text-capybara font-bold">沒有找到符合條件的美食項目</div>`;
-     } else {
-       filtered.forEach(item => {
-         const isFav = window.favoriteItems[item.id] || false;
-         html += `
-           <div class="hand-card p-3 bg-paperCard flex justify-between items-center">
-             <div class="space-y-1 flex-1 pr-2">
-               <div class="flex items-center gap-2 flex-wrap">
-                 <div class="w-6 h-6 flex-shrink-0"><svg class="w-6 h-6"><use href="${item.svg || '#sketch-ramen'}"/></svg></div>
-                 <h3 class="text-xs font-black text-ink">${item.name}</h3>
-                 <span class="hand-pill px-1.5 py-0.5 text-[9px] font-bold bg-matcha/20 text-matcha-dark">${item.tag}</span>
-               </div>
-               <p class="text-[11px] text-capybara font-bold">${item.desc}</p>
-               <p class="text-[10px] text-matcha-dark font-bold"><i class="fa-solid fa-star text-akaushi"></i> ${item.score || '4.5'} • 📍 ${item.location}</p>
-             </div>
-             <div class="flex flex-col items-end gap-1 flex-shrink-0">
-               <button onclick="toggleFavoriteFirestore(${item.id})" class="hand-pill px-2 py-1 text-xs font-bold ${isFav ? 'bg-akaushi text-white' : 'bg-white text-capybara'}"><i class="fa-solid fa-heart"></i></button>
-               <button onclick="openGoogleMap('${item.name}')" class="hand-pill px-2.5 py-0.5 bg-white text-ink text-[10px] font-bold">地圖</button>
-             </div>
-           </div>
-         `;
-       });
-     }
-     container.innerHTML = html;
-   };
-
-   window.addNewCustomFood = function(e) {
-     e.preventDefault();
-     const newItem = {
-       id: Date.now(),
-       type: 'gourmet',
-       name: document.getElementById('customFoodName').value.trim(),
-       tag: document.getElementById('customFoodTag').value,
-       desc: document.getElementById('customFoodDesc').value.trim(),
-       location: document.getElementById('customFoodLoc').value.trim(),
-       score: "4.7",
-       svg: "#sketch-ramen"
-     };
-     if (window.syncFoodToFirestore) {
-       window.syncFoodToFirestore(newItem);
-     } else {
-       window.customFoodList.push(newItem);
-       renderFoodList();
-     }
-     closeModal('addFoodModal');
-     showToast('已新增口袋美食！');
-   };
-
-   // 記帳模組
-   window.addNewExpense = function(e) {
-     e.preventDefault();
-     const item = document.getElementById('expItem').value.trim();
-     const amount = parseFloat(document.getElementById('expAmt').value);
-     const who = document.getElementById('expWhoSelect').value;
-     const checkedSplitters = Array.from(document.querySelectorAll('.splitter-cb:checked')).map(cb => cb.value);
-
-     if (checkedSplitters.length === 0) {
-       showToast('請至少勾選一位分攤成員！');
+     if (!filtered.length) {
+       container.innerHTML = `<div class="hand-card p-4 text-center text-xs text-capybara font-bold">沒有找到符合條件的美食項目</div>`;
        return;
      }
+     container.innerHTML = filtered.map(item => {
+       const key = String(item.id);
+       const isFav = !!state.favs[key];
+       return `
+         <div class="hand-card p-3 bg-paperCard flex justify-between items-center">
+           <div class="space-y-1 flex-1 pr-2">
+             <div class="flex items-center gap-2 flex-wrap">
+               <div class="w-6 h-6 flex-shrink-0"><svg class="w-6 h-6"><use href="${esc(item.svg || '#sketch-ramen')}"/></svg></div>
+               <h3 class="text-xs font-black text-ink">${esc(item.name)}</h3>
+               <span class="hand-pill px-1.5 py-0.5 text-[9px] font-bold bg-matcha/20 text-matcha-dark">${esc(item.tag)}</span>
+             </div>
+             <p class="text-[11px] text-capybara font-bold">${esc(item.desc)}</p>
+             <p class="text-[10px] text-matcha-dark font-bold"><i class="fa-solid fa-star text-akaushi"></i> ${esc(item.score || '4.5')} • 📍 ${esc(item.location)}</p>
+           </div>
+           <div class="flex flex-col items-end gap-1 flex-shrink-0">
+             <button data-action="fav" data-id="${esc(key)}" class="hand-pill px-2 py-1 text-xs font-bold ${isFav ? 'bg-akaushi text-white' : 'bg-white text-capybara'}"><i class="fa-solid fa-heart"></i></button>
+             <button data-action="map" data-q="${esc(item.name)}" class="hand-pill px-2.5 py-0.5 bg-white text-ink text-[10px] font-bold">地圖</button>
+           </div>
+         </div>`;
+     }).join('');
+   }
 
-     const newExp = { item, amount, who, splitters: checkedSplitters, createdAt: Date.now() };
-     if (window.syncExpenseToFirestore) {
-       window.syncExpenseToFirestore(newExp);
-     } else {
-       window.expensesList.push({ id: Date.now().toString(), ...newExp });
-       if (typeof window.saveLocalSnapshot === 'function') window.saveLocalSnapshot();
-       renderExpenses();
-     }
+   function toggleFavorite(key) {
+     if (!requireRoom()) return;
+     setDoc(doc(col('favorites'), key), { fav: !state.favs[key] }).catch(onErr);
+   }
 
-     document.getElementById('expItem').value = '';
-     document.getElementById('expAmt').value = '';
+   function addNewCustomFood(e) {
+     e.preventDefault();
+     if (!requireRoom()) return;
+     const id = 'c_' + newId();
+     setDoc(doc(col('foods'), id), {
+       type: 'gourmet',
+       name: $('customFoodName').value.trim(),
+       tag: $('customFoodTag').value,
+       desc: $('customFoodDesc').value.trim(),
+       location: $('customFoodLoc').value.trim(),
+       score: '4.7',
+       svg: $('customFoodTag').value === 'GIFT' ? '#sketch-bag' : '#sketch-ramen',
+       createdAtMs: Date.now(),
+       createdBy: uid
+     }).catch(onErr);
+     e.target.reset();
+     closeModal('addFoodModal');
+     showToast('已新增口袋美食！');
+   }
+
+   // ===== 記帳 =====
+   function addNewExpense(e) {
+     e.preventDefault();
+     if (!requireRoom()) return;
+     const item = $('expItem').value.trim();
+     const amount = Number($('expAmt').value);
+     const payerId = $('expWhoSelect').value;
+     const splitterIds = Array.from(document.querySelectorAll('.splitter-cb:checked'), cb => cb.value);
+     if (!item || !Number.isFinite(amount) || amount <= 0) return showToast('請輸入正確的項目與金額');
+     if (!payerId) return showToast('請選擇付款人');
+     if (!splitterIds.length) return showToast('請至少勾選一位分攤成員！');
+
+     setDoc(doc(col('expenses'), newId()), { item, amount, payerId, splitterIds, createdAtMs: Date.now(), createdBy: uid }).catch(onErr);
+     $('expItem').value = '';
+     $('expAmt').value = '';
      showToast('已新增共用記帳！');
-   };
+   }
 
-   window.renderExpenses = function() {
+   function deleteExpense(id) {
+     if (!requireRoom()) return;
+     const exp = state.expenses.find(x => x.id === id);
+     if (!confirm(`確定刪除「${exp?.item ?? '這筆帳'}」？全團都會一起刪除。`)) return;
+     deleteDoc(doc(col('expenses'), id)).catch(onErr);
+   }
+
+   function renderExpenses() {
+     const rate = state.rate;
      let total = 0;
-     let html = '';
      const balances = {};
-     window.members.forEach(m => balances[m] = 0);
+     state.members.forEach(m => balances[m.id] = 0);
 
-     window.expensesList.forEach(e => {
+     const html = state.expenses.map(e => {
        total += e.amount;
-       const twdAmt = Math.round(e.amount * window.exchangeRate);
-       const activeSplitters = (e.splitters && e.splitters.length > 0) ? e.splitters : window.members;
-       const perPersonShare = e.amount / activeSplitters.length;
+       const activeIds = (e.splitterIds?.length ? e.splitterIds : state.members.map(m => m.id));
+       const share = e.amount / activeIds.length;
+       if (balances[e.payerId] !== undefined) balances[e.payerId] += e.amount;
+       activeIds.forEach(id => { if (balances[id] !== undefined) balances[id] -= share; });
 
-       if (balances[e.who] !== undefined) balances[e.who] += e.amount;
-       activeSplitters.forEach(s => {
-         if (balances[s] !== undefined) balances[s] -= perPersonShare;
-       });
-
-       const splittersText = activeSplitters.length === window.members.length ? '全員均分' : activeSplitters.join('、');
-
-       html += `
+       const allIn = state.members.length > 0 && state.members.every(m => activeIds.includes(m.id));
+       const splittersText = allIn ? '全員均分' : activeIds.map(memberName).join('、');
+       return `
          <div class="p-2.5 rounded-xl border border-handBorder bg-white space-y-1">
            <div class="flex justify-between items-center">
-             <span class="font-black text-ink">${e.item}</span>
+             <span class="font-black text-ink">${esc(e.item)}</span>
              <div class="flex items-center gap-1.5">
                <span class="font-bold text-akaushi font-mono">¥ ${e.amount.toLocaleString()}</span>
-               <span class="text-[10px] text-capybara font-bold">(NT$ ${twdAmt.toLocaleString()})</span>
-               <button onclick="deleteExpenseFromFirestore('${e.id}')" class="text-capybara hover:text-akaushi pl-1"><i class="fa-solid fa-trash-can text-xs"></i></button>
+               <span class="text-[10px] text-capybara font-bold">(NT$ ${Math.round(e.amount * rate).toLocaleString()})</span>
+               <button data-action="del-exp" data-id="${esc(e.id)}" class="text-capybara hover:text-akaushi pl-1"><i class="fa-solid fa-trash-can text-xs"></i></button>
              </div>
            </div>
            <div class="flex justify-between items-center text-[10px] text-capybara font-bold">
-             <span><i class="fa-solid fa-user-tag text-matcha"></i> 付款: ${e.who}</span>
-             <span><i class="fa-solid fa-users text-akaushi"></i> 分攤 (${activeSplitters.length}人): ${splittersText}</span>
+             <span><i class="fa-solid fa-user-tag text-matcha"></i> 付款: ${esc(memberName(e.payerId))}</span>
+             <span><i class="fa-solid fa-users text-akaushi"></i> 分攤 (${activeIds.length}人): ${esc(splittersText)}</span>
            </div>
-         </div>
-       `;
-     });
+         </div>`;
+     }).join('');
 
-     const listEl = document.getElementById('expenseListItems');
+     const listEl = $('expenseListItems');
      if (listEl) listEl.innerHTML = html || `<p class="text-capybara text-center py-2">尚無記帳資料</p>`;
-     
-     const totalJpyEl = document.getElementById('totalExpenseJPY');
-     if (totalJpyEl) totalJpyEl.innerText = `¥ ${total.toLocaleString()}`;
-     
-     const totalTWD = Math.round(total * window.exchangeRate);
-     const totalTwdEl = document.getElementById('totalExpenseTWD');
-     if (totalTwdEl) totalTwdEl.innerText = `≈ NT$ ${totalTWD.toLocaleString()} (匯率 ${window.exchangeRate})`;
-     
-     const displayRateEl = document.getElementById('displayRateText');
-     if (displayRateEl) displayRateEl.innerText = `1 JPY = ${window.exchangeRate} TWD`;
-
+     $('totalExpenseJPY').innerText = `¥ ${total.toLocaleString()}`;
+     $('totalExpenseTWD').innerText = `≈ NT$ ${Math.round(total * rate).toLocaleString()} (匯率 ${rate})`;
+     $('displayRateText').innerText = `1 JPY = ${rate} TWD`;
      renderSettlement(balances);
-   };
+   }
 
    function renderSettlement(balances) {
-     let debtors = [];
-     let creditors = [];
-     Object.keys(balances).forEach(m => {
-       const bal = balances[m];
-       if (bal < -1) debtors.push({ name: m, amount: -bal });
-       else if (bal > 1) creditors.push({ name: m, amount: bal });
+     const rate = state.rate;
+     const debtors = [], creditors = [];
+     Object.entries(balances).forEach(([id, bal]) => {
+       if (bal < -1) debtors.push({ id, amount: -bal });
+       else if (bal > 1) creditors.push({ id, amount: bal });
      });
 
-     let settlementHTML = '';
-     let transactions = [];
-     let dIdx = 0, cIdx = 0;
-     while (dIdx < debtors.length && cIdx < creditors.length) {
-       let d = debtors[dIdx];
-       let c = creditors[cIdx];
-       let transfer = Math.min(d.amount, c.amount);
-       if (transfer > 1) {
-         transactions.push({ from: d.name, to: c.name, jpy: Math.round(transfer), twd: Math.round(transfer * window.exchangeRate) });
-       }
-       d.amount -= transfer;
-       c.amount -= transfer;
-       if (d.amount < 1) dIdx++;
-       if (c.amount < 1) cIdx++;
+     const tx = [];
+     let d = 0, c = 0;
+     while (d < debtors.length && c < creditors.length) {
+       const t = Math.min(debtors[d].amount, creditors[c].amount);
+       if (t > 1) tx.push({ from: debtors[d].id, to: creditors[c].id, jpy: Math.round(t) });
+       debtors[d].amount -= t;
+       creditors[c].amount -= t;
+       if (debtors[d].amount < 1) d++;
+       if (creditors[c].amount < 1) c++;
      }
 
-     if (transactions.length === 0) {
-       settlementHTML = `<div class="p-2.5 rounded-xl bg-matcha-bg border border-matcha/30 text-matcha-dark font-bold text-center text-xs">🎉 目前所有人帳目平支，互相欠款為 0 元！</div>`;
-     } else {
-       transactions.forEach(t => {
-         settlementHTML += `
+     const txHtml = tx.length
+       ? tx.map(t => `
            <div class="p-2 rounded-xl bg-akaushi/10 border border-akaushi/30 flex justify-between items-center text-ink font-bold text-xs">
-             <span><i class="fa-solid fa-arrow-right-from-bracket text-akaushi"></i> <strong>${t.from}</strong> 應給 <strong>${t.to}</strong></span>
-             <span class="text-akaushi font-mono">¥ ${t.jpy.toLocaleString()} <span class="text-[10px] text-capybara font-normal">(NT$ ${t.twd.toLocaleString()})</span></span>
-           </div>
-         `;
-       });
-     }
+             <span><i class="fa-solid fa-arrow-right-from-bracket text-akaushi"></i> <strong>${esc(memberName(t.from))}</strong> 應給 <strong>${esc(memberName(t.to))}</strong></span>
+             <span class="text-akaushi font-mono">¥ ${t.jpy.toLocaleString()} <span class="text-[10px] text-capybara font-normal">(NT$ ${Math.round(t.jpy * rate).toLocaleString()})</span></span>
+           </div>`).join('')
+       : `<div class="p-2.5 rounded-xl bg-matcha-bg border border-matcha/30 text-matcha-dark font-bold text-center text-xs">🎉 目前所有人帳目平支，互相欠款為 0 元！</div>`;
 
-     let netSummaryHTML = '<div class="mt-2 text-[10px] grid grid-cols-2 gap-1 text-capybara font-bold">';
-     window.members.forEach(m => {
-       const b = Math.round(balances[m] || 0);
+     const net = state.members.map(m => {
+       const b = Math.round(balances[m.id] || 0);
        const color = b > 0 ? 'text-matcha-dark' : (b < 0 ? 'text-akaushi' : 'text-capybara');
-       const sign = b > 0 ? '+' : '';
-       netSummaryHTML += `<div class="bg-white p-1.5 rounded-lg border border-handBorder/40"><span>${m}:</span> <span class="${color} font-mono">${sign}¥${b.toLocaleString()}</span></div>`;
-     });
-     netSummaryHTML += '</div>';
+       return `<div class="bg-white p-1.5 rounded-lg border border-handBorder/40"><span>${esc(m.name)}:</span> <span class="${color} font-mono">${b > 0 ? '+' : ''}¥${b.toLocaleString()}</span></div>`;
+     }).join('');
 
-     const settlementResultEl = document.getElementById('settlementResult');
-     if (settlementResultEl) settlementResultEl.innerHTML = settlementHTML + netSummaryHTML;
+     const el = $('settlementResult');
+     if (el) el.innerHTML = txHtml + `<div class="mt-2 text-[10px] grid grid-cols-2 gap-1 text-capybara font-bold">${net}</div>`;
    }
 
-   window.selectAllSplitters = function(select) {
+   function selectAllSplitters(select) {
      document.querySelectorAll('.splitter-cb').forEach(cb => cb.checked = select);
-   };
+   }
 
-   window.saveExchangeRate = function() {
-     const val = parseFloat(document.getElementById('rateInput').value);
-     if (!isNaN(val) && val > 0) {
-       window.exchangeRate = val;
-       closeModal('editRateModal');
-       renderExpenses();
-       showToast(`匯率已更新為 1 JPY = ${val} TWD`);
-     } else {
-       showToast('請輸入有效的匯率數字');
-     }
-   };
+   function openRateModal() {
+     $('rateInput').value = state.rate;
+     openModal('editRateModal');
+   }
 
-   // 導覽與共用 UI 邏輯
+   function saveExchangeRate() {
+     if (!requireRoom()) return;
+     const val = parseFloat($('rateInput').value);
+     if (isNaN(val) || val <= 0) return showToast('請輸入有效的匯率數字');
+     updateDoc(roomRef(), { exchangeRate: val }).catch(onErr);
+     closeModal('editRateModal');
+     showToast(`匯率已更新為 1 JPY = ${val} TWD`);
+   }
+
+   // ===== 退稅檢查清單（每人各自勾選，存本機） =====
+   function setupKmjChecklistEvents() {
+     const container = $('kmj-checks');
+     if (!container) return;
+     const checks = Array.from(container.querySelectorAll('input[type="checkbox"]'));
+     let saved = [];
+     try { saved = JSON.parse(storage.get(CHECKLIST_KEY) || '[]'); } catch {}
+     checks.forEach((x, i) => x.checked = !!saved[i]);
+     const update = () => {
+       const done = checks.filter(x => x.checked).length;
+       $('kmj-progress').style.width = (done / checks.length * 100) + '%';
+       $('kmj-count').textContent = `完成 ${done} / ${checks.length} 項`;
+       storage.set(CHECKLIST_KEY, JSON.stringify(checks.map(x => x.checked)));
+     };
+     checks.forEach(x => x.addEventListener('change', update));
+     update();
+   }
+
+   // ===== 共用 UI =====
    function switchTab(tabId) {
      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-     document.getElementById(`tab-${tabId}`).classList.add('active');
+     $(`tab-${tabId}`).classList.add('active');
      document.querySelectorAll('.nav-btn').forEach(btn => {
-       if (btn.dataset.tab === tabId) {
-         btn.classList.add('text-akaushi');
-         btn.classList.remove('text-capybara');
-       } else {
-         btn.classList.remove('text-akaushi');
-         btn.classList.add('text-capybara');
-       }
+       const on = btn.dataset.tab === tabId;
+       btn.classList.toggle('text-akaushi', on);
+       btn.classList.toggle('text-capybara', !on);
      });
    }
 
-   function openGoogleMap(query) {
-     window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`, '_blank');
+   function openGoogleMap(q) {
+     window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`, '_blank');
    }
 
-   function copyText(text) {
-     const el = document.createElement('textarea');
-     el.value = text;
-     document.body.appendChild(el);
-     el.select();
-     document.execCommand('copy');
-     document.body.removeChild(el);
-     showToast('已複製地址！');
+   async function copyText(text, msg = '已複製！') {
+     try {
+       await navigator.clipboard.writeText(text);
+     } catch {
+       const el = document.createElement('textarea');
+       el.value = text;
+       document.body.appendChild(el);
+       el.select();
+       document.execCommand('copy');
+       document.body.removeChild(el);
+     }
+     showToast(msg);
    }
 
-   function copyRoomCode() {
-     copyText('KYUSHU2026');
-     showToast('已複製房間代碼 KYUSHU2026');
-   }
-
+   let toastTimer;
    function showToast(msg) {
-     const toast = document.getElementById('toast');
+     const toast = $('toast');
      toast.innerText = msg;
      toast.classList.add('show');
-     setTimeout(() => toast.classList.remove('show'), 2000);
+     clearTimeout(toastTimer);
+     toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
    }
 
-   function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
-   function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+   function openModal(id) { $(id).classList.remove('hidden'); }
+   function closeModal(id) { $(id).classList.add('hidden'); }
 
-   window.switchDay = switchDay;
-   window.stepSpot = stepSpot;
-   window.selectSpot = selectSpot;
-   window.filterFood = filterFood;
-   window.switchTab = switchTab;
-   window.openModal = openModal;
-   window.closeModal = closeModal;
-   window.showToast = showToast;
-   window.openGoogleMap = openGoogleMap;
-   window.copyText = copyText;
-   window.copyRoomCode = copyRoomCode;
-   window.renderMembersUI = renderMembersUI;
-   window.renderMemberVault = renderMemberVault;
+   function renderAll() {
+     setSyncStatus();
+     renderMembersUI();
+     renderMemberVault();
+     renderExpenses();
+     renderFoodList();
+   }
+
+   // 動態產生的按鈕統一用事件委派，不把資料塞進 onclick 字串
+   document.addEventListener('click', (e) => {
+     const t = e.target.closest('[data-action]');
+     if (!t) return;
+     const { action, id, q, text, idx } = t.dataset;
+     if (action === 'map') openGoogleMap(q);
+     else if (action === 'copy-addr') copyText(text, '已複製地址！');
+     else if (action === 'spot') selectSpot(Number(idx));
+     else if (action === 'fav') toggleFavorite(id);
+     else if (action === 'del-exp') deleteExpense(id);
+     else if (action === 'qr-full') openQrFull(id);
+   });
+
+   Object.assign(window, {
+     switchDay, stepSpot, selectSpot, filterFood, switchTab, openModal, closeModal, showToast,
+     joinRoom, createRoom, shareRoomLink, openRoomModal, openRateModal, saveExchangeRate,
+     addNewExpense, selectAllSplitters, addNewCustomFood,
+     switchVaultMember, openEditMemberVaultModal, handleModalFileSelect, saveMemberVaultData,
+     saveNewMember, deleteCurrentMember
+   });
+
+   // ===== 啟動 =====
+   switchDay(1);
+   setupKmjChecklistEvents();
+   $('food-category')?.addEventListener('change', (e) => { currentFoodCategory = e.target.value; renderFoodList(); });
+   window.addEventListener('online', setSyncStatus);
+   window.addEventListener('offline', setSyncStatus);
+   renderAll();
+
+   (async () => {
+     try {
+       await auth.authStateReady();
+       if (!auth.currentUser) await signInAnonymously(auth);
+       uid = auth.currentUser.uid;
+     } catch (e) {
+       onErr(e);
+       return;
+     }
+     const code = normalizeCode(new URLSearchParams(location.search).get('room') || storage.get(ROOM_KEY));
+     if (!code || !(await enterRoom(code))) openRoomModal();
+   })();
  </script>
 </body>
 </html>

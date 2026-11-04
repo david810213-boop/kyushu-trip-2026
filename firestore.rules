@@ -1,0 +1,36 @@
+rules_version = '2';
+
+// 九州行程 App 的 Firestore 安全規則
+// 貼到 Firebase Console → Firestore Database → 規則 → 發布
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    // 有在 rooms/{roomId}/access/{自己的uid} 登記過的人才是房間成員
+    function isMember(roomId) {
+      return signedIn()
+        && exists(/databases/$(database)/documents/rooms/$(roomId)/access/$(request.auth.uid));
+    }
+
+    match /rooms/{roomId} {
+      allow get, update: if isMember(roomId);
+      allow create: if signedIn();
+      allow list, delete: if false;        // 不能列出所有房間
+
+      // 加入房間：只能登記自己
+      match /access/{uid} {
+        allow get: if signedIn() && uid == request.auth.uid;
+        allow create: if signedIn() && uid == request.auth.uid;
+        allow list, update, delete: if false;
+      }
+
+      // 房間內資料：members / qr / expenses / foods / favorites
+      match /{coll}/{docId} {
+        allow read, write: if coll != 'access' && isMember(roomId);
+      }
+    }
+  }
+}
