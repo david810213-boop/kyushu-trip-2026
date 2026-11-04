@@ -271,7 +271,10 @@
      <div class="hand-card p-3.5 bg-paperCard">
        <h3 class="text-xs font-black text-ink mb-2.5 flex items-center justify-between border-b-2 border-dashed border-capybara/20 pb-1.5">
          <span id="dayListTitle"><i class="fa-solid fa-map-location-dot text-matcha"></i> 當日完整景點清單</span>
-         <span id="dayTypeBadge" class="text-[10px] bg-matcha/20 text-matcha-dark font-bold px-2 py-0.5 rounded-full">包車 9小時</span>
+         <span class="flex items-center gap-1.5">
+           <span id="dayTypeBadge" class="text-[10px] bg-matcha/20 text-matcha-dark font-bold px-2 py-0.5 rounded-full">包車 9小時</span>
+           <button onclick="openSpotModal()" class="hand-pill px-2 py-0.5 bg-akaushi text-white text-[10px] font-bold"><i class="fa-solid fa-plus"></i> 新增</button>
+         </span>
        </h3>
        <div id="daySpotList" class="space-y-2"></div>
      </div>
@@ -776,6 +779,40 @@
    </div>
  </div>
 
+ <!-- ADD / EDIT SPOT MODAL -->
+ <div id="spotModal" class="fixed inset-0 bg-ink/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+   <div class="hand-card bg-paperCard p-4 max-w-xs w-full space-y-3 max-h-[90vh] overflow-y-auto">
+     <div class="flex justify-between items-center border-b border-handBorder pb-2">
+       <h3 class="font-black text-ink text-sm"><i class="fa-solid fa-map-pin text-akaushi"></i> <span id="spotModalTitle">新增景點</span></h3>
+       <button onclick="closeModal('spotModal')" class="text-capybara text-base font-bold"><i class="fa-solid fa-xmark"></i></button>
+     </div>
+     <form onsubmit="saveSpot(event)" class="space-y-2 text-xs">
+       <div class="grid grid-cols-2 gap-2">
+         <select id="spotDayInput" class="p-2 rounded-xl border-2 border-handBorder bg-paper font-bold"></select>
+         <input type="time" id="spotTimeInput" required class="p-2 rounded-xl border-2 border-handBorder bg-paper font-bold font-mono">
+       </div>
+       <input type="text" id="spotNameInput" required placeholder="景點名稱 (如: 櫛田神社)" class="w-full p-2 rounded-xl border-2 border-handBorder bg-paper font-bold">
+       <div class="grid grid-cols-2 gap-2">
+         <input type="text" id="spotTagInput" placeholder="標籤 (如: 神社)" class="p-2 rounded-xl border-2 border-handBorder bg-paper font-bold">
+         <select id="spotIconInput" class="p-2 rounded-xl border-2 border-handBorder bg-paper font-bold">
+           <option value="#sketch-torii">⛩️ 神社・景點</option>
+           <option value="#sketch-castle">🏯 城堡</option>
+           <option value="#sketch-onsen">♨️ 溫泉</option>
+           <option value="#sketch-volcano">🌋 自然景觀</option>
+           <option value="#sketch-ramen">🍜 美食</option>
+           <option value="#sketch-bag">🛍️ 購物</option>
+           <option value="#sketch-car">🚐 交通</option>
+           <option value="#sketch-plane">✈️ 機場</option>
+           <option value="#sketch-kumamon">🏨 住宿</option>
+         </select>
+       </div>
+       <textarea id="spotDescInput" rows="2" placeholder="說明 / 備註" class="w-full p-2 rounded-xl border-2 border-handBorder bg-paper font-bold"></textarea>
+       <input type="text" id="spotAddrInput" placeholder="地址 (Google 地圖會用這個搜尋)" class="w-full p-2 rounded-xl border-2 border-handBorder bg-paper font-bold">
+       <button type="submit" class="w-full hand-pill py-2 bg-akaushi text-white font-bold">儲存景點</button>
+     </form>
+   </div>
+ </div>
+
  <!-- QR FULLSCREEN MODAL -->
  <div id="qrFullModal" class="fixed inset-0 bg-white z-[60] hidden flex flex-col items-center justify-center p-4" onclick="closeModal('qrFullModal')">
    <p id="qrFullName" class="text-sm font-black text-ink mb-2"></p>
@@ -908,12 +945,12 @@
    const MAX_QR_CHARS = 900000; // Firestore 單一文件上限 1 MiB，預留空間
 
    // ===== 狀態（全部由 onSnapshot 寫入，畫面只讀 state） =====
-   const state = { roomId: null, members: [], qr: {}, expenses: [], foods: [], favs: {}, rate: DEFAULT_RATE };
+   const state = { roomId: null, members: [], qr: {}, expenses: [], foods: [], favs: {}, spots: null, spotsSeeded: false, rate: DEFAULT_RATE };
    let uid = null;
    let unsubs = [];
    let selectedMemberId = null;
    let pendingQr = null;
-   let currentDayIndex = 1, currentSpotIndex = 0;
+   let currentDayIndex = 1;
    let currentFoodTab = 'gourmet', currentFoodCategory = '';
 
    // ===== 工具 =====
@@ -987,7 +1024,7 @@
      }
 
      unsubs.splice(0).forEach(u => u());
-     Object.assign(state, { roomId: code, members: [], qr: {}, expenses: [], foods: [], favs: {}, rate: DEFAULT_RATE });
+     Object.assign(state, { roomId: code, members: [], qr: {}, expenses: [], foods: [], favs: {}, spots: null, spotsSeeded: false, rate: DEFAULT_RATE });
      selectedMemberId = null;
      storage.set(ROOM_KEY, code);
      const url = new URL(location.href);
@@ -1001,7 +1038,15 @@
    function subscribe() {
      unsubs.push(onSnapshot(roomRef(), s => {
        state.rate = s.data()?.exchangeRate || DEFAULT_RATE;
+       state.spotsSeeded = !!s.data()?.spotsSeeded;
+       seedSpotsIfNeeded(s);
        renderExpenses();
+       renderItinerary();
+     }, onErr));
+
+     unsubs.push(onSnapshot(col('spots'), s => {
+       state.spots = s.docs.map(d => ({ id: d.id, ...d.data() }));
+       renderItinerary();
      }, onErr));
 
      unsubs.push(onSnapshot(query(col('members'), orderBy('order')), s => {
@@ -1042,7 +1087,8 @@
      try {
        await ensureAccess(code);
        const batch = writeBatch(db);
-       batch.set(doc(db, 'rooms', code), { exchangeRate: DEFAULT_RATE, createdAt: Date.now(), createdBy: uid });
+       batch.set(doc(db, 'rooms', code), { exchangeRate: DEFAULT_RATE, spotsSeeded: true, createdAt: Date.now(), createdBy: uid });
+       builtinSpots().forEach(({ id, ...s }) => batch.set(doc(db, 'rooms', code, 'spots', id), s));
        const ids = DEFAULT_MEMBERS.map((name, i) => {
          const id = newId();
          batch.set(doc(db, 'rooms', code, 'members', id), { name, passport: '', expiry: '', order: i });
@@ -1269,75 +1315,180 @@
      openModal('qrFullModal');
    }
 
-   // ===== 行程 =====
+   // ===== 行程（全團同步；房間尚未匯入前先顯示內建行程） =====
+   const SPOT_ICONS = {
+     '#sketch-torii': '⛩️ 神社・景點', '#sketch-castle': '🏯 城堡', '#sketch-onsen': '♨️ 溫泉',
+     '#sketch-volcano': '🌋 自然景觀', '#sketch-ramen': '🍜 美食', '#sketch-bag': '🛍️ 購物',
+     '#sketch-car': '🚐 交通', '#sketch-plane': '✈️ 機場', '#sketch-kumamon': '🏨 住宿'
+   };
+   let currentSpotId = null;
+   let editingSpotId = null;
+   let seedingSpots = false;
+
+   function builtinSpots() {
+     return Object.entries(daysData).flatMap(([day, d]) =>
+       d.spots.map((s, i) => ({ id: `d${day}_${i}`, day: Number(day), ...s, order: i, createdAtMs: 0 })));
+   }
+
+   function allSpots() {
+     return state.spotsSeeded && state.spots ? state.spots : builtinSpots();
+   }
+
+   function daySpots(day) {
+     return allSpots()
+       .filter(s => s.day === day)
+       .sort((a, b) => (a.time || '').localeCompare(b.time || '') || (a.order ?? 0) - (b.order ?? 0));
+   }
+
+   function currentSpots() {
+     const spots = daySpots(currentDayIndex);
+     const idx = Math.max(0, spots.findIndex(s => s.id === currentSpotId));
+     return { spots, idx };
+   }
+
+   // 舊房間第一次開啟時，把內建行程匯入 Firestore（固定 ID，多台同時匯入也不會重複）
+   function seedSpotsIfNeeded(snap) {
+     const data = snap.data();
+     if (!data || data.spotsSeeded || seedingSpots || snap.metadata?.fromCache) return;
+     seedingSpots = true;
+     const batch = writeBatch(db);
+     builtinSpots().forEach(({ id, ...s }) => batch.set(doc(col('spots'), id), s));
+     batch.update(roomRef(), { spotsSeeded: true });
+     batch.commit().catch(onErr).finally(() => { seedingSpots = false; });
+   }
+
    function switchDay(dayNum) {
      currentDayIndex = dayNum;
-     currentSpotIndex = 0;
+     currentSpotId = null;
      document.querySelectorAll('.day-capsule').forEach(btn => {
        const on = parseInt(btn.dataset.day) === dayNum;
        btn.className = `day-capsule hand-pill px-3 py-1.5 text-xs font-bold whitespace-nowrap ${on ? 'bg-akaushi text-white' : 'bg-white text-ink'}`;
      });
-     renderCurrentSpot();
-     renderDaySpotList();
+     renderItinerary();
    }
 
    function stepSpot(delta) {
-     const n = currentSpotIndex + delta;
-     if (n >= 0 && n < daysData[currentDayIndex].spots.length) selectSpot(n);
+     const { spots, idx } = currentSpots();
+     const n = idx + delta;
+     if (n >= 0 && n < spots.length) selectSpot(spots[n].id);
    }
 
-   function selectSpot(idx) {
-     currentSpotIndex = idx;
+   function selectSpot(id) {
+     currentSpotId = id;
+     renderItinerary();
+   }
+
+   function renderItinerary() {
      renderCurrentSpot();
      renderDaySpotList();
    }
 
    function renderCurrentSpot() {
      const dayData = daysData[currentDayIndex];
-     const spot = dayData.spots[currentSpotIndex];
-     const total = dayData.spots.length;
-     $('spotDayHeader').innerText = dayData.dayLabel;
-     $('spotProgressStep').innerText = `進度 ${currentSpotIndex + 1} / ${total} 站`;
-     $('currentSpotTitle').innerText = spot.name;
-     $('topProgressBar').style.width = `${((currentSpotIndex + 1) / total) * 100}%`;
-
+     const { spots, idx } = currentSpots();
+     const spot = spots[idx];
+     const total = spots.length;
      const base = 'hand-pill px-3 py-1.5 font-bold text-xs flex items-center gap-1';
-     $('prevSpotBtn').className = `${base} bg-white text-ink ${currentSpotIndex === 0 ? 'opacity-50 cursor-not-allowed' : ''}`;
-     $('nextSpotBtn').className = currentSpotIndex === total - 1 ? `${base} bg-white text-ink opacity-50 cursor-not-allowed` : `${base} bg-akaushi text-white`;
+     $('spotDayHeader').innerText = dayData.dayLabel;
+     $('spotProgressStep').innerText = total ? `進度 ${idx + 1} / ${total} 站` : '尚無景點';
+     $('currentSpotTitle').innerText = spot?.name ?? '—';
+     $('topProgressBar').style.width = total ? `${((idx + 1) / total) * 100}%` : '0%';
+     $('prevSpotBtn').className = `${base} bg-white text-ink ${idx === 0 ? 'opacity-50 cursor-not-allowed' : ''}`;
+     $('nextSpotBtn').className = idx >= total - 1 ? `${base} bg-white text-ink opacity-50 cursor-not-allowed` : `${base} bg-akaushi text-white`;
+
+     if (!spot) {
+       $('spotDetailCard').innerHTML = `
+         <p class="text-xs text-capybara font-bold text-center py-3">這天還沒有景點</p>
+         <button onclick="openSpotModal()" class="w-full hand-pill py-2 bg-akaushi text-white font-bold text-xs"><i class="fa-solid fa-plus"></i> 新增景點</button>`;
+       return;
+     }
 
      $('spotDetailCard').innerHTML = `
        <div class="flex justify-between items-start">
-         <span class="hand-pill px-2.5 py-0.5 bg-akaushi/15 text-akaushi border-akaushi text-[11px] font-bold">${esc(spot.tag)}</span>
+         <span class="hand-pill px-2.5 py-0.5 bg-akaushi/15 text-akaushi border-akaushi text-[11px] font-bold">${esc(spot.tag || '行程')}</span>
          <span class="hand-pill px-2.5 py-0.5 bg-white text-ink text-[11px] font-mono font-bold">${esc(spot.time)}</span>
        </div>
        <div class="flex items-center gap-2.5 my-1">
-         <div class="w-8 h-8 flex-shrink-0"><svg class="w-8 h-8"><use href="${esc(spot.svg)}"/></svg></div>
+         <div class="w-8 h-8 flex-shrink-0"><svg class="w-8 h-8"><use href="${esc(SPOT_ICONS[spot.svg] ? spot.svg : '#sketch-torii')}"/></svg></div>
          <h2 class="text-base font-black text-ink">${esc(spot.name)}</h2>
        </div>
-       <p class="text-xs text-capybara leading-relaxed font-bold border-t border-b border-dashed border-capybara/20 py-2">${esc(spot.desc)}</p>
+       ${spot.desc ? `<p class="text-xs text-capybara leading-relaxed font-bold border-t border-b border-dashed border-capybara/20 py-2">${esc(spot.desc)}</p>` : ''}
        <div class="space-y-2 pt-1">
-         <p class="text-[11px] text-capybara font-bold flex items-center gap-1"><i class="fa-solid fa-location-dot text-akaushi"></i> ${esc(spot.addr)}</p>
+         ${spot.addr ? `<p class="text-[11px] text-capybara font-bold flex items-center gap-1"><i class="fa-solid fa-location-dot text-akaushi"></i> ${esc(spot.addr)}</p>` : ''}
          <div class="flex gap-2">
            <button data-action="map" data-q="${esc(spot.name)}" class="hand-pill flex-1 py-1.5 bg-matcha text-white font-bold text-xs flex items-center justify-center gap-1"><i class="fa-solid fa-map-location-dot"></i> Google 地圖</button>
-           <button data-action="copy-addr" data-text="${esc(spot.addr)}" class="hand-pill flex-1 py-1.5 bg-white text-ink font-bold text-xs flex items-center justify-center gap-1"><i class="fa-solid fa-copy"></i> 複製地址</button>
+           <button data-action="copy-addr" data-text="${esc(spot.addr || spot.name)}" class="hand-pill flex-1 py-1.5 bg-white text-ink font-bold text-xs flex items-center justify-center gap-1"><i class="fa-solid fa-copy"></i> 複製地址</button>
+         </div>
+         <div class="flex gap-2 pt-1 border-t border-dashed border-capybara/20">
+           <button data-action="spot-edit" data-id="${esc(spot.id)}" class="flex-1 py-1 text-[11px] font-bold text-matcha-dark"><i class="fa-solid fa-pen"></i> 編輯此景點</button>
+           <button data-action="spot-del" data-id="${esc(spot.id)}" class="flex-1 py-1 text-[11px] font-bold text-akaushi"><i class="fa-solid fa-trash-can"></i> 刪除</button>
          </div>
        </div>`;
    }
 
    function renderDaySpotList() {
-     const dayData = daysData[currentDayIndex];
-     $('dayTypeBadge').innerText = dayData.type;
-     $('daySpotList').innerHTML = dayData.spots.map((s, idx) => {
-       const cur = idx === currentSpotIndex;
+     const { spots, idx } = currentSpots();
+     $('dayTypeBadge').innerText = daysData[currentDayIndex].type;
+     $('daySpotList').innerHTML = spots.map((s, i) => {
+       const cur = i === idx;
        return `
-         <div data-action="spot" data-idx="${idx}" class="p-2 rounded-xl border-2 border-handBorder cursor-pointer transition flex items-center justify-between ${cur ? 'bg-akaushi/10 border-akaushi' : 'bg-white'}">
+         <div data-action="spot" data-id="${esc(s.id)}" class="p-2 rounded-xl border-2 border-handBorder cursor-pointer transition flex items-center justify-between ${cur ? 'bg-akaushi/10 border-akaushi' : 'bg-white'}">
            <div class="flex items-center gap-2">
              <span class="w-2 h-2 rounded-full ${cur ? 'bg-akaushi' : 'bg-matcha'}"></span>
              <span class="text-xs font-bold text-ink">${esc(s.name)}</span>
            </div>
            <span class="text-[10px] text-capybara font-mono font-bold">${esc(s.time)}</span>
          </div>`;
-     }).join('');
+     }).join('') || `<p class="text-[11px] text-capybara font-bold text-center py-1">尚無景點</p>`;
+   }
+
+   function openSpotModal(id = null) {
+     if (!requireRoom()) return;
+     const s = id ? allSpots().find(x => x.id === id) : null;
+     editingSpotId = s ? id : null;
+     $('spotModalTitle').textContent = s ? '編輯景點' : '新增景點';
+     $('spotDayInput').value = String(s?.day ?? currentDayIndex);
+     $('spotTimeInput').value = s?.time || '';
+     $('spotNameInput').value = s?.name || '';
+     $('spotTagInput').value = s?.tag || '';
+     $('spotDescInput').value = s?.desc || '';
+     $('spotAddrInput').value = s?.addr || '';
+     $('spotIconInput').value = SPOT_ICONS[s?.svg] ? s.svg : '#sketch-torii';
+     openModal('spotModal');
+   }
+
+   function saveSpot(e) {
+     e.preventDefault();
+     if (!requireRoom()) return;
+     const id = editingSpotId || newId();
+     const old = allSpots().find(x => x.id === id);
+     const svg = $('spotIconInput').value;
+     const data = {
+       day: Number($('spotDayInput').value),
+       time: $('spotTimeInput').value,
+       name: $('spotNameInput').value.trim(),
+       tag: $('spotTagInput').value.trim(),
+       desc: $('spotDescInput').value.trim(),
+       addr: $('spotAddrInput').value.trim(),
+       svg: SPOT_ICONS[svg] ? svg : '#sketch-torii',
+       order: old?.order ?? Date.now(),
+       createdAtMs: old?.createdAtMs ?? Date.now(),
+       updatedBy: uid
+     };
+     if (!data.name || !data.time || !daysData[data.day]) return showToast('請填寫景點名稱與時間');
+     setDoc(doc(col('spots'), id), data).catch(onErr);
+     closeModal('spotModal');
+     if (data.day !== currentDayIndex) switchDay(data.day);
+     selectSpot(id);
+     showToast(old ? '已更新景點' : '已新增景點');
+   }
+
+   function deleteSpot(id) {
+     if (!requireRoom()) return;
+     const s = allSpots().find(x => x.id === id);
+     if (!confirm(`確定刪除「${s?.name ?? '此景點'}」？全團都會一起刪除。`)) return;
+     deleteDoc(doc(col('spots'), id)).catch(onErr);
+     if (currentSpotId === id) currentSpotId = null;
    }
 
    // ===== 美食 =====
@@ -1590,6 +1741,7 @@
 
    function renderAll() {
      setSyncStatus();
+     renderItinerary();
      renderMembersUI();
      renderMemberVault();
      renderExpenses();
@@ -1600,17 +1752,19 @@
    document.addEventListener('click', (e) => {
      const t = e.target.closest('[data-action]');
      if (!t) return;
-     const { action, id, q, text, idx } = t.dataset;
+     const { action, id, q, text } = t.dataset;
      if (action === 'map') openGoogleMap(q);
      else if (action === 'copy-addr') copyText(text, '已複製地址！');
-     else if (action === 'spot') selectSpot(Number(idx));
+     else if (action === 'spot') selectSpot(id);
+     else if (action === 'spot-edit') openSpotModal(id);
+     else if (action === 'spot-del') deleteSpot(id);
      else if (action === 'fav') toggleFavorite(id);
      else if (action === 'del-exp') deleteExpense(id);
      else if (action === 'qr-full') openQrFull(id);
    });
 
    Object.assign(window, {
-     switchDay, stepSpot, selectSpot, filterFood, switchTab, openModal, closeModal, showToast,
+     switchDay, stepSpot, selectSpot, openSpotModal, saveSpot, filterFood, switchTab, openModal, closeModal, showToast,
      joinRoom, createRoom, shareRoomLink, openRoomModal, openRateModal, saveExchangeRate,
      addNewExpense, selectAllSplitters, addNewCustomFood,
      switchVaultMember, openEditMemberVaultModal, handleModalFileSelect, saveMemberVaultData,
@@ -1618,6 +1772,7 @@
    });
 
    // ===== 啟動 =====
+   $('spotDayInput').innerHTML = Object.entries(daysData).map(([d, v]) => `<option value="${d}">${esc(v.dayLabel)}</option>`).join('');
    switchDay(1);
    setupKmjChecklistEvents();
    $('food-category')?.addEventListener('change', (e) => { currentFoodCategory = e.target.value; renderFoodList(); });
