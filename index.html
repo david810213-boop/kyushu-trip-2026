@@ -574,14 +574,16 @@
          <span class="w-5 h-5 rounded-full bg-akaushi text-white text-[10px] font-bold flex items-center justify-center">06</span>
          各通路退稅手續費比較
        </h3>
-       <p class="text-[11px] text-capybara font-bold">新制是結帳先付含稅價、離境確認後退稅；退款時會扣掉下列手續費（佔商品未稅價）。</p>
+       <p class="text-[11px] text-capybara font-bold">2026/11/1 起新制：結帳先付含稅價，出境時海關確認後才退款，退款會扣掉下列手續費（佔未稅價）。</p>
        <div id="taxFeeList" class="space-y-1.5"></div>
        <div class="p-2.5 rounded-xl bg-matcha-bg border border-matcha/40 space-y-1 text-[11px] font-bold text-matcha-dark">
-         <p><i class="fa-solid fa-lightbulb"></i> 唐吉訶德、Bic Camera、札幌藥妝、AEON 免手續費，大量採買優先集中在這幾家。</p>
+         <p><i class="fa-solid fa-lightbulb"></i> 唐吉訶德、Bic Camera、鶴羽藥妝免手續費，大量採買優先集中在這幾家。</p>
+         <p><i class="fa-solid fa-receipt"></i> 同一家店同一天未稅滿 ¥5,000 才能退稅；購買後 90 天內出境。</p>
+         <p><i class="fa-solid fa-credit-card"></i> 熊本機場沒有現金退稅服務，結帳時就把退款綁定信用卡（多半需要輸入卡片背面安全碼）。</p>
+         <p><i class="fa-solid fa-box-open"></i> 免稅品要帶到機場給海關確認，在日本用掉的消耗品不能退。</p>
          <p><i class="fa-solid fa-barcode"></i> 優惠券要在結帳<b>前</b>出示，刷卡後多半無法補折。</p>
-         <p><i class="fa-solid fa-plane-departure"></i> 出境前預留時間到機場海關機台完成確認。</p>
        </div>
-       <p class="text-[10px] text-capybara">※ 整理自網路攻略，費率以店家與退稅業者現場公告為準。優惠券請到「成員」分頁。</p>
+       <p class="text-[10px] text-capybara">※ 2026/11/6 依新制查證。「未公布」代表店家尚未公開費率，結帳前先問；各店可能隨時調整。優惠券請到「成員」分頁。</p>
      </div>
    </section>
 
@@ -725,7 +727,7 @@
          </div>
        </div>
        <div id="couponList" class="space-y-2.5"></div>
-       <p class="text-[10px] text-capybara">※ 整理自網路攻略，折扣與門檻以店家現場公告為準。各通路手續費比較見「航班退稅」分頁。</p>
+       <p class="text-[10px] text-capybara">※ 2026/11/6 查證，12/7–14 皆在有效期內。AEON 外國旅客 5% 券不適用九州，已移除。各通路手續費比較見「航班退稅」分頁。</p>
      </div>
 
      <div class="hand-card p-4 bg-paperCard space-y-3">
@@ -1876,59 +1878,56 @@
      update();
    }
 
-   // ===== 購物優惠券與退稅手續費（靜態資料，整理自網路攻略） =====
+   // ===== 購物優惠券與退稅手續費（2026/11/6 依退稅新制查證，適用 12/7–14） =====
    const COUPONS = [
-     { name: '唐吉訶德 Don Quijote', area: '天神・中洲・熊本市區', cat: '綜合藥妝・零食', fee: '0%',
-       deals: ['含稅滿 ¥11,000 折 5%', '含稅滿 ¥33,000 折 7%'],
-       usage: '不可截圖：結帳時保持連網，出示動態條碼', usageType: 'live',
-       links: [['樂享周游券', 'https://travelcontentsapp.com/sc/coupon/donki/'], ['樂吃購', 'https://www.letsgojp.com/coupon/288199/']] },
-     { name: 'Bic Camera', area: '天神・博多', cat: '家電・3C・藥妝', fee: '0%',
-       deals: ['家電・相機・玩具最高 7% OFF', '藥妝 5% OFF', '清酒 3% OFF'],
-       usage: '可截圖存相簿，結帳前出示條碼', usageType: 'shot',
-       links: [['LIVE JAPAN', 'https://livejapan.com/public/operation/coupon/biccamera/zh-tw.html'], ['樂吃購', 'https://www.letsgojp.com/coupon/1618/']] },
+     { name: '唐吉訶德 Don Quijote', area: '天神・中洲・熊本市區', cat: '綜合藥妝・零食', fee: '0%', feeNote: '店家吸收；機場領現金另計',
+       deals: ['滿 ¥11,000 折 5%', '滿 ¥33,000 折 7%'], valid: '未標示期限',
+       usage: '不可截圖：結帳前出示即時優惠券畫面', usageType: 'live',
+       links: [['Funliday', 'https://www.funliday.com/posts/dondondonki-coupon/'], ['樂吃購', 'https://www.letsgojp.com/coupon/288199/']] },
+     { name: 'Bic Camera', area: '天神・博多', cat: '家電・3C・藥妝', fee: '0%', feeNote: '活動期間，可能提前結束',
+       deals: ['相機・手錶・家電・玩具 7% OFF', '藥品・化妝品・食品・日用品 5% OFF', '日本酒 3% OFF'], valid: '至 2027/4/30',
+       usage: '可截圖；限免稅結帳，Apple、遊戲機等不適用', usageType: 'shot',
+       links: [['Funliday', 'https://www.funliday.com/posts/?p=105873'], ['LIVE JAPAN', 'https://livejapan.com/public/operation/coupon/biccamera/zh-tw.html']] },
      { name: '松本清 / Cocokara Fine', area: '天神・博多・熊本', cat: '藥妝連鎖', fee: '約 0.33%',
-       deals: ['未稅滿 ¥10,000 折 3%', '滿 ¥30,000 折 5%', '滿 ¥50,000 折 7%'],
-       usage: '結帳前出示手機電子優惠券條碼', usageType: 'shot',
+       deals: ['滿 ¥10,000 折 3%', '滿 ¥30,000 折 5%', '滿 ¥50,000 折 7%'], valid: '至 2027/3/31',
+       usage: '結帳前出示手機條碼；專櫃化妝品、尿布等不適用', usageType: 'shot',
        links: [['Funliday', 'https://www.funliday.com/posts/coupon_matsumoto/']] },
-     { name: '鶴羽藥妝 / 札幌藥妝', area: '天神・博多・熊本', cat: '藥妝連鎖', fee: '0%',
-       deals: ['未稅滿 ¥10,000 折 3%', '滿 ¥30,000 折 5%', '滿 ¥50,000 折 7%'],
-       usage: '結帳前出示條碼', usageType: 'shot',
-       links: [['步步日本', 'https://www.bubu-jp.com/archives/29371'], ['Calling Taiwan', 'https://www.callingtaiwan.com.tw/tsuruha/']] },
-     { name: 'AEON 永旺百貨・超市', area: 'Aeon Shoppers 天神等', cat: '服飾・食品・藥妝', fee: '0%',
-       deals: ['服飾・食品・藥妝 5% OFF', '生鮮熟食不能退稅，但出示優惠券仍享 5% 折扣'],
-       usage: '結帳前出示官方優惠券', usageType: 'shot',
-       links: [['AEON 官方', 'https://www.welcome-aeon.com/coupon/']] },
-     { name: '百貨公司 Guest Card', area: '岩田屋本店・大丸福岡天神・博多阪急・熊本鶴屋', cat: '大型百貨', fee: '約 1.5–2.3%',
-       deals: ['貴賓折扣卡 5% OFF', '單筆滿 ¥3,000 起；精品與特價品通常不適用'],
-       usage: '到百貨退稅或總服務台，出示護照免費申辦實體卡', usageType: 'counter', links: [] },
-     { name: '博多運河城 Canal City', area: '博多', cat: '大型商場', fee: '約 1.5%',
-       deals: ['指定店家 5%–10% OFF 或專屬小贈品'],
-       usage: '1F Information 領紙本手冊；1F 集中退稅櫃檯 10:00–21:30', usageType: 'counter',
+     { name: '鶴羽藥妝 Tsuruha', area: '福岡・熊本', cat: '藥妝連鎖', fee: '0%', feeNote: '店家吸收',
+       deals: ['含稅滿 ¥10,000 折 3%', '滿 ¥30,000 折 5%', '滿 ¥50,000 折 7%'], valid: '至 2027/12/31',
+       usage: '結帳前出示條碼；不可與其他優惠併用', usageType: 'shot',
+       links: [['LIVE JAPAN', 'https://livejapan.com/public/operation/coupon/tsuruhadrug/zh-tw.html'], ['步步日本', 'https://www.bubu-jp.com/archives/29371']] },
+     { name: '岩田屋 Guest Card', area: '天神', cat: '百貨公司', fee: '未公布',
+       deals: ['外國旅客 5% OFF', '限單價 ¥3,000 以上商品'], valid: '未標示期限',
+       usage: '購物前到本館 ANNEX 7F 免稅櫃台（10:00–19:45）憑護照申辦；特價品、食品餐飲、部分精品不適用，付款人姓名須與護照相同', usageType: 'counter',
+       links: [['岩田屋官網', 'https://www.iwataya-mitsukoshi.mistore.jp/iwataya/event_calendar/globalcustomer/guest-card.html']] },
+     { name: '博多運河城 Canal City', area: '博多', cat: '大型商場', fee: '未公布', feeNote: '館內 PIE VAT Station 退稅櫃台',
+       deals: ['館內優惠請到 1F Information 詢問'], valid: '—',
+       usage: '2026/9 新設 PIE VAT Station 退稅櫃台，可集中辦理', usageType: 'counter',
        links: [['官方網站', 'https://canalcity.co.jp/']] }
    ];
 
    const TAX_FEES = [
-     { cat: '藥妝・雜貨', brands: '唐吉訶德', fee: '0%', stars: 5, note: '集團免收手續費，首選' },
-     { cat: '藥妝連鎖', brands: 'Bic Camera・札幌藥妝・鶴羽藥妝', fee: '0%', stars: 5, note: '透過 J-TaxRefund 免手續費' },
-     { cat: '超市・伴手禮', brands: 'Aeon Shoppers 天神・TRIAL', fee: '0%', stars: 5, note: '熟食不可退；包裝零食滿 ¥5,000 可退' },
-     { cat: '藥妝連鎖', brands: '松本清・Cocokara Fine', fee: '約 0.33%', stars: 4, note: '手續費極低' },
-     { cat: '平價服飾', brands: 'UNIQLO・GU', fee: '約 1%', stars: 5, note: '基本款好買' },
-     { cat: '流行服飾', brands: 'ZARA・H&M・潮牌', fee: '約 1–1.5%', stars: 4, note: '商場內依商場規定' },
-     { cat: '戶外・運動', brands: 'ABC-MART・Nike・adidas', fee: '0–1%', stars: 4, note: '獨立門市常為 0%' },
-     { cat: '戶外・運動', brands: 'Montbell', fee: '2–3%', stars: 3, note: '看總金額再決定' },
-     { cat: '購物商場', brands: '博多運河城・AEON 夢樂城・AMU Plaza', fee: '約 1.5%', stars: 4, note: '運河城 1F 集中退稅' },
-     { cat: '大型百貨', brands: '岩田屋・大丸・博多阪急・鶴屋', fee: '約 1.5–2.3%', stars: 3, note: '同一天同一家集中買' },
-     { cat: '3C 家電', brands: 'EDION', fee: '定額 ¥210', stars: 4, note: '大單最划算' },
-     { cat: '3C 家電', brands: 'Yodobashi Camera', fee: '約 2.3%', stars: 4, note: '高單價家電' },
-     { cat: '日用雜貨', brands: 'MUJI・LOFT', fee: '約 1.5–2.3%', stars: 4, note: '依所在百貨' },
-     { cat: '日用雜貨', brands: '3COINS', fee: '定額 ¥320', stars: 3, note: '滿 ¥5,000 以上再退稅' },
-     { cat: '美妝專櫃', brands: '資生堂・SK-II 等', fee: '1–1.8%', stars: 3, note: '搭配百貨折扣卡' },
-     { cat: '美妝專櫃', brands: 'Fancl', fee: '約 3.5%', stars: 3, note: '手續費偏高' }
+     { brands: '唐吉訶德', cat: '藥妝・零食', fee: '0%', stars: 5, note: '店家吸收手續費' },
+     { brands: 'Bic Camera', cat: '家電・藥妝', fee: '0%', stars: 5, note: '活動期間，可能提前結束' },
+     { brands: '鶴羽藥妝・札幌藥妝', cat: '藥妝連鎖', fee: '0%', stars: 5, note: 'J-TaxRefund，店家吸收' },
+     { brands: '松本清・Cocokara Fine', cat: '藥妝連鎖', fee: '約 0.33%', stars: 4, note: '手續費極低' },
+     { brands: 'GU', cat: '平價服飾', fee: '1%', stars: 5, note: 'UNIQLO 未公布，預估相同' },
+     { brands: 'AEON Mall', cat: '購物商場', fee: '約 1.5%', stars: 4, note: '外國旅客 5% 券不適用九州' },
+     { brands: '大丸福岡天神・博多阪急', cat: '百貨公司', fee: '2.3%', stars: 3, note: 'Global Blue；同一家集中買' },
+     { brands: 'Yodobashi Camera', cat: '3C 家電', fee: '2.3%', stars: 3, note: 'Global Blue' },
+     { brands: 'EDION', cat: '3C 家電', fee: '定額 ¥210', stars: 4, note: '大單最划算' },
+     { brands: 'Montbell', cat: '戶外用品', fee: '2–3%', stars: 3, note: '依分店不同' },
+     { brands: '3COINS', cat: '日用雜貨', fee: '定額 ¥320', stars: 2, note: '另扣退款金額 5% 匯款費' },
+     { brands: 'Fancl', cat: '美妝保養', fee: '3.5%', stars: 2, note: '另扣退款金額 5% 匯款費' },
+     { brands: '岩田屋・鶴屋百貨', cat: '百貨公司', fee: '未公布', stars: 0, note: '現場詢問' },
+     { brands: '博多運河城・AMU Plaza', cat: '購物商場', fee: '未公布', stars: 0, note: '現場詢問' },
+     { brands: 'ABC-MART・ZARA・H&M・MUJI・LOFT・TRIAL', cat: '其他', fee: '未公布', stars: 0, note: '結帳前先問手續費' }
    ];
 
    const feeBadge = (fee) => {
-     const free = fee === '0%';
-     return `<span class="hand-pill px-2 py-0.5 text-[10px] font-black whitespace-nowrap ${free ? 'bg-matcha text-white' : 'bg-white text-ink'}">${free ? '免手續費' : '手續費 ' + esc(fee)}</span>`;
+     const free = fee === '0%', unknown = fee === '未公布';
+     const cls = free ? 'bg-matcha text-white' : unknown ? 'bg-paper text-capybara border-dashed' : 'bg-white text-ink';
+     return `<span class="hand-pill px-2 py-0.5 text-[10px] font-black whitespace-nowrap ${cls}">${free ? '免手續費' : unknown ? '手續費未公布' : '手續費 ' + esc(fee)}</span>`;
    };
 
    function renderCoupons() {
@@ -1943,21 +1942,27 @@
              <h4 class="text-xs font-black text-ink">${esc(c.name)}</h4>
              <p class="text-[10px] text-capybara font-bold">${esc(c.cat)}・${esc(c.area)}</p>
            </div>
-           ${feeBadge(c.fee)}
+           <div class="flex flex-col items-end gap-0.5 flex-shrink-0">
+             ${feeBadge(c.fee)}
+             ${c.feeNote ? `<span class="text-[9px] text-capybara font-bold">${esc(c.feeNote)}</span>` : ''}
+           </div>
          </div>
          <div class="flex flex-wrap gap-1 pl-1.5">
            ${c.deals.map((d, i) => `<span class="px-2 py-0.5 rounded-lg text-[10px] font-black ${i === 0 ? 'bg-akaushi/15 text-akaushi' : 'bg-paper text-ink'} border border-handBorder/30">${esc(d)}</span>`).join('')}
          </div>
          <p class="text-[10px] font-bold pl-1.5 ${c.usageType === 'live' ? 'text-akaushi' : 'text-matcha-dark'}"><i class="fa-solid ${usageIcon[c.usageType]}"></i> ${esc(c.usage)}</p>
-         ${c.links.length ? `<div class="flex flex-wrap gap-1.5 pl-1.5 pt-0.5">${c.links.map(([label, url]) =>
-           `<a href="${esc(url)}" target="_blank" rel="noopener" class="hand-pill px-2.5 py-0.5 bg-akaushi text-white text-[10px] font-bold inline-flex items-center gap-1">領取：${esc(label)} <i class="fa-solid fa-arrow-up-right-from-square text-[8px]"></i></a>`).join('')}</div>` : ''}
+         <div class="flex flex-wrap items-center gap-1.5 pl-1.5 pt-0.5">
+           <span class="text-[10px] text-capybara font-bold"><i class="fa-regular fa-calendar"></i> ${esc(c.valid)}</span>
+           ${c.links.map(([label, url]) =>
+             `<a href="${esc(url)}" target="_blank" rel="noopener" class="hand-pill px-2.5 py-0.5 bg-akaushi text-white text-[10px] font-bold inline-flex items-center gap-1">領取：${esc(label)} <i class="fa-solid fa-arrow-up-right-from-square text-[8px]"></i></a>`).join('')}
+         </div>
        </div>`).join('');
    }
 
    function renderTaxFees() {
      const el = $('taxFeeList');
      if (!el) return;
-     const stars = (n) => Array.from({ length: 5 }, (_, i) => `<i class="fa-solid fa-star ${i < n ? 'text-akaushi' : 'text-capybara/20'}"></i>`).join('');
+     const stars = (n) => n ? Array.from({ length: 5 }, (_, i) => `<i class="fa-solid fa-star ${i < n ? 'text-akaushi' : 'text-capybara/20'}"></i>`).join('') : '';
      el.innerHTML = TAX_FEES.map(f => `
        <div class="p-2 bg-white rounded-xl border border-handBorder flex justify-between items-center gap-2">
          <div class="min-w-0">
