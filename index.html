@@ -127,6 +127,29 @@
    transform: translateX(-50%) translateY(0);
  }
  </style>
+<script>
+  // 字體大小：每支手機各自記住，預設「大」
+  try { document.documentElement.dataset.fz = localStorage.getItem('kyushu_font') || 'lg'; } catch (e) { document.documentElement.dataset.fz = 'lg'; }
+</script>
+<style>
+  /* 頂部標題列不縮放，避免擠到換行；其餘內容依設定放大 */
+  html[data-fz="lg"] body > :not(header) .text-\[8px\] { font-size: 10px; }
+  html[data-fz="lg"] body > :not(header) .text-\[9px\] { font-size: 11px; }
+  html[data-fz="lg"] body > :not(header) .text-\[10px\] { font-size: 12px; line-height: 1.45; }
+  html[data-fz="lg"] body > :not(header) .text-\[11px\] { font-size: 13px; line-height: 1.45; }
+  html[data-fz="lg"] body > :not(header) .text-xs { font-size: 14px; line-height: 1.45; }
+  html[data-fz="lg"] body > :not(header) .text-sm { font-size: 16px; line-height: 1.4; }
+  html[data-fz="lg"] body > :not(header) .text-base { font-size: 18px; line-height: 1.4; }
+  html[data-fz="lg"] body > :not(header) .text-lg { font-size: 20px; }
+  html[data-fz="xl"] body > :not(header) .text-\[8px\] { font-size: 11px; }
+  html[data-fz="xl"] body > :not(header) .text-\[9px\] { font-size: 12px; }
+  html[data-fz="xl"] body > :not(header) .text-\[10px\] { font-size: 13px; line-height: 1.45; }
+  html[data-fz="xl"] body > :not(header) .text-\[11px\] { font-size: 14px; line-height: 1.45; }
+  html[data-fz="xl"] body > :not(header) .text-xs { font-size: 15px; line-height: 1.45; }
+  html[data-fz="xl"] body > :not(header) .text-sm { font-size: 17px; line-height: 1.4; }
+  html[data-fz="xl"] body > :not(header) .text-base { font-size: 19px; line-height: 1.4; }
+  html[data-fz="xl"] body > :not(header) .text-lg { font-size: 21px; }
+</style>
 </head>
 <body class="pb-24 pt-3 px-3 sm:px-4 max-w-md mx-auto min-h-screen relative">
 
@@ -313,21 +336,25 @@
            <svg class="w-8 h-8"><use href="#sketch-kumamon"/></svg>
          </div>
          <div class="text-left">
-           <h1 class="text-lg font-black text-ink tracking-tight flex items-center gap-1.5">
+           <h1 class="text-lg font-black text-ink tracking-tight flex items-center gap-1.5 whitespace-nowrap">
              福岡・熊本 8天7夜
              <span class="text-[10px] bg-akaushi text-white font-bold px-2 py-0.5 rounded-full border border-handBorder shadow-sm">自由行</span>
            </h1>
-           <div class="flex items-center gap-1.5 text-[11px] font-bold text-capybara">
+           <div class="flex items-center gap-1.5 text-[11px] font-bold text-capybara whitespace-nowrap">
              <span id="roomStatusText" class="text-matcha-dark font-extrabold"><i class="fa-solid fa-users"></i> 尚未加入房間</span>
              <button onclick="shareRoomLink()" class="text-[10px] text-akaushi underline">分享連結</button>
            </div>
          </div>
        </div>
 
-       <button onclick="openRoomModal()" class="hand-pill px-2.5 py-1.5 bg-paper font-bold text-xs text-ink flex items-center gap-1">
-         <i class="fa-solid fa-rotate text-matcha"></i>
-         <span>切換共用</span>
-       </button>
+       <div class="flex flex-col gap-1 flex-shrink-0">
+         <button onclick="cycleFontSize()" class="hand-pill px-2 py-0.5 bg-paper font-black text-[11px] text-ink flex items-center justify-center gap-1 whitespace-nowrap" aria-label="切換字體大小">
+           <i class="fa-solid fa-font text-akaushi text-[10px]"></i><span id="fzLabel">大</span>
+         </button>
+         <button onclick="openRoomModal()" class="hand-pill px-2 py-0.5 bg-paper font-bold text-[11px] text-ink flex items-center justify-center gap-1 whitespace-nowrap">
+           <i class="fa-solid fa-rotate text-matcha text-[10px]"></i><span>房間</span>
+         </button>
+       </div>
      </div>
    </div>
  </header>
@@ -2147,6 +2174,22 @@
        </div>`).join('');
    }
 
+   // ===== 字體大小 =====
+   const FONT_LEVELS = [['std', '標準'], ['lg', '大'], ['xl', '特大']];
+   function applyFontLabel() {
+     const cur = document.documentElement.dataset.fz || 'lg';
+     $('fzLabel').textContent = (FONT_LEVELS.find(l => l[0] === cur) || FONT_LEVELS[1])[1];
+   }
+   function cycleFontSize() {
+     const cur = document.documentElement.dataset.fz || 'lg';
+     const i = FONT_LEVELS.findIndex(l => l[0] === cur);
+     const next = FONT_LEVELS[(i + 1) % FONT_LEVELS.length];
+     document.documentElement.dataset.fz = next[0];
+     storage.set('kyushu_font', next[0]);
+     applyFontLabel();
+     showToast(`字體：${next[1]}`);
+   }
+
    // ===== 共用 UI =====
    function switchTab(tabId) {
      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
@@ -2218,13 +2261,14 @@
      joinRoom, createRoom, shareRoomLink, openRoomModal, openRateModal, saveExchangeRate,
      addNewExpense, selectAllSplitters, addNewCustomFood,
      switchVaultMember, openEditMemberVaultModal, handleModalFileSelect, saveMemberVaultData,
-     saveNewMember, deleteCurrentMember
+     saveNewMember, deleteCurrentMember, cycleFontSize
    });
 
    // ===== 啟動 =====
    $('spotDayInput').innerHTML = Object.entries(daysData).map(([d, v]) => `<option value="${d}">${esc(v.dayLabel)}</option>`).join('');
    switchDay(1);
    setupKmjChecklistEvents();
+   applyFontLabel();
    renderCoupons();
    renderTaxFees();
    renderCardGuide();
