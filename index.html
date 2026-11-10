@@ -127,6 +127,30 @@
    transform: translateX(-50%) translateY(0);
  }
  </style>
+<script>
+  // 字體大小：每支手機各自記住，預設「大」
+  try { document.documentElement.dataset.fz = localStorage.getItem('kyushu_font') || 'lg'; } catch (e) { document.documentElement.dataset.fz = 'lg'; }
+</script>
+<style>
+  /* 頂部標題列不縮放，避免擠到換行；其餘內容依設定放大 */
+  html[data-fz="lg"] body > :not(header) .text-\[8px\] { font-size: 10px; }
+  html[data-fz="lg"] body > :not(header) .text-\[9px\] { font-size: 11px; }
+  html[data-fz="lg"] body > :not(header) .text-\[10px\] { font-size: 12px; line-height: 1.45; }
+  html[data-fz="lg"] body > :not(header) .text-\[11px\] { font-size: 13px; line-height: 1.45; }
+  html[data-fz="lg"] body > :not(header) .text-xs { font-size: 14px; line-height: 1.45; }
+  html[data-fz="lg"] body > :not(header) .text-sm { font-size: 16px; line-height: 1.4; }
+  html[data-fz="lg"] body > :not(header) .text-base { font-size: 18px; line-height: 1.4; }
+  html[data-fz="lg"] body > :not(header) .text-lg { font-size: 20px; }
+  html[data-fz="xl"] body > :not(header) .text-\[8px\] { font-size: 11px; }
+  html[data-fz="xl"] body > :not(header) .text-\[9px\] { font-size: 12px; }
+  html[data-fz="xl"] body > :not(header) .text-\[10px\] { font-size: 13px; line-height: 1.45; }
+  html[data-fz="xl"] body > :not(header) .text-\[11px\] { font-size: 14px; line-height: 1.45; }
+  html[data-fz="xl"] body > :not(header) .text-xs { font-size: 15px; line-height: 1.45; }
+  html[data-fz="xl"] body > :not(header) .text-sm { font-size: 17px; line-height: 1.4; }
+  html[data-fz="xl"] body > :not(header) .text-base { font-size: 19px; line-height: 1.4; }
+  html[data-fz="xl"] body > :not(header) .text-lg { font-size: 21px; }
+  summary::-webkit-details-marker { display: none; }
+</style>
 </head>
 <body class="pb-24 pt-3 px-3 sm:px-4 max-w-md mx-auto min-h-screen relative">
 
@@ -313,21 +337,25 @@
            <svg class="w-8 h-8"><use href="#sketch-kumamon"/></svg>
          </div>
          <div class="text-left">
-           <h1 class="text-lg font-black text-ink tracking-tight flex items-center gap-1.5">
+           <h1 class="text-lg font-black text-ink tracking-tight flex items-center gap-1.5 whitespace-nowrap">
              福岡・熊本 8天7夜
              <span class="text-[10px] bg-akaushi text-white font-bold px-2 py-0.5 rounded-full border border-handBorder shadow-sm">自由行</span>
            </h1>
-           <div class="flex items-center gap-1.5 text-[11px] font-bold text-capybara">
+           <div class="flex items-center gap-1.5 text-[11px] font-bold text-capybara whitespace-nowrap">
              <span id="roomStatusText" class="text-matcha-dark font-extrabold"><i class="fa-solid fa-users"></i> 尚未加入房間</span>
              <button onclick="shareRoomLink()" class="text-[10px] text-akaushi underline">分享連結</button>
            </div>
          </div>
        </div>
 
-       <button onclick="openRoomModal()" class="hand-pill px-2.5 py-1.5 bg-paper font-bold text-xs text-ink flex items-center gap-1">
-         <i class="fa-solid fa-rotate text-matcha"></i>
-         <span>切換共用</span>
-       </button>
+       <div class="flex flex-col gap-1 flex-shrink-0">
+         <button onclick="cycleFontSize()" class="hand-pill px-2 py-0.5 bg-paper font-black text-[11px] text-ink flex items-center justify-center gap-1 whitespace-nowrap" aria-label="切換字體大小">
+           <i class="fa-solid fa-font text-akaushi text-[10px]"></i><span id="fzLabel">大</span>
+         </button>
+         <button onclick="openRoomModal()" class="hand-pill px-2 py-0.5 bg-paper font-bold text-[11px] text-ink flex items-center justify-center gap-1 whitespace-nowrap">
+           <i class="fa-solid fa-rotate text-matcha text-[10px]"></i><span>房間</span>
+         </button>
+       </div>
      </div>
    </div>
  </header>
@@ -642,42 +670,100 @@
      <div class="hand-card p-4 bg-paperCard space-y-2">
        <h3 class="text-xs font-black text-ink border-b-2 border-dashed border-capybara/20 pb-1.5 flex items-center gap-1.5">
          <span class="w-5 h-5 rounded-full bg-akaushi text-white text-[10px] font-bold flex items-center justify-center">06</span>
-         各通路退稅手續費比較
+         退稅新制提醒
        </h3>
-       <p class="text-[11px] text-capybara font-bold">2026/11/1 起新制：結帳先付含稅價，出境時海關確認後才退款，退款會扣掉下列手續費（佔未稅價）。</p>
-       <div id="taxFeeList" class="space-y-1.5"></div>
        <div class="p-2.5 rounded-xl bg-matcha-bg border border-matcha/40 space-y-1 text-[11px] font-bold text-matcha-dark">
-         <p><i class="fa-solid fa-lightbulb"></i> 唐吉訶德、Bic Camera、鶴羽藥妝免手續費，大量採買優先集中在這幾家。</p>
          <p><i class="fa-solid fa-receipt"></i> 同一家店同一天未稅滿 ¥5,000 才能退稅；購買後 90 天內出境。</p>
          <p><i class="fa-solid fa-credit-card"></i> 熊本機場沒有現金退稅服務，結帳時就把退款綁定信用卡（多半需要輸入卡片背面安全碼）。</p>
          <p><i class="fa-solid fa-box-open"></i> 免稅品要帶到機場給海關確認，在日本用掉的消耗品不能退。</p>
-         <p><i class="fa-solid fa-barcode"></i> 優惠券要在結帳<b>前</b>出示，刷卡後多半無法補折。</p>
        </div>
-       <p class="text-[10px] text-capybara">※ 2026/11/10 依新制查證。機場領現金另加約 1–1.1%（熊本機場沒有此服務）。「未公布」請結帳前先問；各店可能隨時調整。優惠券與刷卡攻略請到「成員」分頁。</p>
+       <p class="text-[10px] text-capybara">※ 各店手續費比較、優惠券與刷卡攻略在「美食購物 → 購物」。</p>
      </div>
    </section>
 
-   <!-- TAB 3: GOURMET -->
+   <!-- TAB 3: GOURMET & SHOPPING -->
    <section id="tab-food" class="tab-content space-y-3">
      <div class="hand-card p-3 bg-paperCard space-y-2.5">
        <div class="flex justify-between items-center">
          <h2 class="text-sm font-black text-ink flex items-center gap-1.5">
-           <svg class="w-6 h-6"><use href="#food-ramen"/></svg> 美食・伴手禮寶典
+           <svg class="w-6 h-6"><use href="#food-ramen"/></svg> 美食・購物
          </h2>
-         <button onclick="openModal('addFoodModal')" class="hand-pill px-3 py-1.5 bg-akaushi text-white text-xs font-bold flex items-center gap-1 shadow-sm">
+         <button id="addFoodBtn" onclick="openModal('addFoodModal')" class="hand-pill px-3 py-1.5 bg-akaushi text-white text-xs font-bold flex items-center gap-1 shadow-sm">
            <i class="fa-solid fa-plus text-[10px]"></i> 新增口袋美食
          </button>
        </div>
 
        <div class="flex gap-1.5 pt-2 border-t border-dashed border-capybara/20">
          <button onclick="filterFood('gourmet')" class="food-tab hand-pill px-2.5 py-1 text-[11px] font-bold bg-akaushi text-white flex-shrink-0" data-ftab="gourmet">美食推薦</button>
-         <button onclick="filterFood('souvenir')" class="food-tab hand-pill px-2.5 py-1 text-[11px] font-bold bg-white text-ink flex-shrink-0" data-ftab="souvenir">伴手禮推薦</button>
+         <button onclick="filterFood('souvenir')" class="food-tab hand-pill px-2.5 py-1 text-[11px] font-bold bg-white text-ink flex-shrink-0" data-ftab="souvenir">伴手禮</button>
+         <button onclick="filterFood('shopping')" class="food-tab hand-pill px-2.5 py-1 text-[11px] font-bold bg-white text-ink flex-shrink-0" data-ftab="shopping">購物・刷卡・退稅</button>
        </div>
 
        <div id="foodCatChips" class="flex overflow-x-auto gap-1.5 pt-2 pb-1 px-0.5 no-scrollbar border-t border-dashed border-capybara/20"></div>
-       <p class="text-[10px] text-capybara font-bold">※ 評分與每人價位為食べログ資料（2026/11），出發前請再確認營業時間。</p>
+       <p id="foodNote" class="text-[10px] text-capybara font-bold">※ 評分與每人價位為食べログ資料（2026/11），出發前請再確認營業時間。</p>
      </div>
      <div id="foodListContainer" class="space-y-3"></div>
+
+     <div id="shoppingPanel" class="hidden space-y-3">
+     <div class="hand-card p-4 bg-paperCard space-y-3">
+       <div class="flex items-center gap-2.5 border-b-2 border-dashed border-capybara/20 pb-2">
+         <div class="w-10 h-10 rounded-full border-2 border-handBorder bg-akaushi/15 flex items-center justify-center text-akaushi"><i class="fa-solid fa-ticket"></i></div>
+         <div>
+           <h3 class="text-sm font-black text-ink">購物優惠券（全團共用）</h3>
+           <p class="text-[10px] text-capybara">先領券再結帳，搭配退稅最划算</p>
+         </div>
+       </div>
+       <div id="couponList" class="space-y-2.5"></div>
+       <p class="text-[10px] text-capybara">※ 2026/11/10 查證，12/7–14 皆在有效期內。AEON 外國旅客 5% 券不適用九州。點卡片可展開使用方式與領取連結。刷卡攻略、手續費比較在下方。</p>
+     </div>
+
+     <div class="hand-card p-4 bg-paperCard space-y-3">
+       <div class="flex items-center gap-2.5 border-b-2 border-dashed border-capybara/20 pb-2">
+         <div class="w-10 h-10 rounded-full border-2 border-handBorder bg-gold/20 flex items-center justify-center text-ink"><i class="fa-solid fa-credit-card"></i></div>
+         <div>
+           <h3 class="text-sm font-black text-ink">刷卡攻略（12/7–14 適用）</h3>
+           <p class="text-[10px] text-capybara">各店推薦刷卡見上方優惠券卡片</p>
+         </div>
+       </div>
+       <div class="p-2.5 rounded-xl bg-akaushi/10 border border-akaushi/40 text-[11px] font-black text-akaushi"><i class="fa-solid fa-yen-sign"></i> 刷卡一律選「日圓 JPY」結帳，不要選台幣。回饋未扣海外交易手續費（多數卡 1.5%）。</div>
+       <div id="cardScenes" class="grid grid-cols-1 gap-1.5"></div>
+       <details class="group">
+         <summary class="list-none text-[11px] font-black text-ink cursor-pointer select-none flex items-center gap-1"><i class="fa-solid fa-chevron-right text-[9px] transition group-open:rotate-90"></i> 8 張卡 12 月回饋排行</summary>
+         <div id="cardRankList" class="space-y-1.5 mt-2"></div>
+       </details>
+       <details class="group p-2.5 rounded-xl bg-white border border-handBorder text-[10px] font-bold text-ink">
+         <summary class="list-none cursor-pointer select-none text-[11px] font-black text-ink flex items-center gap-1"><i class="fa-solid fa-chevron-right text-[9px] transition group-open:rotate-90"></i> 刷卡加碼活動登錄教學（MTR・MyJapan+）</summary>
+         <div class="space-y-1 mt-2">
+         <p class="font-black text-matcha-dark"><i class="fa-brands fa-cc-mastercard"></i> Mastercard Travel Rewards（uniopen、Unicard 適用，至 12/31）</p>
+         <p>唐吉訶德滿 ¥10,000 回 ¥1,000、Bic 滿 ¥30,000 回 ¥2,000、松本清滿 ¥20,000 回 ¥2,000、大丸福岡天神滿 ¥30,000 回 ¥3,000（每季每店一次，需單次刷滿）</p>
+         <ol class="list-decimal pl-4 space-y-0.5 text-capybara">
+           <li>到 MTR 官網用姓名、卡號、Email 註冊，地區選「日本」</li>
+           <li>逐店按「啟用優惠」，看到成功訊息才算完成；<b class="text-akaushi">先啟用再刷卡</b></li>
+           <li>一個帳號只能綁同一家銀行的卡：uniopen（中信）、Unicard（玉山）要用兩個 Email 分開註冊</li>
+           <li>回饋約 30 天內以負項折抵出現在信用卡帳單，沒入帳找 Mastercard 客服</li>
+         </ol>
+         <div class="flex flex-wrap gap-1.5 pt-0.5">
+           <a href="https://mtr.mastercardservices.com/zn-TW/login" target="_blank" rel="noopener" class="hand-pill px-2.5 py-0.5 bg-akaushi text-white text-[10px] font-bold inline-flex items-center gap-1">前往 MTR 註冊／啟用 <i class="fa-solid fa-arrow-up-right-from-square text-[8px]"></i></a>
+           <a href="https://www.beurlife.com/2025/08/mastercard_travel_rewards_in_japan.html" target="_blank" rel="noopener" class="hand-pill px-2.5 py-0.5 bg-white text-ink text-[10px] font-bold inline-flex items-center gap-1">圖文教學</a>
+         </div>
+         <p class="font-black text-matcha-dark pt-1"><i class="fa-solid fa-mobile-screen"></i> JCB MyJapan+ App（富邦 J 卡，至 12/31）</p>
+         <p>App 內登錄：福岡指定商場滿 ¥20,000 回 ¥2,000、福岡指定餐廳最高 30%（每卡上限 ¥5,000），名額有限</p>
+         </div>
+       </details>
+       <p class="text-[10px] text-capybara">※ 2026/11/10 查證。加碼多需事先登錄且有名額、上限，出發前再到各銀行 App 確認。</p>
+     </div>
+
+     <div class="hand-card p-4 bg-paperCard space-y-2">
+       <h3 class="text-xs font-black text-ink border-b-2 border-dashed border-capybara/20 pb-1.5 flex items-center gap-1.5">
+         <i class="fa-solid fa-percent text-akaushi"></i>
+         各店退稅手續費比較
+       </h3>
+       <p class="text-[11px] text-capybara font-bold">2026/11/1 起新制：結帳先付含稅價，出境時海關確認後才退款，退款會扣掉下列手續費（佔未稅價）。</p>
+       <div id="taxFeeList" class="space-y-1.5"></div>
+       <button id="taxFeeMore" onclick="toggleTaxFees()" class="w-full hand-pill py-1 bg-white text-ink text-[11px] font-bold"></button>
+       <p class="text-[10px] text-capybara">※ 2026/11/10 依新制查證。機場領現金另加約 1–1.1%（熊本機場沒有此服務）。「未公布」請結帳前先問；各店可能隨時調整。優惠券與刷卡攻略在上方。</p>
+     </div>
+     </div>
    </section>
 
    <!-- TAB 4: EXPENSE -->
@@ -788,50 +874,6 @@
        <div id="memberVaultContainer" class="space-y-2 text-xs"></div>
      </div>
 
-     <div class="hand-card p-4 bg-paperCard space-y-3">
-       <div class="flex items-center gap-2.5 border-b-2 border-dashed border-capybara/20 pb-2">
-         <div class="w-10 h-10 rounded-full border-2 border-handBorder bg-gold/20 flex items-center justify-center text-ink"><i class="fa-solid fa-credit-card"></i></div>
-         <div>
-           <h3 class="text-sm font-black text-ink">刷卡攻略（12/7–14 適用）</h3>
-           <p class="text-[10px] text-capybara">依持有卡片排序，各店推薦見下方優惠券</p>
-         </div>
-       </div>
-       <div class="p-2.5 rounded-xl bg-akaushi/10 border border-akaushi/40 text-[11px] font-black text-akaushi"><i class="fa-solid fa-yen-sign"></i> 刷卡一律選「日圓 JPY」結帳，不要選台幣。回饋未扣海外交易手續費（多數卡 1.5%）。</div>
-       <div id="cardScenes" class="grid grid-cols-1 gap-1.5"></div>
-       <details class="group">
-         <summary class="text-[11px] font-black text-ink cursor-pointer select-none flex items-center gap-1"><i class="fa-solid fa-chevron-right text-[9px] transition group-open:rotate-90"></i> 8 張卡 12 月回饋排行</summary>
-         <div id="cardRankList" class="space-y-1.5 mt-2"></div>
-       </details>
-       <div class="p-2.5 rounded-xl bg-white border border-handBorder text-[10px] font-bold text-ink space-y-1">
-         <p class="font-black text-matcha-dark"><i class="fa-brands fa-cc-mastercard"></i> Mastercard Travel Rewards（uniopen、Unicard 適用，至 12/31）</p>
-         <p>唐吉訶德滿 ¥10,000 回 ¥1,000、Bic 滿 ¥30,000 回 ¥2,000、松本清滿 ¥20,000 回 ¥2,000、大丸福岡天神滿 ¥30,000 回 ¥3,000（每季每店一次，需單次刷滿）</p>
-         <ol class="list-decimal pl-4 space-y-0.5 text-capybara">
-           <li>到 MTR 官網用姓名、卡號、Email 註冊，地區選「日本」</li>
-           <li>逐店按「啟用優惠」，看到成功訊息才算完成；<b class="text-akaushi">先啟用再刷卡</b></li>
-           <li>一個帳號只能綁同一家銀行的卡：uniopen（中信）、Unicard（玉山）要用兩個 Email 分開註冊</li>
-           <li>回饋約 30 天內以負項折抵出現在信用卡帳單，沒入帳找 Mastercard 客服</li>
-         </ol>
-         <div class="flex flex-wrap gap-1.5 pt-0.5">
-           <a href="https://mtr.mastercardservices.com/zn-TW/login" target="_blank" rel="noopener" class="hand-pill px-2.5 py-0.5 bg-akaushi text-white text-[10px] font-bold inline-flex items-center gap-1">前往 MTR 註冊／啟用 <i class="fa-solid fa-arrow-up-right-from-square text-[8px]"></i></a>
-           <a href="https://www.beurlife.com/2025/08/mastercard_travel_rewards_in_japan.html" target="_blank" rel="noopener" class="hand-pill px-2.5 py-0.5 bg-white text-ink text-[10px] font-bold inline-flex items-center gap-1">圖文教學</a>
-         </div>
-         <p class="font-black text-matcha-dark pt-1"><i class="fa-solid fa-mobile-screen"></i> JCB MyJapan+ App（富邦 J 卡，至 12/31）</p>
-         <p>App 內登錄：福岡指定商場滿 ¥20,000 回 ¥2,000、福岡指定餐廳最高 30%（每卡上限 ¥5,000），名額有限</p>
-       </div>
-       <p class="text-[10px] text-capybara">※ 2026/11/10 查證。加碼多需事先登錄且有名額、上限，出發前再到各銀行 App 確認。</p>
-     </div>
-
-     <div class="hand-card p-4 bg-paperCard space-y-3">
-       <div class="flex items-center gap-2.5 border-b-2 border-dashed border-capybara/20 pb-2">
-         <div class="w-10 h-10 rounded-full border-2 border-handBorder bg-akaushi/15 flex items-center justify-center text-akaushi"><i class="fa-solid fa-ticket"></i></div>
-         <div>
-           <h3 class="text-sm font-black text-ink">購物優惠券（全團共用）</h3>
-           <p class="text-[10px] text-capybara">先領券再結帳，搭配退稅最划算</p>
-         </div>
-       </div>
-       <div id="couponList" class="space-y-2.5"></div>
-       <p class="text-[10px] text-capybara">※ 2026/11/10 查證，12/7–14 皆在有效期內。AEON 外國旅客 5% 券不適用九州。各通路手續費比較見「航班退稅」分頁。</p>
-     </div>
 
      <div class="hand-card p-4 bg-paperCard space-y-3">
        <div class="flex items-center gap-2">
@@ -878,7 +920,7 @@
      </button>
      <button onclick="switchTab('food')" class="nav-btn flex flex-col items-center gap-0.5 text-capybara hover:text-akaushi font-bold" data-tab="food">
        <i class="fa-solid fa-utensils text-base"></i>
-       <span class="text-[10px]">美食</span>
+       <span class="text-[10px] whitespace-nowrap">美食購物</span>
      </button>
      <button onclick="switchTab('vault')" class="nav-btn flex flex-col items-center gap-0.5 text-capybara hover:text-akaushi font-bold" data-tab="vault">
        <i class="fa-solid fa-user text-base"></i>
@@ -1736,6 +1778,9 @@
    function filterFood(type) {
      currentFoodTab = type;
      currentFoodCategory = '';
+     const shopping = type === 'shopping';
+     ['foodListContainer', 'foodCatChips', 'foodNote', 'addFoodBtn'].forEach(id => $(id)?.classList.toggle('hidden', shopping));
+     $('shoppingPanel').classList.toggle('hidden', !shopping);
      document.querySelectorAll('.food-tab').forEach(btn => {
        const on = btn.dataset.ftab === type;
        btn.className = `food-tab hand-pill px-2.5 py-1 text-[11px] font-bold flex-shrink-0 ${on ? 'bg-akaushi text-white' : 'bg-white text-ink'}`;
@@ -1777,6 +1822,7 @@
    function renderFoodList() {
      const container = $('foodListContainer');
      if (!container) return;
+     if (currentFoodTab === 'shopping') return;
      const inTab = [...foodList, ...state.foods].filter(item => currentFoodTab === '' || item.type === currentFoodTab);
      renderFoodCats(inTab);
      const filtered = inTab.filter(item => currentFoodCategory === '' || item.tag === currentFoodCategory);
@@ -2074,34 +2120,42 @@
      const el = $('couponList');
      if (!el) return;
      const usageIcon = { live: 'fa-wifi', shot: 'fa-mobile-screen', counter: 'fa-id-card' };
+     const cardRow = ([card, rate, note], i) => `
+       <div class="flex items-start gap-1.5 text-[10px]">
+         <span class="hand-pill px-1.5 py-0 text-[9px] font-black whitespace-nowrap ${i === 0 ? 'bg-ink text-white' : 'bg-white text-capybara'}">${i === 0 ? '最推薦' : '次選'}</span>
+         <span class="min-w-0"><b class="text-ink">${esc(card)}</b> <b class="text-akaushi font-mono">${esc(rate)}</b>${i === 0 ? '' : `<span class="text-capybara font-bold">・${esc(note)}</span>`}</span>
+       </div>`;
      el.innerHTML = COUPONS.map(c => `
-       <div class="p-3 bg-white rounded-xl border-2 border-handBorder space-y-1.5 relative overflow-hidden">
-         <div class="absolute left-0 top-3 bottom-3 border-l-4 border-dashed border-akaushi/40"></div>
-         <div class="flex justify-between items-start gap-2 pl-1.5">
-           <div class="min-w-0">
-             <h4 class="text-xs font-black text-ink">${esc(c.name)}</h4>
-             <p class="text-[10px] text-capybara font-bold">${esc(c.cat)}・${esc(c.area)}</p>
-           </div>
-           <div class="flex flex-col items-end gap-0.5 flex-shrink-0">
+       <details class="group p-3 bg-white rounded-xl border-2 border-handBorder relative overflow-hidden">
+         <summary class="list-none cursor-pointer select-none space-y-1.5">
+           <div class="absolute left-0 top-3 bottom-3 border-l-4 border-dashed border-akaushi/40"></div>
+           <div class="flex justify-between items-start gap-2 pl-1.5">
+             <div class="min-w-0">
+               <h4 class="text-xs font-black text-ink">${esc(c.name)}</h4>
+               <p class="text-[10px] text-capybara font-bold">${esc(c.cat)}・${esc(c.area)}</p>
+             </div>
              ${feeBadge(c.fee)}
-             ${c.feeNote ? `<span class="text-[9px] text-capybara font-bold">${esc(c.feeNote)}</span>` : ''}
+           </div>
+           <div class="flex flex-wrap gap-1 pl-1.5">
+             ${c.deals.map((d, i) => `<span class="px-2 py-0.5 rounded-lg text-[10px] font-black ${i === 0 ? 'bg-akaushi/15 text-akaushi' : 'bg-paper text-ink'} border border-handBorder/30">${esc(d)}</span>`).join('')}
+           </div>
+           ${c.cards ? `<div class="pl-1.5">${cardRow(c.cards[0], 0)}</div>` : ''}
+           <p class="pl-1.5 text-[10px] font-black text-capybara flex items-center gap-1"><i class="fa-solid fa-chevron-down text-[8px] transition group-open:rotate-180"></i><span class="group-open:hidden">展開使用方式・領取連結</span><span class="hidden group-open:inline">收合</span></p>
+         </summary>
+         <div class="space-y-1.5 pt-2 mt-1.5 border-t border-dashed border-capybara/20 pl-1.5">
+           ${c.feeNote ? `<p class="text-[10px] text-capybara font-bold"><i class="fa-solid fa-circle-info"></i> 手續費：${esc(c.feeNote)}</p>` : ''}
+           <p class="text-[10px] font-bold ${c.usageType === 'live' ? 'text-akaushi' : 'text-matcha-dark'}"><i class="fa-solid ${usageIcon[c.usageType]}"></i> ${esc(c.usage)}</p>
+           ${c.cards ? `<div class="rounded-lg bg-gold/10 border border-gold/40 p-1.5 space-y-1">
+             <p class="text-[10px] text-capybara font-bold">最推薦：${esc(c.cards[0][2])}</p>
+             ${c.cards.slice(1).map((x) => cardRow(x, 1)).join('')}
+           </div>` : ''}
+           <div class="flex flex-wrap items-center gap-1.5 pt-0.5">
+             <span class="text-[10px] text-capybara font-bold"><i class="fa-regular fa-calendar"></i> ${esc(c.valid)}</span>
+             ${c.links.map(([label, url]) =>
+               `<a href="${esc(url)}" target="_blank" rel="noopener" class="hand-pill px-2.5 py-0.5 bg-akaushi text-white text-[10px] font-bold inline-flex items-center gap-1">領取：${esc(label)} <i class="fa-solid fa-arrow-up-right-from-square text-[8px]"></i></a>`).join('')}
            </div>
          </div>
-         <div class="flex flex-wrap gap-1 pl-1.5">
-           ${c.deals.map((d, i) => `<span class="px-2 py-0.5 rounded-lg text-[10px] font-black ${i === 0 ? 'bg-akaushi/15 text-akaushi' : 'bg-paper text-ink'} border border-handBorder/30">${esc(d)}</span>`).join('')}
-         </div>
-         <p class="text-[10px] font-bold pl-1.5 ${c.usageType === 'live' ? 'text-akaushi' : 'text-matcha-dark'}"><i class="fa-solid ${usageIcon[c.usageType]}"></i> ${esc(c.usage)}</p>
-         ${c.cards ? `<div class="ml-1.5 rounded-lg bg-gold/10 border border-gold/40 p-1.5 space-y-1">${c.cards.map(([card, rate, note], i) => `
-           <div class="flex items-start gap-1.5 text-[10px]">
-             <span class="hand-pill px-1.5 py-0 text-[9px] font-black whitespace-nowrap ${i === 0 ? 'bg-ink text-white' : 'bg-white text-capybara'}">${i === 0 ? '最推薦' : '次選'}</span>
-             <span class="min-w-0"><b class="text-ink">${esc(card)}</b> <b class="text-akaushi font-mono">${esc(rate)}</b><span class="text-capybara font-bold">・${esc(note)}</span></span>
-           </div>`).join('')}</div>` : ''}
-         <div class="flex flex-wrap items-center gap-1.5 pl-1.5 pt-0.5">
-           <span class="text-[10px] text-capybara font-bold"><i class="fa-regular fa-calendar"></i> ${esc(c.valid)}</span>
-           ${c.links.map(([label, url]) =>
-             `<a href="${esc(url)}" target="_blank" rel="noopener" class="hand-pill px-2.5 py-0.5 bg-akaushi text-white text-[10px] font-bold inline-flex items-center gap-1">領取：${esc(label)} <i class="fa-solid fa-arrow-up-right-from-square text-[8px]"></i></a>`).join('')}
-         </div>
-       </div>`).join('');
+       </details>`).join('');
    }
 
    function renderCardGuide() {
@@ -2130,11 +2184,19 @@
        </div>`).join('');
    }
 
+   let taxFeesAll = false;
+   function toggleTaxFees() {
+     taxFeesAll = !taxFeesAll;
+     renderTaxFees();
+   }
+
    function renderTaxFees() {
      const el = $('taxFeeList');
      if (!el) return;
+     const more = $('taxFeeMore');
+     if (more) more.innerHTML = taxFeesAll ? '<i class="fa-solid fa-chevron-up"></i> 收合' : `<i class="fa-solid fa-chevron-down"></i> 顯示全部 ${TAX_FEES.length} 家`;
      const stars = (n) => n ? Array.from({ length: 5 }, (_, i) => `<i class="fa-solid fa-star ${i < n ? 'text-akaushi' : 'text-capybara/20'}"></i>`).join('') : '';
-     el.innerHTML = TAX_FEES.map(f => `
+     el.innerHTML = (taxFeesAll ? TAX_FEES : TAX_FEES.slice(0, 6)).map(f => `
        <div class="p-2 bg-white rounded-xl border border-handBorder flex justify-between items-center gap-2">
          <div class="min-w-0">
            <p class="text-[11px] font-black text-ink">${esc(f.brands)}</p>
@@ -2145,6 +2207,22 @@
            <span class="text-[8px] tracking-tighter">${stars(f.stars)}</span>
          </div>
        </div>`).join('');
+   }
+
+   // ===== 字體大小 =====
+   const FONT_LEVELS = [['std', '標準'], ['lg', '大'], ['xl', '特大']];
+   function applyFontLabel() {
+     const cur = document.documentElement.dataset.fz || 'lg';
+     $('fzLabel').textContent = (FONT_LEVELS.find(l => l[0] === cur) || FONT_LEVELS[1])[1];
+   }
+   function cycleFontSize() {
+     const cur = document.documentElement.dataset.fz || 'lg';
+     const i = FONT_LEVELS.findIndex(l => l[0] === cur);
+     const next = FONT_LEVELS[(i + 1) % FONT_LEVELS.length];
+     document.documentElement.dataset.fz = next[0];
+     storage.set('kyushu_font', next[0]);
+     applyFontLabel();
+     showToast(`字體：${next[1]}`);
    }
 
    // ===== 共用 UI =====
@@ -2218,13 +2296,14 @@
      joinRoom, createRoom, shareRoomLink, openRoomModal, openRateModal, saveExchangeRate,
      addNewExpense, selectAllSplitters, addNewCustomFood,
      switchVaultMember, openEditMemberVaultModal, handleModalFileSelect, saveMemberVaultData,
-     saveNewMember, deleteCurrentMember
+     saveNewMember, deleteCurrentMember, cycleFontSize, toggleTaxFees
    });
 
    // ===== 啟動 =====
    $('spotDayInput').innerHTML = Object.entries(daysData).map(([d, v]) => `<option value="${d}">${esc(v.dayLabel)}</option>`).join('');
    switchDay(1);
    setupKmjChecklistEvents();
+   applyFontLabel();
    renderCoupons();
    renderTaxFees();
    renderCardGuide();
