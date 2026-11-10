@@ -848,6 +848,28 @@
 
    <!-- TAB 5: VAULT & MEMBER MANAGEMENT -->
    <section id="tab-vault" class="tab-content space-y-3">
+     <!-- MESSAGE BOARD -->
+     <div class="hand-card p-4 bg-paperCard space-y-3">
+       <div class="flex items-center gap-2.5 border-b-2 border-dashed border-capybara/20 pb-2">
+         <div class="w-10 h-10 rounded-full border-2 border-handBorder bg-gold/20 flex items-center justify-center text-ink"><i class="fa-solid fa-note-sticky"></i></div>
+         <div>
+           <h3 class="text-sm font-black text-ink">旅伴留言板</h3>
+           <p class="text-[10px] text-capybara">全團即時同步・重要事項可置頂</p>
+         </div>
+       </div>
+
+       <form onsubmit="postNote(event)" class="space-y-2">
+         <textarea id="noteText" rows="2" maxlength="200" placeholder="寫點什麼… 例：明早 8:30 飯店大廳集合" class="w-full p-2 rounded-xl border-2 border-handBorder bg-paper text-xs font-bold resize-none"></textarea>
+         <div class="flex items-center gap-2 flex-wrap">
+           <select id="noteAuthor" class="p-1.5 rounded-xl border-2 border-handBorder bg-paper text-xs font-bold max-w-[7.5rem]"></select>
+           <div id="noteColors" class="flex gap-1.5"></div>
+           <button type="submit" class="ml-auto hand-pill px-3 py-1.5 bg-akaushi text-white text-xs font-bold whitespace-nowrap"><i class="fa-solid fa-paper-plane"></i> 貼上</button>
+         </div>
+       </form>
+
+       <div id="noteBoard" class="grid grid-cols-2 gap-2.5 p-2.5 rounded-xl border-2 border-dashed border-handBorder/40 bg-[#F4EFE6]"></div>
+     </div>
+
      <div class="hand-card p-4 bg-paperCard space-y-3">
        <div class="flex items-center justify-between border-b-2 border-dashed border-capybara/20 pb-2">
          <div class="flex items-center gap-2.5">
@@ -922,9 +944,10 @@
        <i class="fa-solid fa-utensils text-base"></i>
        <span class="text-[10px] whitespace-nowrap">美食購物</span>
      </button>
-     <button onclick="switchTab('vault')" class="nav-btn flex flex-col items-center gap-0.5 text-capybara hover:text-akaushi font-bold" data-tab="vault">
+     <button onclick="switchTab('vault')" class="nav-btn relative flex flex-col items-center gap-0.5 text-capybara hover:text-akaushi font-bold" data-tab="vault">
+       <span id="noteDot" class="hidden absolute -top-0.5 right-2 w-2.5 h-2.5 rounded-full bg-akaushi border-2 border-paperCard"></span>
        <i class="fa-solid fa-user text-base"></i>
-       <span class="text-[10px]">成員</span>
+       <span class="text-[10px] whitespace-nowrap">成員・留言</span>
      </button>
    </div>
  </nav>
@@ -1223,7 +1246,7 @@
    const MAX_QR_CHARS = 900000; // Firestore 單一文件上限 1 MiB，預留空間
 
    // ===== 狀態（全部由 onSnapshot 寫入，畫面只讀 state） =====
-   const state = { roomId: null, members: [], qr: {}, expenses: [], foods: [], favs: {}, spots: null, spotsSeeded: false, rate: DEFAULT_RATE };
+   const state = { roomId: null, members: [], qr: {}, expenses: [], foods: [], favs: {}, spots: null, spotsSeeded: false, notes: [], rate: DEFAULT_RATE };
    let uid = null;
    let unsubs = [];
    let selectedMemberId = null;
@@ -1302,7 +1325,7 @@
      }
 
      unsubs.splice(0).forEach(u => u());
-     Object.assign(state, { roomId: code, members: [], qr: {}, expenses: [], foods: [], favs: {}, spots: null, spotsSeeded: false, rate: DEFAULT_RATE });
+     Object.assign(state, { roomId: code, members: [], qr: {}, expenses: [], foods: [], favs: {}, spots: null, spotsSeeded: false, notes: [], rate: DEFAULT_RATE });
      selectedMemberId = null;
      storage.set(ROOM_KEY, code);
      const url = new URL(location.href);
@@ -1333,6 +1356,8 @@
        renderMembersUI();
        renderMemberVault();
        renderExpenses();
+       renderNoteForm();
+       renderNotes();
      }, onErr));
 
      unsubs.push(onSnapshot(col('qr'), s => {
@@ -1348,6 +1373,12 @@
      unsubs.push(onSnapshot(query(col('foods'), orderBy('createdAtMs')), s => {
        state.foods = s.docs.map(d => ({ id: d.id, ...d.data() }));
        renderFoodList();
+     }, onErr));
+
+     unsubs.push(onSnapshot(query(col('notes'), orderBy('createdAtMs')), s => {
+       state.notes = s.docs.map(d => ({ id: d.id, ...d.data() }));
+       renderNotes();
+       updateNoteBadge();
      }, onErr));
 
      unsubs.push(onSnapshot(col('favorites'), s => {
@@ -2209,6 +2240,99 @@
        </div>`).join('');
    }
 
+   // ===== 旅伴留言板 =====
+   const NOTE_COLORS = ['#FFF1B8', '#FBD9CF', '#DDE8CF', '#D6E6F2', '#EADCF4'];
+   const NOTE_ME_KEY = 'kyushu_note_me';
+   const NOTE_SEEN_KEY = 'kyushu_notes_seen';
+   let noteColor = NOTE_COLORS[0];
+
+   function timeAgo(ms) {
+     const diff = (Date.now() - ms) / 60000;
+     if (diff < 1) return '剛剛';
+     if (diff < 60) return `${Math.floor(diff)} 分鐘前`;
+     if (diff < 24 * 60) return `${Math.floor(diff / 60)} 小時前`;
+     const d = new Date(ms);
+     return `${d.getMonth() + 1}/${d.getDate()} ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
+   }
+
+   function renderNoteForm() {
+     const sel = $('noteAuthor');
+     if (sel) {
+       const me = sel.value || storage.get(NOTE_ME_KEY);
+       sel.innerHTML = `<option value="">我是…</option>` + state.members.map(m =>
+         `<option value="${esc(m.id)}" ${m.id === me ? 'selected' : ''}>${esc(m.name)}</option>`).join('');
+     }
+     const colors = $('noteColors');
+     if (colors) colors.innerHTML = NOTE_COLORS.map(c =>
+       `<button type="button" data-action="note-color" data-id="${c}" aria-label="便利貼顏色" class="w-6 h-6 rounded-full border-2 ${c === noteColor ? 'border-ink scale-110' : 'border-handBorder/40'}" style="background:${c}"></button>`).join('');
+   }
+
+   function renderNotes() {
+     const board = $('noteBoard');
+     if (!board) return;
+     const notes = [...state.notes].sort((a, b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0) || b.createdAtMs - a.createdAtMs);
+     if (!notes.length) {
+       board.innerHTML = `<p class="col-span-2 text-center text-[11px] text-capybara font-bold py-4">${state.roomId ? '還沒有留言，貼第一張便利貼吧！' : '請先建立或加入行程房間'}</p>`;
+       return;
+     }
+     const tilt = [-1.6, 1.2, -0.6, 1.8, -1.1, 0.7];
+     board.innerHTML = notes.map((n, i) => `
+       <div class="relative p-2.5 pt-3 rounded-lg border-2 border-handBorder shadow-[2px_3px_0_rgba(74,62,61,0.25)] flex flex-col gap-1.5 ${n.pinned ? 'col-span-2' : ''}" style="background:${NOTE_COLORS.includes(n.color) ? n.color : NOTE_COLORS[0]};transform:rotate(${n.pinned ? 0 : tilt[i % tilt.length]}deg)">
+         <span class="absolute -top-2 left-1/2 -translate-x-1/2 w-10 h-3.5 rounded-sm bg-white/70 border border-handBorder/30 rotate-[-3deg]"></span>
+         ${n.pinned ? '<span class="absolute -top-2.5 -right-1.5 w-6 h-6 rounded-full bg-akaushi text-white text-[10px] flex items-center justify-center border-2 border-handBorder"><i class="fa-solid fa-thumbtack"></i></span>' : ''}
+         <p class="text-xs font-bold text-ink whitespace-pre-wrap break-words leading-relaxed">${esc(n.text)}</p>
+         <div class="mt-auto flex items-end justify-between gap-1 text-[10px] font-bold text-capybara">
+           <span class="min-w-0 leading-snug"><b class="text-ink/80">${esc(memberName(n.authorId) === '(已移除成員)' ? (n.authorName || '旅伴') : memberName(n.authorId))}</b><br>${esc(timeAgo(n.createdAtMs))}</span>
+           <span class="flex gap-2.5 flex-shrink-0 pb-0.5">
+             <button data-action="note-pin" data-id="${esc(n.id)}" aria-label="${n.pinned ? '取消置頂' : '置頂'}" class="${n.pinned ? 'text-akaushi' : ''}"><i class="fa-solid fa-thumbtack"></i></button>
+             <button data-action="note-del" data-id="${esc(n.id)}" aria-label="刪除"><i class="fa-solid fa-trash-can"></i></button>
+           </span>
+         </div>
+       </div>`).join('');
+   }
+
+   function postNote(e) {
+     e.preventDefault();
+     if (!requireRoom()) return;
+     const text = $('noteText').value.trim();
+     const authorId = $('noteAuthor').value;
+     if (!text) return showToast('請輸入留言內容');
+     if (!authorId) return showToast('請先選擇你是哪位成員');
+     storage.set(NOTE_ME_KEY, authorId);
+     setDoc(doc(col('notes'), newId()), {
+       text: text.slice(0, 200), color: noteColor, authorId, authorName: memberName(authorId),
+       pinned: false, createdAtMs: Date.now(), createdBy: uid
+     }).catch(onErr);
+     $('noteText').value = '';
+     markNotesSeen();
+   }
+
+   function toggleNotePin(id) {
+     const n = state.notes.find(x => x.id === id);
+     if (!n || !requireRoom()) return;
+     updateDoc(doc(col('notes'), id), { pinned: !n.pinned }).catch(onErr);
+   }
+
+   function deleteNote(id) {
+     if (!requireRoom()) return;
+     if (!confirm('確定刪除這張便利貼？全團都會一起刪除。')) return;
+     deleteDoc(doc(col('notes'), id)).catch(onErr);
+   }
+
+   function markNotesSeen() {
+     storage.set(NOTE_SEEN_KEY, String(Date.now()));
+     updateNoteBadge();
+   }
+
+   function updateNoteBadge() {
+     const dot = $('noteDot');
+     if (!dot) return;
+     const seen = Number(storage.get(NOTE_SEEN_KEY) || 0);
+     const onTab = $('tab-vault')?.classList.contains('active');
+     if (onTab && state.notes.length) { storage.set(NOTE_SEEN_KEY, String(Date.now())); dot.classList.add('hidden'); return; }
+     dot.classList.toggle('hidden', !state.notes.some(n => n.createdAtMs > seen && n.createdBy !== uid));
+   }
+
    // ===== 字體大小 =====
    const FONT_LEVELS = [['std', '標準'], ['lg', '大'], ['xl', '特大']];
    function applyFontLabel() {
@@ -2234,6 +2358,7 @@
        btn.classList.toggle('text-akaushi', on);
        btn.classList.toggle('text-capybara', !on);
      });
+     if (tabId === 'vault') markNotesSeen();
    }
 
    function openGoogleMap(q) {
@@ -2273,6 +2398,8 @@
      renderMemberVault();
      renderExpenses();
      renderFoodList();
+     renderNoteForm();
+     renderNotes();
    }
 
    // 動態產生的按鈕統一用事件委派，不把資料塞進 onclick 字串
@@ -2286,6 +2413,9 @@
      else if (action === 'spot-edit') openSpotModal(id);
      else if (action === 'spot-del') deleteSpot(id);
      else if (action === 'fav') toggleFavorite(id);
+     else if (action === 'note-pin') toggleNotePin(id);
+     else if (action === 'note-del') deleteNote(id);
+     else if (action === 'note-color') { noteColor = id; renderNoteForm(); }
      else if (action === 'food-cat') setFoodCategory(id);
      else if (action === 'del-exp') deleteExpense(id);
      else if (action === 'qr-full') openQrFull(id);
@@ -2296,7 +2426,7 @@
      joinRoom, createRoom, shareRoomLink, openRoomModal, openRateModal, saveExchangeRate,
      addNewExpense, selectAllSplitters, addNewCustomFood,
      switchVaultMember, openEditMemberVaultModal, handleModalFileSelect, saveMemberVaultData,
-     saveNewMember, deleteCurrentMember, cycleFontSize, toggleTaxFees
+     saveNewMember, deleteCurrentMember, cycleFontSize, toggleTaxFees, postNote
    });
 
    // ===== 啟動 =====
