@@ -492,7 +492,7 @@
        </div>
 
        <ol class="space-y-1 text-[11px] font-bold text-ink">
-         <li><span class="text-akaushi font-black">1</span> 3F 出發大廳星宇櫃台報到、托運行李（退稅品先到海關機台確認）</li>
+         <li><span class="text-akaushi font-black">1</span> 先到 <b>1F 大廳退稅機台</b>完成海關確認，再到星宇櫃台報到、托運行李</li>
          <li><span class="text-akaushi font-black">2</span> 依工作人員指示，出示登機證進入國內線出發區</li>
          <li><span class="text-akaushi font-black">3</span> 到 5 號登機口旁的 Lounge ASO，出示<b>實體 JCB 卡＋當日登機證</b></li>
          <li><span class="text-akaushi font-black">4</span> <b>10:45 前</b>離開，回國際線區域重新安檢、出國審查</li>
@@ -674,10 +674,18 @@
        </h3>
        <div class="p-2.5 rounded-xl bg-matcha-bg border border-matcha/40 space-y-1 text-[11px] font-bold text-matcha-dark">
          <p><i class="fa-solid fa-receipt"></i> 同一家店同一天未稅滿 ¥5,000 才能退稅；購買後 90 天內出境。</p>
-         <p><i class="fa-solid fa-credit-card"></i> 熊本機場沒有現金退稅服務，結帳時就把退款綁定信用卡（多半需要輸入卡片背面安全碼）。</p>
+         <p><i class="fa-solid fa-credit-card"></i> 熊本機場只有 1F 大廳的海關確認機台，<b>沒有退稅公司櫃台、也不能領現金</b>。退款由各店的退稅公司匯回，結帳時就把退款綁定信用卡（多半需要輸入卡片背面安全碼）。</p>
          <p><i class="fa-solid fa-box-open"></i> 免稅品要帶到機場給海關確認，在日本用掉的消耗品不能退。</p>
        </div>
-       <p class="text-[10px] text-capybara">※ 各店手續費比較、優惠券與刷卡攻略在「美食購物 → 購物」。</p>
+       <div class="p-2.5 rounded-xl bg-white border border-handBorder text-[11px] font-bold text-ink space-y-1">
+         <p class="font-black"><i class="fa-solid fa-building-columns text-akaushi"></i> 退款由哪家退稅公司處理？（看購物的店）</p>
+         <p><b>J-TaxRefund</b>：唐吉訶德、Bic Camera、鶴羽、松本清、札幌藥妝、UNIQLO・GU、MUJI、ABC-MART</p>
+         <p><b>Global Blue</b>：大丸、博多阪急、AMU Plaza、Yodobashi、EDION、SUGI</p>
+         <p><b>PIE VAT</b>：LaLaport、博多運河城、Montbell</p>
+         <p><b>JPrefund</b>：3COINS、Fancl　<b>Planet</b>：AEON</p>
+         <p class="text-capybara">退稅公司由店家決定、旅客不能選；在熊本機場確認後，依購物時登記的信用卡、App 或銀行帳戶退款。</p>
+       </div>
+       <p class="text-[10px] text-capybara">※ 2026/11/19 查證。各店手續費比較、優惠券與刷卡攻略在「美食購物 → 購物」。</p>
      </div>
    </section>
 
@@ -761,7 +769,7 @@
        <p class="text-[11px] text-capybara font-bold">2026/11/1 起新制：結帳先付含稅價，出境時海關確認後才退款，退款會扣掉下列手續費（佔未稅價）。</p>
        <div id="taxFeeList" class="space-y-1.5"></div>
        <button id="taxFeeMore" onclick="toggleTaxFees()" class="w-full hand-pill py-1 bg-white text-ink text-[11px] font-bold"></button>
-       <p class="text-[10px] text-capybara">※ 2026/11/10 依新制查證。機場領現金另加約 1–1.1%（熊本機場沒有此服務）。「未公布」請結帳前先問；各店可能隨時調整。優惠券與刷卡攻略在上方。</p>
+       <p class="text-[10px] text-capybara">※ 2026/11/19 依新制查證。機場領現金另加約 1–1.1%（熊本機場沒有此服務）。「未公布」請結帳前先問；各店可能隨時調整。優惠券與刷卡攻略在上方。</p>
      </div>
      </div>
    </section>
@@ -2118,27 +2126,28 @@
    ];
 
    const TAX_FEES = [
-     { brands: '唐吉訶德', cat: '藥妝・零食', fee: '0%', stars: 5, note: '店家吸收手續費' },
-     { brands: 'Bic Camera', cat: '家電・藥妝', fee: '0%', stars: 5, note: '活動期間，可能提前結束' },
+     { brands: '唐吉訶德', cat: '藥妝・零食', fee: '0%', stars: 5, note: 'J-TaxRefund，店家吸收' },
+     { brands: 'Bic Camera', cat: '家電・藥妝', fee: '0%', stars: 5, note: 'J-TaxRefund，活動期間' },
      { brands: '鶴羽藥妝', cat: '藥妝連鎖', fee: '0%', stars: 5, note: 'J-TaxRefund，店家吸收' },
-     { brands: '札幌藥妝', cat: '藥妝連鎖', fee: '0%', stars: 5, note: '收 1% 但店家直接降價 1% 補回' },
-     { brands: '松本清・Cocokara Fine', cat: '藥妝連鎖', fee: '約 0.33%', stars: 4, note: '只收匯款費' },
-     { brands: 'UNIQLO・GU', cat: '平價服飾', fee: '1%', stars: 5, note: 'J-TaxRefund' },
+     { brands: '札幌藥妝', cat: '藥妝連鎖', fee: '0%', stars: 5, note: 'J-TaxRefund；收 1% 但結帳直接折 1%' },
+     { brands: '松本清・Cocokara Fine', cat: '藥妝連鎖', fee: '約 0.33%', stars: 4, note: 'J-TaxRefund' },
+     { brands: 'UNIQLO・GU', cat: '平價服飾', fee: '約 1%', stars: 5, note: 'J-TaxRefund；UNIQLO 扣退稅額 10%' },
      { brands: 'LOFT', cat: '生活雜貨', fee: '1.1%', stars: 4, note: '官網公告' },
      { brands: 'MUJI 無印良品', cat: '生活雜貨', fee: '1.3%', stars: 4, note: 'J-TaxRefund' },
      { brands: 'ABC-MART', cat: '鞋店', fee: '1.5%', stars: 4, note: 'J-TaxRefund' },
-     { brands: 'AEON Mall', cat: '購物商場', fee: '約 1.5%', stars: 4, note: '外國旅客 5% 券不適用九州' },
+     { brands: 'LaLaport 福岡', cat: '購物商場', fee: '1.5%', stars: 4, note: 'PIE VAT' },
+     { brands: 'AEON Mall', cat: '購物商場', fee: '1.5%', stars: 4, note: 'Planet；外國旅客 5% 券不適用九州' },
      { brands: 'SUGI 藥局', cat: '藥妝連鎖', fee: '1.6%', stars: 4, note: 'Global Blue' },
      { brands: '大丸福岡天神・博多阪急', cat: '百貨公司', fee: '2.3%', stars: 3, note: 'Global Blue；同一家集中買' },
      { brands: 'AMU Plaza 博多', cat: '購物商場', fee: '2.3%', stars: 3, note: 'Global Blue' },
      { brands: 'Yodobashi Camera', cat: '3C 家電', fee: '2.3%', stars: 3, note: 'Global Blue' },
-     { brands: 'EDION', cat: '3C 家電', fee: '定額 ¥210', stars: 4, note: '大單最划算' },
-     { brands: 'Montbell', cat: '戶外用品', fee: '2–3%', stars: 3, note: '依分店不同' },
-     { brands: '3COINS', cat: '日用雜貨', fee: '定額 ¥320', stars: 2, note: '另扣退款金額 5% 匯款費' },
-     { brands: 'Fancl', cat: '美妝保養', fee: '3.5%', stars: 2, note: '另扣退款金額 5% 匯款費' },
-     { brands: 'ZARA・H&M', cat: '流行服飾', fee: '未公布', stars: 0, note: 'Global Blue 合作店，結帳前問' },
-     { brands: '岩田屋・鶴屋百貨', cat: '百貨公司', fee: '未公布', stars: 0, note: '結帳前問' },
-     { brands: '博多運河城・TRIAL', cat: '商場・超市', fee: '未公布', stars: 0, note: '結帳前問' }
+     { brands: 'EDION', cat: '3C 家電', fee: '定額 ¥210', stars: 4, note: 'Global Blue；大單最划算' },
+     { brands: 'Montbell', cat: '戶外用品', fee: '2–3%', stars: 3, note: 'PIE VAT，依分店不同' },
+     { brands: '3COINS', cat: '日用雜貨', fee: '定額 ¥320', stars: 2, note: 'JPrefund；小額不划算' },
+     { brands: 'Fancl', cat: '美妝保養', fee: '3.5%', stars: 2, note: 'JPrefund' },
+     { brands: '岩田屋', cat: '百貨公司', fee: '未公布', stars: 0, note: '三越伊勢丹系其他店為 Global Blue 1.55%' },
+     { brands: '博多運河城', cat: '購物商場', fee: '未公布', stars: 0, note: 'PIE VAT Station；同平台商場多為 1.5%' },
+     { brands: '鶴屋百貨・TRIAL・ZARA・H&M', cat: '其他', fee: '未公布', stars: 0, note: '結帳前先問' }
    ];
 
    const feeBadge = (fee) => {
