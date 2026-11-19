@@ -2088,37 +2088,37 @@
    // ===== 購物優惠券與退稅手續費（2026/11/10 依退稅新制查證，適用 12/7–14） =====
    const UNIOPEN = ['中信 uniopen', '11%', '每月前約 NT$6,250；可再疊 Mastercard Travel Rewards'];
    const COUPONS = [
-     { name: '唐吉訶德 Don Quijote', area: '天神・中洲・熊本市區', cat: '綜合藥妝・零食', fee: '0%', feeNote: '店家吸收；機場領現金另計',
+     { name: '唐吉訶德 Don Quijote', platform: 'J-TaxRefund', area: '天神・中洲・熊本市區', cat: '綜合藥妝・零食', fee: '0%', feeNote: '店家吸收；機場領現金另計',
        deals: ['滿 ¥11,000 折 5%', '滿 ¥33,000 折 7%'], valid: '未標示期限',
        usage: '不可截圖：結帳前出示即時優惠券畫面', usageType: 'live',
        cards: [UNIOPEN, ['玉山 Unicard＋MTR', '4.5%＋回 ¥1,000', '先在 Mastercard Travel Rewards 啟用，滿 ¥10,000 回 ¥1,000']],
        links: [['Funliday', 'https://www.funliday.com/posts/dondondonki-coupon/'], ['樂吃購', 'https://www.letsgojp.com/coupon/288199/']] },
-     { name: 'Bic Camera', area: '天神・博多', cat: '家電・3C・藥妝', fee: '0%', feeNote: '活動期間，可能提前結束',
+     { name: 'Bic Camera', platform: 'J-TaxRefund', area: '天神・博多', cat: '家電・3C・藥妝', fee: '0%', feeNote: '活動期間，可能提前結束',
        deals: ['相機・手錶・家電・玩具 7% OFF', '藥品・化妝品・食品・日用品 5% OFF', '日本酒 3% OFF'], valid: '至 2027/4/30',
        usage: '可截圖；限免稅結帳，Apple、遊戲機等不適用', usageType: 'shot',
        cards: [UNIOPEN, ['富邦 J 卡', '6%', '單筆滿 NT$1,000；或 Mastercard＋MTR 滿 ¥30,000 回 ¥2,000']],
        links: [['Funliday', 'https://www.funliday.com/posts/?p=105873'], ['LIVE JAPAN', 'https://livejapan.com/public/operation/coupon/biccamera/zh-tw.html']] },
-     { name: '松本清 / Cocokara Fine', area: '天神・博多・熊本', cat: '藥妝連鎖', fee: '約 0.33%',
+     { name: '松本清 / Cocokara Fine', platform: 'J-TaxRefund', area: '天神・博多・熊本', cat: '藥妝連鎖', fee: '約 0.33%',
        deals: ['滿 ¥10,000 折 3%', '滿 ¥30,000 折 5%', '滿 ¥50,000 折 7%'], valid: '至 2027/3/31',
        usage: '結帳前出示手機條碼；專櫃化妝品、尿布等不適用', usageType: 'shot',
        cards: [UNIOPEN, ['玉山 Unicard＋MTR', '4.5%＋回 ¥2,000', '松本清滿 ¥20,000 回 ¥2,000（MTR 先啟用）']],
        links: [['Funliday', 'https://www.funliday.com/posts/coupon_matsumoto/']] },
-     { name: '鶴羽藥妝 Tsuruha', area: '福岡・熊本', cat: '藥妝連鎖', fee: '0%', feeNote: '店家吸收',
+     { name: '鶴羽藥妝 Tsuruha', platform: 'J-TaxRefund', area: '福岡・熊本', cat: '藥妝連鎖', fee: '0%', feeNote: '店家吸收',
        deals: ['含稅滿 ¥10,000 折 3%', '滿 ¥30,000 折 5%', '滿 ¥50,000 折 7%'], valid: '至 2027/12/31',
        usage: '結帳前出示條碼；不可與其他優惠併用', usageType: 'shot',
        cards: [UNIOPEN, ['富邦 J 卡', '6%', '單筆滿 NT$1,000']],
        links: [['LIVE JAPAN', 'https://livejapan.com/public/operation/coupon/tsuruhadrug/zh-tw.html'], ['步步日本', 'https://www.bubu-jp.com/archives/29371']] },
-     { name: '大丸福岡天神', area: '天神', cat: '百貨公司', fee: '2.3%',
+     { name: '大丸福岡天神', platform: 'Global Blue', area: '天神', cat: '百貨公司', fee: '2.3%',
        deals: ['Mastercard Travel Rewards 滿 ¥30,000 回 ¥3,000', 'CUBE App 領券加碼 4.5%'], valid: '至 2026/12/31',
        usage: '刷卡前先在 MTR 網站啟用優惠，或在 CUBE App 領券', usageType: 'shot',
        cards: [['玉山 Unicard＋MTR', '4.5%＋10%', '滿 ¥30,000 回 ¥3,000，合計約 14.5%'], ['國泰 CUBE', '7.5%', '趣旅行 3%＋App 券 4.5%，無門檻']],
        links: [['MTR 註冊', 'https://mtr.mastercardservices.com/zn-TW/login'], ['圖文教學', 'https://www.beurlife.com/2025/08/mastercard_travel_rewards_in_japan.html']] },
-     { name: '岩田屋 Guest Card', area: '天神', cat: '百貨公司', fee: '未公布',
+     { name: '岩田屋 Guest Card', platform: '未公布（三越伊勢丹系為 Global Blue）', area: '天神', cat: '百貨公司', fee: '未公布',
        deals: ['外國旅客 5% OFF', '限單價 ¥3,000 以上商品'], valid: '未標示期限',
        usage: '購物前到本館 ANNEX 7F 免稅櫃台（10:00–19:45）憑護照申辦；特價品、食品餐飲、部分精品不適用，付款人姓名須與護照相同', usageType: 'counter',
        cards: [['富邦 J 卡', '6%', 'JCB 12 月三越伊勢丹滿 ¥50,000 回 ¥10,000，岩田屋是否適用請先查 JCB 活動頁'], UNIOPEN],
        links: [['岩田屋官網', 'https://www.iwataya-mitsukoshi.mistore.jp/iwataya/event_calendar/globalcustomer/guest-card.html']] },
-     { name: '博多運河城 Canal City', area: '博多', cat: '大型商場', fee: '未公布', feeNote: '館內 PIE VAT Station 退稅櫃台',
+     { name: '博多運河城 Canal City', platform: 'PIE VAT', area: '博多', cat: '大型商場', fee: '未公布', feeNote: '館內 PIE VAT Station 可集中辦理',
        deals: ['館內優惠請到 1F Information 詢問'], valid: '—',
        usage: '2026/9 新設 PIE VAT Station 退稅櫃台，可集中辦理', usageType: 'counter',
        cards: [UNIOPEN, ['富邦 J 卡', '6%', '單筆滿 NT$1,000；MyJapan+ 福岡指定商場滿 ¥20,000 回 ¥2,000']],
@@ -2174,7 +2174,10 @@
                <h4 class="text-xs font-black text-ink">${esc(c.name)}</h4>
                <p class="text-[10px] text-capybara font-bold">${esc(c.cat)}・${esc(c.area)}</p>
              </div>
-             ${feeBadge(c.fee)}
+             <div class="flex flex-col items-end gap-0.5 flex-shrink-0 max-w-[45%]">
+               ${feeBadge(c.fee)}
+               ${c.platform ? `<span class="text-[9px] font-black text-capybara text-right leading-tight">退稅：${esc(c.platform)}</span>` : ''}
+             </div>
            </div>
            <div class="flex flex-wrap gap-1 pl-1.5">
              ${c.deals.map((d, i) => `<span class="px-2 py-0.5 rounded-lg text-[10px] font-black ${i === 0 ? 'bg-akaushi/15 text-akaushi' : 'bg-paper text-ink'} border border-handBorder/30">${esc(d)}</span>`).join('')}
