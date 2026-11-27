@@ -747,7 +747,7 @@
          <p><b>JPrefund</b>：3COINS、Fancl　<b>Planet</b>：AEON</p>
          <p class="text-capybara">退稅公司由店家決定、旅客不能選；在熊本機場確認後，依購物時登記的信用卡、App 或銀行帳戶退款。</p>
        </div>
-       <p class="text-[10px] text-capybara">※ 2026/11/19 查證。各店手續費比較、優惠券與刷卡攻略在「美食購物 → 購物」。</p>
+       <p class="text-[10px] text-capybara">※ 2026/11/28 查證。各店手續費比較、優惠券與刷卡攻略在「美食購物 → 購物」。</p>
      </div>
    </section>
 
@@ -856,7 +856,7 @@
        <p class="text-[11px] text-capybara font-bold">2026/11/1 起新制：結帳先付含稅價，出境時海關確認後才退款，退款會扣掉下列手續費（佔未稅價）。</p>
        <div id="taxFeeList" class="space-y-1.5"></div>
        <button id="taxFeeMore" onclick="toggleTaxFees()" class="w-full hand-pill py-1 bg-white text-ink text-[11px] font-bold"></button>
-       <p class="text-[10px] text-capybara">※ 2026/11/19 依新制查證。機場領現金另加約 1–1.1%（熊本機場沒有此服務）。「未公布」請結帳前先問；各店可能隨時調整。優惠券與刷卡攻略在上方。</p>
+       <p class="text-[10px] text-capybara">※ 2026/11/28 依新制查證。機場領現金另加約 1–1.1%（熊本機場沒有此服務）。「未公布」請結帳前先問；各店可能隨時調整。優惠券與刷卡攻略在上方。</p>
      </div>
      </div>
    </section>
@@ -1357,7 +1357,8 @@
      { id: 'p01', type: 'pocket', day: 1, name: '中洲屋台街', tag: 'SPOT', desc: '傍晚後才開的路邊攤，邊吃邊逛中洲夜景。', location: '中洲', mapQ: '中洲 屋台' },
      { id: 'p02', type: 'pocket', day: 1, name: '藥院燒肉（藥院本店／博多店）', tag: 'WAGYU', desc: '燒肉，藥院本店或博多店擇一。', location: '藥院・博多', mapQ: '薬院 焼肉' },
      { id: 'p03', type: 'pocket', day: 1, name: 'Mitsumasu 天神', tag: 'YAKITORI', desc: '雞皮必點。', location: '天神', mapQ: 'Mitsumasu 天神' },
-     { id: 'p04', type: 'pocket', day: 1, name: '超市採買', tag: 'SHOP', desc: '零食、伴手禮補貨。', location: '天神', mapQ: '天神 スーパー' },
+     { id: 'p04', type: 'pocket', day: 1, name: 'MaxValu Express 港町店（AEON）', tag: 'SHOP', desc: '每天補貨首選：24 小時、英文自助結帳，18:00 後便當打折。福濱民宿走路約 8 分鐘。', location: '港町（民宿附近）', mapQ: 'マックスバリュエクスプレス 港町店' },
+     { id: 'p41', type: 'pocket', day: 1, name: 'SUNNY 福岡長濱店', tag: 'SHOP', desc: '24 小時大型超市，生魚片、壽司種類多；同棟 Kitera Town 有百元店、藥妝。民宿走路約 15 分鐘。', location: '長濱（Kitera Town）', mapQ: 'サニー 福岡長浜店' },
      { id: 'p05', type: 'pocket', day: 1, name: '媽媽好買的百貨', tag: 'SHOP', desc: '待確認是哪一間百貨。', location: '天神' },
      { id: 'p06', type: 'pocket', day: 1, name: '大濠公園', tag: 'SPOT', desc: '市中心湖畔公園，適合散步。', location: '大濠公園', mapQ: '大濠公園' },
      { id: 'p07', type: 'pocket', day: 2, name: '御神牛', tag: 'SPOT', desc: '太宰府天滿宮的神牛像，摸頭祈求智慧。', location: '太宰府天滿宮', mapQ: '太宰府天満宮 御神牛' },
@@ -2390,13 +2391,13 @@
      { brands: 'LaLaport 福岡', cat: '購物商場', fee: '1.5%', stars: 4, note: 'PIE VAT' },
      { brands: 'AEON Mall', cat: '購物商場', fee: '1.5%', stars: 4, note: 'Planet；外國旅客 5% 券不適用九州' },
      { brands: 'SUGI 藥局', cat: '藥妝連鎖', fee: '1.6%', stars: 4, note: 'Global Blue' },
-     { brands: '大丸福岡天神・博多阪急', cat: '百貨公司', fee: '2.3%', stars: 3, note: 'Global Blue；同一家集中買' },
+     { brands: '大丸福岡天神・博多阪急', cat: '百貨公司', fee: '最高 2.3%', stars: 3, note: 'Global Blue；同一家集中買' },
      { brands: 'AMU Plaza 博多', cat: '購物商場', fee: '2.3%', stars: 3, note: 'Global Blue' },
      { brands: 'Yodobashi Camera', cat: '3C 家電', fee: '2.3%', stars: 3, note: 'Global Blue' },
      { brands: 'EDION', cat: '3C 家電', fee: '定額 ¥210', stars: 4, note: 'Global Blue；大單最划算' },
-     { brands: 'Montbell', cat: '戶外用品', fee: '2–3%', stars: 3, note: 'PIE VAT，依分店不同' },
-     { brands: '3COINS', cat: '日用雜貨', fee: '定額 ¥320', stars: 2, note: 'JPrefund；小額不划算' },
-     { brands: 'Fancl', cat: '美妝保養', fee: '3.5%', stars: 2, note: 'JPrefund' },
+     { brands: 'Montbell', cat: '戶外用品', fee: '2–3%', stars: 3, note: 'PIE VAT；實測有店扣到退稅額 30%' },
+     { brands: '3COINS', cat: '日用雜貨', fee: '定額 ¥320', stars: 2, note: 'JPrefund；實測退 ¥520 被扣 ¥330，小額別退' },
+     { brands: 'Fancl', cat: '美妝保養', fee: '3.5%', stars: 2, note: 'JPrefund；小額可能接近定額扣款' },
      { brands: '岩田屋', cat: '百貨公司', fee: '未公布', stars: 0, note: '三越伊勢丹系其他店為 Global Blue 1.55%' },
      { brands: '博多運河城', cat: '購物商場', fee: '未公布', stars: 0, note: 'PIE VAT Station；同平台商場多為 1.5%' },
      { brands: '鶴屋百貨・TRIAL・ZARA・H&M', cat: '其他', fee: '未公布', stars: 0, note: '結帳前先問' }
