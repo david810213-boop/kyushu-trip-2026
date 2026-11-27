@@ -348,6 +348,35 @@
        <path d="M8 23h23a7 7 0 0 0 .6-14 9.5 9.5 0 0 0-18 2.8A6 6 0 0 0 8 23z" fill="#FFFDF9" stroke="#4A3E3D" stroke-width="2.2" stroke-linejoin="round"/>
        <g stroke="#5B8DB8" stroke-width="1.8" stroke-linecap="round"><path d="M13 27v6M10.4 28.5l5.2 3M15.6 28.5l-5.2 3"/><path d="M26 27v6M23.4 28.5l5.2 3M28.6 28.5l-5.2 3"/></g>
      </symbol>
+     <symbol id="food-cafe" viewBox="0 0 40 40">
+       <path d="M14 10c-1.5-2 1.5-3.5 0-5.5M20 10c-1.5-2 1.5-3.5 0-5.5" stroke="#D97757" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+       <path d="M6 14h22v9c0 6-4.5 10-11 10S6 29 6 23z" fill="#FFFDF9" stroke="#4A3E3D" stroke-width="2.2" stroke-linejoin="round"/>
+       <path d="M28 16.5h2.5a4 4 0 0 1 0 8H28" stroke="#4A3E3D" stroke-width="2.2" fill="none"/>
+       <ellipse cx="17" cy="14" rx="11" ry="2.6" fill="#B8742F" stroke="#4A3E3D" stroke-width="2"/>
+       <path d="M14 13.6q3 1.6 6 0" stroke="#F6EBD2" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+       <path d="M10 22h14" stroke="#D97757" stroke-width="1.6" stroke-dasharray="2 2"/>
+       <path d="M4 35h26" stroke="#4A3E3D" stroke-width="2.4" stroke-linecap="round"/>
+     </symbol>
+     <symbol id="food-bar" viewBox="0 0 40 40">
+       <path d="M6 7h28L20 22z" fill="#D6E6F2" stroke="#4A3E3D" stroke-width="2.2" stroke-linejoin="round"/>
+       <path d="M10 10.5h20L20 20z" fill="#D97757" opacity="0.85"/>
+       <path d="M20 22v10M13 34h14" stroke="#4A3E3D" stroke-width="2.4" stroke-linecap="round"/>
+       <circle cx="27" cy="8" r="3.4" fill="#8FA07D" stroke="#4A3E3D" stroke-width="1.6"/>
+       <path d="M30 3.5l-6.5 9" stroke="#4A3E3D" stroke-width="1.6" stroke-linecap="round"/>
+     </symbol>
+     <symbol id="food-spot" viewBox="0 0 40 40">
+       <path d="M5 33h30" stroke="#4A3E3D" stroke-width="2.4" stroke-linecap="round"/>
+       <path d="M6 30l9-14 6 8 4-5 9 11z" fill="#B5C79E" stroke="#4A3E3D" stroke-width="2" stroke-linejoin="round"/>
+       <path d="M20 3c-4.4 0-8 3.4-8 7.6C12 16 20 23 20 23s8-7 8-12.4C28 6.4 24.4 3 20 3z" fill="#D97757" stroke="#4A3E3D" stroke-width="2.2" stroke-linejoin="round"/>
+       <circle cx="20" cy="10.5" r="3" fill="#FFFDF9" stroke="#4A3E3D" stroke-width="1.4"/>
+     </symbol>
+     <symbol id="food-shop" viewBox="0 0 40 40">
+       <path d="M8 13h24l-2 21H10z" fill="#D4A373" stroke="#4A3E3D" stroke-width="2.2" stroke-linejoin="round"/>
+       <path d="M14 16v-4a6 6 0 0 1 12 0v4" stroke="#4A3E3D" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+       <circle cx="14" cy="16.5" r="1.6" fill="#4A3E3D"/><circle cx="26" cy="16.5" r="1.6" fill="#4A3E3D"/>
+       <path d="M13 26h14" stroke="#FFFDF9" stroke-width="2" stroke-linecap="round"/>
+       <path d="M16 30h8" stroke="#D97757" stroke-width="2" stroke-linecap="round"/>
+     </symbol>
    </defs>
  </svg>
 
@@ -734,9 +763,10 @@
          </button>
        </div>
 
-       <div class="flex gap-1.5 pt-2 border-t border-dashed border-capybara/20">
+       <div class="flex gap-1.5 pt-2 border-t border-dashed border-capybara/20 overflow-x-auto no-scrollbar">
          <button onclick="filterFood('gourmet')" class="food-tab hand-pill px-2.5 py-1 text-[11px] font-bold bg-akaushi text-white flex-shrink-0" data-ftab="gourmet">美食推薦</button>
          <button onclick="filterFood('souvenir')" class="food-tab hand-pill px-2.5 py-1 text-[11px] font-bold bg-white text-ink flex-shrink-0" data-ftab="souvenir">伴手禮</button>
+         <button onclick="filterFood('pocket')" class="food-tab hand-pill px-2.5 py-1 text-[11px] font-bold bg-white text-ink flex-shrink-0" data-ftab="pocket">口袋名單</button>
          <button onclick="filterFood('shopping')" class="food-tab hand-pill px-2.5 py-1 text-[11px] font-bold bg-white text-ink flex-shrink-0" data-ftab="shopping">購物・刷卡・退稅</button>
        </div>
 
@@ -746,6 +776,30 @@
      <div id="foodListContainer" class="space-y-3"></div>
 
      <div id="shoppingPanel" class="hidden space-y-3">
+     <!-- SHOPPING LIST -->
+     <div class="hand-card p-4 bg-paperCard space-y-3">
+       <div class="flex items-center gap-2.5 border-b-2 border-dashed border-capybara/20 pb-2">
+         <div class="w-10 h-10 rounded-full border-2 border-handBorder bg-matcha/15 flex items-center justify-center"><svg class="w-8 h-8"><use href="#food-shop"/></svg></div>
+         <div>
+           <h3 class="text-sm font-black text-ink">購物清單（全團共用）</h3>
+           <p class="text-[10px] text-capybara">買到或逛過就打勾，全團同步</p>
+         </div>
+         <span id="shopProgress" class="ml-auto hand-pill px-2 py-0.5 bg-white text-ink text-[10px] font-black whitespace-nowrap"></span>
+       </div>
+       <form onsubmit="addShopItem(event)" class="flex gap-1.5">
+         <input id="shopName" maxlength="60" placeholder="要買什麼？" class="flex-1 min-w-0 p-2 rounded-xl border-2 border-handBorder bg-paper text-xs font-bold">
+         <input id="shopWhere" maxlength="40" placeholder="哪裡買" class="w-24 p-2 rounded-xl border-2 border-handBorder bg-paper text-xs font-bold">
+         <button type="submit" class="hand-pill px-3 bg-akaushi text-white text-xs font-bold whitespace-nowrap"><i class="fa-solid fa-plus"></i></button>
+       </form>
+       <div id="shopBuyList" class="space-y-1.5"></div>
+       <details class="group">
+         <summary class="list-none cursor-pointer select-none text-[11px] font-black text-ink flex items-center gap-1"><i class="fa-solid fa-chevron-right text-[9px] transition group-open:rotate-90"></i> 福岡男裝・中性服飾店 <span id="fashionCount" class="text-capybara"></span></summary>
+         <div id="fashionChips" class="flex overflow-x-auto gap-1.5 py-2 no-scrollbar"></div>
+         <div id="fashionList" class="space-y-1.5"></div>
+         <p class="text-[10px] text-capybara pt-1">※ 品牌與配貨會隨季節調整，以到店當季為準（2026/09 整理）。</p>
+       </details>
+     </div>
+
      <div class="hand-card p-4 bg-paperCard space-y-3">
        <div class="flex items-center gap-2.5 border-b-2 border-dashed border-capybara/20 pb-2">
          <div class="w-10 h-10 rounded-full border-2 border-handBorder bg-akaushi/15 flex items-center justify-center text-akaushi"><i class="fa-solid fa-ticket"></i></div>
@@ -1145,6 +1199,27 @@
    </div>
  </div>
 
+ <!-- STARBUCKS ORDER CARD -->
+ <div id="orderCardModal" class="fixed inset-0 bg-white z-[60] hidden flex flex-col items-center justify-center p-5">
+   <div class="w-full max-w-sm border-4 border-[#1E3932] rounded-3xl p-5 space-y-3 bg-white">
+     <p class="text-center text-2xl font-black text-[#1E3932] leading-tight">ほうじ茶 ＆ クラシック<br>ティー ラテ</p>
+     <div class="border-t-4 border-[#1E3932]"></div>
+     <ul class="space-y-2.5 text-xl font-black text-ink">
+       <li class="flex items-center gap-3"><span class="w-9 h-9 rounded-full bg-[#1E3932] text-white text-sm flex items-center justify-center">G</span>グランデ <span class="text-sm text-capybara">(Grande)</span></li>
+       <li class="flex items-center gap-3"><span class="w-9 h-9 rounded-full bg-[#1E3932] text-white flex items-center justify-center"><i class="fa-solid fa-cube text-sm"></i></span>アイス</li>
+       <li class="flex items-center gap-3"><span class="w-9 h-9 rounded-full bg-[#1E3932] text-white flex items-center justify-center"><i class="fa-solid fa-cloud text-sm"></i></span>ムースフォーム追加</li>
+       <li class="flex items-center gap-3"><span class="w-9 h-9 rounded-full bg-[#1E3932] text-white flex items-center justify-center"><i class="fa-solid fa-droplet text-sm"></i></span><span id="orderSyrup">シロップ抜き</span></li>
+       <li class="flex items-center gap-3"><span class="w-9 h-9 rounded-full bg-[#1E3932] text-white flex items-center justify-center"><i class="fa-regular fa-snowflake text-sm"></i></span>ライトアイス <span class="text-sm text-capybara">(氷少なめ)</span></li>
+     </ul>
+     <p class="text-center text-lg font-black text-[#1E3932] border-2 border-[#1E3932] rounded-xl py-2">こちらの内容でお願いします。</p>
+   </div>
+   <div class="flex gap-2 mt-4">
+     <button onclick="setOrderSyrup(0)" id="syrup0" class="hand-pill px-4 py-1.5 text-sm font-black">無糖</button>
+     <button onclick="setOrderSyrup(1)" id="syrup1" class="hand-pill px-4 py-1.5 text-sm font-black">少糖</button>
+     <button onclick="closeModal('orderCardModal')" class="hand-pill px-4 py-1.5 bg-white text-ink text-sm font-black">關閉</button>
+   </div>
+ </div>
+
  <!-- QR FULLSCREEN MODAL -->
  <div id="qrFullModal" class="fixed inset-0 bg-white z-[60] hidden flex flex-col items-center justify-center p-4" onclick="closeModal('qrFullModal')">
    <p id="qrFullName" class="text-sm font-black text-ink mb-2"></p>
@@ -1252,7 +1327,7 @@
    // 評分、價位：食べログ（2026/11 查詢）；reserve: true 可預約 / false 不接受預約 / null 未標示
    const FOOD_CATS = {
      RAMEN: '拉麵', YAKITORI: '燒鳥・串燒', ROBATA: '爐端燒', MOTSU: '牛腸鍋',
-     UNAGI: '鰻魚飯', CHICKEN: '水炊雞肉鍋', WAGYU: '和牛・肉料理', GIFT: '伴手禮'
+     UNAGI: '鰻魚飯', CHICKEN: '水炊雞肉鍋', WAGYU: '和牛・肉料理', CAFE: '咖啡甜點', BAR: '酒吧', SPOT: '景點', SHOP: '購物', GIFT: '伴手禮'
    };
    const TL = (path) => `https://tabelog.com/tw/${path}/`;
    const foodList = [
@@ -1277,7 +1352,48 @@
      { id: 15, type: "souvenir", name: "熊本譽之陣太鼓 (香梅)", tag: "GIFT", desc: "阿蘇伏流水小豆羊羹裹麻糬。", location: "熊本" },
      { id: 16, type: "souvenir", name: "太宰府梅枝餅", tag: "GIFT", desc: "現烤外皮酥、紅豆餡香甜。", location: "太宰府參道" },
      { id: 17, type: "souvenir", name: "B-Speak 蛋糕卷", tag: "GIFT", desc: "每日限量鮮奶純生蛋糕卷。", location: "由布院金鱗湖" },
-     { id: 18, type: "souvenir", name: "福太郎 Menbei", tag: "GIFT", desc: "經典明太子海鮮微辣煎餅。", location: "博多" }
+     { id: 18, type: "souvenir", name: "福太郎 Menbei", tag: "GIFT", desc: "經典明太子海鮮微辣煎餅。", location: "博多" },
+     // ===== 口袋名單（行程筆記中尚未確定的地點，D = 預計日期） =====
+     { id: 'p01', type: 'pocket', day: 1, name: '中洲屋台街', tag: 'SPOT', desc: '傍晚後才開的路邊攤，邊吃邊逛中洲夜景。', location: '中洲', mapQ: '中洲 屋台' },
+     { id: 'p02', type: 'pocket', day: 1, name: '藥院燒肉（藥院本店／博多店）', tag: 'WAGYU', desc: '燒肉，藥院本店或博多店擇一。', location: '藥院・博多', mapQ: '薬院 焼肉' },
+     { id: 'p03', type: 'pocket', day: 1, name: 'Mitsumasu 天神', tag: 'YAKITORI', desc: '雞皮必點。', location: '天神', mapQ: 'Mitsumasu 天神' },
+     { id: 'p04', type: 'pocket', day: 1, name: '超市採買', tag: 'SHOP', desc: '零食、伴手禮補貨。', location: '天神', mapQ: '天神 スーパー' },
+     { id: 'p05', type: 'pocket', day: 1, name: '媽媽好買的百貨', tag: 'SHOP', desc: '待確認是哪一間百貨。', location: '天神' },
+     { id: 'p06', type: 'pocket', day: 1, name: '大濠公園', tag: 'SPOT', desc: '市中心湖畔公園，適合散步。', location: '大濠公園', mapQ: '大濠公園' },
+     { id: 'p07', type: 'pocket', day: 2, name: '御神牛', tag: 'SPOT', desc: '太宰府天滿宮的神牛像，摸頭祈求智慧。', location: '太宰府天滿宮', mapQ: '太宰府天満宮 御神牛' },
+     { id: 'p08', type: 'pocket', day: 2, name: '博多站前廣場聖誕市集', tag: 'SPOT', desc: '冬季限定聖誕市集。', location: '博多站前', mapQ: '博多駅前広場 クリスマスマーケット' },
+     { id: 'p09', type: 'pocket', day: 2, name: '蝦蝦昂昂昂', tag: 'SPOT', desc: '筆記原文，待確認店名。', location: '—' },
+     { id: 'p10', type: 'pocket', day: 3, name: 'Fuk coffee', tag: 'CAFE', desc: '推薦布丁。', location: '博多・祇園', mapQ: 'FUK COFFEE 福岡' },
+     { id: 'p11', type: 'pocket', day: 3, name: 'Rec coffee', tag: 'CAFE', desc: '推薦布丁。', location: '博多', mapQ: 'REC COFFEE 福岡' },
+     { id: 'p12', type: 'pocket', day: 3, name: '牛腸鍋 六花舍', tag: 'MOTSU', desc: '博多牛腸鍋。', location: '博多', mapQ: 'もつ鍋 六花舎' },
+     { id: 'p13', type: 'pocket', day: 3, name: '爐端燒 Musashiza', tag: 'ROBATA', desc: '一定要預約，雞皮必點。', location: '博多', mapQ: '炉端 Musashiza 福岡' },
+     { id: 'p14', type: 'pocket', day: 3, name: '爐端燒 永らく（Nagaraku）', tag: 'ROBATA', desc: '爐端燒。', location: '博多', mapQ: '炉端 永らく 福岡' },
+     { id: 'p15', type: 'pocket', day: 3, name: '爐端燒 Itookashi', tag: 'ROBATA', desc: '需預約。', location: '博多', mapQ: 'いとをかし 炉端 福岡' },
+     { id: 'p16', type: 'pocket', day: 3, name: 'Dacomecca', tag: 'CAFE', desc: '人氣麵包店，19:00 結束營業。', location: '博多站', mapQ: 'ダコメッカ 博多' },
+     { id: 'p17', type: 'pocket', day: 3, name: '甘王草莓銅鑼燒', tag: 'CAFE', desc: '八女抹茶口味＋草莓奶昔。', location: '博多', mapQ: 'あまおう どら焼き 博多' },
+     { id: 'p18', type: 'pocket', day: 3, name: '努努雞', tag: 'YAKITORI', desc: '冷的炸雞，當零嘴。', location: '博多', mapQ: 'nu nu chicken 博多' },
+     { id: 'p19', type: 'pocket', day: 3, name: '博多阪急', tag: 'SHOP', desc: '博多站百貨。', location: '博多站', mapQ: '博多阪急' },
+     { id: 'p20', type: 'pocket', day: 3, name: 'AMU Plaza 博多', tag: 'SHOP', desc: '博多站商場。', location: '博多站', mapQ: 'アミュプラザ博多' },
+     { id: 'p21', type: 'pocket', day: 3, name: 'KITTE 博多', tag: 'SHOP', desc: '博多站前商場。', location: '博多站', mapQ: 'KITTE博多' },
+     { id: 'p22', type: 'pocket', day: 3, name: 'No Time Mixology Bar', tag: 'BAR', desc: '營業到 01:00。', location: '福岡', mapQ: 'No Time mixology bar 福岡' },
+     { id: 'p23', type: 'pocket', day: 3, name: 'Bar Cooper', tag: 'BAR', desc: '營業到 03:00。', location: '福岡', mapQ: 'Bar Cooper 福岡' },
+     { id: 'p24', type: 'pocket', day: 3, name: 'Bar Baron', tag: 'BAR', desc: '營業到 05:00。', location: '福岡', mapQ: 'Bar Baron 福岡' },
+     { id: 'p25', type: 'pocket', day: 3, name: 'Bar Sakamoto', tag: 'BAR', desc: '營業到 03:00。', location: '福岡', mapQ: 'Bar Sakamoto 福岡' },
+     { id: 'p26', type: 'pocket', day: 3, name: 'Oscar', tag: 'BAR', desc: '營業到 00:00，週日、週二公休。', location: '福岡', mapQ: 'Bar Oscar 福岡' },
+     { id: 'p27', type: 'pocket', day: 3, name: 'Bar Cherokee', tag: 'BAR', desc: '營業到 01:00，週日公休。', location: '福岡', mapQ: 'Bar Cherokee 福岡' },
+     { id: 'p28', type: 'pocket', day: 3, name: 'Bar Gita', tag: 'BAR', desc: '營業到 02:00，週日公休。', location: '福岡', mapQ: 'Bar Gita 福岡' },
+     { id: 'p29', type: 'pocket', day: 3, name: 'Bar Laffite', tag: 'BAR', desc: '營業到 03:00。', location: '福岡', mapQ: 'Bar Laffite 福岡' },
+     { id: 'p30', type: 'pocket', day: 4, name: 'Bar 山貓', tag: 'BAR', desc: '由布院的酒吧，17:00–00:00。', location: '由布院', mapQ: '由布院 Bar 山猫' },
+     { id: 'p31', type: 'pocket', day: 4, name: '山並公路（やまなみハイウェイ）', tag: 'SPOT', desc: '由布院往阿蘇的景觀公路，包車途中可停。', location: '由布院→阿蘇', mapQ: 'やまなみハイウェイ' },
+     { id: 'p32', type: 'pocket', day: 4, name: '大觀峰', tag: 'SPOT', desc: '俯瞰阿蘇外輪山的展望台。', location: '阿蘇', mapQ: '大観峰' },
+     { id: 'p33', type: 'pocket', day: 5, name: '下通商店街', tag: 'SHOP', desc: '熊本市區最熱鬧的拱廊商店街。', location: '熊本市區', mapQ: '下通 熊本' },
+     { id: 'p34', type: 'pocket', day: 6, name: 'Izumi tea', tag: 'CAFE', desc: '濃抹茶。', location: '熊本', mapQ: 'Izumi tea 熊本' },
+     { id: 'p35', type: 'pocket', day: 6, name: '加藤神社', tag: 'SPOT', desc: '熊本城內的神社，可拍天守閣。', location: '熊本城', mapQ: '加藤神社 熊本' },
+     { id: 'p36', type: 'pocket', day: 6, name: '夜香木', tag: 'BAR', desc: '日本 50 大酒吧，一個月前開放預約；5 人以上需打電話。', location: '熊本', mapQ: '夜香木 熊本 バー' },
+     { id: 'p37', type: 'pocket', day: 6, name: '熊本屋台村', tag: 'BAR', desc: '投幣清酒、自動燒酎機。', location: '熊本市區', mapQ: '熊本屋台村' },
+     { id: 'p38', type: 'pocket', day: 6, name: '熊本稻荷神社', tag: 'SPOT', desc: '熊本城旁的稻荷神社。', location: '熊本城', mapQ: '熊本城稲荷神社' },
+     { id: 'p39', type: 'pocket', day: 6, name: '高橋稻荷神社', tag: 'SPOT', desc: '九州五大稻荷之一。', location: '熊本市西區', mapQ: '高橋稲荷神社' },
+     { id: 'p40', type: 'pocket', day: 7, name: '熊本市區商店街', tag: 'SHOP', desc: '上通・下通一帶逛街。', location: '熊本市區', mapQ: '上通 熊本' }
    ];
 
    const DEFAULT_MEMBERS = ["又哥", "花生", "妍频", "妹妹", "大衛", "潸潸"];
@@ -1287,7 +1403,7 @@
    const MAX_QR_CHARS = 900000; // Firestore 單一文件上限 1 MiB，預留空間
 
    // ===== 狀態（全部由 onSnapshot 寫入，畫面只讀 state） =====
-   const state = { roomId: null, members: [], qr: {}, expenses: [], foods: [], favs: {}, spots: null, spotsSeeded: false, notes: [], rate: DEFAULT_RATE };
+   const state = { roomId: null, members: [], qr: {}, expenses: [], foods: [], favs: {}, spots: null, spotsSeeded: false, notes: [], shopping: [], rate: DEFAULT_RATE };
    let uid = null;
    let unsubs = [];
    let selectedMemberId = null;
@@ -1366,7 +1482,7 @@
      }
 
      unsubs.splice(0).forEach(u => u());
-     Object.assign(state, { roomId: code, members: [], qr: {}, expenses: [], foods: [], favs: {}, spots: null, spotsSeeded: false, notes: [], rate: DEFAULT_RATE });
+     Object.assign(state, { roomId: code, members: [], qr: {}, expenses: [], foods: [], favs: {}, spots: null, spotsSeeded: false, notes: [], shopping: [], rate: DEFAULT_RATE });
      selectedMemberId = null;
      storage.set(ROOM_KEY, code);
      const url = new URL(location.href);
@@ -1382,6 +1498,7 @@
        state.rate = s.data()?.exchangeRate || DEFAULT_RATE;
        state.spotsSeeded = !!s.data()?.spotsSeeded;
        seedSpotsIfNeeded(s);
+       seedV2IfNeeded(s);
        renderExpenses();
        renderItinerary();
      }, onErr));
@@ -1416,6 +1533,11 @@
        renderFoodList();
      }, onErr));
 
+     unsubs.push(onSnapshot(col('shopping'), s => {
+       state.shopping = s.docs.map(d => ({ id: d.id, ...d.data() }));
+       renderShopping();
+     }, onErr));
+
      unsubs.push(onSnapshot(query(col('notes'), orderBy('createdAtMs')), s => {
        state.notes = s.docs.map(d => ({ id: d.id, ...d.data() }));
        renderNotes();
@@ -1437,8 +1559,9 @@
      try {
        await ensureAccess(code);
        const batch = writeBatch(db);
-       batch.set(doc(db, 'rooms', code), { exchangeRate: DEFAULT_RATE, spotsSeeded: true, createdAt: Date.now(), createdBy: uid });
+       batch.set(doc(db, 'rooms', code), { exchangeRate: DEFAULT_RATE, spotsSeeded: true, seedVersion: SEED_VERSION, createdAt: Date.now(), createdBy: uid });
        builtinSpots().forEach(({ id, ...s }) => batch.set(doc(db, 'rooms', code, 'spots', id), s));
+       SHOP_SEED.forEach(({ id, ...s }, i) => batch.set(doc(db, 'rooms', code, 'shopping', id), { ...s, done: false, order: i, createdAtMs: 0 }));
        const ids = DEFAULT_MEMBERS.map((name, i) => {
          const id = newId();
          batch.set(doc(db, 'rooms', code, 'members', id), { name, passport: '', expiry: '', order: i });
@@ -1675,9 +1798,86 @@
    let editingSpotId = null;
    let seedingSpots = false;
 
+   // 行程筆記中打勾（一定會去）的地點：以固定 ID 加入既有行程，不覆蓋原有景點
+   const V2_SPOTS = [
+     { id: 'v2_d1_0', day: 1, time: '12:15', name: '麵屋兼虎 天神本店', tag: '拉麵', svg: '#sketch-ramen', desc: '濃郁魚介豚骨沾麵。', addr: '福岡市中央區天神' },
+     { id: 'v2_d1_1', day: 1, time: '13:30', name: '博多天神地下街', tag: '購物', svg: '#sketch-bag', desc: '地下街逛街。', addr: '福岡市中央區天神 2 地下' },
+     { id: 'v2_d1_2', day: 1, time: '14:15', name: '大丸百貨 福岡天神店', tag: '百貨', svg: '#sketch-bag', desc: 'MTR 滿 ¥30,000 回 ¥3,000（先啟用）。', addr: '福岡市中央區天神 1-4-1' },
+     { id: 'v2_d1_3', day: 1, time: '15:00', name: '福岡 PARCO', tag: '購物', svg: '#sketch-bag', desc: '天神 PARCO 逛街。', addr: '福岡市中央區天神 2-11-1' },
+     { id: 'v2_d1_4', day: 1, time: '15:45', name: 'UNIQLO（Mina 天神 2F）', tag: '購物', svg: '#sketch-bag', desc: 'Mina 天神 2 樓。', addr: '福岡市中央區天神 4-3-8' },
+     { id: 'v2_d1_5', day: 1, time: '16:15', name: 'GU（Mina 天神 3F）', tag: '購物', svg: '#sketch-bag', desc: 'Mina 天神 3 樓。', addr: '福岡市中央區天神 4-3-8' },
+     { id: 'v2_d1_6', day: 1, time: '17:00', name: '唐吉訶德 天神本店', tag: '購物', svg: '#sketch-bag', desc: '先領券；免退稅手續費。', addr: '福岡市中央區今泉 1-20-17' },
+     { id: 'v2_d1_7', day: 1, time: '20:00', name: '一蘭拉麵 本店', tag: '拉麵', svg: '#sketch-ramen', desc: '20:30 有表演。', addr: '福岡市博多區中洲 5-3-2' },
+     { id: 'v2_d1_8', day: 1, time: '16:45', name: 'MARK IS 福岡ももち', tag: '購物', svg: '#sketch-bag', desc: '百道濱的大型商場，就在福岡塔、PayPay 巨蛋旁。', addr: '福岡市中央區地行濱 2-2-1' },
+     { id: 'v2_d2_0', day: 2, time: '11:30', name: '梅枝餅 やすたけ（紅豆）', tag: '甜點', svg: '#sketch-ramen', desc: '太宰府表參道的梅枝餅。', addr: '太宰府市宰府' },
+     { id: 'v2_d2_1', day: 2, time: '12:00', name: '一蘭拉麵 太宰府參道店', tag: '拉麵', svg: '#sketch-ramen', desc: '五角形「合格」碗。', addr: '太宰府市宰府 2-6-1' },
+     { id: 'v2_d3_0', day: 3, time: '10:00', name: 'The Full Full Hakata 明太子麵包', tag: '麵包', svg: '#sketch-bag', desc: '用 LINE 預約不用排隊（14 天前開放）；奶油乳酪蔓越莓＋明太子。開門時間出發前再確認。', addr: '福岡市博多區' },
+     { id: 'v2_d3_1', day: 3, time: '11:00', name: '櫛田神社', tag: '神社', svg: '#sketch-torii', desc: '博多總鎮守，有山笠裝飾。', addr: '福岡市博多區上川端町 1-41' },
+     { id: 'v2_d4_0', day: 4, time: '11:00', name: '湯布院花卉村', tag: '景點', svg: '#sketch-onsen', desc: '英式小鎮風格的花卉村。', addr: '由布市湯布院町川上 1503-3' },
+     { id: 'v2_d4_1', day: 4, time: '12:00', name: '釜飯 心', tag: '午餐', svg: '#sketch-ramen', desc: '由布院人氣釜飯。', addr: '由布市湯布院町川上' },
+     { id: 'v2_d4_2', day: 4, time: '13:00', name: '由布院布丁（Milch）', tag: '甜點', svg: '#sketch-bag', desc: '起司布丁，4 入 ¥2,080 可當伴手禮。', addr: '由布市湯布院町川上 3001-1' },
+     { id: 'v2_d4_3', day: 4, time: '13:30', name: 'Télato 抹茶冰淇淋', tag: '甜點', svg: '#sketch-ramen', desc: '抹茶冰淇淋專門店。', addr: '由布市湯布院町川上' },
+     { id: 'v2_d4_4', day: 4, time: '14:00', name: '八女抹茶', tag: '甜點', svg: '#sketch-ramen', desc: '焙茶巧克力蛋糕、抹茶蕨餅。', addr: '由布市湯布院町川上' },
+     { id: 'v2_d5_0', day: 5, time: '09:00', name: '阿蘇神社 總本社', tag: '神社', svg: '#sketch-torii', desc: '阿蘇地區的總本社。', addr: '阿蘇市一の宮町宮地 3083-1' }
+   ];
+
+   // 購物清單預設內容（第一次開啟時寫入房間，之後全團可勾選、新增、刪除）
+   const SHOP_SEED = [
+     { id: 's_milch', cat: 'buy', name: '由布院 Milch 起司布丁 4 入', where: '由布院 Milch（ミルヒ ドーナツ＆カフェ限定）', price: '¥2,080（含稅）', note: 'ケーゼプディング 4 本セット' },
+     { id: 's_nepia', cat: 'buy', name: 'nepia 鼻貴族 美容液面膜（3 片入）', where: 'LAWSON、@cosme、shop in、HANDS、AINS & TORPE', price: '', note: '白兔 すこやか肌うさぎ／灰兔 ふっくら肌うさぎ；部分門市可能沒賣' },
+     { id: 's_sbux', cat: 'buy', name: '星巴克 焙茶拿鐵', where: '日本星巴克', price: '', note: '點「點餐卡」直接給店員看', orderCard: true },
+     ...[
+       ['核心選物', 'UNREAL REAL CLOTHES', '高端日本男裝、素材派', 'A.PRESSE、MAATEE AND SONS、HERILL、Graphpaper'],
+       ['核心選物', 'ReUTeR', '安靜成熟、素材導向日本選物', 'ANCELLM、HEUGN、blurhms、nonnotte'],
+       ['核心選物', 'chalt', '日系精品 Casual＋工藝與少量 Outdoor', 'AURALEE、NICENESS、Aeta、KUON'],
+       ['核心選物', 'hazy', '小眾、鬆弛、Unisex 新銳日牌', 'awasa、Product Twelve、DIGAWEL、nakedgauge'],
+       ['核心選物', 'Dice&Dice', '福岡老字號 Cityboy 選物', 'Graphpaper、NICENESS、YAECA、nanamica'],
+       ['核心選物', 'COVERCHORD Fukuoka', 'Cityboy × Outdoor × Lifestyle', 'A.PRESSE、COMOLI、AURALEE、Graphpaper'],
+       ['核心選物', 'BIOTOP FUKUOKA', '高端日系男裝＋國際品牌＋Lifestyle', 'A.PRESSE、COMOLI、AURALEE、HYKE'],
+       ['核心選物', 'Factory market', '大型男裝 Select，Street 到 Contemporary', 'AURALEE、DAIWA PIER39、FreshService、Unlikely'],
+       ['核心選物', "Brown's", 'Classic、Work、Trad、Utility', "CIOTA、KAPTAIN SUNSHINE、POST O'ALLS、CORONA"],
+       ['核心選物', 'BRICK', '經典男裝、材質與工藝', 'A VONTADE、YONETOMI、BROWN by 2-tacs、Barbour'],
+       ['新銳・Mode', 'session', '極簡 Mode、長線條、寬鬆輪廓', 'ssstein、INTÉRIM、KANEMASA PHIL.、UJOH'],
+       ['新銳・Mode', 'NIGHTHAWKS', '前衛時裝、歐洲新銳與次文化', 'Omar Afridi、Gabriela Coll Garments、ISSUETHINGS'],
+       ['新銳・Mode', 'about', '藝術性、工藝、暗色調 Contemporary', 'ensou.、GUIDI、BISOWN、ITTI'],
+       ['新銳・Mode', 'OKOLO', '日系新銳、中性、設計感', 'ENCOMING、RANDY、Product Twelve、KaILI'],
+       ['新銳・街頭', 'Mustang Alley', '日系設計師＋街頭、次文化', 'SUNSEA、SHINYAKOZUKA、URU'],
+       ['新銳・街頭', 'GENTLE', 'Tokyo Street × City Casual × Skate', 'COMFORTABLE REASON、PWA、bal、rajabrooke'],
+       ['街頭・Skate', 'Apple Butter Store', 'Skate、Street、90s、Indie', 'BoTT、NOROLL、COMFORTABLE REASON、ALWAYTH'],
+       ['經典・美式', "HARRY'S", 'American Traditional、Work、Military', "POST O'ALLS、THE CORONA UTILITY、YAECA、FILSON"],
+       ['經典・美式', 'HAVERSACK FUKUOKA', '歐洲古典男裝 × Military × Workwear', 'HAVERSACK、HAVERSACK ATTIRE'],
+       ['經典・生活服', 'knot', '乾淨日系 Basic、機能與耐穿', 'AURALEE、COMOLI、Aeta、DESCENTE ALLTERRAIN'],
+       ['經典・生活服', 'trunk', '成熟 Unisex、法式／日式 Relaxed Classic', "BATONER、ES:S、Honnete、COUTURE D'ADAM"],
+       ['品牌直營', 'nanamica 福岡', 'Urban Outdoor＋Cityboy＋Functional', 'nanamica、THE NORTH FACE Purple Label'],
+       ['品牌直營', 'CABaN FUKUOKA', 'Luxury Casual＋現代男裝＋色彩感', 'CABaN、MAISON et VOYAGE、JIL SANDER、THE ROW'],
+       ['品牌直營', 'MAISON SPECIAL 福岡', 'Trend＋Mode＋Oversize', 'MAISON SPECIAL MEN'],
+       ['大型 Select', 'Le Dome EDIFICE / IENA 福岡 PARCO', '男裝以 EDIFICE 為主，法式成熟', 'COMOLI、CARUSO、MACKINTOSH、Barbour'],
+       ['大型 Select', 'BEAMS 福岡', '大型綜合選物', 'BEAMS、BEAMS PLUS、BEAMS T、BEAMS F'],
+       ['鞋履・配件', 'ALSO MOONSTAR', '日本製鞋履、久留米製鞋文化', 'MOONSTAR Made in Kurume'],
+       ['鞋履・配件', 'Salomon Fukuoka', 'Outdoor Performance × Sportstyle', 'Salomon XT、ACS、XA、Speedcross'],
+       ['鞋履・配件', 'KaILI Shop & Factory', '中性包袋、機能設計、福岡在地製作', 'KaILI Transform Bag、OWL PACK、UP LIGHT'],
+       ['Outdoor', 'mont-bell 福岡天神', '真正 Outdoor Gear，單品可拆進 Cityboy 穿搭', 'mont-bell 全線'],
+       ['古著', 'Eight', '男裝美式 Vintage', '40s–90s American Vintage、Military、Work'],
+       ['古著', 'BLT Used Clothing & Vintage', 'American Vintage × Work × Military', "Levi's、Ralph Lauren、Champion、Carhartt"],
+       ['古著', 'kords古着', 'American Vintage、Work、Military、Sportswear', '古著為主'],
+       ['古著', 'LOOP', '男裝美式古著，粗獷直接', 'Used / Vintage'],
+       ['生活・支線', 'THE STANDARD MANUAL', '美式 General Store', '自家寬版 Tee、Sweat、PUEBCO'],
+       ['生活・支線', 'LT LOTTO AND TRES', '北歐／日本生活選物、家具與少量服飾', 'STANDARD SUPPLY、zattu、MOONSTAR'],
+       ['生活・支線', 'FEELS GOOD', 'Cafe＋Apparel＋Lifestyle', '生活選物與服飾混合'],
+       ['生活・支線', 'NONE TOO SOON LIFE & OBJECT', '日本工藝、生活器物', '生活設計／工藝品牌'],
+       ['配件・支線', 'yocka', '襪子 Select Shop × Color Gallery', 'TRICOTÉ、FAKUI、Bonne Maison、COQ'],
+       ['配件・支線', 'CENE STORE FUKUOKA', '極簡 Jewelry / Accessories', 'CENE 自家 Surgical Stainless 首飾'],
+       ['補充', "LIFE's 福岡", '女性 Natural／Relaxed／Urban Casual', "LIFE's、TODAYFUL"]
+     ].map(([group, name, style, brands], i) => ({ id: `s_f${String(i + 1).padStart(2, '0')}`, cat: 'fashion', group, name, where: style, price: '', note: brands }))
+   ];
+   const SEED_VERSION = 2;
+
    function builtinSpots() {
-     return Object.entries(daysData).flatMap(([day, d]) =>
-       d.spots.map((s, i) => ({ id: `d${day}_${i}`, day: Number(day), ...s, order: i, createdAtMs: 0 })));
+     return [
+       ...Object.entries(daysData).flatMap(([day, d]) =>
+         d.spots.map((s, i) => ({ id: `d${day}_${i}`, day: Number(day), ...s, order: i, createdAtMs: 0 }))),
+       ...V2_SPOTS.map((s, i) => ({ ...s, order: 100 + i, createdAtMs: 0 }))
+     ];
    }
 
    function allSpots() {
@@ -1697,6 +1897,19 @@
    }
 
    // 舊房間第一次開啟時，把內建行程匯入 Firestore（固定 ID，多台同時匯入也不會重複）
+   // 第 2 版內容（筆記打勾景點、購物清單）：只新增、不覆蓋，固定 ID 可重複執行
+   let seedingV2 = false;
+   function seedV2IfNeeded(snap) {
+     const data = snap.data();
+     if (!data || (data.seedVersion || 1) >= SEED_VERSION || seedingV2 || snap.metadata?.fromCache) return;
+     seedingV2 = true;
+     const batch = writeBatch(db);
+     V2_SPOTS.forEach(({ id, ...s }, i) => batch.set(doc(col('spots'), id), { ...s, order: 100 + i, createdAtMs: 0 }));
+     SHOP_SEED.forEach(({ id, ...s }, i) => batch.set(doc(col('shopping'), id), { ...s, done: false, order: i, createdAtMs: 0 }));
+     batch.update(roomRef(), { seedVersion: SEED_VERSION });
+     batch.commit().catch(onErr).finally(() => { seedingV2 = false; });
+   }
+
    function seedSpotsIfNeeded(snap) {
      const data = snap.data();
      if (!data || data.spotsSeeded || seedingSpots || snap.metadata?.fromCache) return;
@@ -1853,6 +2066,9 @@
      currentFoodCategory = '';
      const shopping = type === 'shopping';
      ['foodListContainer', 'foodCatChips', 'foodNote', 'addFoodBtn'].forEach(id => $(id)?.classList.toggle('hidden', shopping));
+     $('foodNote').textContent = type === 'pocket'
+       ? '※ 行程筆記裡還沒確定的地點，依預計日期排序；想去按 ♥，決定要去再到行程頁「＋新增」。'
+       : '※ 評分與每人價位為食べログ資料（2026/11），出發前請再確認營業時間。';
      $('shoppingPanel').classList.toggle('hidden', !shopping);
      document.querySelectorAll('.food-tab').forEach(btn => {
        const on = btn.dataset.ftab === type;
@@ -1898,7 +2114,8 @@
      if (currentFoodTab === 'shopping') return;
      const inTab = [...foodList, ...state.foods].filter(item => currentFoodTab === '' || item.type === currentFoodTab);
      renderFoodCats(inTab);
-     const filtered = inTab.filter(item => currentFoodCategory === '' || item.tag === currentFoodCategory);
+     const filtered = inTab.filter(item => currentFoodCategory === '' || item.tag === currentFoodCategory)
+       .sort((a, b) => currentFoodTab === 'pocket' ? (a.day || 9) - (b.day || 9) : 0);
 
      if (!filtered.length) {
        container.innerHTML = `<div class="hand-card p-4 text-center text-xs text-capybara font-bold">沒有找到符合條件的美食項目</div>`;
@@ -1921,6 +2138,7 @@
              <div class="flex items-center gap-1.5 flex-wrap">
                <h3 class="text-xs font-black text-ink">${esc(item.name)}</h3>
                <span class="hand-pill px-1.5 py-0 text-[9px] font-bold bg-matcha/20 text-matcha-dark">${esc(FOOD_CATS[item.tag] || item.tag)}</span>
+               ${item.day ? `<span class="hand-pill px-1.5 py-0 text-[9px] font-black bg-akaushi/15 text-akaushi">D${item.day}</span>` : ''}
              </div>
              <p class="text-[11px] text-capybara font-bold">${esc(item.desc)}</p>
              <p class="text-[10px] text-matcha-dark font-bold flex flex-wrap items-center gap-x-1">${meta}</p>
@@ -1928,7 +2146,7 @@
            </div>
            <div class="flex flex-col items-end gap-1 flex-shrink-0">
              <button data-action="fav" data-id="${esc(key)}" class="hand-pill px-2 py-1 text-xs font-bold ${isFav ? 'bg-akaushi text-white' : 'bg-white text-capybara'}"><i class="fa-solid fa-heart"></i></button>
-             <button data-action="map" data-q="${esc(item.name)}" class="hand-pill px-2.5 py-0.5 bg-white text-ink text-[10px] font-bold">地圖</button>
+             <button data-action="map" data-q="${esc(item.mapQ || item.name)}" class="hand-pill px-2.5 py-0.5 bg-white text-ink text-[10px] font-bold">地圖</button>
            </div>
          </div>`;
      }).join('');
@@ -2502,6 +2720,61 @@
      $('weatherNote').textContent = [tips.join('；'), when ? `更新：${when.getMonth() + 1}/${when.getDate()} ${String(when.getHours()).padStart(2, '0')}:${String(when.getMinutes()).padStart(2, '0')}` : ''].filter(Boolean).join('｜');
    }
 
+   // ===== 購物清單 =====
+   let fashionGroup = '';
+   function renderShopping() {
+     const buy = $('shopBuyList');
+     if (!buy) return;
+     const items = [...state.shopping].sort((a, b) => (a.order ?? 0) - (b.order ?? 0) || a.createdAtMs - b.createdAtMs);
+     const buys = items.filter(x => x.cat !== 'fashion');
+     const fashion = items.filter(x => x.cat === 'fashion');
+     const done = items.filter(x => x.done).length;
+     $('shopProgress').textContent = items.length ? `${done} / ${items.length}` : '';
+     const row = (x, showGroup) => `
+       <div class="p-2 rounded-xl border border-handBorder flex items-start gap-2 ${x.done ? 'bg-matcha-bg opacity-70' : 'bg-white'}">
+         <button data-action="shop-toggle" data-id="${esc(x.id)}" aria-label="打勾" class="w-6 h-6 mt-0.5 rounded-md border-2 border-handBorder flex items-center justify-center flex-shrink-0 ${x.done ? 'bg-matcha text-white' : 'bg-white'}">${x.done ? '<i class="fa-solid fa-check text-[11px]"></i>' : ''}</button>
+         <div class="min-w-0 flex-1">
+           <p class="text-xs font-black text-ink ${x.done ? 'line-through' : ''}">${esc(x.name)}${showGroup && x.group ? ` <span class="hand-pill px-1.5 py-0 text-[9px] bg-paper text-capybara">${esc(x.group)}</span>` : ''}</p>
+           ${x.where ? `<p class="text-[10px] font-bold text-matcha-dark">${x.cat === 'fashion' ? '' : '<i class="fa-solid fa-location-dot"></i> '}${esc(x.where)}</p>` : ''}
+           ${x.price ? `<p class="text-[10px] font-black text-akaushi font-mono">${esc(x.price)}</p>` : ''}
+           ${x.note ? `<p class="text-[10px] font-bold text-capybara">${esc(x.note)}</p>` : ''}
+           ${x.orderCard ? `<button data-action="order-card" class="mt-1 hand-pill px-2.5 py-0.5 bg-[#1E3932] text-white text-[10px] font-bold"><i class="fa-solid fa-mug-hot"></i> 點餐卡</button>` : ''}
+         </div>
+         <div class="flex flex-col gap-2 items-center flex-shrink-0 text-capybara text-[11px]">
+           ${x.cat === 'fashion' ? `<button data-action="map" data-q="${esc(x.name + ' 福岡')}" aria-label="地圖"><i class="fa-solid fa-map-location-dot"></i></button>` : ''}
+           ${x.createdBy ? `<button data-action="shop-del" data-id="${esc(x.id)}" aria-label="刪除"><i class="fa-solid fa-trash-can"></i></button>` : ''}
+         </div>
+       </div>`;
+     buy.innerHTML = buys.map(x => row(x, false)).join('') || `<p class="text-center text-[11px] text-capybara font-bold py-2">${state.roomId ? '清單載入中…' : '請先建立或加入行程房間'}</p>`;
+     const groups = [...new Set(fashion.map(x => x.group))];
+     $('fashionCount').textContent = fashion.length ? `（${fashion.length} 家）` : '';
+     $('fashionChips').innerHTML = ['', ...groups].map(g => `<button data-action="fashion-group" data-id="${esc(g)}" class="hand-pill flex-shrink-0 px-2.5 py-0.5 text-[10px] font-bold ${fashionGroup === g ? 'bg-akaushi text-white' : 'bg-white text-ink'}">${esc(g || '全部')}</button>`).join('');
+     $('fashionList').innerHTML = fashion.filter(x => !fashionGroup || x.group === fashionGroup).map(x => row(x, true)).join('');
+   }
+
+   function addShopItem(e) {
+     e.preventDefault();
+     if (!requireRoom()) return;
+     const name = $('shopName').value.trim();
+     if (!name) return showToast('請輸入要買的東西');
+     setDoc(doc(col('shopping'), newId()), { cat: 'buy', name, where: $('shopWhere').value.trim(), price: '', note: '', done: false, order: Date.now(), createdAtMs: Date.now(), createdBy: uid }).catch(onErr);
+     $('shopName').value = ''; $('shopWhere').value = '';
+   }
+   function toggleShopItem(id) {
+     const x = state.shopping.find(i => i.id === id);
+     if (!x || !requireRoom()) return;
+     updateDoc(doc(col('shopping'), id), { done: !x.done }).catch(onErr);
+   }
+   function deleteShopItem(id) {
+     if (!requireRoom() || !confirm('確定刪除這個項目？')) return;
+     deleteDoc(doc(col('shopping'), id)).catch(onErr);
+   }
+   function setOrderSyrup(less) {
+     $('orderSyrup').textContent = less ? 'シロップ少なめ' : 'シロップ抜き';
+     $('syrup0').className = `hand-pill px-4 py-1.5 text-sm font-black ${less ? 'bg-white text-ink' : 'bg-[#1E3932] text-white'}`;
+     $('syrup1').className = `hand-pill px-4 py-1.5 text-sm font-black ${less ? 'bg-[#1E3932] text-white' : 'bg-white text-ink'}`;
+   }
+
    // ===== 字體大小 =====
    const FONT_LEVELS = [['std', '標準'], ['lg', '大'], ['xl', '特大']];
    function applyFontLabel() {
@@ -2569,6 +2842,7 @@
      renderFoodList();
      renderNoteForm();
      renderNotes();
+     renderShopping();
    }
 
    // 動態產生的按鈕統一用事件委派，不把資料塞進 onclick 字串
@@ -2583,6 +2857,10 @@
      else if (action === 'spot-del') deleteSpot(id);
      else if (action === 'fav') toggleFavorite(id);
      else if (action === 'note-pin') toggleNotePin(id);
+     else if (action === 'shop-toggle') toggleShopItem(id);
+     else if (action === 'shop-del') deleteShopItem(id);
+     else if (action === 'fashion-group') { fashionGroup = id; renderShopping(); }
+     else if (action === 'order-card') { setOrderSyrup(0); openModal('orderCardModal'); }
      else if (action === 'note-del') deleteNote(id);
      else if (action === 'note-color') { noteColor = id; renderNoteForm(); }
      else if (action === 'food-cat') setFoodCategory(id);
@@ -2595,7 +2873,7 @@
      joinRoom, createRoom, shareRoomLink, openRoomModal, openRateModal, saveExchangeRate,
      addNewExpense, selectAllSplitters, addNewCustomFood,
      switchVaultMember, openEditMemberVaultModal, handleModalFileSelect, saveMemberVaultData,
-     saveNewMember, deleteCurrentMember, cycleFontSize, toggleTaxFees, postNote
+     saveNewMember, deleteCurrentMember, cycleFontSize, toggleTaxFees, postNote, addShopItem, setOrderSyrup
    });
 
    // ===== 啟動 =====
